@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -352,17 +353,8 @@ public class WMLL
 	private wx getWorld() { return mc.f; }
 
 	private String getShortPos(double p) {
-		String b;
-		String a = b = Double.toString(p);
-		int i = a.lastIndexOf(".");
-		try {
-			b = a.substring(0, i + 3);
-		}
-		catch (StringIndexOutOfBoundsException e) {
-			b = a;
-		}
-		//if (b.length() > a.length()) return a;
-		return b;
+		NumberFormat n = new DecimalFormat("#.00");
+		return n.format(p);
 	}
 
 	public static void toggleDebug() {
@@ -422,7 +414,7 @@ public class WMLL
 	public static int WMLLI;
 	public static int WMLLD;
 	long lastKeyPressTime;
-	private String WMLLVER = "497";
+	private String WMLLVER = "498";
 	public static File PropFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 	public static int F4Key = 62;
 	@SuppressWarnings("unused")
