@@ -30,7 +30,6 @@ public class WMLL
 		useImages = Boolean.parseBoolean(options.getProperty("useImages", "false"));
 		location = Integer.parseInt(options.getProperty("OutputLocation", "0"));
 		if (WMLLD > 0) {
-			//WMLLI = 9;
 			showlight = false;
 		}
 		showlight = WMLLI > 4 ? false : true;
@@ -41,9 +40,14 @@ public class WMLL
 			ReiUseMl = ReiMinimap.instance.useModloader;
 		}
 		catch (NoClassDefFoundError e) {
+			System.out.println("[WMLL] Rei's Minimap class(es) not found");
 			Rei = ReiUseMl = false;
 		}
-		System.out.println("[WMLL] Rei's Minimap: "+Rei);
+		catch (VerifyError v) {
+			System.out.println("[WMLL] Unable to verify Rei's Minimap");
+			Rei = ReiUseMl = false;
+		}
+		System.out.println("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
 	}
 
 	public void doInit(Minecraft minecraft) {
@@ -122,7 +126,6 @@ public class WMLL
 			isNormalWorld = realm == 0 ? true : false;
 			StandingOnID = minecraft.f.a(playerX, playerYN2, playerZ);
 			biome = world.i().a((int)playerX, (int)playerZ).y;
-			NumberFormat percent = NumberFormat.getPercentInstance();
 			//temp = percent.format(world.i().a(playerX, playerY, playerZ));
 			temp = percent.format(world.i().a((int)playerX, (int)playerZ).F);
 			humid = percent.format(world.i().a((int)playerX, (int)playerZ).G);
@@ -399,7 +402,7 @@ public class WMLL
 		return (i < 10 ? "0"+i : i).toString();
 	}
 	
-	private afw getGameWindowDimensions() {
+	public afw getGameWindowDimensions() {
 		return new afw(mc.A, mc.d, mc.e);
 	}
 	
@@ -414,7 +417,7 @@ public class WMLL
 	public static int WMLLI;
 	public static int WMLLD;
 	long lastKeyPressTime;
-	private String WMLLVER = "498";
+	public static final String WMLLVER = "Test 502";
 	public static File PropFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 	public static int F4Key = 62;
 	@SuppressWarnings("unused")
@@ -422,7 +425,7 @@ public class WMLL
 	public boolean CanBlockSeeTheSky;
 	public static int playerX, playerY, playerYBase, playerYN2, playerZ, playerF, playerXF, playerYF, playerZF;
 	public boolean isNether = false, sleeping = false;
-	public nh drawtext;
+	public static nh drawtext;
 	private boolean isEnder = false;
 	public static boolean WMLLBindingMode = false;
 	private Minecraft mc;
@@ -448,10 +451,11 @@ public class WMLL
 	public static boolean useImages;
 	private WMLLRenderer wmllRenderer;
 	public int location;
-	private afw size;
+	public afw size;
 	public String worldName = "Unknown";
 	public boolean Enabled = true;
 	private String[] sleepstrings = {"Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "My name is Kurt, and I will see you next time!", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
 	private boolean sleepingstringset = false;
+	NumberFormat percent = NumberFormat.getPercentInstance();
 	
 }

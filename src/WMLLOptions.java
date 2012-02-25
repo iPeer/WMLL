@@ -164,10 +164,9 @@ public class WMLLOptions extends vk {
 		}
 	}
 
-	@SuppressWarnings("static-access")
 	protected void a(char c1, int i1) {
 		if (isBinding) {
-			wmll.F4Key = i1;
+			WMLL.F4Key = i1;
 			isBinding = false;
 			((abi)s.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
 		}
@@ -181,11 +180,14 @@ public class WMLLOptions extends vk {
 		// (fontrenderer, text, x, y, colour)
 		a(u, title, q / 2, 20, 0xffffff);
 		a(u, "What to Display", q / 2, r / 4 + 80, 0xffffff);
+		int a = (q - ((WMLL.drawtext.a(WMLL.WMLLVER) + 2) / 2));
+		a(u, WMLL.WMLLVER, a, r - 9, 0x444444);
 		super.a(i, j, f);
 	}
 
 	private String title;
 	private WMLL wmll;
 	public static boolean isBinding;
+	private afw ws;
 
 }
