@@ -17,7 +17,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 560";
+	public static final String WMLLVER = "Test 561";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -46,26 +46,6 @@ public class WMLL {
 	private boolean sleepingStringSet = false;
 	private String lightString = "Dat Easter Egg";
 	private long lastF4Press = 0;
-
-	private wx getWorld() {
-		return mc.f;
-	}
-
-	public String getWorldName() {
-		return mc.f.x.j();
-	}
-
-	public nh getFontRenderer() {
-		return mc.q;
-	}
-
-	public afw getWindowSize() {
-		return new afw(mc.A, mc.d, mc.e);
-	}
-
-	private boolean mcDebugOpen() {
-		return mc.A.F;
-	}
 
 	public WMLL() {
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
@@ -250,6 +230,29 @@ public class WMLL {
 		return new DecimalFormat("#.00").format(i);
 	}
 
+	private wx getWorld() {
+		return mc.f;
+	}
+
+	public String getWorldName() {
+		return getWorld().x.j();
+	}
+
+	public nh getFontRenderer() {
+		return mc.q;
+	}
+
+	public afw getWindowSize() {
+		return new afw(mc.A, mc.d, mc.e);
+	}
+
+	private boolean mcDebugOpen() {
+		return getGameSettings().F;
+	}
+	
+	private hr getGameSettings() {
+		return mc.A;
+	}
 
 	private boolean isMultiplayer() {
 		return getWorld().F;
