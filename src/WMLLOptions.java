@@ -7,15 +7,16 @@ public class WMLLOptions extends vk {
 		this.wmll = i;
 	}
 
+
 	@SuppressWarnings({ "unchecked", "static-access" })
 	public void c() {
 		s.clear();
-		String debug = wmll.DebugActive == true ? "ON": "OFF";
+		String debug = WMLL.WMLLDebugActive() == true ? "ON": "OFF";
 		String ikey = Keyboard.getKeyName(wmll.F4Key);
 		int TextColour = wmll.TextColour;
 		String clockformat = "24 hr";
 		int a = wmll.clockSetting;
-		String locationString = "Location: "+(wmll.useImages ? getStringForLocation(0) : getStringForLocation(wmll.location));
+		String locationString = "Location: "+(wmll.useImages ? getStringForLocation(0) : getStringForLocation(wmll.outputLocation));
 		if (a < 3)
 			clockformat = (a == 2 ? "24 hr" : "12 hr");
 		else clockformat = "OFF";
@@ -35,9 +36,8 @@ public class WMLLOptions extends vk {
 		s.add(new abi(4, q / 2 - 100, r / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
 		s.add(new abi(7, q / 2 - 56, r / 4 + 45 + offset, 112, 20, locationString));
 		String enabledString = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+wmll.Enabled;
-		int i = wmll.drawtext.a(enabledString);
+		int i = wmll.getFontRenderer().a(enabledString);
 		s.add(new abi(8, (q - (i + 10)) / 2, r / 4 + 70 + offset, i + 10, 20, enabledString));
-		((abi)s.get(7)).h = !wmll.useImages;
 		for (int i1 = 4; i1 < 8; i1++) {
 			((abi)s.get(i1)).h = wmll.Enabled;
 		}
@@ -54,7 +54,7 @@ public class WMLLOptions extends vk {
 		}
 		if (button.f == 0) {
 			WMLL.toggleDebug();
-			String debug = wmll.DebugActive == true ? "ON": "OFF";
+			String debug = wmll.debugActive == true ? "ON": "OFF";
 			button.e = "Debug: "+debug;
 		}
 		if (button.f == 2) {
@@ -89,17 +89,13 @@ public class WMLLOptions extends vk {
 		if (button.f == 6) {
 			wmll.useImages = !wmll.useImages;
 			button.e = "Images: "+(wmll.useImages ? "ON" : "OFF");
-			abi b1 = (abi)s.get(7);
-			b1.h = !wmll.useImages;
-			int loc = wmll.location = 0;
-			b1.e = "Location: "+getStringForLocation(loc);
 		}
 		if (button.f == 7) {
-			int loc = wmll.location;
+			int loc = wmll.outputLocation;
 			loc++;
 			if (loc > 3)
 				loc = 0;
-			wmll.location = loc;
+			wmll.outputLocation = loc;
 			button.e = "Location: "+getStringForLocation(loc);
 		}
 		if (button.f == 8) {
@@ -180,7 +176,7 @@ public class WMLLOptions extends vk {
 		// (fontrenderer, text, x, y, colour)
 		a(u, title, q / 2, 20, 0xffffff);
 		a(u, "What to Display", q / 2, r / 4 + 80, 0xffffff);
-		int a = (q - ((WMLL.drawtext.a(WMLL.WMLLVER) + 2) / 2));
+		int a = (q - ((wmll.getFontRenderer().a(WMLL.WMLLVER) + 2) / 2));
 		a(u, WMLL.WMLLVER, a, r - 9, 0x444444);
 		super.a(i, j, f);
 	}
@@ -188,6 +184,5 @@ public class WMLLOptions extends vk {
 	private String title;
 	private WMLL wmll;
 	public static boolean isBinding;
-	private afw ws;
 
 }
