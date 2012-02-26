@@ -17,7 +17,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 558";
+	public static final String WMLLVER = "Test 560";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -42,7 +42,7 @@ public class WMLL {
 	private boolean Rei, ReiUseMl;
 	private boolean ranInit = false;
 	private boolean firstRun;
-	private final String[] sleepstrings = {"This is my bed. There are many like it, buth this one is mine.", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "My name is Kurt, and I will see you next time!", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
+	private final String[] sleepstrings = {"This is my bed. There are many like it, but this one is mine.", "If it fits, I sits!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "My name is Kurt, and I will see you next time!", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
 	private boolean sleepingStringSet = false;
 	private String lightString = "Dat Easter Egg";
 	private long lastF4Press = 0;
@@ -143,11 +143,12 @@ public class WMLL {
 			// Compass
 
 			if (Arrays.asList(3, 6).contains(WMLLI)) {
-				drawString("X: "+roundCoord(thePlayer().o), 2, 1, 0xffffff);
-				drawString("Y: "+roundCoord(thePlayer().p), 2, 2, 0xffffff);
-				drawString("Z: "+roundCoord(thePlayer().q), 2, 3, 0xffffff);
-				drawString("Seed: "+getWorldSeed(), 2, 4, 0xffffff);
-				drawString("Facing: "+getPlayerDirection(playerPos[3]), 2, 5, 0xffffff);
+				drawString("X: "+roundCoord(thePlayer().o), 2, 2, 0xffffff);
+				drawString("Y: "+roundCoord(thePlayer().p), 2, 3, 0xffffff);
+				drawString("Z: "+roundCoord(thePlayer().q), 2, 4, 0xffffff);
+				drawString("Seed: "+getWorldSeed(), 2, 5, 0xffffff);
+				drawString("Facing: "+getPlayerDirection(playerPos[3]), 2, 1, 0xffffff);
+				drawString("Biome: "+getBiome()+" (T: "+getTemperature()+", H: "+getHumidity()+")", 2, 6, 0xffffff);
 			}
 
 			// Indicators
@@ -189,7 +190,7 @@ public class WMLL {
 				else { // Normal world
 
 					// Hostiles
-					if (light < 8 && !isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2])))
+					if ((light < 8 && !isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]))) || (getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]) != 110 && !getBiome().startsWith("MushroomIsland")))
 						drawString("\247a"+labels[0], 2, 1, 0xffffff);
 					else
 						drawString("\247c"+labels[0], 2, 1 , 0xffffff);
@@ -262,6 +263,22 @@ public class WMLL {
 
 	private int getSkyLight(float f) {
 		return getWorld().a(f);
+	}
+	
+	public String getBiome() {
+		return getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).y;
+	}
+	
+	private String getTemperature() {
+		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).D);
+	}
+	
+	private String getHumidity() {
+		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).E);
+	}
+	
+	private rn getBiomeGenBase() {
+		return getWorld().i();
 	}
 
 	private boolean playerIsStandingOnBlock(int id) {
