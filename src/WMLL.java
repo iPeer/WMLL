@@ -17,7 +17,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 562";
+	public static final String WMLLVER = "Test 564";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -69,6 +69,10 @@ public class WMLL {
 		}
 		catch (VerifyError v) {
 			System.out.println("[WMLL] Unable to verify Rei's Minimap");
+			Rei = ReiUseMl = false;
+		}
+		catch (IllegalAccessError i) {
+			System.out.println("[WMLL] Illegal Access Error @ Rei's Minimap");
 			Rei = ReiUseMl = false;
 		}
 		System.out.println("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
@@ -230,7 +234,7 @@ public class WMLL {
 		return new DecimalFormat("#.00").format(i);
 	}
 
-	private wx getWorld() {
+	private wz getWorld() {
 		return mc.f;
 	}
 
@@ -238,12 +242,12 @@ public class WMLL {
 		return getWorld().x.j();
 	}
 
-	public nh getFontRenderer() {
+	public ni getFontRenderer() {
 		return mc.q;
 	}
 
-	public afw getWindowSize() {
-		return new afw(mc.A, mc.d, mc.e);
+	public afy getWindowSize() {
+		return new afy(mc.A, mc.d, mc.e);
 	}
 
 	private boolean mcDebugOpen() {
@@ -280,7 +284,7 @@ public class WMLL {
 		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).E);
 	}
 	
-	private rn getBiomeGenBase() {
+	private ro getBiomeGenBase() {
 		return getWorld().i();
 	}
 
@@ -303,11 +307,11 @@ public class WMLL {
 		return getWorld().m(x, y, z);
 	}
 
-	private vl thePlayer() {
+	private vm thePlayer() {
 		return mc.h;
 	}
 
-	private wk worldInfo() {
+	private wm worldInfo() {
 		return getWorld().x;
 	}
 
@@ -319,7 +323,7 @@ public class WMLL {
 		return getWorld().c(x, z).a(0x3ad8025fL).nextInt(10) == 0;	
 	}
 
-	private aks getWorldProvider() {
+	private akv getWorldProvider() {
 		return getWorld().t;
 	}
 

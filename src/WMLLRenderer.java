@@ -5,7 +5,7 @@ import net.minecraft.client.Minecraft;
 
 import org.lwjgl.opengl.GL11;
 
-public class WMLLRenderer extends oj {
+public class WMLLRenderer extends ok {
 
 	public WMLLRenderer(Minecraft m, WMLL w) {
 		this.mc = m;

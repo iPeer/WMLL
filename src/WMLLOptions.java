@@ -1,6 +1,6 @@
 import org.lwjgl.input.Keyboard;
 
-public class WMLLOptions extends vk {
+public class WMLLOptions extends vl {
 
 	public WMLLOptions(WMLL i) {
 		title = "WMLL Configuration";
@@ -25,26 +25,26 @@ public class WMLLOptions extends vk {
 		byte offset = -16;
 		/*
 		 * New button
-		 * abi((int)ID, x, y[, width, height], text)
+		 * abk((int)ID, x, y[, width, height], text)
 		 */
-		s.add(new abi(1, q / 2 - 100, r / 4 + 170 + offset, "Done"));
-		s.add(new abi(0, q / 2 - 100, r / 4 - 5 + offset, 98, 20, "Debug: "+debug));
-		s.add(new abi(2, q / 2 + 2, r / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
-		s.add(new abi(5, q / 2 - 100, r / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
-		s.add(new abi(6, q / 2 + 2, r / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
-		s.add(new abi(3, q / 2 - 100, r / 4 + 105 + offset, getStringForLightOption(wmll.WMLLI)));
-		s.add(new abi(4, q / 2 - 100, r / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
-		s.add(new abi(7, q / 2 - 56, r / 4 + 45 + offset, 112, 20, locationString));
+		s.add(new abk(1, q / 2 - 100, r / 4 + 170 + offset, "Done"));
+		s.add(new abk(0, q / 2 - 100, r / 4 - 5 + offset, 98, 20, "Debug: "+debug));
+		s.add(new abk(2, q / 2 + 2, r / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
+		s.add(new abk(5, q / 2 - 100, r / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
+		s.add(new abk(6, q / 2 + 2, r / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
+		s.add(new abk(3, q / 2 - 100, r / 4 + 105 + offset, getStringForLightOption(wmll.WMLLI)));
+		s.add(new abk(4, q / 2 - 100, r / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
+		s.add(new abk(7, q / 2 - 56, r / 4 + 45 + offset, 112, 20, locationString));
 		String enabledString = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+wmll.Enabled;
 		int i = wmll.getFontRenderer().a(enabledString);
-		s.add(new abi(8, (q - (i + 10)) / 2, r / 4 + 70 + offset, i + 10, 20, enabledString));
+		s.add(new abk(8, (q - (i + 10)) / 2, r / 4 + 70 + offset, i + 10, 20, enabledString));
 		for (int i1 = 4; i1 < 8; i1++) {
-			((abi)s.get(i1)).h = wmll.Enabled;
+			((abk)s.get(i1)).h = wmll.Enabled;
 		}
 	}
 
 	@SuppressWarnings("static-access")
-	protected void a(abi button) {
+	protected void a(abk button) {
 		if (button.f == 1) {
 			//p.a(null);
 			wmll.optionsOpen = false;
@@ -103,7 +103,7 @@ public class WMLLOptions extends vk {
 			wmll.Enabled = !a;
 			wmll.options.setProperty("World-"+wmll.getWorldName(), Boolean.toString(!a));
 			for (int i = 4; i < 8; i++) {
-				((abi)s.get(i)).h = !a;
+				((abk)s.get(i)).h = !a;
 			}
 			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+!a;
 		}
@@ -164,7 +164,7 @@ public class WMLLOptions extends vk {
 		if (isBinding) {
 			WMLL.F4Key = i1;
 			isBinding = false;
-			((abi)s.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
+			((abk)s.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
 		}
 		else {
 			super.a(c1, i1);
