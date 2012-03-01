@@ -17,19 +17,19 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 565";
+	public static final String WMLLVER = "Stable 10";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
 	public static boolean Enabled = true;
 	public static int WMLLI;
 	public static boolean debugActive;
-	public static int F4Key;
-	public static int TextColour;
+	public static int F4Key = 62;
+	public static int TextColour = 15;
 	public static Properties options;
 	public static int outputLocation;
 	public static boolean useImages;
-	public static int clockSetting;
+	public static int clockSetting = 2;
 	public static boolean optionsOpen = false;
 	public static int[] playerPos;
 	public static boolean militaryclock;
@@ -41,7 +41,7 @@ public class WMLL {
 	private Minecraft mc;
 	private boolean Rei, ReiUseMl;
 	private boolean ranInit = false;
-	private boolean firstRun;
+	private boolean firstRun = true;
 	private final String[] sleepstrings = {"This is my bed. There are many like it, but this one is mine.", "If it fits, I sits!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "My name is Kurt, and I will see you next time!", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
 	private boolean sleepingStringSet = false;
 	private String lightString = "Dat Easter Egg";
@@ -51,14 +51,7 @@ public class WMLL {
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		System.out.println("[WMLL] Settings file: "+settingsFile);
 		loadOptions();
-		firstRun = Integer.parseInt(options.getProperty("version", "0")) < propertiesVersion ? true : false;
-		debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
-		WMLLI = Integer.parseInt(options.getProperty("WMLLI", "0"));
-		useImages = Boolean.parseBoolean(options.getProperty("useImages", "false"));
-		TextColour = Integer.parseInt(options.getProperty("TextColour", "15"));
-		F4Key = Integer.parseInt(options.getProperty("F4", "62"));
-		clockSetting = Integer.parseInt(options.getProperty("clockSetting", "2"));
-
+		
 		try {
 			Rei = ReiMinimap.instance != null ? true : false;
 			ReiUseMl = ReiMinimap.instance.useModloader;
@@ -412,6 +405,10 @@ public class WMLL {
 	public void saveOptions() {
 		System.out.println("[WMLL] Attempting to save options...");
 		try {
+			if (!settingsFile.exists())
+				settingsFile.createNewFile();
+			if (options == null)
+				options = new Properties();
 			options.setProperty("WMLLI", Integer.toString(WMLLI));
 			options.setProperty("WMLLD", Boolean.toString(debugActive));
 			options.setProperty("FirstRun", Boolean.toString(firstRun));
@@ -424,7 +421,7 @@ public class WMLL {
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
 			System.out.println("[WMLL] Options saved.");
 		}
-		catch (Exception e) { System.out.println("[WMLL] Unable to save options: "+e.getMessage()); }
+		catch (Exception e) { System.out.println("[WMLL] Unable to save options: "+e.getMessage()); e.printStackTrace(); }
 	}
 
 	public void loadOptions() {
@@ -433,12 +430,21 @@ public class WMLL {
 				if (options == null)
 					options = new Properties();
 				options.load(new FileInputStream(settingsFile));
+				firstRun = Integer.parseInt(options.getProperty("version", "0")) < propertiesVersion ? true : false;
+				debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
+				WMLLI = Integer.parseInt(options.getProperty("WMLLI", "0"));
+				useImages = Boolean.parseBoolean(options.getProperty("useImages", "false"));
+				TextColour = Integer.parseInt(options.getProperty("TextColour", "15"));
+				F4Key = Integer.parseInt(options.getProperty("F4", "62"));
+				clockSetting = Integer.parseInt(options.getProperty("clockSetting", "2"));
 				System.out.println("[WMLL] Loaded options.");
 			}
 			catch (Exception e) { System.out.println("[WMLL] Unable to load options: "+e.getMessage()); }
 		}
 		else {
 			System.out.println("[WMLL] Options file does not exist, running with defaults.");
+			saveOptions();
+			loadOptions();
 		}
 	}
 
