@@ -17,7 +17,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Stable 10";
+	public static final String WMLLVER = "Test 569";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -471,7 +471,7 @@ public class WMLL {
 			if (Keyboard.isKeyDown(29) && mc.s == null)
 				mc.a(new WMLLOptions(this));
 			else
-				if (!(mc.s instanceof WMLLOptions)) {
+				if (!(mc.s instanceof WMLLOptions) && !(mc.s instanceof yb/*GuiChat*/)) {
 					if (Keyboard.isKeyDown(42))
 						WMLLI--;
 					else
