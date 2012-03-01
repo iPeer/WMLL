@@ -17,7 +17,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Stable 9";
+	public static final String WMLLVER = "Test 565";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -239,7 +239,7 @@ public class WMLL {
 	}
 
 	public String getWorldName() {
-		return getWorld().x.j();
+		return worldInfo().j();
 	}
 
 	public ni getFontRenderer() {
