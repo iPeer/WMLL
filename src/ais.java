@@ -217,7 +217,7 @@ public class ais extends ok
             GL11.glPushMatrix();
             if(Minecraft.J > 0L)
                 GL11.glTranslatef(0.0F, 32F, 0.0F);
-            ni1.a((new StringBuilder()).append("Minecraft 1.2 (").append(h.M).append(")").toString(), 2, 2, 0xffffff);
+            ni1.a((new StringBuilder()).append("Minecraft 1.2.2 (").append(h.M).append(")").toString(), 2, 2, 0xffffff);
             ni1.a(h.m(), 2, 12, 0xffffff);
             ni1.a(h.n(), 2, 22, 0xffffff);
             ni1.a(h.p(), 2, 32, 0xffffff);
