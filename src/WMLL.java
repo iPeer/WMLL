@@ -17,7 +17,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 573";
+	public static final String WMLLVER = "Test 574";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -106,7 +106,7 @@ public class WMLL {
 				}
 			}
 			else {
-				lightString = "Light level: "+(light < 8 ? "\247c" : "")+light+(clockSetting < 3 ? " ("+getFormattedWorldTime()+")" : "");
+				lightString = "Light level: "+(light < 8 ? "\247c" : "")+light+(clockSetting < 3 ? " \247f("+getFormattedWorldTime()+")" : "");
 				sleepingStringSet = false;			
 			}
 			if (WMLLI < 4) {
