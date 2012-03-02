@@ -17,7 +17,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 574";
+	public static final String WMLLVER = "Test 575";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -224,7 +224,7 @@ public class WMLL {
 	}
 
 	private String roundCoord(double i) {
-		return new DecimalFormat("#.00").format(i);
+		return new DecimalFormat("#0.00").format(i);
 	}
 
 	private wz getWorld() {
