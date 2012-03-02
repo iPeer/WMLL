@@ -17,19 +17,19 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 569";
+	public static final String WMLLVER = "Test 573";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
 	public static boolean Enabled = true;
 	public static int WMLLI;
 	public static boolean debugActive;
-	public static int F4Key = 62;
-	public static int TextColour = 15;
+	public static int F4Key;
+	public static int TextColour;
 	public static Properties options;
 	public static int outputLocation;
 	public static boolean useImages;
-	public static int clockSetting = 2;
+	public static int clockSetting;
 	public static boolean optionsOpen = false;
 	public static int[] playerPos;
 	public static boolean militaryclock;
@@ -106,7 +106,7 @@ public class WMLL {
 				}
 			}
 			else {
-				lightString = "Light level: "+(light < 8 ? "\247c" : "")+light+(clockSetting != 3 ? " ("+getFormattedWorldTime()+")" : "");
+				lightString = "Light level: "+(light < 8 ? "\247c" : "")+light+(clockSetting < 3 ? " ("+getFormattedWorldTime()+")" : "");
 				sleepingStringSet = false;			
 			}
 			if (WMLLI < 4) {
@@ -405,8 +405,8 @@ public class WMLL {
 	public void saveOptions() {
 		System.out.println("[WMLL] Attempting to save options...");
 		try {
-			if (!settingsFile.exists())
-				settingsFile.createNewFile();
+//			if (!settingsFile.exists())
+//				settingsFile.createNewFile();
 			if (options == null)
 				options = new Properties();
 			options.setProperty("WMLLI", Integer.toString(WMLLI));
@@ -425,11 +425,11 @@ public class WMLL {
 	}
 
 	public void loadOptions() {
-		if (settingsFile.exists()) {
 			try {
 				if (options == null)
 					options = new Properties();
-				options.load(new FileInputStream(settingsFile));
+				if (settingsFile.exists())
+					options.load(new FileInputStream(settingsFile));
 				firstRun = Integer.parseInt(options.getProperty("version", "0")) < propertiesVersion ? true : false;
 				debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
 				WMLLI = Integer.parseInt(options.getProperty("WMLLI", "0"));
@@ -438,14 +438,9 @@ public class WMLL {
 				F4Key = Integer.parseInt(options.getProperty("F4", "62"));
 				clockSetting = Integer.parseInt(options.getProperty("clockSetting", "2"));
 				System.out.println("[WMLL] Loaded options.");
+				System.out.println(options);
 			}
 			catch (Exception e) { System.out.println("[WMLL] Unable to load options: "+e.getMessage()); }
-		}
-		else {
-			System.out.println("[WMLL] Options file does not exist, running with defaults.");
-			saveOptions();
-			loadOptions();
-		}
 	}
 
 	public String getPlayerDirection(int f) {
