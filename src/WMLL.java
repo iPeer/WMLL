@@ -17,7 +17,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Stable 11";
+	public static final String WMLLVER = "Test 576";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -123,9 +123,10 @@ public class WMLL {
 				drawString("X: "+roundCoord(thePlayer().o), 2, 2, 0xffffff);
 				drawString("Y: "+roundCoord(thePlayer().p), 2, 3, 0xffffff);
 				drawString("Z: "+roundCoord(thePlayer().q), 2, 4, 0xffffff);
-				drawString("Seed: "+getWorldSeed(), 2, 5, 0xffffff);
+				if (!isMultiplayer())
+					drawString("Seed: "+getWorldSeed(), 2, 5, 0xffffff);
 				drawString("Facing: "+getPlayerDirection(playerPos[3]), 2, 1, 0xffffff);
-				drawString("Biome: "+getBiome()+" (T: "+getTemperature()+", H: "+getHumidity()+")", 2, 6, 0xffffff);
+				drawString("Biome: "+getBiome()+" (T: "+getTemperature()+", H: "+getHumidity()+")", 2, isMultiplayer() ? 5 : 6, 0xffffff);
 			}
 
 			// Indicators
