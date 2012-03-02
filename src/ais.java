@@ -1,6 +1,6 @@
-// Decompiled by Jad v1.5.8e2. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://kpdus.tripod.com/jad.html
-// Decompiler options: packimports(3) 
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) braces deadcode fieldsfirst noconv 
 // Source File Name:   SourceFile
 
 import java.awt.Color;
@@ -11,6 +11,18 @@ import org.lwjgl.opengl.GL11;
 
 public class ais extends ok
 {
+
+    private static ts d = new ts();
+    private java.util.List e;
+    private Random f;
+    private Minecraft h;
+    public String a;
+    private int i;
+    private String j;
+    private int k;
+    private boolean l;
+    public float b;
+    float c;
 
     public ais(Minecraft minecraft)
     {
@@ -34,17 +46,24 @@ public class ais extends ok
         h.u.b();
         GL11.glEnable(3042);
         if(Minecraft.s())
+        {
             a(h.h.a(f1), k1, l1);
-        else
+        } else
+        {
             GL11.glBlendFunc(770, 771);
+        }
         aai aai1 = h.h.ap.f(3);
         if(h.A.E == 0 && aai1 != null && aai1.c == ox.ba.bO)
+        {
             a(k1, l1);
+        }
         if(!h.h.a(zy.k))
         {
             float f2 = h.h.aS + (h.h.aR - h.h.aS) * f1;
             if(f2 > 0.0F)
+            {
                 b(f2, k1, l1);
+            }
         }
         if(!h.c.e())
         {
@@ -61,7 +80,9 @@ public class ais extends ok
             GL11.glDisable(3042);
             boolean flag2 = (h.h.Y / 3) % 2 == 1;
             if(h.h.Y < 10)
+            {
                 flag2 = false;
+            }
             int j3 = h.h.ba();
             int k4 = h.h.by;
             f.setSeed(i * 0x4c627);
@@ -82,53 +103,81 @@ public class ais extends ok
                     int i11 = (l1 - 32) + 3;
                     b(l7, i11, 0, 64, c1, 5);
                     if(j10 > 0)
+                    {
                         b(l7, i11, 0, 69, j10, 5);
+                    }
                 }
                 int l9 = l1 - 39;
                 int k10 = l9 - 10;
                 int j11 = h.h.au();
                 int k11 = -1;
                 if(h.h.a(zy.l))
+                {
                     k11 = i % 25;
+                }
                 for(int i12 = 0; i12 < 10; i12++)
                 {
                     if(j11 > 0)
                     {
                         int l12 = l7 + i12 * 8;
                         if(i12 * 2 + 1 < j11)
+                        {
                             b(l12, k10, 34, 9, 9, 9);
+                        }
                         if(i12 * 2 + 1 == j11)
+                        {
                             b(l12, k10, 25, 9, 9, 9);
+                        }
                         if(i12 * 2 + 1 > j11)
+                        {
                             b(l12, k10, 16, 9, 9, 9);
+                        }
                     }
                     int i13 = 16;
                     if(h.h.a(zy.u))
+                    {
                         i13 += 36;
+                    }
                     int l13 = 0;
                     if(flag2)
+                    {
                         l13 = 1;
+                    }
                     int k14 = l7 + i12 * 8;
                     int l14 = l9;
                     if(j3 <= 4)
+                    {
                         l14 += f.nextInt(2);
+                    }
                     if(i12 == k11)
+                    {
                         l14 -= 2;
+                    }
                     byte byte5 = 0;
                     if(h.f.B().s())
+                    {
                         byte5 = 5;
+                    }
                     b(k14, l14, 16 + l13 * 9, 9 * byte5, 9, 9);
                     if(flag2)
                     {
                         if(i12 * 2 + 1 < k4)
+                        {
                             b(k14, l14, i13 + 54, 9 * byte5, 9, 9);
+                        }
                         if(i12 * 2 + 1 == k4)
+                        {
                             b(k14, l14, i13 + 63, 9 * byte5, 9, 9);
+                        }
                     }
                     if(i12 * 2 + 1 < j3)
+                    {
                         b(k14, l14, i13 + 36, 9 * byte5, 9, 9);
+                    }
                     if(i12 * 2 + 1 == j3)
+                    {
                         b(k14, l14, i13 + 45, 9 * byte5, 9, 9);
+                    }
                 }
 
                 for(int j12 = 0; j12 < 10; j12++)
@@ -142,22 +191,34 @@ public class ais extends ok
                         byte4 = 13;
                     }
                     if(h.h.aF().d() <= 0.0F && i % (j6 * 3 + 1) == 0)
+                    {
                         j13 += f.nextInt(3) - 1;
+                    }
                     if(flag4)
+                    {
                         byte4 = 1;
+                    }
                     int i15 = k8 - j12 * 8 - 9;
                     b(i15, j13, 16 + byte4 * 9, 27, 9, 9);
                     if(flag4)
                     {
                         if(j12 * 2 + 1 < i7)
+                        {
                             b(i15, j13, i14 + 54, 27, 9, 9);
+                        }
                         if(j12 * 2 + 1 == i7)
+                        {
                             b(i15, j13, i14 + 63, 27, 9, 9);
+                        }
                     }
                     if(j12 * 2 + 1 < j6)
+                    {
                         b(i15, j13, i14 + 36, 27, 9, 9);
+                    }
                     if(j12 * 2 + 1 == j6)
+                    {
                         b(i15, j13, i14 + 45, 27, 9, 9);
+                    }
                 }
 
                 if(h.h.a(aci.g))
@@ -165,10 +226,15 @@ public class ais extends ok
                     int k12 = (int)Math.ceil(((double)(h.h.Y() - 2) * 10D) / 300D);
                     int k13 = (int)Math.ceil(((double)h.h.Y() * 10D) / 300D) - k12;
                     for(int j14 = 0; j14 < k12 + k13; j14++)
+                    {
                         if(j14 < k12)
+                        {
                             b(k8 - j14 * 8 - 9, k10, 16, 18, 9, 9);
-                        else
+                        } else
+                        {
                             b(k8 - j14 * 8 - 9, k10, 25, 18, 9, 9);
+                        }
+                    }
 
                 }
             }
@@ -192,7 +258,9 @@ public class ais extends ok
             int i2 = h.h.aB();
             float f4 = (float)i2 / 100F;
             if(f4 > 1.0F)
+            {
                 f4 = 1.0F - (float)(i2 - 100) / 10F;
+            }
             int k3 = (int)(220F * f4) << 24 | 0x101020;
             a(0, 0, k1, l1, k3);
             GL11.glEnable(3008);
@@ -216,8 +284,10 @@ public class ais extends ok
         {
             GL11.glPushMatrix();
             if(Minecraft.J > 0L)
+            {
                 GL11.glTranslatef(0.0F, 32F, 0.0F);
-            ni1.a((new StringBuilder()).append("Minecraft 1.2.2 (").append(h.M).append(")").toString(), 2, 2, 0xffffff);
+            }
+            ni1.a((new StringBuilder()).append("Minecraft 1.2.3 (").append(h.M).append(")").toString(), 2, 2, 0xffffff);
             ni1.a(h.m(), 2, 12, 0xffffff);
             ni1.a(h.n(), 2, 22, 0xffffff);
             ni1.a(h.p(), 2, 32, 0xffffff);
@@ -234,13 +304,13 @@ public class ais extends ok
             b(ni1, (new StringBuilder()).append("y: ").append(h.h.p).toString(), 2, 72, 0xe0e0e0);
             b(ni1, (new StringBuilder()).append("z: ").append(h.h.q).toString(), 2, 80, 0xe0e0e0);
             b(ni1, (new StringBuilder()).append("f: ").append(gh.c((double)((h.h.u * 4F) / 360F) + 0.5D) & 3).toString(), 2, 88, 0xe0e0e0);
-            int l2a = gh.c(h.h.o);
+            l2 = gh.c(h.h.o);
             int k2 = gh.c(h.h.p);
-            int l3a = gh.c(h.h.q);
-            if(h.f != null && h.f.j(l2a, k2, l3a))
+            l3 = gh.c(h.h.q);
+            if(h.f != null && h.f.j((int)l2, k2, (int)l3))
             {
-                acf acf1 = h.f.c(l2a, l3a);
-                b(ni1, (new StringBuilder()).append("lc: ").append(acf1.h() + 15).append(" b: ").append(acf1.a(l2a & 0xf, l3a & 0xf, h.f.i()).y).append(" bl: ").append(acf1.a(wh.b, l2a & 0xf, k2, l3a & 0xf)).append(" sl: ").append(acf1.a(wh.a, l2a & 0xf, k2, l3a & 0xf)).append(" rl: ").append(acf1.c(l2a & 0xf, k2, l3a & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
+                acf acf1 = h.f.c((int)l2, (int)l3);
+                b(ni1, (new StringBuilder()).append("lc: ").append(acf1.h() + 15).append(" b: ").append(acf1.a((int)l2 & 0xf, (int)l3 & 0xf, h.f.i()).y).append(" bl: ").append(acf1.a(wh.b, (int)l2 & 0xf, k2, (int)l3 & 0xf)).append(" sl: ").append(acf1.a(wh.a, (int)l2 & 0xf, k2, (int)l3 & 0xf)).append(" rl: ").append(acf1.c((int)l2 & 0xf, k2, (int)l3 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
             }
             b(ni1, (new StringBuilder()).append("Seed: ").append(h.f.v()).toString(), 2, 112, 0xe0e0e0);
             GL11.glPopMatrix();
@@ -250,7 +320,9 @@ public class ais extends ok
             float f3 = (float)k - f1;
             int i3 = (int)((f3 * 256F) / 20F);
             if(i3 > 255)
+            {
                 i3 = 255;
+            }
             if(i3 > 0)
             {
                 GL11.glPushMatrix();
@@ -259,7 +331,9 @@ public class ais extends ok
                 GL11.glBlendFunc(770, 771);
                 int i4 = 0xffffff;
                 if(l)
+                {
                     i4 = Color.HSBtoRGB(f3 / 50F, 0.7F, 0.6F) & 0xffffff;
+                }
                 ni1.b(j, -ni1.a(j) / 2, -4, i4 + (i3 << 24));
                 GL11.glDisable(3042);
                 GL11.glPopMatrix();
@@ -280,18 +354,26 @@ public class ais extends ok
         for(int j4 = 0; j4 < e.size() && j4 < byte0; j4++)
         {
             if(((nq)e.get(j4)).b >= 200 && !flag3)
+            {
                 continue;
+            }
             double d1 = (double)((nq)e.get(j4)).b / 200D;
             d1 = 1.0D - d1;
             d1 *= 10D;
             if(d1 < 0.0D)
+            {
                 d1 = 0.0D;
+            }
             if(d1 > 1.0D)
+            {
                 d1 = 1.0D;
+            }
             d1 *= d1;
             int k5 = (int)(255D * d1);
             if(flag3)
+            {
                 k5 = 255;
+            }
             if(k5 > 0)
             {
                 byte byte1 = 2;
@@ -312,11 +394,15 @@ public class ais extends ok
             int i6 = j5;
             int k6 = 1;
             for(; i6 > 20; i6 = ((j5 + k6) - 1) / k6)
+            {
                 k6++;
+            }
 
             int k7 = 300 / k6;
             if(k7 > 150)
+            {
                 k7 = 150;
+            }
             int j8 = (k1 - k6 * k7) / 2;
             byte byte2 = 10;
             a(j8 - 1, byte2 - 1, j8 + k7 * k6, byte2 + 9 * i6, 0x80000000);
@@ -328,7 +414,9 @@ public class ais extends ok
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                 GL11.glEnable(3008);
                 if(k9 >= list.size())
+                {
                     continue;
+                }
                 ag ag1 = (ag)list.get(k9);
                 ni1.a(ag1.a, i10, l10, 0xffffff);
                 h.p.b(h.p.b("/gui/icons.png"));
@@ -337,21 +425,28 @@ public class ais extends ok
                 l11 = 0;
                 byte3 = 0;
                 if(ag1.b < 0)
+                {
                     byte3 = 5;
-                else
+                } else
                 if(ag1.b < 150)
+                {
                     byte3 = 0;
-                else
+                } else
                 if(ag1.b < 300)
+                {
                     byte3 = 1;
-                else
+                } else
                 if(ag1.b < 600)
+                {
                     byte3 = 2;
-                else
+                } else
                 if(ag1.b < 1000)
+                {
                     byte3 = 3;
-                else
+                } else
+                {
                     byte3 = 4;
+                }
                 g += 100F;
                 b((i10 + k7) - 12, l10, 0 + l11 * 10, 176 + byte3 * 8, 10, 8);
                 g -= 100F;
@@ -366,7 +461,9 @@ public class ais extends ok
     private void c()
     {
         if(on.c == null)
+        {
             return;
+        }
         om om1 = on.c;
         on.c = null;
         ni ni1 = h.q;
@@ -379,7 +476,9 @@ public class ais extends ok
         b(j1, byte0, 0, 74, c1, 5);
         b(j1, byte0, 0, 74, c1, 5);
         if(k1 > 0)
+        {
             b(j1, byte0, 0, 79, k1, 5);
+        }
         String s = "Boss health";
         ni1.a(s, i1 / 2 - ni1.a(s) / 2, byte0 - 10, 0xff00ff);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -411,9 +510,13 @@ public class ais extends ok
     {
         f1 = 1.0F - f1;
         if(f1 < 0.0F)
+        {
             f1 = 0.0F;
+        }
         if(f1 > 1.0F)
+        {
             f1 = 1.0F;
+        }
         c += (double)(f1 - c) * 0.01D;
         GL11.glDisable(2929);
         GL11.glDepthMask(false);
@@ -468,7 +571,9 @@ public class ais extends ok
     {
         aai aai1 = h.h.ap.a[i1];
         if(aai1 == null)
+        {
             return;
+        }
         float f2 = (float)aai1.b - f1;
         if(f2 > 0.0F)
         {
@@ -480,17 +585,23 @@ public class ais extends ok
         }
         d.a(h.q, h.p, aai1, j1, k1);
         if(f2 > 0.0F)
+        {
             GL11.glPopMatrix();
+        }
         d.b(h.q, h.p, aai1, j1, k1);
     }
 
     public void a()
     {
         if(k > 0)
+        {
             k--;
+        }
         i++;
         for(int i1 = 0; i1 < e.size(); i1++)
+        {
             ((nq)e.get(i1)).b++;
+        }
 
     }
 
@@ -504,12 +615,12 @@ public class ais extends ok
         int i1;
         for(; h.q.a(s) > 320; s = s.substring(i1))
         {
-            for(i1 = 1; i1 < s.length() && h.q.a(s.substring(0, i1 + 1)) <= 320; i1++);
+            for(i1 = 1; i1 < s.length() && h.q.a(s.substring(0, i1 + 1)) <= 320; i1++) { }
             a(s.substring(0, i1));
         }
 
         e.add(0, new nq(s));
-        for(; e.size() > 50; e.remove(e.size() - 1));
+        for(; e.size() > 50; e.remove(e.size() - 1)) { }
     }
 
     public void b(String s)
@@ -525,17 +636,5 @@ public class ais extends ok
         String s1 = adi1.b(s);
         a(s1);
     }
-
-    private static ts d = new ts();
-    private java.util.List e;
-    private Random f;
-    private Minecraft h;
-    public String a;
-    private int i;
-    private String j;
-    private int k;
-    private boolean l;
-    public float b;
-    float c;
 
 }
