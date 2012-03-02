@@ -17,7 +17,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 576";
+	public static final String WMLLVER = "Test 577";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -106,7 +106,7 @@ public class WMLL {
 				}
 			}
 			else {
-				lightString = "Light level: "+(light < 8 ? "\247c" : "")+light+(clockSetting < 3 ? " \247f("+getFormattedWorldTime()+")" : "");
+				lightString = "Light level: "+(light < 8 ? "\247c" : "")+light+(clockSetting < 3 ? " \247"+Integer.toHexString(TextColour)+"("+getFormattedWorldTime()+")" : "");
 				sleepingStringSet = false;			
 			}
 			if (WMLLI < 4) {
@@ -271,11 +271,11 @@ public class WMLL {
 	}
 	
 	private String getTemperature() {
-		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).D);
+		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).F);
 	}
 	
 	private String getHumidity() {
-		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).E);
+		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).G);
 	}
 	
 	private ro getBiomeGenBase() {
