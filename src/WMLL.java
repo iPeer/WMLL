@@ -12,12 +12,10 @@ import net.minecraft.client.Minecraft;
 
 import org.lwjgl.input.Keyboard;
 
-import reifnsk.minimap.ReiMinimap;
-
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 582";
+	public static final String WMLLVER = "Stable 12"; 
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -56,7 +54,7 @@ public class WMLL {
 			Rei = ReiMinimap.instance != null ? true : false;
 			ReiUseMl = ReiMinimap.instance.useModloader;
 		}
-		catch (NoClassDefFoundError e) {
+		catch (NoClassDefFoundError n) {
 			System.out.println("[WMLL] Rei's Minimap class(es) not found");
 			Rei = ReiUseMl = false;
 		}
@@ -65,7 +63,7 @@ public class WMLL {
 			Rei = ReiUseMl = false;
 		}
 		catch (IllegalAccessError i) {
-			System.out.println("[WMLL] Illegal Access Error @ Rei's Minimap");
+			System.out.println("[WMLL] Rei's Minimap threw an Illegal Access Error: "+i.getMessage());
 			Rei = ReiUseMl = false;
 		}
 		System.out.println("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
