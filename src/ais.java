@@ -304,13 +304,13 @@ public class ais extends ok
             b(ni1, (new StringBuilder()).append("y: ").append(h.h.p).toString(), 2, 72, 0xe0e0e0);
             b(ni1, (new StringBuilder()).append("z: ").append(h.h.q).toString(), 2, 80, 0xe0e0e0);
             b(ni1, (new StringBuilder()).append("f: ").append(gh.c((double)((h.h.u * 4F) / 360F) + 0.5D) & 3).toString(), 2, 88, 0xe0e0e0);
-            int l2a = gh.c(h.h.o);
+            l2 = gh.c(h.h.o);
             int k2 = gh.c(h.h.p);
-            int l3a = gh.c(h.h.q);
-            if(h.f != null && h.f.j(l2a, k2, l3a))
+            l3 = gh.c(h.h.q);
+            if(h.f != null && h.f.j((int)l2, k2, (int)l3))
             {
-                acf acf1 = h.f.c(l2a, l3a);
-                b(ni1, (new StringBuilder()).append("lc: ").append(acf1.h() + 15).append(" b: ").append(acf1.a(l2a & 0xf, l3a & 0xf, h.f.i()).y).append(" bl: ").append(acf1.a(wh.b, l2a & 0xf, k2, l3a & 0xf)).append(" sl: ").append(acf1.a(wh.a, l2a & 0xf, k2, l3a & 0xf)).append(" rl: ").append(acf1.c(l2a & 0xf, k2, l3a & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
+                acf acf1 = h.f.c((int)l2, (int)l3);
+                b(ni1, (new StringBuilder()).append("lc: ").append(acf1.h() + 15).append(" b: ").append(acf1.a((int)l2 & 0xf, (int)l3 & 0xf, h.f.i()).y).append(" bl: ").append(acf1.a(wh.b, (int)l2 & 0xf, k2, (int)l3 & 0xf)).append(" sl: ").append(acf1.a(wh.a, (int)l2 & 0xf, k2, (int)l3 & 0xf)).append(" rl: ").append(acf1.c((int)l2 & 0xf, k2, (int)l3 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
             }
             b(ni1, (new StringBuilder()).append("Seed: ").append(h.f.v()).toString(), 2, 112, 0xe0e0e0);
             GL11.glPopMatrix();

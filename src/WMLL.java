@@ -17,7 +17,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 580";
+	public static final String WMLLVER = "Test 581";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -270,7 +270,7 @@ public class WMLL {
 		//return getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).y;
 		int x = getPlayerCoordinates()[0];
 		int z = getPlayerCoordinates()[2];
-		return getWorld().c(x, z).a(x & 0xf, z & 0xf, getWorld().i()).y;
+		return getChunk(x, z).a(x & 0xf, z & 0xf, getWorld().i()).y;
 	}
 	
 	private String getTemperature() {
@@ -311,13 +311,17 @@ public class WMLL {
 	private wm worldInfo() {
 		return getWorld().x;
 	}
+	
+	private acf getChunk(int x, int z) {
+		return getWorld().c(x, z);
+	}
 
 	private int getDimension() {
 		return getWorldProvider().g;
 	}
 
 	private boolean canSlimesSpawnHere(int x, int z) {
-		return getWorld().c(x, z).a(0x3ad8025fL).nextInt(10) == 0;	
+		return getChunk(x, z).a(0x3ad8025fL).nextInt(10) == 0;	
 	}
 
 	private akv getWorldProvider() {
