@@ -17,7 +17,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 581";
+	public static final String WMLLVER = "Test 582";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -270,7 +270,7 @@ public class WMLL {
 		//return getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).y;
 		int x = getPlayerCoordinates()[0];
 		int z = getPlayerCoordinates()[2];
-		return getChunk(x, z).a(x & 0xf, z & 0xf, getWorld().i()).y;
+		return getChunk(x, z).a(x & 0xf, z & 0xf, getBiomeGenBase()).y;
 	}
 	
 	private String getTemperature() {
