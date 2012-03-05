@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Stable 12"; 
+	public static final String WMLLVER = "Test 583";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -80,10 +80,9 @@ public class WMLL {
 			ranInit = true;
 		}
 		if (mcDebugOpen()) {
-			drawStringUsingPixels("WMLL: "+WMLLVER, 2, 52, 0xffffff);
+			drawStringUsingPixels("WMLL "+WMLLVER, 2, 52, 0xffffff);
 		}
 		else {
-
 			if (WMLLDebugActive()) {
 				drawDebug(getWorldName()+" ("+isMultiplayer()+")", (getWindowSize().a() - (getFontRenderer().a(getWorldName()+" ("+isMultiplayer()+")") + 1)), 0, 0xffffff);
 				drawDebug(Integer.toString(getDimension()), (getWindowSize().a() - (getFontRenderer().a(Integer.toString(getDimension())) + 1)), 1, 0xffffff);
@@ -91,6 +90,12 @@ public class WMLL {
 				drawDebug(Integer.toString(WMLLI), (getWindowSize().a() - (getFontRenderer().a(Integer.toString(WMLLI)) + 1)), 3, 0xffffff);
 				int blockID = getBlockID(getPlayerCoordinates()[0], getPlayerCoordinates()[1] - 1, getPlayerCoordinates()[2]);
 				drawDebug(Integer.toString(blockID), (getWindowSize().a() - (getFontRenderer().a(Integer.toString(blockID)) + 1)), 4, 0xffffff);
+				try {
+					drawDebug(mc.s.toString(), (getWindowSize().a() - (getFontRenderer().a(mc.s.toString()) + 1)), 5, 0xffffff);
+				}
+				catch (NullPointerException e) {
+					drawDebug("null", (getWindowSize().a() - (getFontRenderer().a("null") + 1)), 5, 0xffffff);
+				}
 			}
 
 			WMLLCheckKeys();
@@ -443,6 +448,7 @@ public class WMLL {
 				TextColour = Integer.parseInt(options.getProperty("TextColour", "15"));
 				F4Key = Integer.parseInt(options.getProperty("F4", "62"));
 				clockSetting = Integer.parseInt(options.getProperty("clockSetting", "2"));
+				outputLocation = Integer.parseInt(options.getProperty("OutputLocation", "0"));
 				System.out.println("[WMLL] Loaded options.");
 				System.out.println(options);
 			}

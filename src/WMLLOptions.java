@@ -48,9 +48,9 @@ public class WMLLOptions extends vl {
 		if (button.f == 1) {
 			//p.a(null);
 			wmll.optionsOpen = false;
+			wmll.saveOptions();
 			p.s = null;
 			p.g();
-			wmll.loadOptions();
 		}
 		if (button.f == 0) {
 			WMLL.toggleDebug();
@@ -107,8 +107,6 @@ public class WMLLOptions extends vl {
 			}
 			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+!a;
 		}
-		if (button.f > 0)
-			wmll.saveOptions();
 	}
 
 	private static String buttonTextForClockSetting(int i) {
