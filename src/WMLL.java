@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 585";
+	public static final String WMLLVER = "Test 587";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -48,29 +48,29 @@ public class WMLL {
 	public WMLL() {
 		Rei = ReiUseMl = false;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
-		System.out.println("[WMLL] Settings file: "+settingsFile);
+		debug("[WMLL] Settings file: "+settingsFile);
 		loadOptions();
 		if (getClass().getClassLoader().getResource("ReiMinimap.class") != null) {
 			Rei = true;
 			ReiUseMl = ReiMinimap.instance.useModloader;
 		}
-//		try {
-//			Rei = ReiMinimap.instance != null ? true : false;
-//			ReiUseMl = ReiMinimap.instance.useModloader;
-//		}
-//		catch (NoClassDefFoundError n) {
-//			System.out.println("[WMLL] Rei's Minimap class(es) not found");
-//			Rei = ReiUseMl = false;
-//		}
-//		catch (VerifyError v) {
-//			System.out.println("[WMLL] Unable to verify Rei's Minimap");
-//			Rei = ReiUseMl = false;
-//		}
-//		catch (IllegalAccessError i) {
-//			System.out.println("[WMLL] Rei's Minimap threw an Illegal Access Error: "+i.getMessage());
-//			Rei = ReiUseMl = false;
-//		}
-		System.out.println("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
+		//		try {
+		//			Rei = ReiMinimap.instance != null ? true : false;
+		//			ReiUseMl = ReiMinimap.instance.useModloader;
+		//		}
+		//		catch (NoClassDefFoundError n) {
+		//			debug("[WMLL] Rei's Minimap class(es) not found");
+		//			Rei = ReiUseMl = false;
+		//		}
+		//		catch (VerifyError v) {
+		//			debug("[WMLL] Unable to verify Rei's Minimap");
+		//			Rei = ReiUseMl = false;
+		//		}
+		//		catch (IllegalAccessError i) {
+		//			debug("[WMLL] Rei's Minimap threw an Illegal Access Error: "+i.getMessage());
+		//			Rei = ReiUseMl = false;
+		//		}
+		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
 	}
 
 	public void updategui(Minecraft h) {
@@ -259,7 +259,7 @@ public class WMLL {
 	private boolean mcDebugOpen() {
 		return getGameSettings().F;
 	}
-	
+
 	private hr getGameSettings() {
 		return mc.A;
 	}
@@ -277,22 +277,21 @@ public class WMLL {
 	private int getSkyLight(float f) {
 		return getWorld().a(f);
 	}
-	
+
 	public String getBiome() {
-		//return getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).y;
 		int x = getPlayerCoordinates()[0];
 		int z = getPlayerCoordinates()[2];
 		return getChunk(x, z).a(x & 0xf, z & 0xf, getBiomeGenBase()).y;
 	}
-	
+
 	private String getTemperature() {
 		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).F);
 	}
-	
+
 	private String getHumidity() {
 		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).G);
 	}
-	
+
 	private ro getBiomeGenBase() {
 		return getWorld().i();
 	}
@@ -323,7 +322,7 @@ public class WMLL {
 	private wm worldInfo() {
 		return getWorld().x;
 	}
-	
+
 	private acf getChunk(int x, int z) {
 		return getWorld().c(x, z);
 	}
@@ -423,10 +422,8 @@ public class WMLL {
 	}
 
 	public void saveOptions() {
-		System.out.println("[WMLL] Attempting to save options...");
+		debug("[WMLL] Attempting to save options...");
 		try {
-//			if (!settingsFile.exists())
-//				settingsFile.createNewFile();
 			if (options == null)
 				options = new Properties();
 			options.setProperty("WMLLI", Integer.toString(WMLLI));
@@ -439,29 +436,29 @@ public class WMLL {
 			options.setProperty("useImages", Boolean.toString(useImages));
 			options.setProperty("OutputLocation", Integer.toString(outputLocation));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
-			System.out.println("[WMLL] Options saved.");
+			debug("[WMLL] Options saved.");
 		}
-		catch (Exception e) { System.out.println("[WMLL] Unable to save options: "+e.getMessage()); e.printStackTrace(); }
+		catch (Exception e) { debug("[WMLL] Unable to save options: "+e.getMessage()); e.printStackTrace(); }
 	}
 
 	public void loadOptions() {
-			try {
-				if (options == null)
-					options = new Properties();
-				if (settingsFile.exists())
-					options.load(new FileInputStream(settingsFile));
-				firstRun = Integer.parseInt(options.getProperty("version", "0")) < propertiesVersion ? true : false;
-				debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
-				WMLLI = Integer.parseInt(options.getProperty("WMLLI", "0"));
-				useImages = Boolean.parseBoolean(options.getProperty("useImages", "false"));
-				TextColour = Integer.parseInt(options.getProperty("TextColour", "15"));
-				F4Key = Integer.parseInt(options.getProperty("F4", "62"));
-				clockSetting = Integer.parseInt(options.getProperty("clockSetting", "2"));
-				outputLocation = Integer.parseInt(options.getProperty("OutputLocation", "0"));
-				System.out.println("[WMLL] Loaded options.");
-				System.out.println(options);
-			}
-			catch (Exception e) { System.out.println("[WMLL] Unable to load options: "+e.getMessage()); }
+		try {
+			if (options == null)
+				options = new Properties();
+			if (settingsFile.exists())
+				options.load(new FileInputStream(settingsFile));
+			firstRun = Integer.parseInt(options.getProperty("version", "0")) < propertiesVersion ? true : false;
+			debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
+			WMLLI = Integer.parseInt(options.getProperty("WMLLI", "0"));
+			useImages = Boolean.parseBoolean(options.getProperty("useImages", "false"));
+			TextColour = Integer.parseInt(options.getProperty("TextColour", "15"));
+			F4Key = Integer.parseInt(options.getProperty("F4", "62"));
+			clockSetting = Integer.parseInt(options.getProperty("clockSetting", "2"));
+			outputLocation = Integer.parseInt(options.getProperty("OutputLocation", "0"));
+			debug("[WMLL] Loaded options.");
+			debug(options.toString());
+		}
+		catch (Exception e) { debug("[WMLL] Unable to load options: "+e.getMessage()); }
 	}
 
 	public String getPlayerDirection(int f) {
@@ -479,6 +476,19 @@ public class WMLL {
 
 	public static void toggleDebug() {
 		debugActive = !debugActive;
+	}
+
+	public void debug(String s) {
+		try {
+			if (WMLLDebugActive()) {
+				thePlayer().b(s);
+				return;
+			}
+			System.out.println(s);
+		}
+		catch (NullPointerException e) {
+			System.out.println(s);
+		}
 	}
 
 	private void WMLLCheckKeys() {

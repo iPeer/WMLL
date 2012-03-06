@@ -1,0 +1,41 @@
+private boolean IChat;
+
+GuiInagame(...) {
+	IChat = false;
+	if (getClass().getClassLoader().getResource("ImprovedChat.class") != null)
+		IChat = true;
+	System.out.println("[WMLL] Improved Chat: "+IChat);
+	...
+	if (IChat)
+		ImprovedChat.init(h);
+}
+
+public void a(float, boolean, int, int) {
+	...
+	byte0 = 20
+	flag3 = flag;
+	<gl>
+	if (IChat) {
+		ImprovedChat.handle_draw(this, fontrenderer, flag3, byte0);
+	}
+	else {
+		<default code>
+	}
+}
+
+public void a() {
+	...
+	if (IChat)
+		ImprovedChat.tick();
+}
+
+public void a(String) {
+	if (IChat) {
+        e.add(0, new nq(s));
+        ImprovedChat.receiveLine(s);
+        return;
+	}
+	...
+}
+	
+	
