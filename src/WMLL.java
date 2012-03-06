@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 587";
+	public static final String WMLLVER = "Stable 13";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -54,22 +54,6 @@ public class WMLL {
 			Rei = true;
 			ReiUseMl = ReiMinimap.instance.useModloader;
 		}
-		//		try {
-		//			Rei = ReiMinimap.instance != null ? true : false;
-		//			ReiUseMl = ReiMinimap.instance.useModloader;
-		//		}
-		//		catch (NoClassDefFoundError n) {
-		//			debug("[WMLL] Rei's Minimap class(es) not found");
-		//			Rei = ReiUseMl = false;
-		//		}
-		//		catch (VerifyError v) {
-		//			debug("[WMLL] Unable to verify Rei's Minimap");
-		//			Rei = ReiUseMl = false;
-		//		}
-		//		catch (IllegalAccessError i) {
-		//			debug("[WMLL] Rei's Minimap threw an Illegal Access Error: "+i.getMessage());
-		//			Rei = ReiUseMl = false;
-		//		}
 		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
 	}
 
