@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 583";
+	public static final String WMLLVER = "Test 585";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -46,26 +46,30 @@ public class WMLL {
 	private long lastF4Press = 0;
 
 	public WMLL() {
+		Rei = ReiUseMl = false;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		System.out.println("[WMLL] Settings file: "+settingsFile);
 		loadOptions();
-		
-		try {
-			Rei = ReiMinimap.instance != null ? true : false;
+		if (getClass().getClassLoader().getResource("ReiMinimap.class") != null) {
+			Rei = true;
 			ReiUseMl = ReiMinimap.instance.useModloader;
 		}
-		catch (NoClassDefFoundError n) {
-			System.out.println("[WMLL] Rei's Minimap class(es) not found");
-			Rei = ReiUseMl = false;
-		}
-		catch (VerifyError v) {
-			System.out.println("[WMLL] Unable to verify Rei's Minimap");
-			Rei = ReiUseMl = false;
-		}
-		catch (IllegalAccessError i) {
-			System.out.println("[WMLL] Rei's Minimap threw an Illegal Access Error: "+i.getMessage());
-			Rei = ReiUseMl = false;
-		}
+//		try {
+//			Rei = ReiMinimap.instance != null ? true : false;
+//			ReiUseMl = ReiMinimap.instance.useModloader;
+//		}
+//		catch (NoClassDefFoundError n) {
+//			System.out.println("[WMLL] Rei's Minimap class(es) not found");
+//			Rei = ReiUseMl = false;
+//		}
+//		catch (VerifyError v) {
+//			System.out.println("[WMLL] Unable to verify Rei's Minimap");
+//			Rei = ReiUseMl = false;
+//		}
+//		catch (IllegalAccessError i) {
+//			System.out.println("[WMLL] Rei's Minimap threw an Illegal Access Error: "+i.getMessage());
+//			Rei = ReiUseMl = false;
+//		}
 		System.out.println("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
 	}
 
@@ -84,6 +88,9 @@ public class WMLL {
 		}
 		else {
 			if (WMLLDebugActive()) {
+				int x = getPlayerCoordinates()[0];
+				int y = getPlayerCoordinates()[1];
+				int z = getPlayerCoordinates()[2];
 				drawDebug(getWorldName()+" ("+isMultiplayer()+")", (getWindowSize().a() - (getFontRenderer().a(getWorldName()+" ("+isMultiplayer()+")") + 1)), 0, 0xffffff);
 				drawDebug(Integer.toString(getDimension()), (getWindowSize().a() - (getFontRenderer().a(Integer.toString(getDimension())) + 1)), 1, 0xffffff);
 				drawDebug(Boolean.toString(isPlayerSleeping()), (getWindowSize().a() - (getFontRenderer().a(Boolean.toString(isPlayerSleeping())) + 1)), 2, 0xffffff);
@@ -96,6 +103,7 @@ public class WMLL {
 				catch (NullPointerException e) {
 					drawDebug("null", (getWindowSize().a() - (getFontRenderer().a("null") + 1)), 5, 0xffffff);
 				}
+				drawDebug(Boolean.toString(canSlimesSpawnHere(x, z)), (getWindowSize().a() - (getFontRenderer().a(Boolean.toString(canSlimesSpawnHere(x, z))) + 1)), 6, 0xffffff);
 			}
 
 			WMLLCheckKeys();
@@ -186,13 +194,14 @@ public class WMLL {
 						drawString("\247c"+labels[1], 2, 2, 0xffffff);
 
 					// Slimes
-					if (canSlimesSpawnHere(playerPos[0], playerPos[3]))
-						if ((playerPos[1] - 1) <= 40)
-							drawString("\247a"+labels[5], 2, 3, 0xffffff);
+					if (!isMultiplayer())
+						if (canSlimesSpawnHere(playerPos[0], playerPos[2]))
+							if ((playerPos[1] - 1) <= 40)
+								drawString("\247a"+labels[5], 2, 3, 0xffffff);
+							else
+								drawString("\247e"+labels[5], 2, 3, 0xffffff);
 						else
-							drawString("\247e"+labels[5], 2, 3, 0xffffff);
-					else
-						drawString("\247c"+labels[5], 2, 3, 0xffffff);
+							drawString("\247c"+labels[5], 2, 3, 0xffffff);
 
 				}
 
@@ -210,9 +219,9 @@ public class WMLL {
 
 				// Mushrooms
 				if ((playerIsStandingOnBlock(110) || light < 13) && !isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2])))
-					drawString("\247a"+labels[4], getDimension() == 1 ? 55 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
+					drawString("\247a"+labels[4], getDimension() == 1 ? 55 : isMultiplayer() ? 2 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
 				else
-					drawString("\247c"+labels[4], getDimension() == 1 ? 55 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
+					drawString("\247c"+labels[4], getDimension() == 1 ? 55 : isMultiplayer() ? 2 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
 
 			}
 
@@ -324,7 +333,7 @@ public class WMLL {
 	}
 
 	private boolean canSlimesSpawnHere(int x, int z) {
-		return getChunk(x, z).a(0x3ad8025fL).nextInt(10) == 0;	
+		return getChunk(x, z).a(0x3ad8025fL).nextInt(10) == 0 && getWorldSeed() != 0L;
 	}
 
 	private akv getWorldProvider() {
