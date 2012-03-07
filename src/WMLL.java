@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Stable 13";
+	public static final String WMLLVER = "Test 588";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -46,6 +46,7 @@ public class WMLL {
 	private long lastF4Press = 0;
 
 	public WMLL() {
+		debug("[WMLL] Initializing WMLL "+WMLLVER);
 		Rei = ReiUseMl = false;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		debug("[WMLL] Settings file: "+settingsFile);
@@ -490,6 +491,7 @@ public class WMLL {
 						WMLLI = 7;
 					if (WMLLI > 7)
 						WMLLI = 0;
+					saveOptions();
 				}
 		}
 	}
