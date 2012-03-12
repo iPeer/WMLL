@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 588";
+	public static final String WMLLVER = "Test 590";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -34,6 +34,7 @@ public class WMLL {
 
 	private static final int propertiesVersion = 1;
 	private static File settingsFile;
+	private static boolean debugClassPresent;
 
 	private WMLLRenderer wmllRenderer;
 	private Minecraft mc;
@@ -48,13 +49,18 @@ public class WMLL {
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+WMLLVER);
 		Rei = ReiUseMl = false;
+		debugClassPresent = false;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		debug("[WMLL] Settings file: "+settingsFile);
 		loadOptions();
+		if (getClass().getClassLoader().getResource("WMLLDebug.class") != null) {
+			debugClassPresent = true;
+		}
 		if (getClass().getClassLoader().getResource("ReiMinimap.class") != null) {
 			Rei = true;
 			ReiUseMl = ReiMinimap.instance.useModloader;
 		}
+		debug("[WMLL] Can run debug: "+debugClassPresent);
 		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
 	}
 
@@ -72,6 +78,8 @@ public class WMLL {
 			drawStringUsingPixels("WMLL "+WMLLVER, 2, 52, 0xffffff);
 		}
 		else {
+			if (debugClassPresent)
+				WMLLDebug.onGuiTick();
 			if (WMLLDebugActive()) {
 				int x = getPlayerCoordinates()[0];
 				int y = getPlayerCoordinates()[1];
@@ -304,7 +312,7 @@ public class WMLL {
 		return mc.h;
 	}
 
-	private wm worldInfo() {
+	public wm worldInfo() {
 		return getWorld().x;
 	}
 
@@ -324,7 +332,7 @@ public class WMLL {
 		return getWorld().t;
 	}
 
-	private long getWorldTime() {
+	public long getWorldTime() {
 		return worldInfo().f();
 	}
 
@@ -375,7 +383,7 @@ public class WMLL {
 		return debugActive;
 	}
 
-	private void drawDebug(String t, int x, int y, int c) {
+	public void drawDebug(String t, int x, int y, int c) {
 		if (WMLLI > 3)
 			y++;
 		drawString(t, x, y, c);
@@ -477,6 +485,13 @@ public class WMLL {
 	}
 
 	private void WMLLCheckKeys() {
+		if (Keyboard.isKeyDown(Keyboard.KEY_F7) && debugClassPresent)
+			if (Keyboard.isKeyDown(42))
+				WMLLDebug.toggleTimeLock();
+			else
+				WMLLDebug.setTimeToNight();
+		if (Keyboard.isKeyDown(Keyboard.KEY_F9) && debugClassPresent)
+			WMLLDebug.setTimeToDay();
 		if (Keyboard.isKeyDown(F4Key) && System.currentTimeMillis() - lastF4Press > 150) {
 			lastF4Press = System.currentTimeMillis();
 			if (Keyboard.isKeyDown(29) && mc.s == null)
