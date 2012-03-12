@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 591";
+	public static final String WMLLVER = "Test 593";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();

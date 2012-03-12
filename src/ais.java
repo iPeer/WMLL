@@ -27,7 +27,7 @@ public class ais extends ok
 
 	public ais(Minecraft minecraft)
 	{
-		e = new ArrayList();
+		//e = new ArrayList();
 		f = new Random();
 		a = null;
 		i = 0;
@@ -40,8 +40,12 @@ public class ais extends ok
 		if (getClass().getClassLoader().getResource("ImprovedChat.class") != null)
 			IChat = true;
 		System.out.println("[WMLL] Improved Chat: "+IChat);
-		if (IChat)
+		if (IChat) {
 			ImprovedChat.init(h);
+			e = ImprovedChat.e;
+		}
+		else 
+			e = new ArrayList();
 	}
 
 	public void a(float f1, boolean flag, int i1, int j1)
@@ -348,10 +352,12 @@ public class ais extends ok
 		}
 		byte byte0 = 10;
 		boolean flag3 = false;
-		if(h.s instanceof yb)
+		boolean chatActive;
+		if(chatActive = h.s instanceof yb)
 		{
 			byte0 = 20;
-			flag3 = true;
+			if (!IChat)
+				flag3 = true;
 		}
 		GL11.glEnable(3042);
 		GL11.glBlendFunc(770, 771);
@@ -359,7 +365,7 @@ public class ais extends ok
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0.0F, l1 - 48, 0.0F);
 		if (IChat)
-			ImprovedChat.handle_draw(this, ni1, flag3, byte0);
+			WMLLImprovedChat.i.run(chatActive, ni1, i, byte0);
 		else {
 			for(int j4 = 0; j4 < e.size() && j4 < byte0; j4++)
 			{
@@ -608,13 +614,15 @@ public class ais extends ok
 			k--;
 		}
 		i++;
-		for(int i1 = 0; i1 < e.size(); i1++)
-		{
-			((nq)e.get(i1)).b++;
-		}
 
 		if (IChat)
 			ImprovedChat.tick();
+		else {
+			for(int i1 = 0; i1 < e.size(); i1++)
+			{
+				((nq)e.get(i1)).b++;
+			}
+		}
 	}
 
 	public void b()
@@ -625,7 +633,6 @@ public class ais extends ok
 	public void a(String s)
 	{
 		if (IChat) {
-	        e.add(0, new nq(s));
 	        ImprovedChat.receiveLine(s);
 			return;
 		}

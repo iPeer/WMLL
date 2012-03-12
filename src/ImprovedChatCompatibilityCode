@@ -1,41 +1,53 @@
 private boolean IChat;
 
-GuiInagame(...) {
+public void GuiIngame(Minecraft) {
+	...
 	IChat = false;
 	if (getClass().getClassLoader().getResource("ImprovedChat.class") != null)
 		IChat = true;
 	System.out.println("[WMLL] Improved Chat: "+IChat);
-	...
-	if (IChat)
+	if (IChat) {
 		ImprovedChat.init(h);
+		e = ImprovedChat.e;
+	}
+	else 
+		e = new ArrayList();
 }
 
 public void a(float, boolean, int, int) {
-	...
-	byte0 = 20
-	flag3 = flag;
-	<gl>
-	if (IChat) {
-		ImprovedChat.handle_draw(this, fontrenderer, flag3, byte0);
+...
+	boolean flag3 = false;
+	boolean chatActive;
+	if(chatActive = h.s instanceof GUICHAT_CLASS)
+	{
+		byte0 = 20;
+		if (!IChat)
+			flag3 = true;
 	}
+	<gl>
+	if (IChat)
+		WMLLImprovedChat.i.run(chatActive, ni1, i, byte0);
 	else {
 		<default code>
-	}
+	...
 }
 
 public void a() {
 	...
 	if (IChat)
 		ImprovedChat.tick();
+	else {
+		for(int i1 = 0; i1 < e.size(); i1++)
+		{
+			((**UNKNOWN_CLASSFILE**)e.get(i1)).b++;
+		}
+	}
 }
 
 public void a(String) {
 	if (IChat) {
-        e.add(0, new nq(s));
-        ImprovedChat.receiveLine(s);
-        return;
+		ImprovedChat.receiveLine(s);
+		return;
 	}
-	...
+	<default code>
 }
-	
-	
