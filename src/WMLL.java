@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 590";
+	public static final String WMLLVER = "Test 591";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -257,7 +257,7 @@ public class WMLL {
 		return mc.A;
 	}
 
-	private boolean isMultiplayer() {
+	public boolean isMultiplayer() {
 		return getWorld().F;
 	}
 
@@ -308,7 +308,7 @@ public class WMLL {
 		return getWorld().m(x, y, z);
 	}
 
-	private vm thePlayer() {
+	vm thePlayer() {
 		return mc.h;
 	}
 
@@ -473,7 +473,7 @@ public class WMLL {
 
 	public void debug(String s) {
 		try {
-			if (WMLLDebugActive()) {
+			if (WMLLDebugActive() || s.startsWith("[WMLLDebug]")) {
 				thePlayer().b(s);
 				return;
 			}
