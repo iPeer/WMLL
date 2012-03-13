@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 593";
+	public static final String WMLLVER = "Test 594";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -41,7 +41,7 @@ public class WMLL {
 	private boolean Rei, ReiUseMl;
 	private boolean ranInit = false;
 	private boolean firstRun = true;
-	private final String[] sleepstrings = {"This is my bed. There are many like it, but this one is mine.", "If it fits, I sits!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "My name is Kurt, and I will see you next time!", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
+	private final String[] sleepstrings = {"Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
 	private boolean sleepingStringSet = false;
 	private String lightString = "Dat Easter Egg";
 	private long lastF4Press = 0;
@@ -105,7 +105,7 @@ public class WMLL {
 			int light = getLightLevel(playerPos[0], playerPos[1], playerPos[2]);
 			if (isPlayerSleeping()) {
 				if (!sleepingStringSet) {
-					lightString = sleepstrings[new Random().nextInt(sleepstrings.length)];
+					lightString = sleepstrings[new Random().nextInt(sleepstrings.length)].replaceAll("PLAYERNAME", playerEntity().b);
 					sleepingStringSet = true;
 				}
 			}
@@ -308,8 +308,12 @@ public class WMLL {
 		return getWorld().m(x, y, z);
 	}
 
-	vm thePlayer() {
+	public vm thePlayer() {
 		return mc.h;
+	}
+	
+	public ey playerEntity() {
+		return mc.k;
 	}
 
 	public wm worldInfo() {
