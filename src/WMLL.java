@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 594";
+	public static final String WMLLVER = "Test 607";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -25,16 +25,17 @@ public class WMLL {
 	public static int F4Key;
 	public static int TextColour;
 	public static Properties options;
+	public static Properties outputOptions;
 	public static int outputLocation;
 	public static boolean useImages;
 	public static int clockSetting;
 	public static boolean optionsOpen = false;
 	public static int[] playerPos;
 	public static boolean militaryclock;
+	public static boolean debugClassPresent;
 
 	private static final int propertiesVersion = 1;
-	private static File settingsFile;
-	private static boolean debugClassPresent;
+	private static File settingsFile, outputOptionsFile;
 
 	private WMLLRenderer wmllRenderer;
 	private Minecraft mc;
@@ -51,6 +52,7 @@ public class WMLL {
 		Rei = ReiUseMl = false;
 		debugClassPresent = false;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
+		outputOptionsFile = new File(Minecraft.a("minecraft"), "WMLLOutput.properties");
 		debug("[WMLL] Settings file: "+settingsFile);
 		loadOptions();
 		if (getClass().getClassLoader().getResource("WMLLDebug.class") != null) {
@@ -103,6 +105,7 @@ public class WMLL {
 			// 0 = x, 1 = y, 2 = z, 3 = f
 			int[] playerPos = getPlayerCoordinates();
 			int light = getLightLevel(playerPos[0], playerPos[1], playerPos[2]);
+			int blockLight = getSavedBlockLight(playerPos[0], playerPos[1], playerPos[2]);
 			if (isPlayerSleeping()) {
 				if (!sleepingStringSet) {
 					lightString = sleepstrings[new Random().nextInt(sleepstrings.length)].replaceAll("PLAYERNAME", playerEntity().b);
@@ -110,7 +113,7 @@ public class WMLL {
 				}
 			}
 			else {
-				lightString = "Light level: "+(light < 8 ? "\247c" : "")+light+(clockSetting < 3 ? " \247"+Integer.toHexString(TextColour)+"("+getFormattedWorldTime()+")" : "");
+				lightString = generateLightString();
 				sleepingStringSet = false;			
 			}
 			if (WMLLI < 4) {
@@ -228,6 +231,32 @@ public class WMLL {
 		wmllRenderer.renderLightImage(light);
 		drawString(Integer.toString(light), 6, 0, 0xffffff);
 	}
+	
+	public String generateLightString() {
+		return generateLightString(outputOptions.getProperty("lightString", "Light level: %LightLevel%"));
+	}
+	
+	public String generateLightString(String s) {
+		int x = getPlayerCoordinates()[0];
+		int y = getPlayerCoordinates()[1];
+		int z = getPlayerCoordinates()[2];
+		int highlightSky = Integer.parseInt(outputOptions.getProperty("highlightSky", "8"));
+		int highlightBlock = Integer.parseInt(outputOptions.getProperty("highlightBlock", "8"));
+		int highlightRaw = Integer.parseInt(outputOptions.getProperty("highlightRaw", "8"));
+		int highlightLight = Integer.parseInt(outputOptions.getProperty("highlightLight", "8"));
+		int a = getLightLevel(x, y, z);
+		String lightLevel = (a < highlightLight ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
+		a = getSavedBlockLight(x, y, z);
+		String blockLight = (a < highlightBlock ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
+		a = getRawLightLevel(x, y, z);
+		String rawLight = (a < highlightRaw ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
+		a = getSkyLight(1.0f);
+		String skyLight = (a < highlightSky ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
+		String b = s.replaceAll("%LightLevel%", lightLevel).replaceAll("%BlockLight%", blockLight).replaceAll("%RawLight%", rawLight).replaceAll("%SkyLight%", skyLight).replaceAll("%Biome%", getBiome());	
+		if (clockSetting < 3)
+			b = b+" ("+getFormattedWorldTime()+")";
+		return b;
+	}
 
 	private String roundCoord(double i) {
 		return new DecimalFormat("#0.00").format(i);
@@ -261,13 +290,23 @@ public class WMLL {
 		return getWorld().F;
 	}
 
-	private int getLightLevel(int j, int k, int l) {
+	public int getSavedBlockLight(int x, int y, int z) {
+		int[] playerPos = getPlayerCoordinates();
+		return getChunk(playerPos[0], playerPos[2]).a(wh.b, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+	}
+	
+	public int getRawLightLevel(int x, int y, int z) {
+		int[] playerPos = getPlayerCoordinates();
+		return getChunk(playerPos[0], playerPos[2]).a(wh.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+	}
+	
+	public int getLightLevel(int j, int k, int l) {
 		if (k < 0 || k > 255)
 			return 0;
 		return getWorld().d(j >> 4, l >> 4).c(j & 0xf, k, l & 0xf, getSkyLight(1.0F));
 	}
 
-	private int getSkyLight(float f) {
+	public int getSkyLight(float f) {
 		return getWorld().a(f);
 	}
 
@@ -433,6 +472,8 @@ public class WMLL {
 			options.setProperty("useImages", Boolean.toString(useImages));
 			options.setProperty("OutputLocation", Integer.toString(outputLocation));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
+			if (!outputOptions.isEmpty())
+				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
 			debug("[WMLL] Options saved.");
 		}
 		catch (Exception e) { debug("[WMLL] Unable to save options: "+e.getMessage()); e.printStackTrace(); }
@@ -442,8 +483,12 @@ public class WMLL {
 		try {
 			if (options == null)
 				options = new Properties();
+			if (outputOptions == null)
+				outputOptions = new Properties();
 			if (settingsFile.exists())
 				options.load(new FileInputStream(settingsFile));
+			if (outputOptionsFile.exists())
+				outputOptions.load(new FileInputStream(outputOptionsFile));
 			firstRun = Integer.parseInt(options.getProperty("version", "0")) < propertiesVersion ? true : false;
 			debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
 			WMLLI = Integer.parseInt(options.getProperty("WMLLI", "0"));
