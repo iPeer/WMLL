@@ -12,10 +12,12 @@ import net.minecraft.client.Minecraft;
 
 import org.lwjgl.input.Keyboard;
 
+import reifnsk.minimap.ReiMinimap;
+
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 607";
+	public static final String WMLLVER = "Stable 14";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -67,7 +69,6 @@ public class WMLL {
 	}
 
 	public void updategui(Minecraft h) {
-
 		if (Rei && !ReiUseMl)
 			ReiMinimap.instance.onTickInGame(h);
 
