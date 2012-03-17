@@ -32,12 +32,12 @@ public class WMLLOptions extends vl {
 		s.add(new abk(6, q / 2 + 2, r / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
 		s.add(new abk(3, q / 2 - 100, r / 4 + 125 + offset, "Output options..."));
 		//s.add(new abk(4, q / 2 - 100, r / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
-		String enabledString = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+wmll.Enabled;
+		String enabledString = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(wmll.Enabled ? "Yes" : "No");
 		int i = wmll.getFontRenderer().a(enabledString);
 		s.add(new abk(8, (q - (i + 10)) / 2, r / 4 + 45 + offset, i + 10, 20, enabledString));
-		for (int i1 = 4; i1 < s.size(); i1++) {
-			((abk)s.get(i1)).h = wmll.Enabled;
-		}
+		if (!wmll.Enabled)
+			for (int x = 3; x < 6; x++)
+				((abk)s.get(x)).h = false;
 	}
 
 	@SuppressWarnings("static-access")
@@ -92,10 +92,9 @@ public class WMLLOptions extends vl {
 			boolean a = wmll.Enabled;
 			wmll.Enabled = !a;
 			wmll.options.setProperty("World-"+wmll.getWorldName(), Boolean.toString(!a));
-			for (int i = 4; i < s.size(); i++) {
-				((abk)s.get(i)).h = !a;
-			}
-			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+!a;
+			for (int x = 3; x < 6; x++)
+				((abk)s.get(x)).h = !a;
+			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(!a ? "Yes" : "No");
 		}
 	}
 

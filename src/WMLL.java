@@ -18,7 +18,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 608";
+	public static final String WMLLVER = "Test 610";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -82,6 +82,7 @@ public class WMLL {
 			drawStringUsingPixels("WMLL "+WMLLVER, 2, 52, 0xffffff);
 		}
 		else {
+			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true"));
 			if (debugClassPresent)
 				WMLLDebug.onGuiTick();
 			if (WMLLDebugActive()) {
@@ -104,6 +105,8 @@ public class WMLL {
 			}
 
 			WMLLCheckKeys();
+			if (!Enabled)
+				return;
 			// 0 = x, 1 = y, 2 = z, 3 = f
 			int[] playerPos = getPlayerCoordinates();
 			int light = getLightLevel(playerPos[0], playerPos[1], playerPos[2]);
@@ -477,6 +480,7 @@ public class WMLL {
 			if (!outputOptions.isEmpty())
 				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
 			debug("[WMLL] Options saved.");
+			debug(options.toString());
 		}
 		catch (Exception e) { debug("[WMLL] Unable to save options: "+e.getMessage()); e.printStackTrace(); }
 	}
