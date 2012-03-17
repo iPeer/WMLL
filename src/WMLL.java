@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
@@ -17,7 +18,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Stable 14";
+	public static final String WMLLVER = "Test 608";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -60,7 +61,7 @@ public class WMLL {
 		if (getClass().getClassLoader().getResource("WMLLDebug.class") != null) {
 			debugClassPresent = true;
 		}
-		if (getClass().getClassLoader().getResource("ReiMinimap.class") != null) {
+		if (getClass().getClassLoader().getResource("mod_ReiMinimap.class") != null) {
 			Rei = true;
 			ReiUseMl = ReiMinimap.instance.useModloader;
 		}
