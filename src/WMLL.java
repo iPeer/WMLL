@@ -19,7 +19,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 624";
+	public static final String WMLLVER = "Test 625";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -162,7 +162,9 @@ public class WMLL {
 					wmllRenderer.renderIndicatorImages(light, getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]), getDimension(), canSlimesSpawnHere(playerPos[0], playerPos[2]), canBlockSeeTheSky(playerPos[0], playerPos[1] - 1, playerPos[2]));
 					return;
 				}
-				boolean showSlimes = isMultiplayer() && isSeedSet();
+				boolean showSlimes = true;
+				if (isMultiplayer())
+					 showSlimes = isSeedSet();
 				String[] labels = {"Mobs", "Animals", "Trees", "Crops", "Mushrooms", "Slimes", "Ghasts", "Pigmen", "Blaze", "Endermen"};
 				if (getDimension() == -1) { // Nether
 
@@ -642,6 +644,8 @@ public class WMLL {
 	}
 	
 	public boolean isSeedSet() {
+		if (!isMultiplayer())
+			return true;
 		return options.containsKey("Seed:"+getWorldName().toLowerCase());
 	}
 
