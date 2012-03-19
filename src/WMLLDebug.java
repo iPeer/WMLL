@@ -66,6 +66,8 @@ public class WMLLDebug {
 		WMLL wmll = WMLL.i;
 		kf pc = wmll.getPlayerController();
 		Minecraft mc = wmll.getMCInstance();
+		if (mc.s != null) 
+			return;
 		if (!wmll.isCreative())
 			pc = new afa(mc);
 		else
@@ -83,8 +85,8 @@ public class WMLLDebug {
 
 	public static void displayDebugInfo() {
 		WMLL wmll = WMLL.i;
-		wmll.drawDebug("Time locked? "+timeLocked+" ("+currentWorldTime+")", 1, 6, 0xffffff);
-		wmll.drawDebug("Creative: "+wmll.isCreative(), 1, 7, 0xffffff);
+		wmll.drawDebug("Time locked? "+timeLocked+" ("+currentWorldTime+")", 1, 10, 0xffffff);
+		wmll.drawDebug("Creative: "+wmll.isCreative(), 1, 11, 0xffffff);
 	}
 
 }

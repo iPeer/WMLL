@@ -35,20 +35,22 @@ public class WMLLGuiOutputOptions extends vl {
 		s.add(new abk(1, q / 2 - 100, r / 4 + 150 + o, 98, 20, "Done"));
 		//s.add(new abk(0, q / 2 - 152, r / 4 + 150 + o, 98, 20, "<<"));
 		s.add(new abk(2, q / 2 + 2, r / 4 + 150 + o, 98, 20, ">>"));
-		s.add(new abk(3, q / 2 - 107, r / 4 - 5 + o, 108, 20, outputLocations[WMLL.outputLocation]));
-		s.add(new abk(4, q / 2 + 7, r / 4 - 5 + o, 108, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
+		s.add(new abk(3, q / 2 - 112, r / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
+		s.add(new abk(4, q / 2 + 2, r / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
 		if (WMLL.debugClassPresent)
 			s.add(new abk(9001, 2, r - 22, 50, 20, "Reload"));
 		s.add(new abk(5, q / 2 - 100, r / 4 + 120 + o, "Light Level options..."));
-		s.add(new abk(6, q / 2 - 107, r / 4 + 20 + o, 108, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
-		s.add(new abk(7, q / 2 + 7, r / 4 + 20 + o, 108, 20, "F3 Type: "+(wmll.F3Type == 1 ? "Alternate" : "Classic")));
-/*		s.add(new abk(0, q / 2 - 100, r / 4 + 45 + o, 98, 20, "e"));
-		s.add(new abk(2, q / 2 + 2, r / 4 + 45 + o, 98, 20, "f"));
+		s.add(new abk(6, q / 2 - 112, r / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
+		s.add(new abk(7, q / 2 + 2, r / 4 + 20 + o, 112, 20, "F3 Type: "+(wmll.F3Type == 1 ? "Alternate" : "Classic")));
+		s.add(new abk(8, q / 2 - 112, r / 4 + 45 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
+		s.add(new abk(9, q / 2 - 100, r / 4 + 98 + o, "Enter seed for server..."));
+/*		s.add(new abk(2, q / 2 + 2, r / 4 + 45 + o, 98, 20, "f"));
 		s.add(new abk(0, q / 2 - 100, r / 4 + 70 + o, 98, 20, "g"));
 		s.add(new abk(2, q / 2 + 2, r / 4 + 70 + o, 98, 20, "h"));
 		s.add(new abk(0, q / 2 - 100, r / 4 + 95 + o, 98, 20, "i"));
 		s.add(new abk(2, q / 2 + 2, r / 4 + 95 + o, 98, 20, "j"));*/
 		((abk)s.get(1)).h = ((abk)s.get(7)).h = false;
+		((abk)s.get(8)).i = wmll.isMultiplayer();
 		
 	}
 	
@@ -91,6 +93,15 @@ public class WMLLGuiOutputOptions extends vl {
 				a = 0;
 			wmll.F3Type = a;
 			b.e = "F3 Type: "+(a == 1 ? "Alternate" : "Classic");
+		}
+		else if (b.f == 8) {
+			boolean a = wmll.showSeedWithCoords;
+			a = !a;
+			wmll.showSeedWithCoords = a;
+			b.e = "Seed w/ Coords: "+(a ? "Yes" : "No");
+		}
+		else if (b.f == 9) {
+			p.a(new WMLLSMPSeed(wmll, this));
 		}
 		else if (b.f == 9001) // Debug button
 			p.a(new WMLLGuiOutputOptions(wmll, parent));

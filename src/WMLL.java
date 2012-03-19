@@ -1,11 +1,12 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.lang.reflect.Field;
+import java.net.SocketAddress;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
@@ -18,7 +19,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 617";
+	public static final String WMLLVER = "Test 624";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -37,8 +38,9 @@ public class WMLL {
 	public static boolean militaryclock;
 	public static boolean debugClassPresent;
 	
-	public boolean wmllOverrideF3 = true;
+	public boolean wmllOverrideF3;
 	public int F3Type;
+	public boolean showSeedWithCoords;
 
 	private static final int propertiesVersion = 1;
 	private static File settingsFile, outputOptionsFile;
@@ -146,10 +148,11 @@ public class WMLL {
 				drawString("X: "+roundCoord(thePlayer().o), 2, 2, 0xffffff);
 				drawString("Y: "+roundCoord(thePlayer().p), 2, 3, 0xffffff);
 				drawString("Z: "+roundCoord(thePlayer().q), 2, 4, 0xffffff);
-				if (!isMultiplayer())
+				boolean showSeed = (!isMultiplayer() || isSeedSet()) && showSeedWithCoords;
+				if (showSeed)
 					drawString("Seed: "+getWorldSeed(), 2, 5, 0xffffff);
 				drawString("Facing: "+getPlayerDirection(playerPos[3]), 2, 1, 0xffffff);
-				drawString("Biome: "+getBiome()+" (T: "+getTemperature()+", H: "+getHumidity()+")", 2, isMultiplayer() ? 5 : 6, 0xffffff);
+				drawString("Biome: "+getBiome()+" (T: "+getTemperature()+", H: "+getHumidity()+")", 2, showSeed ? 6 : 5, 0xffffff);
 			}
 
 			// Indicators
@@ -159,6 +162,7 @@ public class WMLL {
 					wmllRenderer.renderIndicatorImages(light, getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]), getDimension(), canSlimesSpawnHere(playerPos[0], playerPos[2]), canBlockSeeTheSky(playerPos[0], playerPos[1] - 1, playerPos[2]));
 					return;
 				}
+				boolean showSlimes = isMultiplayer() && isSeedSet();
 				String[] labels = {"Mobs", "Animals", "Trees", "Crops", "Mushrooms", "Slimes", "Ghasts", "Pigmen", "Blaze", "Endermen"};
 				if (getDimension() == -1) { // Nether
 
@@ -189,7 +193,6 @@ public class WMLL {
 						drawString("\247c"+labels[9], 2, 1, 0xffffff);
 				}
 				else { // Normal world
-
 					// Hostiles
 					if ((light < 8 && !isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]))) && (getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]) != 110 && !getBiome().startsWith("MushroomIsland")))
 						drawString("\247a"+labels[0], 2, 1, 0xffffff);
@@ -206,7 +209,7 @@ public class WMLL {
 						drawString("\247c"+labels[1], 2, 2, 0xffffff);
 
 					// Slimes
-					if (!isMultiplayer())
+					if (showSlimes)
 						if (canSlimesSpawnHere(playerPos[0], playerPos[2]))
 							if ((playerPos[1] - 1) <= 40)
 								drawString("\247a"+labels[5], 2, 3, 0xffffff);
@@ -231,9 +234,9 @@ public class WMLL {
 
 				// Mushrooms
 				if ((playerIsStandingOnBlock(110) || light < 13) && !isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2])))
-					drawString("\247a"+labels[4], getDimension() == 1 ? 55 : isMultiplayer() ? 2 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
+					drawString("\247a"+labels[4], getDimension() == 1 ? 55 : !showSlimes ? 2 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
 				else
-					drawString("\247c"+labels[4], getDimension() == 1 ? 55 : isMultiplayer() ? 2 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
+					drawString("\247c"+labels[4], getDimension() == 1 ? 55 : !showSlimes ? 2 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
 
 			}
 
@@ -283,6 +286,26 @@ public class WMLL {
 	}
 
 	public String getWorldName() {
+		if (isMultiplayer()) {
+			try {
+				Object obj = thePlayer();
+				Field f = obj.getClass().getDeclaredField("cl"); // sendQueue
+				f.setAccessible(true);
+				obj = f.get(obj);
+				Field f1 = obj.getClass().getDeclaredField("g"); // netManager
+				f1.setAccessible(true);
+				obj = f1.get(obj);
+				Field f2 = obj.getClass().getDeclaredField("i"); // remoteSocketAddress
+				f2.setAccessible(true);
+				SocketAddress a = (SocketAddress)f2.get(obj);
+				String s = a.toString();
+				return s.toString().split("/")[0]+":"+s.split(":")[1];	
+			}
+			catch (Exception e) {
+				return e.getMessage();
+			}
+			
+		}	
 		return worldInfo().j();
 	}
 
@@ -374,7 +397,6 @@ public class WMLL {
 	public kf getPlayerController() {
 		return mc.c;
 	}
-	
 	public boolean isCreative() {
 		return !(getPlayerController() instanceof aen);
 	}
@@ -396,6 +418,12 @@ public class WMLL {
 	}
 
 	private boolean canSlimesSpawnHere(int x, int z) {
+		if (isMultiplayer()) {
+			acf chunk = getChunk(x, z);
+			int xPos = chunk.g;
+			int zPos = chunk.h;
+			return new Random(getWorldSeed() + (long)(xPos * xPos * 0x4c1906) + (long)(xPos * 0x5ac0db) + (long)(zPos * zPos) * 0x4307a7L + (long) (zPos * 0x5f24f) ^ 0x3ad8025f).nextInt(10) == 0;
+		}
 		return getChunk(x, z).a(0x3ad8025fL).nextInt(10) == 0 && getWorldSeed() != 0L;
 	}
 
@@ -443,6 +471,13 @@ public class WMLL {
 	}
 
 	public long getWorldSeed() {
+		if (isMultiplayer())
+			try {
+				return Long.parseLong(options.getProperty("Seed:"+getWorldName().toLowerCase(), "0"));
+			}
+		catch (NumberFormatException n) {
+			return 0;
+		}
 		return getWorld().v();
 	}
 
@@ -500,6 +535,7 @@ public class WMLL {
 			options.setProperty("useImages", Boolean.toString(useImages));
 			options.setProperty("OutputLocation", Integer.toString(outputLocation));
 			options.setProperty("OverrideIngameF3", Boolean.toString(wmllOverrideF3));
+			options.setProperty("showSeedWithCoords", Boolean.toString(showSeedWithCoords));
 			options.setProperty("F3Type", Integer.toString(F3Type));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
 			if (!outputOptions.isEmpty())
@@ -530,6 +566,7 @@ public class WMLL {
 			outputLocation = Integer.parseInt(options.getProperty("OutputLocation", "0"));
 			wmllOverrideF3 = Boolean.parseBoolean(options.getProperty("OverrideIngameF3", "true"));
 			F3Type = Integer.parseInt(options.getProperty("F3Type", "0"));
+			showSeedWithCoords = Boolean.parseBoolean(options.getProperty("showSeedWithCoords", "true"));
 			debug("[WMLL] Loaded options.");
 			debug(options.toString());
 		}
@@ -555,7 +592,7 @@ public class WMLL {
 
 	public void debug(String s) {
 		try {
-			if (WMLLDebugActive() || s.startsWith("[WMLLDebug]")) {
+			if (s.startsWith("[WMLLDebug]")) {
 				thePlayer().b(s);
 				return;
 			}
@@ -602,6 +639,10 @@ public class WMLL {
 	
 	public int getFPSThreshold() {
 		return Integer.parseInt(options.getProperty("FPSThreshold", "60"));
+	}
+	
+	public boolean isSeedSet() {
+		return options.containsKey("Seed:"+getWorldName().toLowerCase());
 	}
 
 }

@@ -190,6 +190,13 @@ public class WMLLGuiLightLevel extends vl {
 		super.a(i, j, f);
 	}
 	
+	public void a() {
+		lightLevelEditbox.b();
+		for (int x = 0; x < page3editboxes.size(); x++) {
+			page3editboxes.get(x).b();
+		}
+	}
+	
 	protected void a(int i, int j, int k) {
 		super.a(i, j, k);
 		if (page == 3) {
