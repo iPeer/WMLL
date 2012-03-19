@@ -39,14 +39,15 @@ public class WMLLGuiOutputOptions extends vl {
 		if (WMLL.debugClassPresent)
 			s.add(new abk(9001, 2, r - 22, 50, 20, "Reload"));
 		s.add(new abk(5, q / 2 - 100, r / 4 + 120 + o, "Light Level options..."));
-/*		s.add(new abk(0, q / 2 - 100, r / 4 + 20 + o, 98, 20, "c"));
-		s.add(new abk(2, q / 2 + 2, r / 4 + 20 + o, 98, 20, "d"));
+		s.add(new abk(6, q / 2 - 107, r / 4 + 20 + o, 108, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
+/*		s.add(new abk(2, q / 2 + 2, r / 4 + 20 + o, 98, 20, "d"));
 		s.add(new abk(0, q / 2 - 100, r / 4 + 45 + o, 98, 20, "e"));
 		s.add(new abk(2, q / 2 + 2, r / 4 + 45 + o, 98, 20, "f"));
 		s.add(new abk(0, q / 2 - 100, r / 4 + 70 + o, 98, 20, "g"));
 		s.add(new abk(2, q / 2 + 2, r / 4 + 70 + o, 98, 20, "h"));
 		s.add(new abk(0, q / 2 - 100, r / 4 + 95 + o, 98, 20, "i"));
 		s.add(new abk(2, q / 2 + 2, r / 4 + 95 + o, 98, 20, "j"));*/
+		((abk)s.get(1)).h = false;
 		
 	}
 	
@@ -64,7 +65,7 @@ public class WMLLGuiOutputOptions extends vl {
 			a++;
 			if (a > 3)
 				a = 0;
-			getButton(3).e = outputLocations[a];
+			getButton(2).e = outputLocations[a];
 			WMLL.outputLocation = a;
 		}
 		else if (b.f == 4) { // Text Colour
@@ -72,14 +73,18 @@ public class WMLLGuiOutputOptions extends vl {
 			a++;
 			if (a > 15)
 				a = 0;
-			getButton(4).e = "\247"+Integer.toHexString(a)+colourNames[a];
+			getButton(3).e = "\247"+Integer.toHexString(a)+colourNames[a];
 			WMLL.TextColour = a;
+		}
+		else if (b.f == 6) { // F3 override
+			wmll.wmllOverrideF3 = !wmll.wmllOverrideF3;
+			b.e = "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No");
+		}
+		else if (b.f == 5) { // Light level options
+			p.a(new WMLLGuiLightLevel(wmll, this));
 		}
 		else if (b.f == 9001) // Debug button
 			p.a(new WMLLGuiOutputOptions(wmll, parent));
-		else if (b.f == 5) { //Light level options
-			p.a(new WMLLGuiLightLevel(wmll, this));
-		}
 	}
 	
 	protected void a(char c, int i) {

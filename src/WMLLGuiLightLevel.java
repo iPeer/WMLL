@@ -163,7 +163,7 @@ public class WMLLGuiLightLevel extends vl {
 
 			b = "\247c%SkyLight%";
 			a(u, b, q / 2, 85, 0xffffff);
-			b = "Returns the current sky's light level.";
+			b = "Returns the sky's current light level.";
 			a(u, b, q / 2, 95, 0xffffff);
 
 			b = "\247c%BlockLight%";
@@ -173,7 +173,7 @@ public class WMLLGuiLightLevel extends vl {
 			
 			b = "\247c%Biome%";
 			a(u, b, q / 2, 125, 0xffffff);
-			b = "Returns the current biome";
+			b = "Returns the current biome.";
 			a(u, b, q / 2, 135, 0xffffff);
 		}
 		else if (page == 3) {

@@ -18,7 +18,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 610";
+	public static final String WMLLVER = "Test 612";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -36,11 +36,14 @@ public class WMLL {
 	public static int[] playerPos;
 	public static boolean militaryclock;
 	public static boolean debugClassPresent;
+	
+	public boolean wmllOverrideF3 = true;
 
 	private static final int propertiesVersion = 1;
 	private static File settingsFile, outputOptionsFile;
 
 	private WMLLRenderer wmllRenderer;
+	private WMLLF3 wmllF3;
 	private Minecraft mc;
 	private boolean Rei, ReiUseMl;
 	private boolean ranInit = false;
@@ -49,6 +52,7 @@ public class WMLL {
 	private boolean sleepingStringSet = false;
 	private String lightString = "Dat Easter Egg";
 	private long lastF4Press = 0;
+	private boolean wmllF3Output = false;
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+WMLLVER);
@@ -76,10 +80,17 @@ public class WMLL {
 		if (!ranInit) {
 			this.mc = h;
 			wmllRenderer = new WMLLRenderer(mc, this);
+			wmllF3 = new WMLLF3(mc, this);
 			ranInit = true;
 		}
 		if (mcDebugOpen()) {
-			drawStringUsingPixels("WMLL "+WMLLVER, 2, 52, 0xffffff);
+			if (wmllOverrideF3)
+				toggleF3Override();
+			else
+				drawStringUsingPixels("WMLL "+WMLLVER, 2, 52, 0xffffff);
+		}
+		else if (wmllF3Output) {
+			wmllF3.draw();
 		}
 		else {
 			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true"));
@@ -476,6 +487,7 @@ public class WMLL {
 			options.setProperty("clockSetting", Integer.toString(clockSetting));
 			options.setProperty("useImages", Boolean.toString(useImages));
 			options.setProperty("OutputLocation", Integer.toString(outputLocation));
+			options.setProperty("OverrideIngameF3", Boolean.toString(wmllOverrideF3));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
 			if (!outputOptions.isEmpty())
 				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
@@ -503,6 +515,7 @@ public class WMLL {
 			F4Key = Integer.parseInt(options.getProperty("F4", "62"));
 			clockSetting = Integer.parseInt(options.getProperty("clockSetting", "2"));
 			outputLocation = Integer.parseInt(options.getProperty("OutputLocation", "0"));
+			wmllOverrideF3 = Boolean.parseBoolean(options.getProperty("OverrideIngameF3", "true"));
 			debug("[WMLL] Loaded options.");
 			debug(options.toString());
 		}
@@ -564,6 +577,11 @@ public class WMLL {
 					saveOptions();
 				}
 		}
+	}
+	
+	private void toggleF3Override() {
+		wmllF3Output = !wmllF3Output;
+		getGameSettings().F = false;
 	}
 
 }
