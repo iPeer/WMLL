@@ -36,7 +36,7 @@ public class WMLLF3 {
 		// FPS & Chunk Updates
 		int col = 15;
 		int fps = Integer.parseInt(wmll.getFPSString().split(" ")[0]);
-		if (fps < 60)
+		if (fps < wmll.getFPSThreshold())
 			col = 12;
 		wmll.drawStringUsingPixels("\247"+Integer.toHexString(col)+wmll.getFPSString(), 2, 12, 0xffffff);
 		

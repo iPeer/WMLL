@@ -31,10 +31,13 @@ public class WMLLOptions extends vl {
 		s.add(new abk(5, q / 2 - 100, r / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
 		s.add(new abk(6, q / 2 + 2, r / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
 		s.add(new abk(3, q / 2 - 100, r / 4 + 125 + offset, "Output options..."));
+		s.add(new abk(4, q / 2 - 100, r / 4 + 85 + offset, "Force options reload"));
 		//s.add(new abk(4, q / 2 - 100, r / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
 		String enabledString = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(wmll.Enabled ? "Yes" : "No");
 		int i = wmll.getFontRenderer().a(enabledString);
 		s.add(new abk(8, (q - (i + 10)) / 2, r / 4 + 45 + offset, i + 10, 20, enabledString));
+		if (WMLL.debugClassPresent)
+			s.add(new abk(9001, 2, r - 22, 50, 20, "Reload"));
 		if (!wmll.Enabled)
 			for (int x = 3; x < 6; x++)
 				((abk)s.get(x)).h = false;
@@ -68,13 +71,7 @@ public class WMLLOptions extends vl {
 			wmll.WMLLI = i2;*/
 		}
 		if (button.f == 4) {
-			int colourid = wmll.TextColour;
-			colourid++;
-			if (colourid > 15)
-				colourid = 0;
-			String prefix1 = "\247"+Integer.toHexString(colourid);
-			wmll.TextColour = colourid;
-			button.e = prefix1+"Text Colour";
+			wmll.loadOptions();
 		}
 		if (button.f == 5) {
 			int a = wmll.clockSetting;
@@ -96,6 +93,8 @@ public class WMLLOptions extends vl {
 				((abk)s.get(x)).h = !a;
 			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(!a ? "Yes" : "No");
 		}
+		if (button.f == 9001) // Debug button
+			p.a(new WMLLOptions(wmll));
 	}
 
 	private static String buttonTextForClockSetting(int i) {
@@ -149,6 +148,7 @@ public class WMLLOptions extends vl {
 		k();
 		// (fontrenderer, text, x, y, colour)
 		a(u, title, q / 2, 20, 0xffffff);
+		a(u, "\247cReloading options will undo any changes you've made!", q / 2, 150, 0xffffff);
 		int a = (q - ((wmll.getFontRenderer().a(WMLL.WMLLVER) + 2) / 2));
 		a(u, WMLL.WMLLVER, a, r - 9, 0x444444);
 		super.a(i, j, f);

@@ -18,7 +18,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 612";
+	public static final String WMLLVER = "Test 613";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -582,6 +582,10 @@ public class WMLL {
 	private void toggleF3Override() {
 		wmllF3Output = !wmllF3Output;
 		getGameSettings().F = false;
+	}
+	
+	public int getFPSThreshold() {
+		return Integer.parseInt(options.getProperty("FPSThreshold", "60"));
 	}
 
 }
