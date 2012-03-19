@@ -18,7 +18,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 615";
+	public static final String WMLLVER = "Test 617";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -38,6 +38,7 @@ public class WMLL {
 	public static boolean debugClassPresent;
 	
 	public boolean wmllOverrideF3 = true;
+	public int F3Type;
 
 	private static final int propertiesVersion = 1;
 	private static File settingsFile, outputOptionsFile;
@@ -369,9 +370,21 @@ public class WMLL {
 	public ey playerEntity() {
 		return mc.k;
 	}
+	
+	public kf getPlayerController() {
+		return mc.c;
+	}
+	
+	public boolean isCreative() {
+		return !(getPlayerController() instanceof aen);
+	}
 
 	public wm worldInfo() {
 		return getWorld().x;
+	}
+	
+	protected Minecraft getMCInstance() {
+		return mc;
 	}
 
 	private acf getChunk(int x, int z) {
@@ -487,6 +500,7 @@ public class WMLL {
 			options.setProperty("useImages", Boolean.toString(useImages));
 			options.setProperty("OutputLocation", Integer.toString(outputLocation));
 			options.setProperty("OverrideIngameF3", Boolean.toString(wmllOverrideF3));
+			options.setProperty("F3Type", Integer.toString(F3Type));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
 			if (!outputOptions.isEmpty())
 				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
@@ -515,6 +529,7 @@ public class WMLL {
 			clockSetting = Integer.parseInt(options.getProperty("clockSetting", "2"));
 			outputLocation = Integer.parseInt(options.getProperty("OutputLocation", "0"));
 			wmllOverrideF3 = Boolean.parseBoolean(options.getProperty("OverrideIngameF3", "true"));
+			F3Type = Integer.parseInt(options.getProperty("F3Type", "0"));
 			debug("[WMLL] Loaded options.");
 			debug(options.toString());
 		}
@@ -559,6 +574,8 @@ public class WMLL {
 				WMLLDebug.setTimeToNight();
 		if (Keyboard.isKeyDown(Keyboard.KEY_F9) && debugClassPresent)
 			WMLLDebug.setTimeToDay();
+		if (Keyboard.isKeyDown(Keyboard.KEY_G)&& debugClassPresent)
+			WMLLDebug.toggleGameMode();
 		if (Keyboard.isKeyDown(F4Key) && System.currentTimeMillis() - lastF4Press > 150) {
 			lastF4Press = System.currentTimeMillis();
 			if (Keyboard.isKeyDown(29) && mc.s == null)

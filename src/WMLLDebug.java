@@ -1,3 +1,5 @@
+import net.minecraft.client.Minecraft;
+
 
 /* 
  * Do not use this with an actual installation of WMLL. 
@@ -57,6 +59,20 @@ public class WMLLDebug {
 		}
 		lastCommandTime = System.currentTimeMillis();
 	}
+	
+	public static void toggleGameMode() {
+		if (System.currentTimeMillis() - lastCommandTime < 150L)
+			return;
+		WMLL wmll = WMLL.i;
+		kf pc = wmll.getPlayerController();
+		Minecraft mc = wmll.getMCInstance();
+		if (!wmll.isCreative())
+			pc = new afa(mc);
+		else
+			pc = new aen(mc);
+		mc.c = pc;
+		lastCommandTime = System.currentTimeMillis();	
+	}
 
 	public static void onGuiTick() {
 		if (timeLocked)
@@ -68,6 +84,7 @@ public class WMLLDebug {
 	public static void displayDebugInfo() {
 		WMLL wmll = WMLL.i;
 		wmll.drawDebug("Time locked? "+timeLocked+" ("+currentWorldTime+")", 1, 6, 0xffffff);
+		wmll.drawDebug("Creative: "+wmll.isCreative(), 1, 7, 0xffffff);
 	}
 
 }

@@ -35,6 +35,11 @@ public class WMLLF3 {
 		// Minecraft version
 		wmll.drawStringUsingPixels("Minecraft "+MINECRAFT_VERSION, 2, 2, 0xffffff);
 		
+		if (wmll.F3Type == 1) {
+			
+		}
+		else {
+		
 		// FPS & Chunk Updates
 		int col = 15;
 		int fps = Integer.parseInt(wmll.getFPSString().split(" ")[0]);
@@ -67,6 +72,7 @@ public class WMLLF3 {
 		// Seed
 		if (!wmll.isMultiplayer())
 			wmll.drawStringUsingPixels("Seed: "+wmll.getWorldSeed(), 2, 112, 0xffffff);
+		}
 		
 	}
 	
