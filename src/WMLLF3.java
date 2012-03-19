@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 import net.minecraft.client.Minecraft;
 
 
@@ -26,9 +28,9 @@ public class WMLLF3 {
 		String used = "Used: "+Long.toString((um * 100L) / mm)+"%, "+(um / 1024L / 1024L)+"MB/"+(mm / 1024L / 1024L)+"MB";
 		String allocated = "Allocated: "+(tm * 100L) / mm+"% ("+(tm / 1024L / 1024L)+"MB)";
 		
-		wmll.drawStringUsingPixels(used, sw - wmll.getFontRenderer().a(used) - 2, 2, 0xe0e0e0);
+		wmll.drawStringUsingPixels(used, sw - wmll.getFontRenderer().a(used) - 2, 2, 0xffffff);
 		
-		wmll.drawStringUsingPixels(allocated, sw - wmll.getFontRenderer().a(allocated) - 2, 12, 0xe0e0e0);
+		wmll.drawStringUsingPixels(allocated, sw - wmll.getFontRenderer().a(allocated) - 2, 12, 0xffffff);
 		
 		// Minecraft version
 		wmll.drawStringUsingPixels("Minecraft "+MINECRAFT_VERSION, 2, 2, 0xffffff);
@@ -50,9 +52,21 @@ public class WMLLF3 {
 		// WMLL Version
 		wmll.drawStringUsingPixels("WMLL "+WMLL.WMLLVER, 2, 72, 0xffffff);
 		
+		// Coordinates
+		vm player = wmll.thePlayer();
+		double x = player.o;
+		double y = player.p;
+		double z = player.q;
+		double f = gh.c((double)((player.u * 4F) / 360F) + 0.5D) & 3;
+		String roundingFormat = "#0";
+		DecimalFormat d = new DecimalFormat(roundingFormat);
+		String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+wmll.getPlayerDirection(Integer.parseInt(d.format(f)))+")";
+		
+		wmll.drawStringUsingPixels(coords, 2, 92, 0xffffff);
+		
 		// Seed
 		if (!wmll.isMultiplayer())
-			wmll.drawStringUsingPixels("Seed: "+wmll.getWorldSeed(), 2, 112, 0xe0e0e0);
+			wmll.drawStringUsingPixels("Seed: "+wmll.getWorldSeed(), 2, 112, 0xffffff);
 		
 	}
 	

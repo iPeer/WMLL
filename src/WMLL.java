@@ -18,7 +18,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 613";
+	public static final String WMLLVER = "Test 615";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -83,14 +83,13 @@ public class WMLL {
 			wmllF3 = new WMLLF3(mc, this);
 			ranInit = true;
 		}
-		if (mcDebugOpen()) {
-			if (wmllOverrideF3)
+		if (mcDebugOpen() || wmllF3Output) {
+			if (mcDebugOpen() && wmllOverrideF3)
 				toggleF3Override();
-			else
+			else if (mcDebugOpen() && !wmllOverrideF3)
 				drawStringUsingPixels("WMLL "+WMLLVER, 2, 52, 0xffffff);
-		}
-		else if (wmllF3Output) {
-			wmllF3.draw();
+			else
+				wmllF3.draw();
 		}
 		else {
 			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true"));
