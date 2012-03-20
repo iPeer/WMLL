@@ -101,7 +101,7 @@ public class WMLLGuiOutputOptions extends vl {
 			b.e = "Seed w/ Coords: "+(a ? "Yes" : "No");
 		}
 		else if (b.f == 9) {
-			p.a(new WMLLSMPSeed(wmll, this));
+			p.a(new WMLLGuiSMPSeed(wmll, this));
 		}
 		else if (b.f == 9001) // Debug button
 			p.a(new WMLLGuiOutputOptions(wmll, parent));
