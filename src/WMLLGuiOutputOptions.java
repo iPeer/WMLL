@@ -43,14 +43,14 @@ public class WMLLGuiOutputOptions extends vl {
 		s.add(new abk(6, q / 2 - 112, r / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
 		s.add(new abk(7, q / 2 + 2, r / 4 + 20 + o, 112, 20, "F3 Type: "+(wmll.F3Type == 1 ? "Alternate" : "Classic")));
 		s.add(new abk(8, q / 2 - 112, r / 4 + 45 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
-		s.add(new abk(9, q / 2 - 100, r / 4 + 98 + o, "Enter seed for server..."));
+		s.add(new abk(9, q / 2 - 100, r / 4 + 98 + o, "Enter seed for this server..."));
 /*		s.add(new abk(2, q / 2 + 2, r / 4 + 45 + o, 98, 20, "f"));
 		s.add(new abk(0, q / 2 - 100, r / 4 + 70 + o, 98, 20, "g"));
 		s.add(new abk(2, q / 2 + 2, r / 4 + 70 + o, 98, 20, "h"));
 		s.add(new abk(0, q / 2 - 100, r / 4 + 95 + o, 98, 20, "i"));
 		s.add(new abk(2, q / 2 + 2, r / 4 + 95 + o, 98, 20, "j"));*/
 		((abk)s.get(1)).h = ((abk)s.get(7)).h = false;
-		((abk)s.get(8)).i = wmll.isMultiplayer();
+		((abk)s.get(9)).i = wmll.isMultiplayer();
 		
 	}
 	

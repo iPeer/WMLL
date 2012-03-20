@@ -6,9 +6,24 @@ import org.lwjgl.opengl.GL11;
 
 public class WMLLRenderer extends ok {
 
+	public int updateVersion = 0;
+	private int StringY = 12, notifyTick = 200;
+
 	public WMLLRenderer(Minecraft m, WMLL w) {
 		this.mc = m;
 		this.wmll = w;
+	}
+
+	public void tick() {
+		if (notifyUpdate) {
+			notifyTick--;
+			if (notifyTick < 10)
+				StringY--;
+			if (StringY <= -13)
+				notifyUpdate = false;
+			String a = "WMLL Stable \247c"+updateVersion+"\247f is available!";
+			wmll.drawStringUsingPixels(a, (wmll.getWindowSize().a() - wmll.getFontRenderer().a(a)) / 2, StringY, 0xffffff);
+		}
 	}
 
 	public void renderLightImage(int i) {
@@ -104,7 +119,7 @@ public class WMLLRenderer extends ok {
 			drawImage(38, 32, 16, 64, 16, 16);
 
 	}
-	
+
 	private void drawImage(int x, int y, int imageposx, int imageposy, int imagewidth, int imageheight) {
 		int pos = WMLL.outputLocation;
 		int width = wmll.getWindowSize().a();
@@ -130,6 +145,7 @@ public class WMLLRenderer extends ok {
 
 	public Minecraft mc;
 	private WMLL wmll;
+	public boolean notifyUpdate;
 
 }
 

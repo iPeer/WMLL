@@ -1,7 +1,13 @@
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Scanner;
+
 import org.lwjgl.input.Keyboard;
 
 public class WMLLOptions extends vl {
 
+	private int updateDelay = 0;
+	
 	public WMLLOptions(WMLL i) {
 		title = "WMLL Configuration";
 		this.wmll = i;
@@ -142,6 +148,10 @@ public class WMLLOptions extends vl {
 		else {
 			super.a(c1, i1);
 		}
+	}
+	
+	public void a() {
+
 	}
 
 	public void a(int i, int j, float f) {

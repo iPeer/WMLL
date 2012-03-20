@@ -19,7 +19,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 625";
+	public static final String WMLLVER = "Test 628";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -44,6 +44,7 @@ public class WMLL {
 
 	private static final int propertiesVersion = 1;
 	private static File settingsFile, outputOptionsFile;
+	private static final WMLLUpdateCheck wmllUpdateCheck = new WMLLUpdateCheck();
 
 	private WMLLRenderer wmllRenderer;
 	private WMLLF3 wmllF3;
@@ -56,6 +57,7 @@ public class WMLL {
 	private String lightString = "Dat Easter Egg";
 	private long lastF4Press = 0;
 	private boolean wmllF3Output = false;
+	private int updateCheck = 180000;
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+WMLLVER);
@@ -77,6 +79,11 @@ public class WMLL {
 	}
 
 	public void updategui(Minecraft h) {
+		updateCheck--;
+		if (updateCheck <= 0) {
+			updateCheck = 180000;
+			(new Thread(wmllUpdateCheck)).start();
+		}
 		if (Rei && !ReiUseMl)
 			ReiMinimap.instance.onTickInGame(h);
 
@@ -85,6 +92,7 @@ public class WMLL {
 			wmllRenderer = new WMLLRenderer(mc, this);
 			wmllF3 = new WMLLF3(mc, this);
 			ranInit = true;
+			wmllUpdateCheck.run();
 		}
 		if (mcDebugOpen() || wmllF3Output) {
 			if (mcDebugOpen() && wmllOverrideF3)
@@ -102,6 +110,8 @@ public class WMLL {
 				int x = getPlayerCoordinates()[0];
 				int y = getPlayerCoordinates()[1];
 				int z = getPlayerCoordinates()[2];
+				int hr = (updateCheck / 50) / 60;
+				int mi = (updateCheck / 50) % 60;
 				drawDebug(getWorldName()+" ("+isMultiplayer()+")", (getWindowSize().a() - (getFontRenderer().a(getWorldName()+" ("+isMultiplayer()+")") + 1)), 0, 0xffffff);
 				drawDebug(Integer.toString(getDimension()), (getWindowSize().a() - (getFontRenderer().a(Integer.toString(getDimension())) + 1)), 1, 0xffffff);
 				drawDebug(Boolean.toString(isPlayerSleeping()), (getWindowSize().a() - (getFontRenderer().a(Boolean.toString(isPlayerSleeping())) + 1)), 2, 0xffffff);
@@ -115,6 +125,8 @@ public class WMLL {
 					drawDebug("null", (getWindowSize().a() - (getFontRenderer().a("null") + 1)), 5, 0xffffff);
 				}
 				drawDebug(Boolean.toString(canSlimesSpawnHere(x, z)), (getWindowSize().a() - (getFontRenderer().a(Boolean.toString(canSlimesSpawnHere(x, z))) + 1)), 6, 0xffffff);
+				String t = "Next update check: "+hr+":"+mi;
+				drawDebug(t, (getWindowSize().a() - (getFontRenderer().a(t) + 1)), 7, 0xffffff);
 			}
 
 			WMLLCheckKeys();
@@ -244,7 +256,8 @@ public class WMLL {
 
 			if (Arrays.asList(2, 5).contains(WMLLI))
 				drawString(getFPSString(),2, 1, 0xffffff);
-		}		
+		}
+		wmllRenderer.tick();
 
 	}
 
@@ -332,12 +345,16 @@ public class WMLL {
 	}
 
 	public int getSavedBlockLight(int x, int y, int z) {
-		int[] playerPos = getPlayerCoordinates();
+		if (y < 0 || y > 255) 
+				return 0;
+		int[] playerPos = {x, y, z};
 		return getChunk(playerPos[0], playerPos[2]).a(wh.b, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
 	}
 	
 	public int getRawLightLevel(int x, int y, int z) {
-		int[] playerPos = getPlayerCoordinates();
+		if (y < 0 || y > 255) 
+			return 0;
+		int[] playerPos = {x, y, z};
 		return getChunk(playerPos[0], playerPos[2]).a(wh.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
 	}
 	
@@ -647,6 +664,12 @@ public class WMLL {
 		if (!isMultiplayer())
 			return true;
 		return options.containsKey("Seed:"+getWorldName().toLowerCase());
+	}
+
+	public void displayUpdateString(int ver) {
+		wmllRenderer.updateVersion = ver;
+		wmllRenderer.notifyUpdate = true;
+		
 	}
 
 }
