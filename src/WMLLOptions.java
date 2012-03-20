@@ -69,12 +69,6 @@ public class WMLLOptions extends vl {
 		}
 		if (button.f == 3) {
 			p.a(new WMLLGuiOutputOptions(WMLL.i, this));
-/*			int i2 = wmll.WMLLI;
-			i2++;
-			if (i2 > 7)
-				i2 = 0;
-			button.e = getStringForLightOption(i2);
-			wmll.WMLLI = i2;*/
 		}
 		if (button.f == 4) {
 			wmll.loadOptions();

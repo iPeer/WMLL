@@ -4,14 +4,14 @@ import org.lwjgl.input.Keyboard;
 
 
 public class WMLLGuiOutputOptions extends vl {
-	
+
 	protected WMLL wmll;
 	private vl parent;
 	private String title;
 	private static final String[] colourNames = {"Black", "Dark Blue", "Dark Green", "Cyan", "Red", "Purple", "Orange", "Light Grey", "Dark Grey", "Lavender?", "Lime Green", "Light Blue", "Bright Red", "Pink", "Yellow", "White"};
 	private static final String[] outputLocations = {"Top Left", "Top Right", "Bottom Left", "Bottom Right"};
 	public static Properties outputOptions;
-	
+
 	@SuppressWarnings("static-access")
 	public WMLLGuiOutputOptions(WMLL wmll, vl parent) {
 		this.wmll = wmll;
@@ -19,7 +19,7 @@ public class WMLLGuiOutputOptions extends vl {
 		this.outputOptions = WMLL.outputOptions;
 		title = "WMLL Output Configuration";
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void c() {
 		s.clear();
@@ -31,29 +31,30 @@ public class WMLLGuiOutputOptions extends vl {
 		 * New button
 		 * abk((int)ID, x, y[, width, height], text)
 		 * y = y+25 for each button
-		*/
-		s.add(new abk(1, q / 2 - 100, r / 4 + 150 + o, 98, 20, "Done"));
+		 */
+		s.add(new abk(1, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done"));
 		//s.add(new abk(0, q / 2 - 152, r / 4 + 150 + o, 98, 20, "<<"));
-		s.add(new abk(2, q / 2 + 2, r / 4 + 150 + o, 98, 20, ">>"));
+		//s.add(new abk(2, q / 2 + 2, r / 4 + 150 + o, 98, 20, ">>"));
 		s.add(new abk(3, q / 2 - 112, r / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
 		s.add(new abk(4, q / 2 + 2, r / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
 		if (WMLL.debugClassPresent)
 			s.add(new abk(9001, 2, r - 22, 50, 20, "Reload"));
-		s.add(new abk(5, q / 2 - 100, r / 4 + 120 + o, "Light Level options..."));
+		s.add(new abk(5, q / 2 - 112, r / 4 + 120 + o, 226, 20, "Light Level options..."));
 		s.add(new abk(6, q / 2 - 112, r / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
 		s.add(new abk(7, q / 2 + 2, r / 4 + 20 + o, 112, 20, "F3 Type: "+(wmll.F3Type == 1 ? "Alternate" : "Classic")));
 		s.add(new abk(8, q / 2 - 112, r / 4 + 45 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
-		s.add(new abk(9, q / 2 - 100, r / 4 + 98 + o, "Enter seed for this server..."));
-/*		s.add(new abk(2, q / 2 + 2, r / 4 + 45 + o, 98, 20, "f"));
+		s.add(new abk(9, q / 2 - 112, r / 4 + 98 + o, 226, 20, "Enter seed for this server..."));
+		/*		s.add(new abk(2, q / 2 + 2, r / 4 + 45 + o, 98, 20, "f"));
 		s.add(new abk(0, q / 2 - 100, r / 4 + 70 + o, 98, 20, "g"));
 		s.add(new abk(2, q / 2 + 2, r / 4 + 70 + o, 98, 20, "h"));
 		s.add(new abk(0, q / 2 - 100, r / 4 + 95 + o, 98, 20, "i"));
 		s.add(new abk(2, q / 2 + 2, r / 4 + 95 + o, 98, 20, "j"));*/
-		((abk)s.get(1)).h = ((abk)s.get(7)).h = false;
-		((abk)s.get(9)).i = wmll.isMultiplayer();
-		
+		s.add(new abk(10, q / 2 - 112, r / 4 + 76 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
+		((abk)s.get(6)).h = false;
+		((abk)s.get(8)).i = wmll.isMultiplayer();
+
 	}
-	
+
 	protected void a(abk b) {
 		if (b.f == 1 || b.f == 2) {
 			if (b.f == 2) { // Next
@@ -103,17 +104,25 @@ public class WMLLGuiOutputOptions extends vl {
 		else if (b.f == 9) {
 			p.a(new WMLLGuiSMPSeed(wmll, this));
 		}
+		else if (b.f == 10) {
+			int i2 = WMLL.WMLLI;
+			i2++;
+			if (i2 > 7)
+				i2 = 0;
+			b.e = "Show: "+getStringForLightOption(i2);
+			WMLL.WMLLI = i2;
+		}            
 		else if (b.f == 9001) // Debug button
 			p.a(new WMLLGuiOutputOptions(wmll, parent));
 	}
-	
+
 	protected void a(char c, int i) {
 		if (Keyboard.KEY_ESCAPE == i)
 			p.a(parent);
 		else
 			super.a(c, i);
 	}
-	
+
 	public void a(int i, int j, float f) {
 		k();
 		// (fontrenderer, text, x, y, colour)
@@ -122,15 +131,40 @@ public class WMLLGuiOutputOptions extends vl {
 		a(u, WMLL.WMLLVER, a, r - 9, 0x444444);
 		super.a(i, j, f);
 	}
-	
+
 	public void e() {
 		Keyboard.enableRepeatEvents(false);
 	}
-	
+
 	// Begin custom functions
-	
+
 	private abk getButton(int id) {
 		return ((abk)s.get(id));
 	}
-	
+
+	public String getStringForLightOption(int o) {
+		switch (o) {
+		case 0:
+			return "Just Light";
+		case 1:
+			return "Light + Indicators";
+		case 2:
+			return "Light + FPS/Chunk Updates";
+		case 3:
+			return "Light + Coords, Facing, Biome & Seed";
+			//		case 4:
+			//			return "Light + Seed";
+		case 4:
+			return "Just Indicators";
+		case 5:
+			return "Just FPS/Chunk updates";
+		case 6:
+			return "Just Coords, Facing, Biome & Seed";
+			//		case 7: 
+			//			return "Just Seed";
+		default:
+			return "Nothing";
+		}
+	}
+
 }

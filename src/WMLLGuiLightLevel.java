@@ -34,7 +34,7 @@ public class WMLLGuiLightLevel extends vl {
 		byte o = -16;
 		s.clear();
 		
-		doneButton = new abk(0, q / 2 - 100, r / 4 + 150 + o, "Done");
+		doneButton = new abk(0, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done");
 		s.add(doneButton);
 		
 		int a = wmll.getFontRenderer().a("Parameter Help") + 10;
