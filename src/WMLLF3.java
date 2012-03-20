@@ -70,7 +70,7 @@ public class WMLLF3 {
 		wmll.drawStringUsingPixels(coords, 2, 92, 0xffffff);
 		
 		// Seed
-		if (!wmll.isMultiplayer())
+		if ((!wmll.isMultiplayer() && wmll.isSeedSet()) || wmll.showSeedWithCoords)
 			wmll.drawStringUsingPixels("Seed: "+wmll.getWorldSeed(), 2, 112, 0xffffff);
 		}
 		
