@@ -69,7 +69,7 @@ public class WMLLGuiOutputOptions extends vl {
 			a++;
 			if (a > 3)
 				a = 0;
-			getButton(2).e = outputLocations[a];
+			b.e = outputLocations[a];
 			WMLL.outputLocation = a;
 		}
 		else if (b.f == 4) { // Text Colour
@@ -77,7 +77,7 @@ public class WMLLGuiOutputOptions extends vl {
 			a++;
 			if (a > 15)
 				a = 0;
-			getButton(3).e = "\247"+Integer.toHexString(a)+colourNames[a];
+			b.e = "\247"+Integer.toHexString(a)+colourNames[a];
 			WMLL.TextColour = a;
 		}
 		else if (b.f == 6) { // F3 override
@@ -137,10 +137,6 @@ public class WMLLGuiOutputOptions extends vl {
 	}
 
 	// Begin custom functions
-
-	private abk getButton(int id) {
-		return ((abk)s.get(id));
-	}
 
 	public String getStringForLightOption(int o) {
 		switch (o) {
