@@ -1,15 +1,15 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiSMPSeed extends vl {
+public class WMLLGuiSMPSeed extends vp {
 	
 	protected WMLL wmll;
-	private vl parent;
+	private vp parent;
 	private String title;
 	
-	private ago seedBox;
+	private agu seedBox;
 
-	public WMLLGuiSMPSeed(WMLL wmll, vl parent) {
+	public WMLLGuiSMPSeed(WMLL wmll, vp parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.title = "WMLL SMP Seed Configuration";
@@ -20,25 +20,25 @@ public class WMLLGuiSMPSeed extends vl {
 		s.clear();
 		byte o = -16;
 		if (WMLL.debugClassPresent)
-			s.add(new abk(9001, 2, r - 22, 50, 20, "Reload"));
+			s.add(new abp(9001, 2, r - 22, 50, 20, "Reload"));
 		/*
 		 * New Editbox:
-		 * new ago(Gui, fontrenderer, posx, posy, width, height, default text);
+		 * new agu(Gui, fontrenderer, posx, posy, width, height, default text);
 		 */
-		seedBox = new ago(this, u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), ""));
+		seedBox = new agu(/*this,*/ u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
 		//s.add(seedBox);
-		seedBox.a = true;
-		s.add(new abk(0, q / 2 - 100, r / 4 + 90 + o, "Save Seed"));
+		seedBox.b(true);
+		s.add(new abp(0, q / 2 - 100, r / 4 + 90 + o, "Save Seed"));
 	}
 	
-	protected void a(abk b) {
+	protected void a(abp b) {
 		if (b.f == 9001) {
 			p.a(new WMLLGuiSMPSeed(wmll, parent));
 		}
 		else if (b.f == 0) {
-			if (!seedBox.a().equals("")) {
-				System.out.println(true+ " | "+seedBox.a());
-				WMLL.options.put("Seed:"+wmll.getWorldName().toLowerCase(), seedBox.a());
+			if (!seedBox.b().equals("")) {
+				System.out.println(true+ " | "+seedBox.b());
+				WMLL.options.put("Seed:"+wmll.getWorldName().toLowerCase(), seedBox.b());
 			}
 			p.a(parent);
 		}
@@ -51,7 +51,7 @@ public class WMLLGuiSMPSeed extends vl {
 	protected void a(char c, int i) {
 		if (Keyboard.KEY_ESCAPE == i)
 			p.a(parent);
-		else if (seedBox.a)
+		else if (seedBox.j())
 			seedBox.a(c, i);
 		else
 			super.a(c, i);

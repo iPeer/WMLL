@@ -5,21 +5,19 @@ import java.util.Properties;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiLightLevel extends vl {
+public class WMLLGuiLightLevel extends vp {
 	
 	protected WMLL wmll;
-	private vl parent;
+	private vp parent;
 	private String title;
 	private Properties outputOptions;
 	private String lightString;
 	private int page = 1;
-	private abk parameterButton, colouringButton, doneButton;
-	private ago lightEditbox, skyEditbox, rawEditbox, blockEditbox, lightLevelEditbox;
-	private final List<ago> page3editboxes = new ArrayList<ago>();
-	
-	private static zl[] enums;
+	private abp parameterButton, colouringButton, doneButton;
+	private agu lightEditbox, skyEditbox, rawEditbox, blockEditbox, lightLevelEditbox;
+	private final List<agu> page3editboxes = new ArrayList<agu>();
 
-	public WMLLGuiLightLevel(WMLL w, vl parent) {
+	public WMLLGuiLightLevel(WMLL w, vp parent) {
 		this.wmll = w;
 		this.parent = parent;
 		title = "WMLL Light Level Customization";
@@ -34,47 +32,48 @@ public class WMLLGuiLightLevel extends vl {
 		byte o = -16;
 		s.clear();
 		
-		doneButton = new abk(0, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done");
+		doneButton = new abp(0, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done");
 		s.add(doneButton);
 		
 		int a = wmll.getFontRenderer().a("Parameter Help") + 10;
-		parameterButton = new abk(1, (q - a) / 2, r / 4 + 65 + o, a, 20, "Parameter Help");
+		parameterButton = new abp(1, (q - a) / 2, r / 4 + 65 + o, a, 20, "Parameter Help");
 		s.add(parameterButton);
 		
 		a = wmll.getFontRenderer().a("Colouring Options...") + 10;
-		colouringButton = new abk(2, (q - a) / 2, r / 4 + 75, a, 20, "Colouring Options...");
+		colouringButton = new abp(2, (q - a) / 2, r / 4 + 75, a, 20, "Colouring Options...");
 		s.add(colouringButton);
 		
 		/*
 		 * New Editbox:
-		 * new ago(Gui, fontrenderer, posx, posy, width, height, default text);
+		 * new agu(Gui, fontrenderer, posx, posy, width, height, default text);
 		 */
-		lightLevelEditbox = new ago(this, u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 70, wmll.getWindowSize().a() - 20, 20, outputOptions.getProperty("lightString", "Light level: %LightLevel%"));
-		lightLevelEditbox.a = true;
+		lightLevelEditbox = new agu(/*this,*/ u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 70, wmll.getWindowSize().a() - 20, 20/*, outputOptions.getProperty("lightString", "Light level: %LightLevel%")*/);
+		//lightLevelEditbox.a = true;
+		lightLevelEditbox.b(true);
 		lightLevelEditbox.a(76);
 
-		blockEditbox = new ago(this, u, q / 2 - 10, 43, 20, 10, outputOptions.getProperty("highlightBlock", "8"));
+		/*blockEditbox = new agu(this, u, q / 2 - 10, 43, 20, 10, outputOptions.getProperty("highlightBlock", "8"));
 		blockEditbox.a(2);
 		page3editboxes.add(blockEditbox);
 		
-		skyEditbox = new ago(this, u, q / 2 - 10, 73, 20, 10, outputOptions.getProperty("highlightSky", "8"));
+		skyEditbox = new agu(this, u, q / 2 - 10, 73, 20, 10, outputOptions.getProperty("highlightSky", "8"));
 		skyEditbox.a(2);
 		page3editboxes.add(skyEditbox);
 		
-		rawEditbox = new ago(this, u, q / 2 - 10, 103, 20, 10, outputOptions.getProperty("highlightRaw", "8"));
+		rawEditbox = new agu(this, u, q / 2 - 10, 103, 20, 10, outputOptions.getProperty("highlightRaw", "8"));
 		rawEditbox.a(2);
 		page3editboxes.add(rawEditbox);
 		
-		lightEditbox = new ago(this, u, q / 2 - 10, 133, 20, 10, outputOptions.getProperty("highlightLight", "8"));
+		lightEditbox = new agu(this, u, q / 2 - 10, 133, 20, 10, outputOptions.getProperty("highlightLight", "8"));
 		lightEditbox.a(2);
-		page3editboxes.add(lightEditbox);
+		page3editboxes.add(lightEditbox);*/
 		
 		if (WMLL.debugClassPresent)
-			s.add(new abk(9001, 2, r - 22, 50, 20, "Reload"));
+			s.add(new abp(9001, 2, r - 22, 50, 20, "Reload"));
 		generateLightStringPreview();
 	}
 	
-	protected void a(abk b) {
+	protected void a(abp b) {
 		if (b.f == 0) {
 			if (page == 1) {
 				performSave();
@@ -89,13 +88,13 @@ public class WMLLGuiLightLevel extends vl {
 				parameterButton.i = colouringButton.i = true;
 				doneButton.e = "Done";
 				for (int x = 0; x < page3editboxes.size(); x++) {
-					page3editboxes.get(x).a = false;
+					page3editboxes.get(x).b(false);
 				}
-				outputOptions.put("highlightLight", verify(lightEditbox.a()));
-				outputOptions.put("highlightBlock", verify(blockEditbox.a()));
-				outputOptions.put("highlightRaw", verify(rawEditbox.a()));
-				outputOptions.put("highlightSky", verify(skyEditbox.a()));
-				lightLevelEditbox.a = true;
+				outputOptions.put("highlightLight", verify(lightEditbox.b()));
+				outputOptions.put("highlightBlock", verify(blockEditbox.b()));
+				outputOptions.put("highlightRaw", verify(rawEditbox.b()));
+				outputOptions.put("highlightSky", verify(skyEditbox.b()));
+				lightLevelEditbox.b(true);
 			}
 		}
 		else if (b.f == 9001) // Debug button
@@ -111,7 +110,7 @@ public class WMLLGuiLightLevel extends vl {
 				b.i = colouringButton.i = false;
 				doneButton.e = "<<";
 			}
-			lightLevelEditbox.a = false;
+			lightLevelEditbox.b(false);
 		}
 
 	}
@@ -121,17 +120,17 @@ public class WMLLGuiLightLevel extends vl {
 			performSave();
 			p.a(parent);
 		}
-		else if (lightLevelEditbox.a) {
+		else if (lightLevelEditbox.j()) {
 			lightLevelEditbox.a(c, i);
 			generateLightStringPreview();
 		}
-		else if (blockEditbox.a)
+		else if (blockEditbox.j())
 			blockEditbox.a(c, i);
-		else if (lightEditbox.a)
+		else if (lightEditbox.j())
 			lightEditbox.a(c, i);
-		else if (rawEditbox.a)
+		else if (rawEditbox.j())
 			rawEditbox.a(c, i);
-		else if (skyEditbox.a)
+		else if (skyEditbox.j())
 			skyEditbox.a(c, i);
 		else
 			super.a(c, i);
@@ -216,11 +215,11 @@ public class WMLLGuiLightLevel extends vl {
 	// Custom functions
 	
 	public void generateLightStringPreview() {
-		lightString = wmll.generateLightString(lightLevelEditbox.a());	
+		lightString = wmll.generateLightString(lightLevelEditbox.b());	
 	}
 	
 	public void performSave() {
-		outputOptions.put("lightString", lightLevelEditbox.a());
+		outputOptions.put("lightString", lightLevelEditbox.b());
 		WMLLGuiOutputOptions.outputOptions = WMLL.outputOptions = outputOptions;
 		System.out.println(outputOptions);
 	}

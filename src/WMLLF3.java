@@ -8,7 +8,7 @@ public class WMLLF3 {
 	protected Minecraft mc;
 	protected WMLL wmll;
 	
-	private final String MINECRAFT_VERSION = "1.2.3";
+	private final String MINECRAFT_VERSION = "1.2.4";
 
 	public WMLLF3(Minecraft mc, WMLL wmll) {
 		this.mc = mc;
@@ -58,11 +58,11 @@ public class WMLLF3 {
 		wmll.drawStringUsingPixels("WMLL "+WMLL.WMLLVER, 2, 72, 0xffffff);
 		
 		// Coordinates
-		vm player = wmll.thePlayer();
+		acq player = wmll.thePlayer();
 		double x = player.o;
 		double y = player.p;
 		double z = player.q;
-		double f = gh.c((double)((player.u * 4F) / 360F) + 0.5D) & 3;
+		double f = gk.c((double)((player.u * 4F) / 360F) + 0.5D) & 3;
 		String roundingFormat = "#0";
 		DecimalFormat d = new DecimalFormat(roundingFormat);
 		String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+wmll.getPlayerDirection(Integer.parseInt(d.format(f)))+")";

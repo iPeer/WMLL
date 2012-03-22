@@ -1,12 +1,15 @@
 import org.lwjgl.opengl.GL11;
 
 
-public class WMLLImprovedChat extends ok {
+// Coding is updated here but due to ImprovedChat's code requiring nq instad of 1.2.4's nt, it will error - iPeer
+
+
+public class WMLLImprovedChat extends oo {
 	
 	public static final WMLLImprovedChat i = new WMLLImprovedChat();
 	private static int fade = 0;
 
-	public void run(boolean chatActive, ni localni, int i, int i3) {
+	public void run(boolean chatActive, nl localni, int i, int i3) {
 		if(ImprovedChat.Current != null)
 		{
 			if(ImprovedChat.Current.tabs.size() > 1)
@@ -66,9 +69,9 @@ public class WMLLImprovedChat extends ok {
 			}
 			for(int it = ImprovedChat.currentTab().chatScroll; it < ImprovedChat.currentTab().e.size() && it < i3 + ImprovedChat.currentTab().chatScroll; it++)
 			{
-				if(((nq)ImprovedChat.currentTab().e.get(it)).b >= 200 && !chatActive)
+				if(((nt)ImprovedChat.currentTab().e.get(it)).b >= 200 && !chatActive)
 					continue;
-				double d1 = (double)((nq)ImprovedChat.currentTab().e.get(it)).b / 200D;
+				double d1 = (double)((nt)ImprovedChat.currentTab().e.get(it)).b / 200D;
 				d1 = 1.0D - d1;
 				d1 *= 10D;
 				if(d1 < 0.0D)
@@ -83,7 +86,7 @@ public class WMLLImprovedChat extends ok {
 				{
 					int i120 = 2;
 					int i131 = (-it + ImprovedChat.currentTab().chatScroll) * 9;
-					String str2 = ((nq)ImprovedChat.currentTab().e.get(it)).a;
+					String str2 = ((nt)ImprovedChat.currentTab().e.get(it)).a;
 					a(i120, i131 - 1, i120 + 320, i131 + 8, (i110 << 24) + ImprovedChat.historyColor);
 					GL11.glEnable(3042);
 					localni.a(str2, i120, i131, 0xffffff);

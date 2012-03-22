@@ -3,17 +3,17 @@ import java.util.Properties;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiOutputOptions extends vl {
+public class WMLLGuiOutputOptions extends vp {
 
 	protected WMLL wmll;
-	private vl parent;
+	private vp parent;
 	private String title;
 	private static final String[] colourNames = {"Black", "Dark Blue", "Dark Green", "Cyan", "Red", "Purple", "Orange", "Light Grey", "Dark Grey", "Lavender?", "Lime Green", "Light Blue", "Bright Red", "Pink", "Yellow", "White"};
 	private static final String[] outputLocations = {"Top Left", "Top Right", "Bottom Left", "Bottom Right"};
 	public static Properties outputOptions;
 
 	@SuppressWarnings("static-access")
-	public WMLLGuiOutputOptions(WMLL wmll, vl parent) {
+	public WMLLGuiOutputOptions(WMLL wmll, vp parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.outputOptions = WMLL.outputOptions;
@@ -29,33 +29,33 @@ public class WMLLGuiOutputOptions extends vl {
 		byte o = -16;
 		/*
 		 * New button
-		 * abk((int)ID, x, y[, width, height], text)
+		 * abp((int)ID, x, y[, width, height], text)
 		 * y = y+25 for each button
 		 */
-		s.add(new abk(1, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done"));
-		//s.add(new abk(0, q / 2 - 152, r / 4 + 150 + o, 98, 20, "<<"));
-		//s.add(new abk(2, q / 2 + 2, r / 4 + 150 + o, 98, 20, ">>"));
-		s.add(new abk(3, q / 2 - 112, r / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
-		s.add(new abk(4, q / 2 + 2, r / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
+		s.add(new abp(1, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done"));
+		//s.add(new abp(0, q / 2 - 152, r / 4 + 150 + o, 98, 20, "<<"));
+		//s.add(new abp(2, q / 2 + 2, r / 4 + 150 + o, 98, 20, ">>"));
+		s.add(new abp(3, q / 2 - 112, r / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
+		s.add(new abp(4, q / 2 + 2, r / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
 		if (WMLL.debugClassPresent)
-			s.add(new abk(9001, 2, r - 22, 50, 20, "Reload"));
-		s.add(new abk(5, q / 2 - 112, r / 4 + 120 + o, 226, 20, "Light Level options..."));
-		s.add(new abk(6, q / 2 - 112, r / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
-		s.add(new abk(7, q / 2 + 2, r / 4 + 20 + o, 112, 20, "F3 Type: "+(wmll.F3Type == 1 ? "Alternate" : "Classic")));
-		s.add(new abk(8, q / 2 - 112, r / 4 + 45 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
-		s.add(new abk(9, q / 2 - 112, r / 4 + 98 + o, 226, 20, "Enter seed for this server..."));
-		/*		s.add(new abk(2, q / 2 + 2, r / 4 + 45 + o, 98, 20, "f"));
-		s.add(new abk(0, q / 2 - 100, r / 4 + 70 + o, 98, 20, "g"));
-		s.add(new abk(2, q / 2 + 2, r / 4 + 70 + o, 98, 20, "h"));
-		s.add(new abk(0, q / 2 - 100, r / 4 + 95 + o, 98, 20, "i"));
-		s.add(new abk(2, q / 2 + 2, r / 4 + 95 + o, 98, 20, "j"));*/
-		s.add(new abk(10, q / 2 - 112, r / 4 + 76 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
-		((abk)s.get(6)).h = false;
-		((abk)s.get(8)).i = wmll.isMultiplayer();
+			s.add(new abp(9001, 2, r - 22, 50, 20, "Reload"));
+		s.add(new abp(5, q / 2 - 112, r / 4 + 120 + o, 226, 20, "Light Level options..."));
+		s.add(new abp(6, q / 2 - 112, r / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
+		s.add(new abp(7, q / 2 + 2, r / 4 + 20 + o, 112, 20, "F3 Type: "+(wmll.F3Type == 1 ? "Alternate" : "Classic")));
+		s.add(new abp(8, q / 2 - 112, r / 4 + 45 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
+		s.add(new abp(9, q / 2 - 112, r / 4 + 98 + o, 226, 20, "Enter seed for this server..."));
+		/*		s.add(new abp(2, q / 2 + 2, r / 4 + 45 + o, 98, 20, "f"));
+		s.add(new abp(0, q / 2 - 100, r / 4 + 70 + o, 98, 20, "g"));
+		s.add(new abp(2, q / 2 + 2, r / 4 + 70 + o, 98, 20, "h"));
+		s.add(new abp(0, q / 2 - 100, r / 4 + 95 + o, 98, 20, "i"));
+		s.add(new abp(2, q / 2 + 2, r / 4 + 95 + o, 98, 20, "j"));*/
+		s.add(new abp(10, q / 2 - 112, r / 4 + 76 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
+		((abp)s.get(6)).h = false;
+		((abp)s.get(8)).i = wmll.isMultiplayer();
 
 	}
 
-	protected void a(abk b) {
+	protected void a(abp b) {
 		if (b.f == 1 || b.f == 2) {
 			if (b.f == 2) { // Next
 				System.out.println("NO GUI YET!");

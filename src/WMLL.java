@@ -19,7 +19,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 631";
+	public static final String WMLLVER = "Stable 17"; //631
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -127,6 +127,7 @@ public class WMLL {
 				drawDebug(Boolean.toString(canSlimesSpawnHere(x, z)), (getWindowSize().a() - (getFontRenderer().a(Boolean.toString(canSlimesSpawnHere(x, z))) + 1)), 6, 0xffffff);
 				String t = "Next update check: "+hr+":"+mi;
 				drawDebug(t, (getWindowSize().a() - (getFontRenderer().a(t) + 1)), 7, 0xffffff);
+				drawDebug(getPlayerController().toString(),  (getWindowSize().a() - (getFontRenderer().a(getPlayerController().toString()) + 1)), 8, 0xffffff);
 			}
 
 			WMLLCheckKeys();
@@ -296,7 +297,7 @@ public class WMLL {
 		return new DecimalFormat("#0.00").format(i);
 	}
 
-	private wz getWorld() {
+	private xd getWorld() {
 		return mc.f;
 	}
 
@@ -324,19 +325,19 @@ public class WMLL {
 		return worldInfo().j();
 	}
 
-	public ni getFontRenderer() {
+	public nl getFontRenderer() {
 		return mc.q;
 	}
 
-	public afy getWindowSize() {
-		return new afy(mc.A, mc.d, mc.e);
+	public agd getWindowSize() {
+		return new agd(mc.A, mc.d, mc.e);
 	}
 
 	private boolean mcDebugOpen() {
 		return getGameSettings().F;
 	}
 
-	private hr getGameSettings() {
+	private hu getGameSettings() {
 		return mc.A;
 	}
 
@@ -348,14 +349,14 @@ public class WMLL {
 		if (y < 0 || y > 255) 
 				return 0;
 		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(wh.b, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+		return getChunk(playerPos[0], playerPos[2]).a(wl.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
 	}
 	
 	public int getRawLightLevel(int x, int y, int z) {
 		if (y < 0 || y > 255) 
 			return 0;
 		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(wh.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+		return getChunk(playerPos[0], playerPos[2]).a(wl.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
 	}
 	
 	public int getLightLevel(int j, int k, int l) {
@@ -382,7 +383,7 @@ public class WMLL {
 		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).G);
 	}
 
-	private ro getBiomeGenBase() {
+	private rs getBiomeGenBase() {
 		return getWorld().i();
 	}
 
@@ -405,22 +406,22 @@ public class WMLL {
 		return getWorld().m(x, y, z);
 	}
 
-	public vm thePlayer() {
-		return mc.h;
+	public acq thePlayer() {
+		return mc.i;
 	}
 	
-	public ey playerEntity() {
+	public fc playerEntity() {
 		return mc.k;
 	}
 	
-	public kf getPlayerController() {
+	public ki getPlayerController() {
 		return mc.c;
 	}
 	public boolean isCreative() {
-		return !(getPlayerController() instanceof aen);
+		return (getPlayerController() instanceof aff);
 	}
 
-	public wm worldInfo() {
+	public wq worldInfo() {
 		return getWorld().x;
 	}
 	
@@ -428,7 +429,7 @@ public class WMLL {
 		return mc;
 	}
 
-	private acf getChunk(int x, int z) {
+	private ack getChunk(int x, int z) {
 		return getWorld().c(x, z);
 	}
 
@@ -438,7 +439,7 @@ public class WMLL {
 
 	private boolean canSlimesSpawnHere(int x, int z) {
 		if (isMultiplayer()) {
-			acf chunk = getChunk(x, z);
+			ack chunk = getChunk(x, z);
 			int xPos = chunk.g;
 			int zPos = chunk.h;
 			return new Random(getWorldSeed() + (long)(xPos * xPos * 0x4c1906) + (long)(xPos * 0x5ac0db) + (long)(zPos * zPos) * 0x4307a7L + (long) (zPos * 0x5f24f) ^ 0x3ad8025f).nextInt(10) == 0;
@@ -446,7 +447,7 @@ public class WMLL {
 		return getChunk(x, z).a(0x3ad8025fL).nextInt(10) == 0 && getWorldSeed() != 0L;
 	}
 
-	private akv getWorldProvider() {
+	private alb getWorldProvider() {
 		return getWorld().t;
 	}
 
@@ -485,7 +486,7 @@ public class WMLL {
 	}
 
 	public int[] getPlayerCoordinates() {
-		int[] a = {gh.c(mc.h.o), gh.c(mc.h.p - 1), gh.c(mc.h.q), gh.c((double)((mc.h.u * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().o, (int)thePlayer().p, (int)thePlayer().q};
+		int[] a = {gk.c(thePlayer().o), gk.c(thePlayer().p - 1), gk.c(thePlayer().q), gk.c((double)((thePlayer().u * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().o, (int)thePlayer().p, (int)thePlayer().q};
 		return a;
 	}
 
@@ -611,10 +612,11 @@ public class WMLL {
 
 	public void debug(String s) {
 		try {
-			if (s.startsWith("[WMLLDebug]")) {
+/*			if (s.startsWith("[WMLLDebug]")) {
 				thePlayer().b(s);
+				thePlayer().
 				return;
-			}
+			}*/
 			System.out.println(s);
 		}
 		catch (NullPointerException e) {
@@ -630,14 +632,14 @@ public class WMLL {
 				WMLLDebug.setTimeToNight();
 		if (Keyboard.isKeyDown(Keyboard.KEY_F9) && debugClassPresent)
 			WMLLDebug.setTimeToDay();
-		if (Keyboard.isKeyDown(Keyboard.KEY_G)&& debugClassPresent)
-			WMLLDebug.toggleGameMode();
+/*		if (Keyboard.isKeyDown(Keyboard.KEY_G)&& debugClassPresent)
+			WMLLDebug.toggleGameMode();*/
 		if (Keyboard.isKeyDown(F4Key) && System.currentTimeMillis() - lastF4Press > 150) {
 			lastF4Press = System.currentTimeMillis();
 			if (Keyboard.isKeyDown(29) && mc.s == null)
 				mc.a(new WMLLOptions(this));
 			else
-				if (!(mc.s instanceof WMLLOptions) && !(mc.s instanceof yb/*GuiChat*/)) {
+				if (!(mc.s instanceof WMLLOptions) && !(mc.s instanceof yf/*GuiChat*/)) {
 					if (Keyboard.isKeyDown(42))
 						WMLLI--;
 					else
