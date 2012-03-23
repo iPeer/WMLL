@@ -182,7 +182,7 @@ public class WMLLGuiLightLevel extends vp {
 		}
 		else if (page == 3) {
 			for (int x = 0; x < page3editboxes.size(); x++) {
-				page3editboxes.get(x).c();
+				page3editboxes.get(x).f();
 			}
 			a(u, "Highlight block light when less than...", q / 2, 30, 0xffffff);
 			a(u, "Highlight sky light when less than...", q / 2, 60, 0xffffff);
