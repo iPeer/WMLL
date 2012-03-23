@@ -45,28 +45,33 @@ public class WMLLGuiLightLevel extends vp {
 		
 		/*
 		 * New Editbox:
-		 * new agu(Gui, fontrenderer, posx, posy, width, height, default text);
+		 * new agu(fontrenderer, posx, posy, width, height);
 		 */
 		lightLevelEditbox = new agu(/*this,*/ u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 70, wmll.getWindowSize().a() - 20, 20/*, outputOptions.getProperty("lightString", "Light level: %LightLevel%")*/);
+		lightLevelEditbox.f(76);
+		lightLevelEditbox.a(outputOptions.getProperty("lightString", "Light level: %LightLevel%"));
 		//lightLevelEditbox.a = true;
 		lightLevelEditbox.b(true);
-		lightLevelEditbox.a(76);
-
-		/*blockEditbox = new agu(this, u, q / 2 - 10, 43, 20, 10, outputOptions.getProperty("highlightBlock", "8"));
-		blockEditbox.a(2);
+		
+		blockEditbox = new agu(u, q / 2 - 10, 43, 20, 10);
+		blockEditbox.f(2);
+		blockEditbox.a(outputOptions.getProperty("highlightBlock", "8"));
 		page3editboxes.add(blockEditbox);
 		
-		skyEditbox = new agu(this, u, q / 2 - 10, 73, 20, 10, outputOptions.getProperty("highlightSky", "8"));
-		skyEditbox.a(2);
+		skyEditbox = new agu( u, q / 2 - 10, 73, 20, 10);
+		skyEditbox.a(outputOptions.getProperty("highlightSky", "8"));
+		skyEditbox.f(2);
 		page3editboxes.add(skyEditbox);
 		
-		rawEditbox = new agu(this, u, q / 2 - 10, 103, 20, 10, outputOptions.getProperty("highlightRaw", "8"));
-		rawEditbox.a(2);
+		rawEditbox = new agu(u, q / 2 - 10, 103, 20, 10);
+		rawEditbox.f(2);
+		rawEditbox.a(outputOptions.getProperty("highlightRaw", "8"));
 		page3editboxes.add(rawEditbox);
 		
-		lightEditbox = new agu(this, u, q / 2 - 10, 133, 20, 10, outputOptions.getProperty("highlightLight", "8"));
-		lightEditbox.a(2);
-		page3editboxes.add(lightEditbox);*/
+		lightEditbox = new agu(u, q / 2 - 10, 133, 20, 10);
+		lightEditbox.f(2);
+		lightEditbox.a(outputOptions.getProperty("highlightLight", "8"));
+		page3editboxes.add(lightEditbox);
 		
 		if (WMLL.debugClassPresent)
 			s.add(new abp(9001, 2, r - 22, 50, 20, "Reload"));
@@ -144,7 +149,7 @@ public class WMLLGuiLightLevel extends vp {
 		int a = (q - ((wmll.getFontRenderer().a(WMLL.WMLLVER) + 2) / 2));
 		a(u, WMLL.WMLLVER, a, r - 9, 0x444444);
 		if (page == 1) {
-			lightLevelEditbox.c();
+			lightLevelEditbox.f();
 			a(u, lightString, q / 2, 95, 0xffffff);
 		}
 		else if (page == 2) {

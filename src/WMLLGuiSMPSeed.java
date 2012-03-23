@@ -27,6 +27,7 @@ public class WMLLGuiSMPSeed extends vp {
 		 */
 		seedBox = new agu(/*this,*/ u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
 		//s.add(seedBox);
+		seedBox.a(Long.toString(wmll.getWorldSeed()));
 		seedBox.b(true);
 		s.add(new abp(0, q / 2 - 100, r / 4 + 90 + o, "Save Seed"));
 	}
