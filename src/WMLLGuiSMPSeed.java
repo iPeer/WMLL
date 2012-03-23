@@ -27,6 +27,7 @@ public class WMLLGuiSMPSeed extends vp {
 		 */
 		seedBox = new agu(/*this,*/ u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
 		//s.add(seedBox);
+		seedBox.a(72);
 		seedBox.a(Long.toString(wmll.getWorldSeed()));
 		seedBox.b(true);
 		s.add(new abp(0, q / 2 - 100, r / 4 + 90 + o, "Save Seed"));
@@ -68,9 +69,8 @@ public class WMLLGuiSMPSeed extends vp {
 		// (fontrenderer, text, x, y, colour)
 		a(u, title, q / 2, 20, 0xffffff);
 		a(u, "If you know the seed for this server, you can enter it here.", q / 2, 80, 0xffffff);
-		a(u, "This will enable both the seed display and allow Slime chunk detection.", q / 2, 90, 0xffffff);
-		
-		seedBox.c();
+		a(u, "This will enable both the seed display and allow Slime chunk detection.", q / 2, 90, 0xffffff);	
+		seedBox.f();
 		super.a(i, j, f);
 	}
 	
