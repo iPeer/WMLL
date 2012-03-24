@@ -108,7 +108,7 @@ public class WMLLGuiOutputOptions extends vp {
 		else if (b.f == 10) {
 			int i2 = WMLL.WMLLI;
 			i2++;
-			if (i2 > 7)
+			if (i2 > 9)
 				i2 = 0;
 			b.e = "Show: "+getStringForLightOption(i2);
 			WMLL.WMLLI = i2;
@@ -148,17 +148,19 @@ public class WMLLGuiOutputOptions extends vp {
 		case 2:
 			return "Light + FPS/Chunk Updates";
 		case 3:
-			return "Light + Coords, Facing, Biome & Seed";
-			//		case 4:
-			//			return "Light + Seed";
+			return "Light & Compass";
 		case 4:
-			return "Just Indicators";
+			return "Light, Indicators & Compass";
 		case 5:
-			return "Just FPS/Chunk updates";
+			return "Just Indicators";
 		case 6:
-			return "Just Coords, Facing, Biome & Seed";
+			return "Just FPS/Chunk updates";
+		case 7:
+			return "Just Compass";
 			//		case 7: 
 			//			return "Just Seed";
+		case 8:
+			return "Just Indicators and Compass";
 		default:
 			return "Nothing";
 		}

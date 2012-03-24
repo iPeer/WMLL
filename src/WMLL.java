@@ -19,7 +19,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 636";
+	public static final String WMLLVER = "Test 639";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -104,8 +104,8 @@ public class WMLL {
 		}
 		else {
 			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true"));
-			if (debugClassPresent)
-				WMLLDebug.onGuiTick();
+//			if (debugClassPresent)
+//				WMLLDebug.onGuiTick();
 			if (WMLLDebugActive()) {
 				int x = getPlayerCoordinates()[0];
 				int y = getPlayerCoordinates()[1];
@@ -147,7 +147,7 @@ public class WMLL {
 				lightString = generateLightString();
 				sleepingStringSet = false;			
 			}
-			if (WMLLI < 4) {
+			if (WMLLI < 5) {
 				if (!isPlayerSleeping() && useImages)
 					drawLightImage(light);
 				else
@@ -157,20 +157,23 @@ public class WMLL {
 
 			// Compass
 
-			if (Arrays.asList(3, 6).contains(WMLLI)) {
-				drawString("X: "+roundCoord(thePlayer().o), 2, 2, 0xffffff);
-				drawString("Y: "+roundCoord(thePlayer().p), 2, 3, 0xffffff);
-				drawString("Z: "+roundCoord(thePlayer().q), 2, 4, 0xffffff);
+			if (Arrays.asList(3, 4, 7, 8).contains(WMLLI)) {
+				int out = 1;
+				if (WMLLI == 8 || WMLLI == 4)
+					out = 4;
+				drawString("X: "+roundCoord(thePlayer().o), 2, out + 1, 0xffffff);
+				drawString("Y: "+roundCoord(thePlayer().p), 2, out + 2, 0xffffff);
+				drawString("Z: "+roundCoord(thePlayer().q), 2, out + 3, 0xffffff);
 				boolean showSeed = (!isMultiplayer() || isSeedSet()) && showSeedWithCoords;
 				if (showSeed)
-					drawString("Seed: "+getWorldSeed(), 2, 5, 0xffffff);
-				drawString("Facing: "+getPlayerDirection(playerPos[3]), 2, 1, 0xffffff);
-				drawString("Biome: "+getBiome()+" (T: "+getTemperature()+", H: "+getHumidity()+")", 2, showSeed ? 6 : 5, 0xffffff);
+					drawString("Seed: "+getWorldSeed(), 2, out + 4, 0xffffff);
+				drawString("Facing: "+getPlayerDirection(playerPos[3]), 2, out, 0xffffff);
+				drawString("Biome: "+getBiome()+" (T: "+getTemperature()+", H: "+getHumidity()+")", 2, showSeed ? out + 5 : out + 4, 0xffffff);
 			}
 
 			// Indicators
 
-			if (Arrays.asList(1, 4).contains(WMLLI)) {
+			if (Arrays.asList(1, 4, 5, 8).contains(WMLLI)) {
 				if (useImages) {
 					wmllRenderer.renderIndicatorImages(light, getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]), getDimension(), canSlimesSpawnHere(playerPos[0], playerPos[2]), canBlockSeeTheSky(playerPos[0], playerPos[1] - 1, playerPos[2]));
 					return;
@@ -255,7 +258,7 @@ public class WMLL {
 
 			}
 
-			if (Arrays.asList(2, 5).contains(WMLLI))
+			if (Arrays.asList(2, 6).contains(WMLLI))
 				drawString(getFPSString(),2, 1, 0xffffff);
 		}
 		wmllRenderer.tick();
@@ -510,7 +513,7 @@ public class WMLL {
 	}
 
 	public void drawDebug(String t, int x, int y, int c) {
-		if (WMLLI > 3)
+		if (WMLLI > 4)
 			y++;
 		drawString(t, x, y, c);
 	}
@@ -521,7 +524,7 @@ public class WMLL {
 	}
 
 	public void drawString(String t, int i, int j, int k) {
-		int textpos = WMLLI > 3 ? -8 : 2;
+		int textpos = WMLLI > 4 ? -8 : 2;
 				t = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
 				int w = getWindowSize().a();
 				int h = getWindowSize().b();
@@ -645,8 +648,8 @@ public class WMLL {
 					else
 						WMLLI++;
 					if (WMLLI < 0)
-						WMLLI = 7;
-					if (WMLLI > 7)
+						WMLLI = 9;
+					if (WMLLI > 9)
 						WMLLI = 0;
 					saveOptions();
 				}

@@ -14,7 +14,7 @@ public class aiy extends oo
 {
 
     private static tw d = new tw();
-    private java.util.List e;
+    private java.util.List<nt> e;
     private java.util.List f;
     private Random h;
     private Minecraft i;
@@ -30,7 +30,7 @@ public class aiy extends oo
 
     public aiy(Minecraft minecraft)
     {
-        e = new ArrayList();
+        e = new ArrayList<nt>();
         f = new ArrayList();
         h = new Random();
         a = null;
