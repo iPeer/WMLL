@@ -19,7 +19,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 639";
+	public static final String WMLLVER = "Test 640";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -69,6 +69,7 @@ public class WMLL {
 		loadOptions();
 		if (getClass().getClassLoader().getResource("WMLLDebug.class") != null) {
 			debugClassPresent = true;
+			debugActive = true;
 		}
 		if (getClass().getClassLoader().getResource("mod_ReiMinimap.class") != null) {
 			Rei = true;
@@ -104,8 +105,8 @@ public class WMLL {
 		}
 		else {
 			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true"));
-//			if (debugClassPresent)
-//				WMLLDebug.onGuiTick();
+			if (debugClassPresent)
+				WMLLDebug.onGuiTick();
 			if (WMLLDebugActive()) {
 				int x = getPlayerCoordinates()[0];
 				int y = getPlayerCoordinates()[1];
@@ -549,7 +550,8 @@ public class WMLL {
 			if (options == null)
 				options = new Properties();
 			options.setProperty("WMLLI", Integer.toString(WMLLI));
-			options.setProperty("WMLLD", Boolean.toString(debugActive));
+			if (!debugClassPresent)
+				options.setProperty("WMLLD", Boolean.toString(debugActive));
 			options.setProperty("FirstRun", Boolean.toString(firstRun));
 			options.setProperty("version", Integer.toString(propertiesVersion));
 			options.setProperty("F4", Integer.toString(F4Key));
@@ -580,7 +582,8 @@ public class WMLL {
 			if (outputOptionsFile.exists())
 				outputOptions.load(new FileInputStream(outputOptionsFile));
 			firstRun = Integer.parseInt(options.getProperty("version", "0")) < propertiesVersion ? true : false;
-			debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
+			if (!debugClassPresent)
+				debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
 			WMLLI = Integer.parseInt(options.getProperty("WMLLI", "0"));
 			useImages = Boolean.parseBoolean(options.getProperty("useImages", "false"));
 			TextColour = Integer.parseInt(options.getProperty("TextColour", "15"));
