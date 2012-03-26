@@ -6,9 +6,12 @@ import java.net.SocketAddress;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 import net.minecraft.client.Minecraft;
 
@@ -19,7 +22,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 640";
+	public static final String WMLLVER = "Stable 19"; //641
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -45,6 +48,7 @@ public class WMLL {
 	private static final int propertiesVersion = 1;
 	private static File settingsFile, outputOptionsFile;
 	private static final WMLLUpdateCheck wmllUpdateCheck = new WMLLUpdateCheck();
+	private static final Calendar calendar = Calendar.getInstance();
 
 	private WMLLRenderer wmllRenderer;
 	private WMLLF3 wmllF3;
@@ -129,6 +133,8 @@ public class WMLL {
 				String t = "Next update check: "+hr+":"+mi;
 				drawDebug(t, (getWindowSize().a() - (getFontRenderer().a(t) + 1)), 7, 0xffffff);
 				drawDebug(getPlayerController().toString(),  (getWindowSize().a() - (getFontRenderer().a(getPlayerController().toString()) + 1)), 8, 0xffffff);
+				String a = getCalendarDate()+"/"+getCalendarDate(2);
+				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 9, 0xffffff);
 			}
 
 			WMLLCheckKeys();
@@ -139,7 +145,13 @@ public class WMLL {
 			int light = getLightLevel(playerPos[0], playerPos[1], playerPos[2]);
 			int blockLight = getSavedBlockLight(playerPos[0], playerPos[1], playerPos[2]);
 			if (isPlayerSleeping()) {
-				if (!sleepingStringSet) {
+				if (getCalendarDate().equals("66"))
+					lightString = "Happy birthday, iPeer!";
+				else if (getCalendarDate().equals("243"))
+					lightString = "Happy birthday, Roxy!";
+				else if (getCalendarDate().equals("202"))
+					lightString = "Happy birthday, WMLL!";
+				else if (!sleepingStringSet) {
 					lightString = sleepstrings[new Random().nextInt(sleepstrings.length)].replaceAll("PLAYERNAME", playerEntity().b);
 					sleepingStringSet = true;
 				}
@@ -162,14 +174,19 @@ public class WMLL {
 				int out = 1;
 				if (WMLLI == 8 || WMLLI == 4)
 					out = 4;
-				drawString("X: "+roundCoord(thePlayer().o), 2, out + 1, 0xffffff);
-				drawString("Y: "+roundCoord(thePlayer().p), 2, out + 2, 0xffffff);
-				drawString("Z: "+roundCoord(thePlayer().q), 2, out + 3, 0xffffff);
+				acq player = thePlayer();
+				double x = player.o;
+				double y = player.p;
+				double z = player.q;
+				double f = gk.c((double)((player.u * 4F) / 360F) + 0.5D) & 3;
+				NumberFormat d = new DecimalFormat("#0.00");
+				String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection((int)f)+")";
+				drawString(coords, 2, out, 0xffffff);
 				boolean showSeed = (!isMultiplayer() || isSeedSet()) && showSeedWithCoords;
 				if (showSeed)
-					drawString("Seed: "+getWorldSeed(), 2, out + 4, 0xffffff);
-				drawString("Facing: "+getPlayerDirection(playerPos[3]), 2, out, 0xffffff);
-				drawString("Biome: "+getBiome()+" (T: "+getTemperature()+", H: "+getHumidity()+")", 2, showSeed ? out + 5 : out + 4, 0xffffff);
+					drawString("Seed: "+getWorldSeed(), 2, out + 1, 0xffffff);
+				//drawString("Facing: "+getPlayerDirection(playerPos[3]), 2, out, 0xffffff);
+				drawString("Biome: "+getBiome()+" (T: "+getTemperature()+", H: "+getHumidity()+")", 2, showSeed ? out + 2 : out + 1, 0xffffff);
 			}
 
 			// Indicators
@@ -291,7 +308,7 @@ public class WMLL {
 		String rawLight = (a < highlightRaw ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
 		a = getSkyLight(1.0f);
 		String skyLight = (a < highlightSky ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
-		String b = s.replaceAll("%LightLevel%", lightLevel).replaceAll("%BlockLight%", blockLight).replaceAll("%RawLight%", rawLight).replaceAll("%SkyLight%", skyLight).replaceAll("%Biome%", getBiome());	
+		String b = s.replaceAll("%LightLevel%", lightLevel).replaceAll("%BlockLight%", blockLight).replaceAll("%rawlight%", rawLight).replaceAll("%SkyLight%", skyLight).replaceAll("%Biome%", getBiome());	
 		if (clockSetting < 3)
 			b = b+" ("+getFormattedWorldTime()+")";
 		return b;
@@ -678,6 +695,25 @@ public class WMLL {
 		wmllRenderer.updateVersion = ver;
 		wmllRenderer.notifyUpdate = true;
 		
+	}
+	
+	public String getCalendarDate() {
+		return getCalendarDate(1);
+	}
+	
+	public String getCalendarDate(int type) {
+		if (calendar.getTime() != new Date())
+			calendar.setTime(new Date());
+		String c = "";
+		int a = calendar.get(5);
+		int b = calendar.get(2) + 1;
+		if (type == 2) {
+			int d = calendar.get(1);
+			c = Integer.toString(a)+Integer.toString(b)+Integer.toString(d);
+		}
+		else
+			c = Integer.toString(a)+Integer.toString(b);
+		return c;
 	}
 
 }
