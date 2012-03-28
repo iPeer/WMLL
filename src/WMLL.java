@@ -22,7 +22,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 642";
+	public static final String WMLLVER = "Test 644";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -544,21 +544,22 @@ public class WMLL {
 	public void drawString(String t, int i, int j, int k) {
 		int textpos = WMLLI > 4 ? -8 : 2;
 				t = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
+				String t1 = Pattern.compile("\247[0-9a-f]").matcher(t).replaceAll("");
 				int w = getWindowSize().a();
 				int h = getWindowSize().b();
-				if (outputLocation == 1) {
-					getFontRenderer().a(t, w - (getFontRenderer().a(t) + (i - 2)), textpos+(j*10), k);
+				if (outputLocation == 1) { // Top right
+					getFontRenderer().a(t, w - (getFontRenderer().a(t1) + (i - 1)), textpos+(j*10), k);
 					return;
 				}
-				else if (outputLocation == 2) {
+				else if (outputLocation == 2) { // Bottom Left
 					getFontRenderer().a(t, i, h - (textpos+(j*10) + 8), k);
 					return;
 				}
-				else if (outputLocation == 3) {
-					getFontRenderer().a(t,  w - (getFontRenderer().a(t) + (i - 2)), h - (textpos+(j*10) + 8), k);
+				else if (outputLocation == 3) { // Bottom Right
+					getFontRenderer().a(t,  w - (getFontRenderer().a(t1) + (i - 1)), h - (textpos+(j*10) + 8), k);
 					return;
 				}
-				getFontRenderer().a(t, i, textpos+(j*10), k);
+				getFontRenderer().a(t, i, textpos+(j*10), k); // Top Left
 	}
 
 	public void saveOptions() {
