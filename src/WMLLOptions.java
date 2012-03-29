@@ -1,12 +1,6 @@
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Scanner;
-
 import org.lwjgl.input.Keyboard;
 
 public class WMLLOptions extends vp {
-
-	private int updateDelay = 0;
 	
 	public WMLLOptions(WMLL i) {
 		title = "WMLL Configuration";

@@ -22,7 +22,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 646";
+	public static final String WMLLVER = "Test 647";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -113,7 +113,6 @@ public class WMLL {
 				WMLLDebug.onGuiTick();
 			if (WMLLDebugActive()) {
 				int x = getPlayerCoordinates()[0];
-				int y = getPlayerCoordinates()[1];
 				int z = getPlayerCoordinates()[2];
 				int hr = (updateCheck / 50) / 60;
 				int mi = (updateCheck / 50) % 60;
@@ -143,7 +142,6 @@ public class WMLL {
 			// 0 = x, 1 = y, 2 = z, 3 = f
 			int[] playerPos = getPlayerCoordinates();
 			int light = getLightLevel(playerPos[0], playerPos[1], playerPos[2]);
-			int blockLight = getSavedBlockLight(playerPos[0], playerPos[1], playerPos[2]);
 			if (isPlayerSleeping()) {
 				if (getCalendarDate().equals("66"))
 					lightString = "Happy birthday, iPeer!";
@@ -314,10 +312,6 @@ public class WMLL {
 		if (clockSetting < 3)
 			b = b+" ("+getFormattedWorldTime()+")";
 		return b;
-	}
-
-	private String roundCoord(double i) {
-		return new DecimalFormat("#0.00").format(i);
 	}
 
 	private xd getWorld() {
@@ -697,7 +691,6 @@ public class WMLL {
 	public void displayUpdateString(int ver) {
 		wmllRenderer.updateVersion = ver;
 		wmllRenderer.notifyUpdate = true;
-		
 	}
 	
 	public String getCalendarDate() {

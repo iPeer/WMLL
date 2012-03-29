@@ -10,12 +10,13 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
+@SuppressWarnings("rawtypes")
 public class aiy extends oo
 {
 
     private static tw d = new tw();
     private java.util.List<nt> e;
-    private java.util.List f;
+	private java.util.List f;
     private Random h;
     private Minecraft i;
     public String a;

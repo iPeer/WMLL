@@ -18,7 +18,6 @@ public class WMLLF3 {
 	public void draw() {
 		
 		int sw = wmll.getWindowSize().a();
-		int ch = wmll.getWindowSize().b();
 		
 		// Memory
 		long mm = Runtime.getRuntime().maxMemory();
