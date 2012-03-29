@@ -22,7 +22,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 644";
+	public static final String WMLLVER = "Test 646";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -174,6 +174,8 @@ public class WMLL {
 				int out = 1;
 				if (WMLLI == 8 || WMLLI == 4)
 					out = 4;
+				if (getDimension() == -1)
+					out++;
 				acq player = thePlayer();
 				double x = player.o;
 				double y = player.p;
