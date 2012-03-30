@@ -8,7 +8,7 @@ public class WMLLF3 {
 	protected Minecraft mc;
 	protected WMLL wmll;
 	
-	private final String MINECRAFT_VERSION = "1.2.4";
+	private final String MINECRAFT_VERSION = "1.2.5";
 
 	public WMLLF3(Minecraft mc, WMLL wmll) {
 		this.mc = mc;
