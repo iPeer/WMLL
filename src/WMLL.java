@@ -22,7 +22,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 648";
+	public static final String WMLLVER = "Test 649";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -143,12 +143,28 @@ public class WMLL {
 			int[] playerPos = getPlayerCoordinates();
 			int light = getLightLevel(playerPos[0], playerPos[1], playerPos[2]);
 			if (isPlayerSleeping()) {
-				if (getCalendarDate().equals("66"))
+				if (getCalendarDate().equals("66")) // My birthday
 					lightString = "Happy birthday, iPeer!";
-				else if (getCalendarDate().equals("243"))
+				else if (getCalendarDate().equals("243")) // Roxy's birthday (<3)
 					lightString = "Happy birthday, Roxy!";
-				else if (getCalendarDate().equals("202"))
+				else if (getCalendarDate().equals("202")) // WMLL's birthday
 					lightString = "Happy birthday, WMLL!";
+				else if (getCalendarDate().equals("84")) // Easy Sunday
+					lightString = "Happy Easter!";
+				else if (getCalendarDate().equals("2512")) // Christmas Day
+					lightString = "Why are you playing Minecraft on Christmas Day?";
+				else if (getCalendarDate().equals("11")) // New Year
+					lightString = "Happy New Year!";
+				else if (getCalendarDate().equals("3110")) // Halloween
+					lightString = "Happy Halloween! WoooOOOoooOOoooO!";
+				else if (getCalendarDate().equals("31")) // Millie <3 RIP, honey.
+					lightString = "Millie <3";
+				else if (getCalendarDate().equals("23")) {// Roxy and I's anniversary
+					String a = getCalendarDate(2);
+					int now = Integer.parseInt(a.substring(a.length() - 4));
+					int years = now-2007;
+					lightString = years+" years today!";
+				}
 				else if (!sleepingStringSet) {
 					lightString = sleepstrings[new Random().nextInt(sleepstrings.length)].replaceAll("PLAYERNAME", playerEntity().b);
 					sleepingStringSet = true;
