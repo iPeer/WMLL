@@ -22,7 +22,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 654";
+	public static final String WMLLVER = "Test 655";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -673,15 +673,15 @@ public class WMLL {
 				if (!(mc.s instanceof WMLLOptions) && !(mc.s instanceof yf/*GuiChat*/)) {
 					if (Keyboard.isKeyDown(42)) {
 						WMLLI--;
-						if (WMLLI < 0)
-							WMLLI = 11;
+//						if (WMLLI < 0)
+//							WMLLI = 11;
 						while (!isOutputEnabled(WMLLI))
 							WMLLI--;
 					}
 					else {
 						WMLLI++;
-						if (WMLLI > 11)
-							WMLLI = 0;
+//						if (WMLLI > 11)
+//							WMLLI = 0;
 						while (!isOutputEnabled(WMLLI))
 							WMLLI++;
 					}
@@ -731,11 +731,11 @@ public class WMLL {
 	
 	public boolean isOutputEnabled(int i) {
 		try {
-			if (i > 10)
-				i = 0;
+			if (i > 11)
+				WMLLI = i = 0;
 			if (i < 0)
-				i = 11;
-			String a = options.getProperty("enabledOutputs", "11111111111");
+				WMLLI = i = 11;
+			String a = options.getProperty("enabledOutputs", "111111111111");
 			System.out.println(a+", "+"("+i+") "+a.substring(i)+", "+a.substring(i).startsWith("1"));
 			return a.substring(i).startsWith("1");
 		}
