@@ -22,7 +22,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 655";
+	public static final String WMLLVER = "Test 657";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -53,7 +53,7 @@ public class WMLL {
 	private WMLLRenderer wmllRenderer;
 	private WMLLF3 wmllF3;
 	private Minecraft mc;
-	private boolean Rei, ReiUseMl;
+	private boolean Rei, ReiUseMl, RadarBro;
 	private boolean ranInit = false;
 	private boolean firstRun = true;
 	private final String[] sleepstrings = {"Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
@@ -62,6 +62,8 @@ public class WMLL {
 	private long lastF4Press = 0;
 	private boolean wmllF3Output = false;
 	private int updateCheck = 180000;
+	
+	protected WMLLCompatibility wmllCompatibility;
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+WMLLVER);
@@ -69,6 +71,7 @@ public class WMLL {
 		debugClassPresent = false;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		outputOptionsFile = new File(Minecraft.a("minecraft"), "WMLLOutput.properties");
+		wmllCompatibility = new WMLLCompatibility();
 		debug("[WMLL] Settings file: "+settingsFile);
 		loadOptions();
 		if (getClass().getClassLoader().getResource("WMLLDebug.class") != null) {
@@ -79,8 +82,12 @@ public class WMLL {
 			Rei = true;
 			ReiUseMl = ReiMinimap.instance.useModloader;
 		}
+		if (getClass().getClassLoader().getResource("RadarBro.class") != null) {
+			RadarBro = true;
+		}
 		debug("[WMLL] Can run debug: "+debugClassPresent);
 		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
+		debug("[WMLL] RadarBro: "+RadarBro);
 	}
 
 	public void updategui(Minecraft h) {
@@ -108,6 +115,8 @@ public class WMLL {
 				wmllF3.draw();
 		}
 		else {
+			if (RadarBro)
+				wmllCompatibility.RadarBroRun(mc, this);
 			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true"));
 			if (debugClassPresent)
 				WMLLDebug.onGuiTick();
