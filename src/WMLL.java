@@ -22,7 +22,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 657";
+	public static final String WMLLVER = "Test 658";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -634,7 +634,7 @@ public class WMLL {
 			F4Key = Integer.parseInt(options.getProperty("F4", "62"));
 			clockSetting = Integer.parseInt(options.getProperty("clockSetting", "2"));
 			outputLocation = Integer.parseInt(options.getProperty("OutputLocation", "0"));
-			wmllOverrideF3 = Boolean.parseBoolean(options.getProperty("OverrideIngameF3", "true"));
+			wmllOverrideF3 = Boolean.parseBoolean(options.getProperty("OverrideIngameF3", "false")); // Now defaults to false due to Minecraft's native Shift + F3
 			F3Type = Integer.parseInt(options.getProperty("F3Type", "0"));
 			showSeedWithCoords = Boolean.parseBoolean(options.getProperty("showSeedWithCoords", "true"));
 			debug("[WMLL] Loaded options.");
