@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.minecraft.client.Minecraft;
@@ -22,7 +23,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 659";
+	public static final String WMLLVER = "Test 663";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -114,8 +115,8 @@ public class WMLL {
 				wmllF3.draw();
 		}
 		else {
-			if (RadarBro)
-				wmllCompatibility.RadarBroRun(mc, this);
+//			if (RadarBro)
+//				wmllCompatibility.RadarBroRun(mc, this);
 			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true"));
 			if (debugClassPresent)
 				WMLLDebug.onGuiTick();
@@ -195,12 +196,14 @@ public class WMLL {
 			if (Arrays.asList(3, 4, 5, 8, 9, 10).contains(WMLLI)) {
 				int out = 1;
 				if (WMLLI == 9 || WMLLI == 4) {
-					out = 4;
-					if (getDimension() == -1)
-						out++;
+					out = 5;
+//					if (getDimension() == -1)
+//						out++;
 				}
 				if (WMLLI == 5 || WMLLI == 10)
 					out = 2;
+				if (!isSeedSet() || getDimension() == 1)
+					out--;
 				acq player = thePlayer();
 				double x = player.o;
 				double y = player.p;
@@ -228,7 +231,7 @@ public class WMLL {
 				boolean showSlimes = true;
 				if (isMultiplayer())
 					showSlimes = isSeedSet();
-				String[] labels = {"Mobs", "Animals", "Trees", "Crops", "Mushrooms", "Slimes", "Ghasts", "Pigmen", "Blaze", "Endermen"};
+				String[] labels = {"Mobs", "Animals", "Trees", "Crops", "Mushrooms", "Slimes", "Ghasts", "Pigmen", "Blaze", "Endermen", "Grass"};
 				if (getDimension() == -1) { // Nether
 
 					if (!isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]))) {
@@ -274,7 +277,7 @@ public class WMLL {
 						drawString("\247c"+labels[1], 2, 2, 0xffffff);
 
 					// Slimes
-					if (showSlimes)
+					if (showSlimes) {
 						if (canSlimesSpawnHere(playerPos[0], playerPos[2]))
 							if ((playerPos[1] - 1) <= 40)
 								drawString("\247a"+labels[5], 2, 3, 0xffffff);
@@ -282,6 +285,7 @@ public class WMLL {
 								drawString("\247e"+labels[5], 2, 3, 0xffffff);
 						else
 							drawString("\247c"+labels[5], 2, 3, 0xffffff);
+					}
 
 				}
 
@@ -299,10 +303,16 @@ public class WMLL {
 
 				// Mushrooms
 				if ((playerIsStandingOnBlock(110) || light < 13) && !isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2])))
-					drawString("\247a"+labels[4], getDimension() == 1 ? 55 : !showSlimes ? 2 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
+					drawString("\247a"+labels[4], getDimension() == 0 ? 40 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
 				else
-					drawString("\247c"+labels[4], getDimension() == 1 ? 55 : !showSlimes ? 2 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
-
+					drawString("\247c"+labels[4], getDimension() == 0 ? 40 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
+				
+				// Grass
+				if ((playerIsStandingOnBlock(3) && light > 8))
+					drawString("\247a"+labels[10], getDimension() == -1 ? 40 : 2, getDimension() == 1 ? 3 : getDimension() == -1 ? 4 : !showSlimes ? 3 : 4, 0xffffff);
+				else
+					drawString("\247c"+labels[10], getDimension() == -1 ? 40 : 2, getDimension() == 1 ? 3 : getDimension() == - 1 ? 4 : !showSlimes ? 3 : 4, 0xffffff);
+				
 			}
 
 			if (Arrays.asList(2, 5, 7, 10).contains(WMLLI))
@@ -321,7 +331,7 @@ public class WMLL {
 		return generateLightString(outputOptions.getProperty("lightString", "Light level: %LightLevel%"));
 	}
 
-	public String generateLightString(String s) {
+	public String generateLightString(String s) { // [Roxy] Now Case insensitive
 		int x = getPlayerCoordinates()[0];
 		int y = getPlayerCoordinates()[1];
 		int z = getPlayerCoordinates()[2];
@@ -330,6 +340,11 @@ public class WMLL {
 		int highlightRaw = Integer.parseInt(outputOptions.getProperty("highlightRaw", "8"));
 		int highlightLight = Integer.parseInt(outputOptions.getProperty("highlightLight", "8"));
 		int a = getLightLevel(x, y, z);
+		Pattern SkyLight = Pattern.compile("%skylight%", Pattern.CASE_INSENSITIVE);
+		Pattern BlockLight = Pattern.compile("%blocklight%", Pattern.CASE_INSENSITIVE);
+		Pattern RawLight = Pattern.compile("%rawlight%", Pattern.CASE_INSENSITIVE);
+		Pattern Light = Pattern.compile("%LightLevel%", Pattern.CASE_INSENSITIVE);
+		Pattern Biome = Pattern.compile("%Biome%", Pattern.CASE_INSENSITIVE);
 		String lightLevel = (a < highlightLight ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
 		a = getSavedBlockLight(x, y, z);
 		String blockLight = (a < highlightBlock ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
@@ -337,10 +352,20 @@ public class WMLL {
 		String rawLight = (a < highlightRaw ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
 		a = getSkyLight(1.0f);
 		String skyLight = (a < highlightSky ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
-		String b = s.replaceAll("%LightLevel%", lightLevel).replaceAll("%BlockLight%", blockLight).replaceAll("%RawLight%", rawLight).replaceAll("%SkyLight%", skyLight).replaceAll("%Biome%", getBiome());	
+		Matcher m = SkyLight.matcher(s);
+		s = m.replaceAll(skyLight);
+		m = BlockLight.matcher(s);
+		s = m.replaceAll(blockLight);
+		m = RawLight.matcher(s);
+		s = m.replaceAll(rawLight);
+		m = Light.matcher(s);
+		s = m.replaceAll(lightLevel);
+		m = Biome.matcher(s);
+		s = m.replaceAll(getBiome());
+		//String b = s.replaceAll("%LightLevel%", lightLevel).replaceAll("%BlockLight%", blockLight).replaceAll("%RawLight%", rawLight).replaceAll("%SkyLight%", skyLight).replaceAll("%Biome%", getBiome());	
 		if (clockSetting < 3)
-			b = b+" ("+getFormattedWorldTime()+")";
-		return b;
+			s = s+" ("+getFormattedWorldTime()+")";
+		return s;
 	}
 
 	private xd getWorld() {
@@ -681,15 +706,11 @@ public class WMLL {
 				if (!(mc.s instanceof WMLLOptions) && !(mc.s instanceof yf/*GuiChat*/)) {
 					if (Keyboard.isKeyDown(42)) {
 						WMLLI--;
-//						if (WMLLI < 0)
-//							WMLLI = 11;
 						while (!isOutputEnabled(WMLLI))
 							WMLLI--;
 					}
 					else {
 						WMLLI++;
-//						if (WMLLI > 11)
-//							WMLLI = 0;
 						while (!isOutputEnabled(WMLLI))
 							WMLLI++;
 					}

@@ -47,7 +47,7 @@ public class WMLLGuiSMPSeed extends vp {
 	}
 	
 	public void a() {
-		seedBox.b();
+		seedBox.a();
 	}
 	
 	protected void a(char c, int i) {

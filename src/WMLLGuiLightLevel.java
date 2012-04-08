@@ -195,9 +195,9 @@ public class WMLLGuiLightLevel extends vp {
 	}
 	
 	public void a() {
-		lightLevelEditbox.b();
+		lightLevelEditbox.a();
 		for (int x = 0; x < page3editboxes.size(); x++) {
-			page3editboxes.get(x).b();
+			page3editboxes.get(x).a();
 		}
 	}
 	
