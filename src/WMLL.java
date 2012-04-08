@@ -115,8 +115,8 @@ public class WMLL {
 				wmllF3.draw();
 		}
 		else {
-//			if (RadarBro)
-//				wmllCompatibility.RadarBroRun(mc, this);
+			if (RadarBro)
+				wmllCompatibility.RadarBroRun(mc, this);
 			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true"));
 			if (debugClassPresent)
 				WMLLDebug.onGuiTick();
