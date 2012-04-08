@@ -22,7 +22,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 658";
+	public static final String WMLLVER = "Test 659";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -67,8 +67,7 @@ public class WMLL {
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+WMLLVER);
-		Rei = ReiUseMl = false;
-		debugClassPresent = false;
+		Rei = ReiUseMl = debugClassPresent = RadarBro = false;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		outputOptionsFile = new File(Minecraft.a("minecraft"), "WMLLOutput.properties");
 		wmllCompatibility = new WMLLCompatibility();
