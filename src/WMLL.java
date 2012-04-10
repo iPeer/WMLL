@@ -23,7 +23,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 663";
+	public static final String WMLLVER = "Test 664";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -196,14 +196,14 @@ public class WMLL {
 			if (Arrays.asList(3, 4, 5, 8, 9, 10).contains(WMLLI)) {
 				int out = 1;
 				if (WMLLI == 9 || WMLLI == 4) {
-					out = 5;
+					out = 4;
 //					if (getDimension() == -1)
 //						out++;
 				}
 				if (WMLLI == 5 || WMLLI == 10)
 					out = 2;
-				if (!isSeedSet() || getDimension() == 1)
-					out--;
+				if (isSeedSet() || getDimension() == 1)
+					out++;
 				acq player = thePlayer();
 				double x = player.o;
 				double y = player.p;
