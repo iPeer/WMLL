@@ -23,7 +23,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 669";
+	public static final String WMLLVER = "Test 670";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -147,6 +147,7 @@ public class WMLL {
 				drawDebug(getPlayerController().toString(),  (getWindowSize().a() - (getFontRenderer().a(getPlayerController().toString()) + 1)), 8, 0xffffff);
 				String a = getCalendarDate()+"/"+getCalendarDate(2);
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 9, 0xffffff);
+				drawDebug(Boolean.toString(isSeedSet()), (getWindowSize().a() - (getFontRenderer().a(Boolean.toString(isSeedSet())) + 1)), 10, 0xffffff);
 			}
 
 			WMLLCheckKeys();
@@ -199,14 +200,13 @@ public class WMLL {
 
 			if (Arrays.asList(3, 4, 5, 8, 9, 10).contains(WMLLI)) {
 				int out = 1;
-				if (WMLLI == 9 || WMLLI == 4) {
-					out = 4;
-//					if (getDimension() == -1)
-//						out++;
-				}
-				if (WMLLI == 5 || WMLLI == 10)
-					out = 2;
-				if (isSeedSet() || getDimension() == 1)
+				if (WMLLI == 9 || WMLLI == 4)
+					out = isMultiplayer() && !isSeedSet() ? 3 : 4;
+				else if (WMLLI == 8 || WMLLI == 3)
+					out = 0;
+				else if (WMLLI == 10 || WMLLI == 5) 
+					out = 1;
+				if ((isSeedSet()) || isMultiplayer())
 					out++;
 				adb player = thePlayer();
 				double x = player.o;
