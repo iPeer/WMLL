@@ -23,7 +23,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 668";
+	public static final String WMLLVER = "Test 669";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 
 	public static WMLL i = new WMLL();
@@ -116,7 +116,11 @@ public class WMLL {
 		}
 		else {
 			if (RadarBro)
-				wmllCompatibility.RadarBroRun(mc, this);
+				try {
+					wmllCompatibility.RadarBroRun(mc, this);
+				}
+				catch (NoSuchMethodError n) { }
+				catch (NoClassDefFoundError n1) { }
 			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true"));
 			if (debugClassPresent)
 				WMLLDebug.onGuiTick();
@@ -569,7 +573,7 @@ public class WMLL {
 		catch (NumberFormatException n) {
 			return 0;
 		}
-		return getWorld().v();
+		return getWorld().u();
 	}
 
 	public String getFPSString() {
@@ -703,7 +707,7 @@ public class WMLL {
 			if (Keyboard.isKeyDown(29) && mc.s == null)
 				mc.a(new WMLLOptions(this));
 			else
-				if (!(mc.s instanceof WMLLOptions) && !false/*(mc.s instanceof yfGuiChat)*/) {
+				if (!(mc.s instanceof WMLLOptions) && !(mc.s instanceof yq/*GuiChat*/)) {
 					if (Keyboard.isKeyDown(42)) {
 						WMLLI--;
 						while (!isOutputEnabled(WMLLI))
