@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 
 import org.lwjgl.opengl.GL11;
 
-public class WMLLRenderer extends oo {
+public class WMLLRenderer extends ov {
 
 	public int updateVersion = 0;
 	private int StringY = 12, notifyTick = 200;

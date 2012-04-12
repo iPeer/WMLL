@@ -1,8 +1,3 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode fieldsfirst noconv 
-// Source File Name:   SourceFile
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,102 +5,101 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
-@SuppressWarnings("rawtypes")
-public class aiy extends oo
+public class ajl extends ov
 {
 
-    private static tw d = new tw();
-	private java.util.List e;
-    private java.util.List f;
-    private Random h;
-    private Minecraft i;
-    private int j;
-    private String k;
-    private int l;
-    private boolean m;
-    private int n;
-    private boolean o;
-    public float b;
-    float c;
+    private static uf c = new uf();
+    private java.util.List d;
+    private java.util.List e;
+    private Random f;
+    private Minecraft h;
+    private int i;
+    private String j;
+    private int k;
+    private boolean l;
+    private int m;
+    private boolean n;
+    public float a;
+    float b;
 
-    public aiy(Minecraft minecraft)
+    public ajl(Minecraft minecraft)
     {
+        d = new ArrayList();
         e = new ArrayList();
-        f = new ArrayList();
-        h = new Random();
-        j = 0;
-        k = "";
-        l = 0;
-        m = false;
-        n = 0;
-        o = false;
-        c = 1.0F;
-        i = minecraft;
+        f = new Random();
+        i = 0;
+        j = "";
+        k = 0;
+        l = false;
+        m = 0;
+        n = false;
+        b = 1.0F;
+        h = minecraft;
     }
 
     public void a(float f1, boolean flag, int i1, int j1)
     {
-        agd agd1 = new agd(i.A, i.d, i.e);
-        int k1 = agd1.a();
-        int l1 = agd1.b();
-        nl nl1 = i.q;
-        i.u.b();
+        agp agp1 = new agp(h.A, h.d, h.e);
+        int k1 = agp1.a();
+        int l1 = agp1.b();
+        nt nt1 = h.q;
+        h.u.b();
         GL11.glEnable(3042);
         if(Minecraft.s())
         {
-            a(i.h.a(f1), k1, l1);
+            a(h.h.a(f1), k1, l1);
         } else
         {
             GL11.glBlendFunc(770, 771);
         }
-        aan aan1 = i.h.ap.f(3);
-        if(i.A.E == 0 && aan1 != null && aan1.c == pb.ba.bO)
+        aay aay1 = h.h.ap.f(3);
+        if(h.A.E == 0 && aay1 != null && aay1.c == pj.ba.bO)
         {
             b(k1, l1);
         }
-        if(!i.h.a(aad.k))
+        if(!h.h.a(aao.k))
         {
-            float f2 = i.h.aS + (i.h.aR - i.h.aS) * f1;
+            float f2 = h.h.aS + (h.h.aR - h.h.aS) * f1;
             if(f2 > 0.0F)
             {
                 b(f2, k1, l1);
             }
         }
-        if(!i.c.e())
+        if(!h.c.e())
         {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            GL11.glBindTexture(3553, i.p.b("/gui/gui.png"));
-            aak aak1 = i.h.ap;
+            GL11.glBindTexture(3553, h.p.b("/gui/gui.png"));
+            aav aav1 = h.h.ap;
             g = -90F;
             b(k1 / 2 - 91, l1 - 22, 0, 0, 182, 22);
-            b((k1 / 2 - 91 - 1) + aak1.c * 20, l1 - 22 - 1, 0, 22, 24, 22);
-            GL11.glBindTexture(3553, i.p.b("/gui/icons.png"));
+            b((k1 / 2 - 91 - 1) + aav1.c * 20, l1 - 22 - 1, 0, 22, 24, 22);
+            GL11.glBindTexture(3553, h.p.b("/gui/icons.png"));
             GL11.glEnable(3042);
             GL11.glBlendFunc(775, 769);
             b(k1 / 2 - 7, l1 / 2 - 7, 0, 0, 16, 16);
             GL11.glDisable(3042);
-            boolean flag1 = (i.h.Y / 3) % 2 == 1;
-            if(i.h.Y < 10)
+            boolean flag1 = (h.h.Y / 3) % 2 == 1;
+            if(h.h.Y < 10)
             {
                 flag1 = false;
             }
-            int j2 = i.h.bb();
-            int k3 = i.h.by;
-            h.setSeed(j * 0x4c627);
+            int j2 = h.h.bb();
+            int k3 = h.h.by;
+            f.setSeed(i * 0x4c627);
             boolean flag3 = false;
-            ne ne1 = i.h.aF();
-            int k5 = ne1.a();
-            int j6 = ne1.b();
+            nm nm1 = h.h.aF();
+            int k5 = nm1.a();
+            int j6 = nm1.b();
             f();
-            if(i.c.d())
+            if(h.c.d())
             {
                 int i7 = k1 / 2 - 91;
                 int k7 = k1 / 2 + 91;
-                int j8 = i.h.aE();
+                int j8 = h.h.aE();
                 if(j8 > 0)
                 {
                     char c1 = '\266';
-                    int l9 = (int)(i.h.aW * (float)(c1 + 1));
+                    int l9 = (int)(h.h.aW * (float)(c1 + 1));
                     int k10 = (l1 - 32) + 3;
                     b(i7, k10, 0, 64, c1, 5);
                     if(l9 > 0)
@@ -115,11 +109,11 @@ public class aiy extends oo
                 }
                 int i9 = l1 - 39;
                 int i10 = i9 - 10;
-                int l10 = i.h.au();
+                int l10 = h.h.au();
                 int k11 = -1;
-                if(i.h.a(aad.l))
+                if(h.h.a(aao.l))
                 {
-                    k11 = j % 25;
+                    k11 = i % 25;
                 }
                 for(int l11 = 0; l11 < 10; l11++)
                 {
@@ -140,7 +134,7 @@ public class aiy extends oo
                         }
                     }
                     int l12 = 16;
-                    if(i.h.a(aad.u))
+                    if(h.h.a(aao.u))
                     {
                         l12 += 36;
                     }
@@ -153,14 +147,14 @@ public class aiy extends oo
                     int l14 = i9;
                     if(j2 <= 4)
                     {
-                        l14 += h.nextInt(2);
+                        l14 += f.nextInt(2);
                     }
                     if(l11 == k11)
                     {
                         l14 -= 2;
                     }
                     byte byte3 = 0;
-                    if(i.f.B().s())
+                    if(h.f.A().s())
                     {
                         byte3 = 5;
                     }
@@ -191,14 +185,14 @@ public class aiy extends oo
                     int i13 = i9;
                     int l13 = 16;
                     byte byte2 = 0;
-                    if(i.h.a(aad.s))
+                    if(h.h.a(aao.s))
                     {
                         l13 += 36;
                         byte2 = 13;
                     }
-                    if(i.h.aF().d() <= 0.0F && j % (k5 * 3 + 1) == 0)
+                    if(h.h.aF().d() <= 0.0F && i % (k5 * 3 + 1) == 0)
                     {
-                        i13 += h.nextInt(3) - 1;
+                        i13 += f.nextInt(3) - 1;
                     }
                     if(flag3)
                     {
@@ -227,9 +221,9 @@ public class aiy extends oo
                     }
                 }
 
-                if(i.h.a(acn.g))
+                if(h.h.a(acy.g))
                 {
-                    int j12 = i.h.Y();
+                    int j12 = h.h.Y();
                     int j13 = (int)Math.ceil(((double)(j12 - 2) * 10D) / 300D);
                     int i14 = (int)Math.ceil(((double)j12 * 10D) / 300D) - j13;
                     for(int k14 = 0; k14 < j13 + i14; k14++)
@@ -247,7 +241,7 @@ public class aiy extends oo
             }
             GL11.glDisable(3042);
             GL11.glEnable(32826);
-            tf.c();
+            tn.c();
             for(int j7 = 0; j7 < 9; j7++)
             {
                 int l7 = (k1 / 2 - 90) + j7 * 20 + 2;
@@ -255,14 +249,14 @@ public class aiy extends oo
                 a(j7, l7, k8, f1);
             }
 
-            tf.a();
+            tn.a();
             GL11.glDisable(32826);
         }
-        if(i.h.aB() > 0)
+        if(h.h.aB() > 0)
         {
             GL11.glDisable(2929);
             GL11.glDisable(3008);
-            int i2 = i.h.aB();
+            int i2 = h.h.aB();
             float f3 = (float)i2 / 100F;
             if(f3 > 1.0F)
             {
@@ -273,61 +267,61 @@ public class aiy extends oo
             GL11.glEnable(3008);
             GL11.glEnable(2929);
         }
-        if(i.c.f() && i.h.aU > 0)
+        if(h.c.f() && h.h.aU > 0)
         {
             boolean flag2 = false;
             int i3 = flag2 ? 0xffffff : 0x80ff20;
-            String s = (new StringBuilder()).append("").append(i.h.aU).toString();
-            int k4 = (k1 - nl1.a(s)) / 2;
+            String s = (new StringBuilder()).append("").append(h.h.aU).toString();
+            int k4 = (k1 - nt1.a(s)) / 2;
             int i5 = l1 - 31 - 4;
-            nl1.b(s, k4 + 1, i5, 0);
-            nl1.b(s, k4 - 1, i5, 0);
-            nl1.b(s, k4, i5 + 1, 0);
-            nl1.b(s, k4, i5 - 1, 0);
-            nl1.b(s, k4, i5, i3);
+            nt1.b(s, k4 + 1, i5, 0);
+            nt1.b(s, k4 - 1, i5, 0);
+            nt1.b(s, k4, i5 + 1, 0);
+            nt1.b(s, k4, i5 - 1, 0);
+            nt1.b(s, k4, i5, i3);
         }
-        WMLL.i.updategui(i);
-        if(i.A.F)
+        WMLL.i.updategui(h);
+        if(h.A.F)
         {
             GL11.glPushMatrix();
             if(Minecraft.J > 0L)
             {
                 GL11.glTranslatef(0.0F, 32F, 0.0F);
             }
-            nl1.a((new StringBuilder()).append("Minecraft 1.2.5 (").append(i.M).append(")").toString(), 2, 2, 0xffffff);
-            nl1.a(i.m(), 2, 12, 0xffffff);
-            nl1.a(i.n(), 2, 22, 0xffffff);
-            nl1.a(i.p(), 2, 32, 0xffffff);
-            nl1.a(i.o(), 2, 42, 0xffffff);
+            nt1.a((new StringBuilder()).append("Minecraft 12w15a (").append(h.M).append(")").toString(), 2, 2, 0xffffff);
+            nt1.a(h.m(), 2, 12, 0xffffff);
+            nt1.a(h.n(), 2, 22, 0xffffff);
+            nt1.a(h.p(), 2, 32, 0xffffff);
+            nt1.a(h.o(), 2, 42, 0xffffff);
             long l2 = Runtime.getRuntime().maxMemory();
             long l3 = Runtime.getRuntime().totalMemory();
             long l5 = Runtime.getRuntime().freeMemory();
             long l6 = l3 - l5;
             String s1 = (new StringBuilder()).append("Used memory: ").append((l6 * 100L) / l2).append("% (").append(l6 / 1024L / 1024L).append("MB) of ").append(l2 / 1024L / 1024L).append("MB").toString();
-            b(nl1, s1, k1 - nl1.a(s1) - 2, 2, 0xe0e0e0);
+            b(nt1, s1, k1 - nt1.a(s1) - 2, 2, 0xe0e0e0);
             s1 = (new StringBuilder()).append("Allocated memory: ").append((l3 * 100L) / l2).append("% (").append(l3 / 1024L / 1024L).append("MB)").toString();
-            b(nl1, s1, k1 - nl1.a(s1) - 2, 12, 0xe0e0e0);
-            b(nl1, (new StringBuilder()).append("x: ").append(i.h.o).toString(), 2, 64, 0xe0e0e0);
-            b(nl1, (new StringBuilder()).append("y: ").append(i.h.p).toString(), 2, 72, 0xe0e0e0);
-            b(nl1, (new StringBuilder()).append("z: ").append(i.h.q).toString(), 2, 80, 0xe0e0e0);
-            b(nl1, (new StringBuilder()).append("f: ").append(gk.c((double)((i.h.u * 4F) / 360F) + 0.5D) & 3).toString(), 2, 88, 0xe0e0e0);
-            int j9 = gk.c(i.h.o);
-            int j10 = gk.c(i.h.p);
-            int i11 = gk.c(i.h.q);
-            if(i.f != null && i.f.j(j9, j10, i11))
+            b(nt1, s1, k1 - nt1.a(s1) - 2, 12, 0xe0e0e0);
+            b(nt1, (new StringBuilder()).append("x: ").append(h.h.o).toString(), 2, 64, 0xe0e0e0);
+            b(nt1, (new StringBuilder()).append("y: ").append(h.h.p).toString(), 2, 72, 0xe0e0e0);
+            b(nt1, (new StringBuilder()).append("z: ").append(h.h.q).toString(), 2, 80, 0xe0e0e0);
+            b(nt1, (new StringBuilder()).append("f: ").append(gm.c((double)((h.h.u * 4F) / 360F) + 0.5D) & 3).toString(), 2, 88, 0xe0e0e0);
+            int j9 = gm.c(h.h.o);
+            int j10 = gm.c(h.h.p);
+            int i11 = gm.c(h.h.q);
+            if(h.f != null && h.f.j(j9, j10, i11))
             {
-                ack ack1 = i.f.c(j9, i11);
-                b(nl1, (new StringBuilder()).append("lc: ").append(ack1.h() + 15).append(" b: ").append(ack1.a(j9 & 0xf, i11 & 0xf, i.f.i()).y).append(" bl: ").append(ack1.a(wl.b, j9 & 0xf, j10, i11 & 0xf)).append(" sl: ").append(ack1.a(wl.a, j9 & 0xf, j10, i11 & 0xf)).append(" rl: ").append(ack1.c(j9 & 0xf, j10, i11 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
+                acv acv1 = h.f.c(j9, i11);
+                b(nt1, (new StringBuilder()).append("lc: ").append(acv1.g() + 15).append(" b: ").append(acv1.a(j9 & 0xf, i11 & 0xf, h.f.i()).y).append(" bl: ").append(acv1.a(wt.b, j9 & 0xf, j10, i11 & 0xf)).append(" sl: ").append(acv1.a(wt.a, j9 & 0xf, j10, i11 & 0xf)).append(" rl: ").append(acv1.c(j9 & 0xf, j10, i11 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
             }
-            if(!i.f.F)
+            if(!h.f.F)
             {
-                b(nl1, (new StringBuilder()).append("Seed: ").append(i.f.v()).toString(), 2, 112, 0xe0e0e0);
+                b(nt1, (new StringBuilder()).append("Seed: ").append(h.f.u()).toString(), 2, 112, 0xe0e0e0);
             }
             GL11.glPopMatrix();
         }
-        if(l > 0)
+        if(k > 0)
         {
-            float f4 = (float)l - f1;
+            float f4 = (float)k - f1;
             int j3 = (int)((f4 * 256F) / 20F);
             if(j3 > 255)
             {
@@ -340,11 +334,11 @@ public class aiy extends oo
                 GL11.glEnable(3042);
                 GL11.glBlendFunc(770, 771);
                 int i4 = 0xffffff;
-                if(m)
+                if(l)
                 {
                     i4 = Color.HSBtoRGB(f4 / 50F, 0.7F, 0.6F) & 0xffffff;
                 }
-                nl1.b(k, -nl1.a(k) / 2, -4, i4 + (j3 << 24));
+                nt1.b(j, -nt1.a(j) / 2, -4, i4 + (j3 << 24));
                 GL11.glDisable(3042);
                 GL11.glPopMatrix();
             }
@@ -354,13 +348,13 @@ public class aiy extends oo
         GL11.glDisable(3008);
         GL11.glPushMatrix();
         GL11.glTranslatef(0.0F, l1 - 48, 0.0F);
-        a(nl1);
+        a(nt1);
         GL11.glPopMatrix();
-        if((i.h instanceof ahv) && i.A.y.e)
+        if((h.h instanceof aij) && h.A.y.e)
         {
-            adl adl1 = ((ahv)i.h).cl;
-            java.util.List list = adl1.c;
-            int j4 = adl1.d;
+            adw adw1 = ((aij)h.h).cl;
+            java.util.List list = adw1.c;
+            int j4 = adw1.d;
             int l4 = j4;
             int j5 = 1;
             for(; l4 > 20; l4 = ((j4 + j5) - 1) / j5)
@@ -388,8 +382,8 @@ public class aiy extends oo
                     continue;
                 }
                 ah ah1 = (ah)list.get(i8);
-                nl1.a(ah1.a, l8, k9, 0xffffff);
-                i.p.b(i.p.b("/gui/icons.png"));
+                nt1.a(ah1.a, l8, k9, 0xffffff);
+                h.p.b(h.p.b("/gui/icons.png"));
                 int j11 = 0;
                 byte byte1 = 0;
                 if(ah1.b < 0)
@@ -426,12 +420,12 @@ public class aiy extends oo
         GL11.glEnable(3008);
     }
 
-    private void a(nl nl1)
+    private void a(nt nt1)
     {
         byte byte0 = 10;
         boolean flag = false;
         int i1 = 0;
-        int j1 = e.size();
+        int j1 = d.size();
         if(j1 <= 0)
         {
             return;
@@ -441,14 +435,14 @@ public class aiy extends oo
             byte0 = 20;
             flag = true;
         }
-        for(int k1 = 0; k1 + n < e.size() && k1 < byte0; k1++)
+        for(int k1 = 0; k1 + m < d.size() && k1 < byte0; k1++)
         {
-            if(((nt)e.get(k1)).b >= 200 && !flag)
+            if(((ob)d.get(k1)).b >= 200 && !flag)
             {
                 continue;
             }
-            nt nt1 = (nt)e.get(k1 + n);
-            double d1 = (double)nt1.b / 200D;
+            ob ob1 = (ob)d.get(k1 + m);
+            double d1 = (double)ob1.b / 200D;
             d1 = 1.0D - d1;
             d1 *= 10D;
             if(d1 < 0.0D)
@@ -470,24 +464,24 @@ public class aiy extends oo
             {
                 byte byte1 = 3;
                 int j3 = -k1 * 9;
-                String s = nt1.a;
+                String s = ob1.a;
                 a(byte1, j3 - 1, byte1 + 320 + 4, j3 + 8, l2 / 2 << 24);
                 GL11.glEnable(3042);
-                nl1.a(s, byte1, j3, 0xffffff + (l2 << 24));
+                nt1.a(s, byte1, j3, 0xffffff + (l2 << 24));
             }
         }
 
         if(flag)
         {
-            GL11.glTranslatef(0.0F, nl1.b, 0.0F);
-            int l1 = j1 * nl1.b + j1;
-            int i2 = i1 * nl1.b + i1;
-            int j2 = (n * i2) / j1;
+            GL11.glTranslatef(0.0F, nt1.b, 0.0F);
+            int l1 = j1 * nt1.b + j1;
+            int i2 = i1 * nt1.b + i1;
+            int j2 = (m * i2) / j1;
             int k2 = (i2 * i2) / l1;
             if(l1 != i2)
             {
                 char c1 = j2 <= 0 ? '`' : '\252';
-                int i3 = o ? 0xcc3333 : 0x3333aa;
+                int i3 = n ? 0xcc3333 : 0x3333aa;
                 a(0, -j2, 2, -j2 - k2, i3 + (c1 << 24));
                 a(2, -j2, 1, -j2 - k2, 0xcccccc + (c1 << 24));
             }
@@ -496,18 +490,18 @@ public class aiy extends oo
 
     private void f()
     {
-        if(or.c == null)
+        if(oz.c == null)
         {
             return;
         }
-        oq oq1 = or.c;
-        or.c = null;
-        nl nl1 = i.q;
-        agd agd1 = new agd(i.A, i.d, i.e);
-        int i1 = agd1.a();
+        oy oy1 = oz.c;
+        oz.c = null;
+        nt nt1 = h.q;
+        agp agp1 = new agp(h.A, h.d, h.e);
+        int i1 = agp1.a();
         char c1 = '\266';
         int j1 = i1 / 2 - c1 / 2;
-        int k1 = (int)(((float)oq1.x() / (float)oq1.d()) * (float)(c1 + 1));
+        int k1 = (int)(((float)oy1.x() / (float)oy1.d()) * (float)(c1 + 1));
         byte byte0 = 12;
         b(j1, byte0, 0, 74, c1, 5);
         b(j1, byte0, 0, 74, c1, 5);
@@ -516,9 +510,9 @@ public class aiy extends oo
             b(j1, byte0, 0, 79, k1, 5);
         }
         String s = "Boss health";
-        nl1.a(s, i1 / 2 - nl1.a(s) / 2, byte0 - 10, 0xff00ff);
+        nt1.a(s, i1 / 2 - nt1.a(s) / 2, byte0 - 10, 0xff00ff);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GL11.glBindTexture(3553, i.p.b("/gui/icons.png"));
+        GL11.glBindTexture(3553, h.p.b("/gui/icons.png"));
     }
 
     private void b(int i1, int j1)
@@ -528,14 +522,14 @@ public class aiy extends oo
         GL11.glBlendFunc(770, 771);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(3008);
-        GL11.glBindTexture(3553, i.p.b("%blur%/misc/pumpkinblur.png"));
-        adz adz1 = adz.a;
-        adz1.b();
-        adz1.a(0.0D, j1, -90D, 0.0D, 1.0D);
-        adz1.a(i1, j1, -90D, 1.0D, 1.0D);
-        adz1.a(i1, 0.0D, -90D, 1.0D, 0.0D);
-        adz1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        adz1.a();
+        GL11.glBindTexture(3553, h.p.b("%blur%/misc/pumpkinblur.png"));
+        aek aek1 = aek.a;
+        aek1.b();
+        aek1.a(0.0D, j1, -90D, 0.0D, 1.0D);
+        aek1.a(i1, j1, -90D, 1.0D, 1.0D);
+        aek1.a(i1, 0.0D, -90D, 1.0D, 0.0D);
+        aek1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        aek1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -553,19 +547,19 @@ public class aiy extends oo
         {
             f1 = 1.0F;
         }
-        c += (double)(f1 - c) * 0.01D;
+        b += (double)(f1 - b) * 0.01D;
         GL11.glDisable(2929);
         GL11.glDepthMask(false);
         GL11.glBlendFunc(0, 769);
-        GL11.glColor4f(c, c, c, 1.0F);
-        GL11.glBindTexture(3553, i.p.b("%blur%/misc/vignette.png"));
-        adz adz1 = adz.a;
-        adz1.b();
-        adz1.a(0.0D, j1, -90D, 0.0D, 1.0D);
-        adz1.a(i1, j1, -90D, 1.0D, 1.0D);
-        adz1.a(i1, 0.0D, -90D, 1.0D, 0.0D);
-        adz1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        adz1.a();
+        GL11.glColor4f(b, b, b, 1.0F);
+        GL11.glBindTexture(3553, h.p.b("%blur%/misc/vignette.png"));
+        aek aek1 = aek.a;
+        aek1.b();
+        aek1.a(0.0D, j1, -90D, 0.0D, 1.0D);
+        aek1.a(i1, j1, -90D, 1.0D, 1.0D);
+        aek1.a(i1, 0.0D, -90D, 1.0D, 0.0D);
+        aek1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        aek1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -585,18 +579,18 @@ public class aiy extends oo
         GL11.glDepthMask(false);
         GL11.glBlendFunc(770, 771);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
-        GL11.glBindTexture(3553, i.p.b("/terrain.png"));
-        float f2 = (float)(pb.be.bN % 16) / 16F;
-        float f3 = (float)(pb.be.bN / 16) / 16F;
-        float f4 = (float)(pb.be.bN % 16 + 1) / 16F;
-        float f5 = (float)(pb.be.bN / 16 + 1) / 16F;
-        adz adz1 = adz.a;
-        adz1.b();
-        adz1.a(0.0D, j1, -90D, f2, f5);
-        adz1.a(i1, j1, -90D, f4, f5);
-        adz1.a(i1, 0.0D, -90D, f4, f3);
-        adz1.a(0.0D, 0.0D, -90D, f2, f3);
-        adz1.a();
+        GL11.glBindTexture(3553, h.p.b("/terrain.png"));
+        float f2 = (float)(pj.be.bN % 16) / 16F;
+        float f3 = (float)(pj.be.bN / 16) / 16F;
+        float f4 = (float)(pj.be.bN % 16 + 1) / 16F;
+        float f5 = (float)(pj.be.bN / 16 + 1) / 16F;
+        aek aek1 = aek.a;
+        aek1.b();
+        aek1.a(0.0D, j1, -90D, f2, f5);
+        aek1.a(i1, j1, -90D, f4, f5);
+        aek1.a(i1, 0.0D, -90D, f4, f3);
+        aek1.a(0.0D, 0.0D, -90D, f2, f3);
+        aek1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -605,12 +599,12 @@ public class aiy extends oo
 
     private void a(int i1, int j1, int k1, float f1)
     {
-        aan aan1 = i.h.ap.a[i1];
-        if(aan1 == null)
+        aay aay1 = h.h.ap.a[i1];
+        if(aay1 == null)
         {
             return;
         }
-        float f2 = (float)aan1.b - f1;
+        float f2 = (float)aay1.b - f1;
         if(f2 > 0.0F)
         {
             GL11.glPushMatrix();
@@ -619,32 +613,33 @@ public class aiy extends oo
             GL11.glScalef(1.0F / f3, (f3 + 1.0F) / 2.0F, 1.0F);
             GL11.glTranslatef(-(j1 + 8), -(k1 + 12), 0.0F);
         }
-        d.a(i.q, i.p, aan1, j1, k1);
+        c.a(h.q, h.p, aay1, j1, k1);
         if(f2 > 0.0F)
         {
             GL11.glPopMatrix();
         }
-        d.b(i.q, i.p, aan1, j1, k1);
+        c.b(h.q, h.p, aay1, j1, k1);
     }
 
     public void a()
     {
-        if(l > 0)
+        if(k > 0)
         {
-            l--;
+            k--;
         }
-        j++;
-        for(int i1 = 0; i1 < e.size(); i1++)
+        i++;
+        for(Iterator iterator = d.iterator(); iterator.hasNext();)
         {
-            ((nt)e.get(i1)).b++;
+            ob ob1 = (ob)iterator.next();
+            ob1.b++;
         }
 
     }
 
     public void b()
     {
+        d.clear();
         e.clear();
-        f.clear();
     }
 
     public void a(String s)
@@ -652,12 +647,12 @@ public class aiy extends oo
         boolean flag = e();
         boolean flag1 = true;
         String s1;
-        for(Iterator iterator = i.q.c(s, 320).iterator(); iterator.hasNext(); e.add(0, new nt(s1)))
+        for(Iterator iterator = h.q.c(s, 320).iterator(); iterator.hasNext(); d.add(0, new ob(s1)))
         {
             s1 = (String)iterator.next();
-            if(flag && n > 0)
+            if(flag && m > 0)
             {
-                o = true;
+                n = true;
                 a(1);
             }
             if(!flag1)
@@ -667,53 +662,53 @@ public class aiy extends oo
             flag1 = false;
         }
 
-        for(; e.size() > 100; e.remove(e.size() - 1)) { }
+        for(; d.size() > 100; d.remove(d.size() - 1)) { }
     }
 
     public java.util.List c()
     {
-        return f;
+        return e;
     }
 
     public void d()
     {
-        n = 0;
-        o = false;
+        m = 0;
+        n = false;
     }
 
     public void a(int i1)
     {
-        n += i1;
-        int j1 = e.size();
-        if(n > j1 - 20)
+        m += i1;
+        int j1 = d.size();
+        if(m > j1 - 20)
         {
-            n = j1 - 20;
+            m = j1 - 20;
         }
-        if(n <= 0)
+        if(m <= 0)
         {
-            n = 0;
-            o = false;
+            m = 0;
+            n = false;
         }
     }
 
-    public dx a(int i1, int j1)
+    public dz a(int i1, int j1)
     {
         if(!e())
         {
             return null;
         }
-        agd agd1 = new agd(i.A, i.d, i.e);
-        j1 = j1 / agd1.c - 40;
-        i1 = i1 / agd1.c - 3;
+        agp agp1 = new agp(h.A, h.d, h.e);
+        j1 = j1 / agp1.c - 40;
+        i1 = i1 / agp1.c - 3;
         if(i1 < 0 || j1 < 0)
         {
             return null;
         }
-        int k1 = Math.min(20, e.size());
-        if(i1 <= 320 && j1 < i.q.b * k1 + k1)
+        int k1 = Math.min(20, d.size());
+        if(i1 <= 320 && j1 < h.q.b * k1 + k1)
         {
-            int l1 = j1 / (i.q.b + 1) + n;
-            return new dx(i.q, (nt)e.get(l1), i1, (j1 - (l1 - n) * i.q.b) + l1);
+            int l1 = j1 / (h.q.b + 1) + m;
+            return new dz(h.q, (ob)d.get(l1), i1, (j1 - (l1 - m) * h.q.b) + l1);
         } else
         {
             return null;
@@ -722,20 +717,20 @@ public class aiy extends oo
 
     public void b(String s)
     {
-        k = (new StringBuilder()).append("Now playing: ").append(s).toString();
-        l = 60;
-        m = true;
+        j = (new StringBuilder()).append("Now playing: ").append(s).toString();
+        k = 60;
+        l = true;
     }
 
     public boolean e()
     {
-        return i.s instanceof yf;
+        return h.s instanceof yq;
     }
 
     public void c(String s)
     {
-        adn adn1 = adn.a();
-        String s1 = adn1.b(s);
+        ady ady1 = ady.a();
+        String s1 = ady1.b(s);
         a(s1);
     }
 

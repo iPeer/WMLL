@@ -3,18 +3,18 @@ import java.util.Properties;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiOutputOptions extends vp {
+public class WMLLGuiOutputOptions extends vy {
 
 	protected WMLL wmll;
-	private vp parent;
+	private vy parent;
 	private String title;
 	private static final String[] colourNames = {"Black", "Dark Blue", "Dark Green", "Cyan", "Red", "Purple", "Orange", "Light Grey", "Dark Grey", "Lavender?", "Lime Green", "Light Blue", "Bright Red", "Pink", "Yellow", "White"};
 	private static final String[] outputLocations = {"Top Left", "Top Right", "Bottom Left", "Bottom Right"};
 	public static Properties outputOptions;
-	private abp F3TypeButton, SMPSeedButton;
+	private aca F3TypeButton, SMPSeedButton;
 
 	@SuppressWarnings("static-access")
-	public WMLLGuiOutputOptions(WMLL wmll, vp parent) {
+	public WMLLGuiOutputOptions(WMLL wmll, vy parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.outputOptions = WMLL.outputOptions;
@@ -30,33 +30,33 @@ public class WMLLGuiOutputOptions extends vp {
 		byte o = -16;
 		/*
 		 * New button
-		 * abp((int)ID, x, y[, width, height], text)
+		 * aca((int)ID, x, y[, width, height], text)
 		 * y = y+25 for each button
 		 */
-		s.add(new abp(1, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done"));
-		//s.add(new abp(0, q / 2 - 152, r / 4 + 150 + o, 98, 20, "<<"));
-		//s.add(new abp(2, q / 2 + 2, r / 4 + 150 + o, 98, 20, ">>"));
-		s.add(new abp(3, q / 2 - 112, r / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
-		s.add(new abp(4, q / 2 + 2, r / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
+		s.add(new aca(1, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done"));
+		//s.add(new aca(0, q / 2 - 152, r / 4 + 150 + o, 98, 20, "<<"));
+		//s.add(new aca(2, q / 2 + 2, r / 4 + 150 + o, 98, 20, ">>"));
+		s.add(new aca(3, q / 2 - 112, r / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
+		s.add(new aca(4, q / 2 + 2, r / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
 		if (WMLL.debugClassPresent)
-			s.add(new abp(9001, 2, r - 22, 50, 20, "Reload"));
-		s.add(new abp(5, q / 2 - 112, r / 4 + 120 + o, 226, 20, "Light Level options..."));
-		s.add(new abp(6, q / 2 - 112, r / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
-		s.add(F3TypeButton = new abp(7, q / 2 + 2, r / 4 + 20 + o, 112, 20, "F3 Type: "+(wmll.F3Type == 1 ? "Alternate" : "Classic")));
-		s.add(new abp(8, q / 2 - 112, r / 4 + 45 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
-		s.add(SMPSeedButton = new abp(9, q / 2 - 112, r / 4 + 98 + o, 226, 20, "Enter seed for this server..."));
-		/*		s.add(new abp(2, q / 2 + 2, r / 4 + 45 + o, 98, 20, "f"));
-		s.add(new abp(0, q / 2 - 100, r / 4 + 70 + o, 98, 20, "g"));
-		s.add(new abp(2, q / 2 + 2, r / 4 + 70 + o, 98, 20, "h"));
-		s.add(new abp(0, q / 2 - 100, r / 4 + 95 + o, 98, 20, "i"));
-		s.add(new abp(2, q / 2 + 2, r / 4 + 95 + o, 98, 20, "j"));*/
-		s.add(new abp(10, q / 2 - 112, r / 4 + 76 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
+			s.add(new aca(9001, 2, r - 22, 50, 20, "Reload"));
+		s.add(new aca(5, q / 2 - 112, r / 4 + 120 + o, 226, 20, "Light Level options..."));
+		s.add(new aca(6, q / 2 - 112, r / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
+		s.add(F3TypeButton = new aca(7, q / 2 + 2, r / 4 + 20 + o, 112, 20, "F3 Type: "+(wmll.F3Type == 1 ? "Alternate" : "Classic")));
+		s.add(new aca(8, q / 2 - 112, r / 4 + 45 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
+		s.add(SMPSeedButton = new aca(9, q / 2 - 112, r / 4 + 98 + o, 226, 20, "Enter seed for this server..."));
+		/*		s.add(new aca(2, q / 2 + 2, r / 4 + 45 + o, 98, 20, "f"));
+		s.add(new aca(0, q / 2 - 100, r / 4 + 70 + o, 98, 20, "g"));
+		s.add(new aca(2, q / 2 + 2, r / 4 + 70 + o, 98, 20, "h"));
+		s.add(new aca(0, q / 2 - 100, r / 4 + 95 + o, 98, 20, "i"));
+		s.add(new aca(2, q / 2 + 2, r / 4 + 95 + o, 98, 20, "j"));*/
+		s.add(new aca(10, q / 2 - 112, r / 4 + 76 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
 		F3TypeButton.h = false;
 		SMPSeedButton.i = wmll.isMultiplayer();
 
 	}
 
-	protected void a(abp b) {
+	protected void a(aca b) {
 		if (b.f == 1 || b.f == 2) {
 			if (b.f == 2) { // Next
 				System.out.println("NO GUI YET!");
