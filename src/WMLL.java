@@ -8,7 +8,9 @@ import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -23,8 +25,11 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 671";
+	public static final String WMLLVER = "Test 673";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
+	public static final Map<String, String> fieldNames = new HashMap<String, String>();
+	@SuppressWarnings("rawtypes")
+	public static final Map<Class, String> mobClasses = new HashMap<Class, String>();
 
 	public static WMLL i = new WMLL();
 	public static boolean Enabled = true;
@@ -63,11 +68,17 @@ public class WMLL {
 	private long lastF4Press = 0;
 	private boolean wmllF3Output = false;
 	private int updateCheck = 180000;
-	
+
 	protected WMLLCompatibility wmllCompatibility;
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+WMLLVER);
+		fieldNames.put("sendQueue", "cl");
+		fieldNames.put("netManager", "g");
+		fieldNames.put("remoteSocketAddress", "i");
+		fieldNames.put("genNetherBridge", "c");
+		fieldNames.put("SpawnListEntry", "a");
+		initMonsterClasses();
 		Rei = ReiUseMl = debugClassPresent = RadarBro = false;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		outputOptionsFile = new File(Minecraft.a("minecraft"), "WMLLOutput.properties");
@@ -119,8 +130,8 @@ public class WMLL {
 				try {
 					wmllCompatibility.RadarBroRun(mc, this);
 				}
-				catch (NoSuchMethodError n) { }
-				catch (NoClassDefFoundError n1) { }
+			catch (NoSuchMethodError n) { }
+			catch (NoClassDefFoundError n1) { }
 			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true"));
 			if (debugClassPresent)
 				WMLLDebug.onGuiTick();
@@ -148,6 +159,9 @@ public class WMLL {
 				String a = getCalendarDate()+"/"+getCalendarDate(2);
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 9, 0xffffff);
 				drawDebug(Boolean.toString(isSeedSet()), (getWindowSize().a() - (getFontRenderer().a(Boolean.toString(isSeedSet())) + 1)), 10, 0xffffff);
+				a = getChunkProvider().toString();
+				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 11, 0xffffff);
+				
 			}
 
 			WMLLCheckKeys();
@@ -241,7 +255,7 @@ public class WMLL {
 					if (!isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]))) {
 						drawString("\247a"+labels[6], 2, 1, 0xffffff); // Ghasts
 						drawString("\247a"+labels[7], 2, 2, 0xffffff); // Pigmen
-						if (light < 13)
+						if (light < 12)
 							drawString("\247a"+labels[8], 2, 3, 0xffffff); // Blaze
 						else
 							drawString("\247c"+labels[8], 2, 3, 0xffffff); // Blaze
@@ -310,13 +324,13 @@ public class WMLL {
 					drawString("\247a"+labels[4], getDimension() == 0 ? 40 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
 				else
 					drawString("\247c"+labels[4], getDimension() == 0 ? 40 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
-				
+
 				// Grass
 				if ((playerIsStandingOnBlock(3) && light > 8))
 					drawString("\247a"+labels[10], getDimension() == -1 ? 40 : 2, getDimension() == 1 ? 3 : getDimension() == -1 ? 4 : !showSlimes ? 3 : 4, 0xffffff);
 				else
 					drawString("\247c"+labels[10], getDimension() == -1 ? 40 : 2, getDimension() == 1 ? 3 : getDimension() == - 1 ? 4 : !showSlimes ? 3 : 4, 0xffffff);
-				
+
 			}
 
 			if (Arrays.asList(2, 5, 7, 10).contains(WMLLI))
@@ -380,17 +394,21 @@ public class WMLL {
 		if (isMultiplayer()) {
 			try {
 				Object obj = thePlayer();
-				Field f = obj.getClass().getDeclaredField("cl"); // sendQueue
+				Field f = obj.getClass().getDeclaredField(getField("sendQueue")); // sendQueue
 				f.setAccessible(true);
 				obj = f.get(obj);
-				Field f1 = obj.getClass().getDeclaredField("g"); // netManager
+				Field f1 = obj.getClass().getDeclaredField(getField("netManager")); // netManager
 				f1.setAccessible(true);
 				obj = f1.get(obj);
-				Field f2 = obj.getClass().getDeclaredField("i"); // remoteSocketAddress
+				Field f2 = obj.getClass().getDeclaredField(getField("remoteSocketAddress")); // remoteSocketAddress
 				f2.setAccessible(true);
 				SocketAddress a = (SocketAddress)f2.get(obj);
 				String s = a.toString();
-				return s.toString().split("/")[0]+":"+s.split(":")[1];	
+				String server = s.split("/")[0].split(":")[0];
+				if (server == null || server.equals(""))
+					server = s.split("/")[1].split(":")[0];
+				String port = s.split(":")[1];
+				return server+":"+port;	
 			}
 			catch (Exception e) {
 				return e.getMessage();
@@ -468,7 +486,6 @@ public class WMLL {
 	}
 
 	private int getBlockID(int x, int y, int z) {
-
 		return getWorld().a(x, y, z);
 	}
 
@@ -524,6 +541,10 @@ public class WMLL {
 
 	private alp getWorldProvider() {
 		return getWorld().t;
+	}
+
+	private ca getChunkProvider() {
+		return getWorldProvider().b();
 	}
 
 	public long getWorldTime() {
@@ -597,23 +618,23 @@ public class WMLL {
 
 	public void drawString(String t, int i, int j, int k) {
 		int textpos = WMLLI > 5 ? -8 : 2;
-				t = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
-				String t1 = Pattern.compile("\247[0-9a-f]").matcher(t).replaceAll("");
-				int w = getWindowSize().a();
-				int h = getWindowSize().b();
-				if (outputLocation == 1) { // Top right
-					getFontRenderer().a(t, w - (getFontRenderer().a(t1) + (i - 1)), textpos+(j*10), k);
-					return;
-				}
-				else if (outputLocation == 2) { // Bottom Left
-					getFontRenderer().a(t, i, h - (textpos+(j*10) + 8), k);
-					return;
-				}
-				else if (outputLocation == 3) { // Bottom Right
-					getFontRenderer().a(t,  w - (getFontRenderer().a(t1) + (i - 1)), h - (textpos+(j*10) + 8), k);
-					return;
-				}
-				getFontRenderer().a(t, i, textpos+(j*10), k); // Top Left
+					t = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
+					String t1 = Pattern.compile("\247[0-9a-f]").matcher(t).replaceAll("");
+					int w = getWindowSize().a();
+					int h = getWindowSize().b();
+					if (outputLocation == 1) { // Top right
+						getFontRenderer().a(t, w - (getFontRenderer().a(t1) + (i - 1)), textpos+(j*10), k);
+						return;
+					}
+					else if (outputLocation == 2) { // Bottom Left
+						getFontRenderer().a(t, i, h - (textpos+(j*10) + 8), k);
+						return;
+					}
+					else if (outputLocation == 3) { // Bottom Right
+						getFontRenderer().a(t,  w - (getFontRenderer().a(t1) + (i - 1)), h - (textpos+(j*10) + 8), k);
+						return;
+					}
+					getFontRenderer().a(t, i, textpos+(j*10), k); // Top Left
 	}
 
 	public void saveOptions() {
@@ -689,7 +710,7 @@ public class WMLL {
 	}
 
 	public void debug(String s) {
-			System.out.println(s);
+		System.out.println(s);
 	}
 
 	private void WMLLCheckKeys() {
@@ -761,7 +782,7 @@ public class WMLL {
 			c = Integer.toString(a)+Integer.toString(b);
 		return c;
 	}
-	
+
 	public boolean isOutputEnabled(int i) {
 		try {
 			if (i > 11)
@@ -776,6 +797,38 @@ public class WMLL {
 			e.printStackTrace();
 			return true;
 		}
+	}
+	
+	private String getField(String n) {
+		return fieldNames.get(n);
+	}
+	
+	private void initMonsterClasses() {
+        mobClasses.put(adb.class, "Mob");
+        mobClasses.put(zj.class, "Monster");
+        mobClasses.put(yo.class, "Creeper");
+        mobClasses.put(yc.class, "Skeleton");
+        mobClasses.put(cb.class, "Spider");
+        mobClasses.put(kk.class, "Giant");
+        mobClasses.put(aju.class, "Zombie");
+        mobClasses.put(ajo.class, "Slime");
+        mobClasses.put(ur.class, "Ghast");
+        mobClasses.put(amh.class, "PigZombie");
+        mobClasses.put(jj.class, "Enderman");
+        mobClasses.put(fp.class, "CaveSpider");
+        mobClasses.put(qw.class, "Silverfish");
+        mobClasses.put(adr.class, "Blaze");
+        mobClasses.put(aiq.class, "LavaSlime");
+        mobClasses.put(oy.class, "EnderDragon");
+        mobClasses.put(ra.class, "Pig");
+        mobClasses.put(cv.class, "Sheep");
+        mobClasses.put(uw.class, "Cow");
+        mobClasses.put(rm.class, "Chicken");
+        mobClasses.put(alz.class, "Squid");
+        mobClasses.put(yz.class, "Wolf");
+        mobClasses.put(on.class, "MushroomCow");
+        mobClasses.put(q.class, "SnowMan");
+        mobClasses.put(ux.class, "Ozelot");
 	}
 
 }
