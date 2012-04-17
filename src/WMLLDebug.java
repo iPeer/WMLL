@@ -64,14 +64,14 @@ public class WMLLDebug {
 		if (System.currentTimeMillis() - lastCommandTime < 150L)
 			return;
 		WMLL wmll = WMLL.i;
-		kl pc = wmll.getPlayerController();
+		ki pc = wmll.getPlayerController();
 		Minecraft mc = wmll.getMCInstance();
 		if (mc.s != null) 
 			return;
 		if (!wmll.isCreative())
-			pc = new afs(mc);
+			pc = new aff(mc);
 		else
-			pc = new afd(mc);
+			pc = new aes(mc);
 		mc.c = pc;
 		lastCommandTime = System.currentTimeMillis();	
 	}
