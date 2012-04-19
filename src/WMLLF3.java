@@ -7,6 +7,7 @@ public class WMLLF3 {
 	
 	protected Minecraft mc;
 	protected WMLL wmll;
+	boolean showSeed;
 	
 	private final String MINECRAFT_VERSION = "12w15a";
 
@@ -69,9 +70,20 @@ public class WMLLF3 {
 		wmll.drawStringUsingPixels(coords, 2, 92, 0xffffff);
 		
 		// Seed
-		if ((!wmll.isMultiplayer() && wmll.isSeedSet()) || wmll.showSeedWithCoords)
+		showSeed = (!wmll.isMultiplayer() && wmll.isSeedSet()) || wmll.showSeedWithCoords;
+		if (showSeed)
 			wmll.drawStringUsingPixels("Seed: "+wmll.getWorldSeed(), 2, 112, 0xffffff);
 		}
+		int[] coords = wmll.getPlayerCoordinates();
+		int x = coords[0];
+		int y = coords[1];
+		int z = coords[2];
+		int lightA = wmll.getLightLevel(x, y, z);
+		int lightB = wmll.getLightLevel(x, y+1, z);
+		
+		wmll.drawStringUsingPixels("\247nLight levels", 2, showSeed ? 132 : 112, 0xffffff);
+		wmll.drawStringUsingPixels("Head: "+lightB, 2, showSeed ? 142 : 122, 0xffffff);
+		wmll.drawStringUsingPixels("Feet: "+lightA, 2, showSeed ? 152 : 132, 0xffffff);
 		
 	}
 	
