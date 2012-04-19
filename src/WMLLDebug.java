@@ -29,37 +29,15 @@ public class WMLLDebug {
 
 	public static void setTimeToDay() {
 		if (System.currentTimeMillis() - lastCommandTime > 150L) {
-//			if (wmll.isMultiplayer()) {
 			sendChatCommand("/time set 0");
-//			}
-//			else {
-//				if (timeLocked)
-//					toggleTimeLock();
-//				wmll.worldInfo().a(0L);
-			//}
 			lastCommandTime = System.currentTimeMillis();
 		}
-	}
-
-	public static void toggleTimeLock() {
-		if (System.currentTimeMillis() - lastCommandTime > 150L) {
-			WMLL wmll = WMLL.i;
-			if (!wmll.isMultiplayer()) {
-				currentWorldTime = wmll.getWorldTime();
-				timeLocked = !timeLocked;
-				wmll.debug("[WMLLDebug] "+(timeLocked ? "Locking time at "+currentWorldTime : "Time unlocked"));
-			}
-			else
-				wmll.debug("[WMLLDebug] Cannot lock time on SMP.");
-		}
-		lastCommandTime = System.currentTimeMillis();
 	}
 	
 	public static void toggleGameMode() {
 		if (System.currentTimeMillis() - lastCommandTime < 150L)
 			return;
 		WMLL wmll = WMLL.i;
-		//kp pc = wmll.getPlayerController();
 		Minecraft mc = wmll.getMCInstance();
 		if (mc.s != null) 
 			return;
@@ -67,7 +45,6 @@ public class WMLLDebug {
 			sendChatCommand("/gamemode 1 "+wmll.getPlayerName());
 		else
 			sendChatCommand("/gamemode 0 "+wmll.getPlayerName());
-		//mc.c = pc;
 		lastCommandTime = System.currentTimeMillis();	
 	}
 

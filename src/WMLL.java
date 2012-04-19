@@ -719,10 +719,7 @@ public class WMLL {
 
 	private void WMLLCheckKeys() {
 		if (Keyboard.isKeyDown(Keyboard.KEY_F7) && debugClassPresent)
-			if (Keyboard.isKeyDown(42))
-				WMLLDebug.toggleTimeLock();
-			else
-				WMLLDebug.setTimeToNight();
+			WMLLDebug.setTimeToNight();
 		if (Keyboard.isKeyDown(Keyboard.KEY_F9) && debugClassPresent)
 			WMLLDebug.setTimeToDay();
 		if (Keyboard.isKeyDown(Keyboard.KEY_G)&& debugClassPresent)
