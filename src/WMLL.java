@@ -25,12 +25,9 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 673";
+	public static final String WMLLVER = "Test 675";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
-	@SuppressWarnings("rawtypes")
-	public static final Map<Class, String> mobClasses = new HashMap<Class, String>();
-
 	public static WMLL i = new WMLL();
 	public static boolean Enabled = true;
 	public static int WMLLI;
@@ -78,7 +75,6 @@ public class WMLL {
 		fieldNames.put("remoteSocketAddress", "i");
 		fieldNames.put("genNetherBridge", "c");
 		fieldNames.put("SpawnListEntry", "a");
-		initMonsterClasses();
 		Rei = ReiUseMl = debugClassPresent = RadarBro = false;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		outputOptionsFile = new File(Minecraft.a("minecraft"), "WMLLOutput.properties");
@@ -222,11 +218,11 @@ public class WMLL {
 					out = 1;
 				if ((isSeedSet()) || isMultiplayer())
 					out++;
-				adb player = thePlayer();
+				ady player = thePlayer();
 				double x = player.o;
 				double y = player.p;
 				double z = player.q;
-				double f = gm.c((double)((player.u * 4F) / 360F) + 0.5D) & 3;
+				double f = gp.c((double)((player.u * 4F) / 360F) + 0.5D) & 3;
 				NumberFormat d = new DecimalFormat("#0.00");
 				String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection((int)f)+")";
 				drawString(coords, 2, out, 0xffffff);
@@ -386,7 +382,7 @@ public class WMLL {
 		return s;
 	}
 
-	private xo getWorld() {
+	private yi getWorld() {
 		return mc.f;
 	}
 
@@ -418,19 +414,19 @@ public class WMLL {
 		return worldInfo().j();
 	}
 
-	public nt getFontRenderer() {
+	public oc getFontRenderer() {
 		return mc.q;
 	}
 
-	public agp getWindowSize() {
-		return new agp(mc.A, mc.d, mc.e);
+	public aho getWindowSize() {
+		return new aho(mc.A, mc.d, mc.e);
 	}
 
 	private boolean mcDebugOpen() {
 		return getGameSettings().F;
 	}
 
-	private hy getGameSettings() {
+	private ib getGameSettings() {
 		return mc.A;
 	}
 
@@ -442,14 +438,14 @@ public class WMLL {
 		if (y < 0 || y > 255) 
 			return 0;
 		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(wt.b, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+		return getChunk(playerPos[0], playerPos[2]).a(xm.b, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
 	}
 
 	public int getRawLightLevel(int x, int y, int z) {
 		if (y < 0 || y > 255) 
 			return 0;
 		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(wt.b, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+		return getChunk(playerPos[0], playerPos[2]).a(xm.b, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
 	}
 
 	public int getLightLevel(int j, int k, int l) {
@@ -476,7 +472,7 @@ public class WMLL {
 		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).G);
 	}
 
-	private sb getBiomeGenBase() {
+	private sq getBiomeGenBase() {
 		return getWorld().i();
 	}
 
@@ -498,22 +494,22 @@ public class WMLL {
 		return getWorld().m(x, y, z);
 	}
 
-	public adb thePlayer() {
+	public ady thePlayer() {
 		return mc.i;
 	}
 
-	public fd playerEntity() {
+	public fg playerEntity() {
 		return mc.k;
 	}
 
-	public kl getPlayerController() {
+	public kp getPlayerController() {
 		return mc.c;
 	}
 	public boolean isCreative() {
-		return (getPlayerController() instanceof afs);
+		return (getPlayerController() instanceof agr);
 	}
 
-	public xb worldInfo() {
+	public xu worldInfo() {
 		return getWorld().x;
 	}
 
@@ -521,7 +517,7 @@ public class WMLL {
 		return mc;
 	}
 
-	private acv getChunk(int x, int z) {
+	private ads getChunk(int x, int z) {
 		return getWorld().c(x, z);
 	}
 
@@ -531,7 +527,7 @@ public class WMLL {
 
 	private boolean canSlimesSpawnHere(int x, int z) {
 		if (isMultiplayer()) {
-			acv chunk = getChunk(x, z);
+			ads chunk = getChunk(x, z);
 			int xPos = chunk.g;
 			int zPos = chunk.h;
 			return new Random(getWorldSeed() + (long)(xPos * xPos * 0x4c1906) + (long)(xPos * 0x5ac0db) + (long)(zPos * zPos) * 0x4307a7L + (long) (zPos * 0x5f24f) ^ 0x3ad8025f).nextInt(10) == 0;
@@ -539,11 +535,11 @@ public class WMLL {
 		return getChunk(x, z).a(0x3ad8025fL).nextInt(10) == 0 && getWorldSeed() != 0L;
 	}
 
-	private alp getWorldProvider() {
+	private amt getWorldProvider() {
 		return getWorld().t;
 	}
 
-	private ca getChunkProvider() {
+	private cb getChunkProvider() {
 		return getWorldProvider().b();
 	}
 
@@ -582,7 +578,7 @@ public class WMLL {
 	}
 
 	public int[] getPlayerCoordinates() {
-		int[] a = {gm.c(thePlayer().o), gm.c(thePlayer().p - 1), gm.c(thePlayer().q), gm.c((double)((thePlayer().u * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().o, (int)thePlayer().p, (int)thePlayer().q};
+		int[] a = {gp.c(thePlayer().o), gp.c(thePlayer().p - 1), gp.c(thePlayer().q), gp.c((double)((thePlayer().u * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().o, (int)thePlayer().p, (int)thePlayer().q};
 		return a;
 	}
 
@@ -594,7 +590,7 @@ public class WMLL {
 		catch (NumberFormatException n) {
 			return 0;
 		}
-		return getWorld().u();
+		return getWorld().v();
 	}
 
 	public String getFPSString() {
@@ -728,7 +724,7 @@ public class WMLL {
 			if (Keyboard.isKeyDown(29) && mc.s == null)
 				mc.a(new WMLLOptions(this));
 			else
-				if (!(mc.s instanceof WMLLOptions) && !(mc.s instanceof yq/*GuiChat*/) && !(mc.s instanceof ami/*Sign Editing*/)) {
+				if (!(mc.s instanceof WMLLOptions) && !(mc.s instanceof zk/*GuiChat*/) && !(mc.s instanceof anm/*Sign Editing*/)) {
 					if (Keyboard.isKeyDown(42)) {
 						WMLLI--;
 						while (!isOutputEnabled(WMLLI))
@@ -801,34 +797,6 @@ public class WMLL {
 	
 	private String getField(String n) {
 		return fieldNames.get(n);
-	}
-	
-	private void initMonsterClasses() {
-        mobClasses.put(adb.class, "Mob");
-        mobClasses.put(zj.class, "Monster");
-        mobClasses.put(yo.class, "Creeper");
-        mobClasses.put(yc.class, "Skeleton");
-        mobClasses.put(cb.class, "Spider");
-        mobClasses.put(kk.class, "Giant");
-        mobClasses.put(aju.class, "Zombie");
-        mobClasses.put(ajo.class, "Slime");
-        mobClasses.put(ur.class, "Ghast");
-        mobClasses.put(amh.class, "PigZombie");
-        mobClasses.put(jj.class, "Enderman");
-        mobClasses.put(fp.class, "CaveSpider");
-        mobClasses.put(qw.class, "Silverfish");
-        mobClasses.put(adr.class, "Blaze");
-        mobClasses.put(aiq.class, "LavaSlime");
-        mobClasses.put(oy.class, "EnderDragon");
-        mobClasses.put(ra.class, "Pig");
-        mobClasses.put(cv.class, "Sheep");
-        mobClasses.put(uw.class, "Cow");
-        mobClasses.put(rm.class, "Chicken");
-        mobClasses.put(alz.class, "Squid");
-        mobClasses.put(yz.class, "Wolf");
-        mobClasses.put(on.class, "MushroomCow");
-        mobClasses.put(q.class, "SnowMan");
-        mobClasses.put(ux.class, "Ozelot");
 	}
 
 }

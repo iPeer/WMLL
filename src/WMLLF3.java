@@ -57,11 +57,11 @@ public class WMLLF3 {
 		wmll.drawStringUsingPixels("WMLL "+WMLL.WMLLVER, 2, 72, 0xffffff);
 		
 		// Coordinates
-		adb player = wmll.thePlayer();
+		ady player = wmll.thePlayer();
 		double x = player.o;
 		double y = player.p;
 		double z = player.q;
-		double f = gm.c((double)((player.u * 4F) / 360F) + 0.5D) & 3;
+		double f = gp.c((double)((player.u * 4F) / 360F) + 0.5D) & 3;
 		String roundingFormat = "#0";
 		DecimalFormat d = new DecimalFormat(roundingFormat);
 		String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+wmll.getPlayerDirection(Integer.parseInt(d.format(f)))+")";
