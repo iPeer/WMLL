@@ -1,15 +1,15 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiSMPSeed extends vy {
+public class WMLLGuiSMPSeed extends wq {
 	
 	protected WMLL wmll;
-	private vy parent;
+	private wq parent;
 	private String title;
 	
 	private aih seedBox;
 
-	public WMLLGuiSMPSeed(WMLL wmll, vy parent) {
+	public WMLLGuiSMPSeed(WMLL wmll, wq parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.title = "WMLL SMP Seed Configuration";
@@ -65,7 +65,7 @@ public class WMLLGuiSMPSeed extends vy {
 	}
 	
 	public void a(int i, int j, float f) {
-		k();
+		r_();
 		// (fontrenderer, text, x, y, colour)
 		a(u, title, q / 2, 20, 0xffffff);
 		a(u, "If you know the seed for this server, you can enter it here.", q / 2, 80, 0xffffff);

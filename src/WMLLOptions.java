@@ -1,6 +1,6 @@
 import org.lwjgl.input.Keyboard;
 
-public class WMLLOptions extends vy {
+public class WMLLOptions extends wq {
 	
 	public WMLLOptions(WMLL i) {
 		title = "WMLL Configuration";
@@ -143,7 +143,7 @@ public class WMLLOptions extends vy {
 	}
 
 	public void a(int i, int j, float f) {
-		k();
+		r_();
 		// (fontrenderer, text, x, y, colour)
 		a(u, title, q / 2, 20, 0xffffff);
 		a(u, "\247cReloading options will undo any changes you've made!", q / 2, 150, 0xffffff);

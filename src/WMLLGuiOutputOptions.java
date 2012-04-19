@@ -3,10 +3,10 @@ import java.util.Properties;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiOutputOptions extends vy {
+public class WMLLGuiOutputOptions extends wq {
 
 	protected WMLL wmll;
-	private vy parent;
+	private wq parent;
 	private String title;
 	private static final String[] colourNames = {"Black", "Dark Blue", "Dark Green", "Cyan", "Red", "Purple", "Orange", "Light Grey", "Dark Grey", "Lavender?", "Lime Green", "Light Blue", "Bright Red", "Pink", "Yellow", "White"};
 	private static final String[] outputLocations = {"Top Left", "Top Right", "Bottom Left", "Bottom Right"};
@@ -14,7 +14,7 @@ public class WMLLGuiOutputOptions extends vy {
 	private acv F3TypeButton, SMPSeedButton;
 
 	@SuppressWarnings("static-access")
-	public WMLLGuiOutputOptions(WMLL wmll, vy parent) {
+	public WMLLGuiOutputOptions(WMLL wmll, wq parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.outputOptions = WMLL.outputOptions;
@@ -125,7 +125,7 @@ public class WMLLGuiOutputOptions extends vy {
 	}
 
 	public void a(int i, int j, float f) {
-		k();
+		r_();
 		// (fontrenderer, text, x, y, colour)
 		a(u, title, q / 2, 20, 0xffffff);
 		int a = (q - ((wmll.getFontRenderer().a(WMLL.WMLLVER) + 2) / 2));

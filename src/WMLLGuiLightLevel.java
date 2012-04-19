@@ -5,10 +5,10 @@ import java.util.Properties;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiLightLevel extends vy {
+public class WMLLGuiLightLevel extends wq {
 	
 	protected WMLL wmll;
-	private vy parent;
+	private wq parent;
 	private String title;
 	private Properties outputOptions;
 	private String lightString;
@@ -17,7 +17,7 @@ public class WMLLGuiLightLevel extends vy {
 	private aih lightEditbox, skyEditbox, rawEditbox, blockEditbox, lightLevelEditbox;
 	private final List<aih> page3editboxes = new ArrayList<aih>();
 
-	public WMLLGuiLightLevel(WMLL w, vy parent) {
+	public WMLLGuiLightLevel(WMLL w, wq parent) {
 		this.wmll = w;
 		this.parent = parent;
 		title = "WMLL Light Level Customization";
@@ -142,8 +142,8 @@ public class WMLLGuiLightLevel extends vy {
 	}
 	
 	public void a(int i, int j, float f) {
-		k();
 		// (fontrenderer, text, x, y, colour)
+		r_();
 		if (page == 1)
 			a(u, title, q / 2, 20, 0xffffff);
 		int a = (q - ((wmll.getFontRenderer().a(WMLL.WMLLVER) + 2) / 2));
@@ -190,7 +190,6 @@ public class WMLLGuiLightLevel extends vy {
 			a(u, "Highlight light level when less than...", q / 2, 120, 0xffffff);
 			a(u, "\247cSetting a value to 0 will disable highlighting for that output", q / 2, 160, 0xffffff);
 		}
-		
 		super.a(i, j, f);
 	}
 	
