@@ -20,7 +20,7 @@ public class WMLLGuiSMPSeed extends wq {
 		s.clear();
 		byte o = -16;
 		if (WMLL.debugClassPresent)
-			s.add(new acv(9001, 2, r - 22, 50, 20, "Reload"));
+			s.add(new acv(9001, q - 52, r - 22, 50, 20, "Reload"));
 		/*
 		 * New Editbox:
 		 * new aih(Gui, fontrenderer, posx, posy, width, height, default text);
@@ -71,6 +71,7 @@ public class WMLLGuiSMPSeed extends wq {
 		a(u, "If you know the seed for this server, you can enter it here.", q / 2, 80, 0xffffff);
 		a(u, "This will enable both the seed display and allow Slime chunk detection.", q / 2, 90, 0xffffff);	
 		seedBox.f();
+		WMLLOptions.renderWMLLVersion();
 		super.a(i, j, f);
 	}
 	

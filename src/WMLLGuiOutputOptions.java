@@ -39,7 +39,7 @@ public class WMLLGuiOutputOptions extends wq {
 		s.add(new acv(3, q / 2 - 112, r / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
 		s.add(new acv(4, q / 2 + 2, r / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
 		if (WMLL.debugClassPresent)
-			s.add(new acv(9001, 2, r - 22, 50, 20, "Reload"));
+			s.add(new acv(9001, q - 52, r - 22, 50, 20, "Reload"));
 		s.add(new acv(5, q / 2 - 112, r / 4 + 120 + o, 226, 20, "Light Level options..."));
 		s.add(new acv(6, q / 2 - 112, r / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
 		s.add(F3TypeButton = new acv(7, q / 2 + 2, r / 4 + 20 + o, 112, 20, "F3 Type: "+(wmll.F3Type == 1 ? "Alternate" : "Classic")));
@@ -128,8 +128,7 @@ public class WMLLGuiOutputOptions extends wq {
 		r_();
 		// (fontrenderer, text, x, y, colour)
 		a(u, title, q / 2, 20, 0xffffff);
-		int a = (q - ((wmll.getFontRenderer().a(WMLL.WMLLVER) + 2) / 2));
-		a(u, WMLL.WMLLVER, a, r - 9, 0x444444);
+		WMLLOptions.renderWMLLVersion();
 		super.a(i, j, f);
 	}
 

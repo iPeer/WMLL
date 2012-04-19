@@ -74,7 +74,7 @@ public class WMLLGuiLightLevel extends wq {
 		page3editboxes.add(lightEditbox);
 		
 		if (WMLL.debugClassPresent)
-			s.add(new acv(9001, 2, r - 22, 50, 20, "Reload"));
+			s.add(new acv(9001, q - 52, r - 22, 50, 20, "Reload"));
 		generateLightStringPreview();
 	}
 	
@@ -146,8 +146,7 @@ public class WMLLGuiLightLevel extends wq {
 		r_();
 		if (page == 1)
 			a(u, title, q / 2, 20, 0xffffff);
-		int a = (q - ((wmll.getFontRenderer().a(WMLL.WMLLVER) + 2) / 2));
-		a(u, WMLL.WMLLVER, a, r - 9, 0x444444);
+		WMLLOptions.renderWMLLVersion();
 		if (page == 1) {
 			lightLevelEditbox.f();
 			a(u, lightString, q / 2, 95, 0xffffff);

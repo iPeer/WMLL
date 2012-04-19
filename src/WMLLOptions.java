@@ -25,7 +25,7 @@ public class WMLLOptions extends wq {
 		 * New button
 		 * acv((int)ID, x, y[, width, height], text)
 		 */
-		s.add(new acv(1, q / 2 - 100, r / 4 + 170 + offset, "Done"));
+		s.add(new acv(1, q / 2 - 100, r / 4 + 150 + offset, "Done"));
 		s.add(new acv(0, q / 2 - 100, r / 4 - 5 + offset, 98, 20, "Debug: "+debug));
 		s.add(new acv(2, q / 2 + 2, r / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
 		s.add(new acv(5, q / 2 - 100, r / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
@@ -37,7 +37,7 @@ public class WMLLOptions extends wq {
 		int i = wmll.getFontRenderer().a(enabledString);
 		s.add(new acv(8, (q - (i + 10)) / 2, r / 4 + 45 + offset, i + 10, 20, enabledString));
 		if (WMLL.debugClassPresent)
-			s.add(new acv(9001, 2, r - 22, 50, 20, "Reload"));
+			s.add(new acv(9001, q - 52, r - 22, 50, 20, "Reload"));
 		if (!wmll.Enabled)
 			for (int x = 3; x < 6; x++)
 				((acv)s.get(x)).h = false;
@@ -147,9 +147,17 @@ public class WMLLOptions extends wq {
 		// (fontrenderer, text, x, y, colour)
 		a(u, title, q / 2, 20, 0xffffff);
 		a(u, "\247cReloading options will undo any changes you've made!", q / 2, 150, 0xffffff);
-		int a = (q - ((wmll.getFontRenderer().a(WMLL.WMLLVER) + 2) / 2));
-		a(u, WMLL.WMLLVER, a, r - 9, 0x444444);
+		renderWMLLVersion();
 		super.a(i, j, f);
+	}
+	
+	public static void renderWMLLVersion() {
+		WMLL wmll = WMLL.i;
+		int q = wmll.getWindowSize().a();
+		int r = wmll.getWindowSize().b();
+		String ver = "WMLL "+WMLL.WMLLVER+" ("+WMLL.getMinecraftVersion()+")";
+		int a = (q - ((wmll.getFontRenderer().a(ver) + 2) / 2));
+		wmll.drawStringUsingPixels(ver, 2, r - 9, 0x444444);
 	}
 
 	private String title;

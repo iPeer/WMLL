@@ -25,7 +25,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 679";
+	public static final String WMLLVER = "Test 680";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
 	public static WMLL i = new WMLL();
@@ -50,6 +50,7 @@ public class WMLL {
 
 	private static final int propertiesVersion = 1;
 	private static File settingsFile, outputOptionsFile;
+	public static long lastUpdateCheck = 0;
 	private static final WMLLUpdateCheck wmllUpdateCheck = new WMLLUpdateCheck();
 	private static final Calendar calendar = Calendar.getInstance();
 
@@ -98,10 +99,12 @@ public class WMLL {
 	}
 
 	public void updategui(Minecraft h) {
-		updateCheck--;
-		if (updateCheck <= 0) {
-			updateCheck = 180000;
-			(new Thread(wmllUpdateCheck)).start();
+		if (getWorld() != null && !wmllUpdateCheck.running) {
+			wmllUpdateCheck.start();
+		}
+		else if (getWorld() == null && wmllUpdateCheck.running) {
+			System.out.println("[WMLL] FATAL: World == NULL! -- Stopping update thread.");
+			wmllUpdateCheck.stop1();
 		}
 		if (Rei && !ReiUseMl)
 			ReiMinimap.instance.onTickInGame(h);
@@ -149,7 +152,13 @@ public class WMLL {
 					drawDebug("null", (getWindowSize().a() - (getFontRenderer().a("null") + 1)), 5, 0xffffff);
 				}
 				drawDebug(Boolean.toString(canSlimesSpawnHere(x, z)), (getWindowSize().a() - (getFontRenderer().a(Boolean.toString(canSlimesSpawnHere(x, z))) + 1)), 6, 0xffffff);
-				String t = "Next update check: "+hr+":"+mi;
+
+				long nextUpdate = ((lastUpdateCheck + 3600000) - System.currentTimeMillis()) / 1000;
+				int hours = (int)(nextUpdate / 3600);
+				int seconds = (int)nextUpdate % 60;
+				int minutes = (int)(nextUpdate % 3600) / 60;
+				String update = pad(hours)+":"+pad(minutes)+":"+pad(seconds);
+				String t = "Next update check: "+update;
 				drawDebug(t, (getWindowSize().a() - (getFontRenderer().a(t) + 1)), 7, 0xffffff);
 				drawDebug(getPlayerController().toString(),  (getWindowSize().a() - (getFontRenderer().a(getPlayerController().toString()) + 1)), 8, 0xffffff);
 				String a = getCalendarDate()+"/"+getCalendarDate(2);
@@ -383,7 +392,12 @@ public class WMLL {
 	}
 
 	private yi getWorld() {
-		return mc.f;
+		try {
+			return mc.f;
+		}
+		catch (NullPointerException n) {
+			return null;
+		}
 	}
 
 	public String getWorldName() {
@@ -802,6 +816,10 @@ public class WMLL {
 	
 	private String getField(String n) {
 		return fieldNames.get(n);
+	}
+	
+	public static String getMinecraftVersion() {
+		return Minecraft.w();
 	}
 
 }
