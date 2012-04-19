@@ -9,11 +9,12 @@ public class WMLLF3 {
 	protected WMLL wmll;
 	boolean showSeed;
 	
-	private final String MINECRAFT_VERSION = "12w15a";
+	private String MINECRAFT_VERSION = "";
 
 	public WMLLF3(Minecraft mc, WMLL wmll) {
 		this.mc = mc;
 		this.wmll = wmll;
+		MINECRAFT_VERSION = Minecraft.w();
 	}
 	
 	public void draw() {
