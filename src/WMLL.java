@@ -25,7 +25,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 675";
+	public static final String WMLLVER = "Test 676";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
 	public static WMLL i = new WMLL();
@@ -190,7 +190,7 @@ public class WMLL {
 					lightString = years+" years today!";
 				}
 				else if (!sleepingStringSet) {
-					lightString = sleepstrings[new Random().nextInt(sleepstrings.length)].replaceAll("PLAYERNAME", playerEntity().b);
+					lightString = sleepstrings[new Random().nextInt(sleepstrings.length)].replaceAll("PLAYERNAME", getPlayerName());
 					sleepingStringSet = true;
 				}
 			}
@@ -493,6 +493,10 @@ public class WMLL {
 	private boolean canBlockSeeTheSky(int x, int y, int z) {
 		return getWorld().m(x, y, z);
 	}
+	
+	public wr entityPlayer() {
+		return mc.h;
+	}
 
 	public ady thePlayer() {
 		return mc.i;
@@ -500,6 +504,10 @@ public class WMLL {
 
 	public fg playerEntity() {
 		return mc.k;
+	}
+	
+	public String getPlayerName() {
+		return playerEntity().b;
 	}
 
 	public kp getPlayerController() {

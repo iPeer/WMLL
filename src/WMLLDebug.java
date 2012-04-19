@@ -14,34 +14,29 @@ public class WMLLDebug {
 	private static boolean timeLocked = false;
 	private static long currentWorldTime = 0L;
 
+	public static void sendChatCommand(String s) {
+		WMLL wmll = WMLL.i;
+		System.out.println(s);
+		wmll.entityPlayer().c(s);
+	}
+	
 	public static void setTimeToNight() {
 		if (System.currentTimeMillis() - lastCommandTime > 150L) {
-			WMLL wmll = WMLL.i;
-			//if (!wmll.isMultiplayer()) {
-				if (timeLocked)
-					toggleTimeLock();
-				wmll.worldInfo().a(14000L);
-/*			}
-			else  {
-				wmll.thePlayer().a("/time set 14000");
-			}*/
-			wmll.debug("[WMLLDebug] Setting time to 14000 ticks");
+			sendChatCommand("/time set 14000");
 			lastCommandTime = System.currentTimeMillis();
 		}
 	}
 
 	public static void setTimeToDay() {
 		if (System.currentTimeMillis() - lastCommandTime > 150L) {
-			WMLL wmll = WMLL.i;
-/*			if (wmll.isMultiplayer()) {
-				wmll.thePlayer().a("/time set 0");
-			}
-			else {*/
-				if (timeLocked)
-					toggleTimeLock();
-				wmll.worldInfo().a(0L);
+//			if (wmll.isMultiplayer()) {
+			sendChatCommand("/time set 0");
+//			}
+//			else {
+//				if (timeLocked)
+//					toggleTimeLock();
+//				wmll.worldInfo().a(0L);
 			//}
-			wmll.debug("[WMLLDebug] Setting time to 0 ticks");
 			lastCommandTime = System.currentTimeMillis();
 		}
 	}
@@ -64,15 +59,15 @@ public class WMLLDebug {
 		if (System.currentTimeMillis() - lastCommandTime < 150L)
 			return;
 		WMLL wmll = WMLL.i;
-		kp pc = wmll.getPlayerController();
+		//kp pc = wmll.getPlayerController();
 		Minecraft mc = wmll.getMCInstance();
 		if (mc.s != null) 
 			return;
 		if (!wmll.isCreative())
-			pc = new agr(mc);
+			sendChatCommand("/gamemode 1 "+wmll.getPlayerName());
 		else
-			pc = new agc(mc);
-		mc.c = pc;
+			sendChatCommand("/gamemode 0 "+wmll.getPlayerName());
+		//mc.c = pc;
 		lastCommandTime = System.currentTimeMillis();	
 	}
 
