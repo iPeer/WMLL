@@ -25,7 +25,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 683";
+	public static final String WMLLVER = "Test 685";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
 	public static WMLL i = new WMLL();
@@ -130,7 +130,7 @@ public class WMLL {
 				}
 			catch (NoSuchMethodError n) { }
 			catch (NoClassDefFoundError n1) { }
-			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true"));
+			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true")) && !Boolean.parseBoolean(options.getProperty("AllOutputsOff", "false"));
 			if (debugClassPresent)
 				WMLLDebug.onGuiTick();
 			if (WMLLDebugActive()) {
@@ -815,6 +815,13 @@ public class WMLL {
 	
 	public static String getMinecraftVersion() {
 		return Minecraft.w();
+	}
+
+	public boolean areAllOutputsDisabled() {
+		int x =0;
+		for (; Boolean.parseBoolean(options.getProperty("Output"+x, "true")) == false && x <= 11; x++) { }	
+		System.out.println(x);
+		return x > 11;
 	}
 
 }

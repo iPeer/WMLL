@@ -29,9 +29,9 @@ public class WMLLEnabledOutputs extends wq {
 		s.add(new acv(9, q / 2 + 2, r / 4 + 95 + o, 170, 20, "Indicators & Compass: "+(wmll.isOutputEnabled(9) ? "ON" : "OFF")));
 		s.add(new acv(10, q / 2 - 172, r / 4 + 120 + o, 170, 20, "FPS & Compass: "+(wmll.isOutputEnabled(10) ? "ON" : "OFF")));
 		s.add(new acv(11, q / 2 + 2, r / 4 + 120 + o, 170, 20, "Nothing: "+(wmll.isOutputEnabled(11) ? "ON" : "OFF")));
-		//s.add(new acv(12, q / 2 - 172, r / 4 + 145 + o, 170, 20, "All ON"));
-		//s.add(new acv(13, q / 2 + 2, r / 4 + 145 + o, 170, 20, "All OFF"));
-		s.add(new acv(12, q / 2 + 2, r / 4 + 145 + o, 170, 20, "Done"));
+		s.add(new acv(12, q / 2 - 172, r / 4 + 145 + o, 85, 20, "All ON"));
+		s.add(new acv(13, q / 2 - 86, r / 4 + 145 + o, 85, 20, "All OFF"));
+		s.add(new acv(14, q / 2 + 2, r / 4 + 145 + o, 170, 20, "Done"));
 		if (WMLL.debugClassPresent)
 			s.add(new acv(9001, q - 52, r - 22, 50, 20, "Reload"));
 		
@@ -40,15 +40,44 @@ public class WMLLEnabledOutputs extends wq {
 	protected void a(acv b) {
 		if (b.f == 9001) // Debug button
 			p.a(new WMLLEnabledOutputs(wmll, parent));
-		else if (b.f == 12) {
+		else if (b.f == 14) {
 			p.a(parent);
+		}
+		else if (b.f == 12) { // All on
+			for (int x = 0; x <= 11; x++) {
+				if (WMLL.options.containsKey("Output"+x))
+					WMLL.options.remove("Output"+x);
+				String buttonText = ((acv)s.get(x)).e;
+				((acv)s.get(x)).e = buttonText.replaceAll("OFF", "ON");
+				WMLL.options.setProperty("AllOutputsOff", "false");
+				WMLL.Enabled = true;
+			}
+		}
+		else if (b.f == 13) { // All off
+			for (int x = 0; x <= 11; x++) {
+				WMLL.options.setProperty("Output"+x, "false");
+				String buttonText = ((acv)s.get(x)).e;
+				((acv)s.get(x)).e = buttonText.replaceAll("ON", "OFF");
+				WMLL.options.setProperty("AllOutputsOff", "true");
+				WMLL.Enabled = false;
+			}
 		}
 		else {
 			int outputID = b.f;
 			boolean enabled = wmll.isOutputEnabled(outputID);
 			WMLL.options.setProperty("Output"+outputID, Boolean.toString(!enabled));
+			if (!enabled == true) {
+				WMLL.options.setProperty("AllOutputsOff", "false");
+				WMLL.Enabled = !enabled;
+			}
 			String buttonText = ((acv)s.get(outputID)).e;
 			b.e = buttonText.split(":")[0]+": "+(wmll.isOutputEnabled(outputID) ? "ON" : "OFF");
+			System.out.println(wmll.areAllOutputsDisabled());
+			if (wmll.areAllOutputsDisabled() && !enabled == false) {
+				WMLL.options.setProperty("AllOutputsOff", "true");
+				WMLL.Enabled = false;
+				return;
+			}
 			while (!wmll.isOutputEnabled(WMLL.WMLLI))
 				WMLL.WMLLI++;
 		}
