@@ -25,7 +25,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 681";
+	public static final String WMLLVER = "Test 683";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
 	public static WMLL i = new WMLL();
@@ -801,9 +801,7 @@ public class WMLL {
 				WMLLI = i = 0;
 			if (i < 0)
 				WMLLI = i = 11;
-			String a = options.getProperty("enabledOutputs", "111111111111");
-			System.out.println(a+", "+"("+i+") "+a.substring(i)+", "+a.substring(i).startsWith("1"));
-			return a.substring(i).startsWith("1");
+			return Boolean.parseBoolean(options.getProperty("Output"+i, "true"));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
