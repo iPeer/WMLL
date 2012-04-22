@@ -25,7 +25,7 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 680";
+	public static final String WMLLVER = "Test 681";
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
 	public static WMLL i = new WMLL();
@@ -65,7 +65,6 @@ public class WMLL {
 	private String lightString = "Dat Easter Egg";
 	private long lastF4Press = 0;
 	private boolean wmllF3Output = false;
-	private int updateCheck = 180000;
 
 	protected WMLLCompatibility wmllCompatibility;
 
@@ -137,8 +136,6 @@ public class WMLL {
 			if (WMLLDebugActive()) {
 				int x = getPlayerCoordinates()[0];
 				int z = getPlayerCoordinates()[2];
-				int hr = (updateCheck / 50) / 60;
-				int mi = (updateCheck / 50) % 60;
 				drawDebug(getWorldName()+" ("+isMultiplayer()+")", (getWindowSize().a() - (getFontRenderer().a(getWorldName()+" ("+isMultiplayer()+")") + 1)), 0, 0xffffff);
 				drawDebug(Integer.toString(getDimension()), (getWindowSize().a() - (getFontRenderer().a(Integer.toString(getDimension())) + 1)), 1, 0xffffff);
 				drawDebug(Boolean.toString(isPlayerSleeping()), (getWindowSize().a() - (getFontRenderer().a(Boolean.toString(isPlayerSleeping())) + 1)), 2, 0xffffff);
