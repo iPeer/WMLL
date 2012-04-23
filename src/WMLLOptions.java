@@ -2,9 +2,16 @@ import org.lwjgl.input.Keyboard;
 
 public class WMLLOptions extends wq {
 	
+	
+	
 	public WMLLOptions(WMLL i) {
-		title = "WMLL Configuration";
 		this.wmll = i;
+	}
+
+
+	public WMLLOptions(WMLL wmll, wq parent) {
+		this.wmll = wmll;
+		this.parent = parent;
 	}
 
 
@@ -46,11 +53,15 @@ public class WMLLOptions extends wq {
 	@SuppressWarnings("static-access")
 	protected void a(acv button) {
 		if (button.f == 1) {
-			//p.a(null);
 			wmll.optionsOpen = false;
 			wmll.saveOptions();
-			p.s = null;
-			p.g();
+			if (parent == null) {
+				p.s = null;
+				p.g();
+			}
+			else {
+				p.a(parent);
+			}
 		}
 		if (button.f == 0) {
 			WMLL.toggleDebug();
@@ -128,7 +139,10 @@ public class WMLLOptions extends wq {
 	}
 
 	protected void a(char c1, int i1) {
-		if (isBinding) {
+		if (i1 == Keyboard.KEY_ESCAPE && parent != null) {
+			p.a(parent);
+		}
+		else if (isBinding && i1 != Keyboard.KEY_ESCAPE) {
 			WMLL.F4Key = i1;
 			isBinding = false;
 			((acv)s.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
@@ -153,15 +167,14 @@ public class WMLLOptions extends wq {
 	
 	public static void renderWMLLVersion() {
 		WMLL wmll = WMLL.i;
-		int q = wmll.getWindowSize().a();
 		int r = wmll.getWindowSize().b();
 		String ver = "WMLL "+WMLL.WMLLVER+" ("+WMLL.getMinecraftVersion()+")";
-		int a = (q - ((wmll.getFontRenderer().a(ver) + 2) / 2));
 		wmll.drawStringUsingPixels(ver, 2, r - 9, 0x444444);
 	}
 
-	private String title;
+	private String title = "WMLL Configuration";;
 	private WMLL wmll;
+	protected wq parent;
 	public static boolean isBinding;
 
 }
