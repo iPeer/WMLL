@@ -11,6 +11,7 @@ public class ls extends xa
 
     private int a;
     private int b;
+    private xa gui = null;
 
     public ls()
     {
@@ -40,33 +41,31 @@ public class ls extends xa
 
     protected void a(adi adi1)
     {
+    	
         switch(adi1.f)
         {
-        case 9001:
-        	p.a(new ls());
-        case 7:
-        	p.a(new WMLLOptions(WMLL.i, this));
+
         case 2: // '\002'
         case 3: // '\003'
         default:
             break;
-
-        case 0: // '\0'
-            p.a(new cg(this, p.A));
-            break;
-
-        case 1: // '\001'
+            
+        case 1:
             p.K.a(hg.j, 1);
             if(p.l())
             {
                 p.f.g();
             }
-            p.s = null;
+            p.a((yu)null);
             p.a(new zk());
+            break;
+            
+        case 0: // '\0'
+            p.a(new cg(this, p.A));
             break;
 
         case 4: // '\004'
-            p.s = null;
+            p.a(gui);
             p.g();
             break;
 
@@ -77,6 +76,15 @@ public class ls extends xa
         case 6: // '\006'
             p.a(new dh(this, p.K));
             break;
+            
+        case 9001:
+        	p.a(new ls());
+        	break;
+        	
+        case 7:
+        	p.a(new WMLLOptions(WMLL.i, this));
+        	break;
+        	
         }
     }
 
