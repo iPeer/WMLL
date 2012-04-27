@@ -168,7 +168,7 @@ public class WMLLOptions extends xa {
 	public static void renderWMLLVersion() {
 		WMLL wmll = WMLL.i;
 		int r = wmll.getWindowSize().b();
-		String ver = "WMLL "+WMLL.WMLLVER+" ("+WMLL.getMinecraftVersion()+")";
+		String ver = "WMLL "+WMLL.wmllVersion()+" ("+WMLL.getMinecraftVersion()+")";
 		wmll.drawStringUsingPixels(ver, 2, r - 9, 0x444444);
 	}
 

@@ -25,7 +25,10 @@ import reifnsk.minimap.ReiMinimap;
 
 public class WMLL {
 
-	public static final String WMLLVER = "Test 691";
+	public static final String wmllVersion() {
+		return "Test 692";
+	}
+	
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
 	public static WMLL i = new WMLL();
@@ -69,7 +72,7 @@ public class WMLL {
 	protected WMLLCompatibility wmllCompatibility;
 
 	public WMLL() {
-		debug("[WMLL] Initializing WMLL "+WMLLVER);
+		debug("[WMLL] Initializing WMLL "+wmllVersion());
 		fieldNames.put("sendQueue", "cl");
 		fieldNames.put("netManager", "g");
 		fieldNames.put("remoteSocketAddress", "i");
@@ -119,7 +122,7 @@ public class WMLL {
 			if (mcDebugOpen() && wmllOverrideF3)
 				toggleF3Override();
 			else if (mcDebugOpen() && !wmllOverrideF3)
-				drawStringUsingPixels("WMLL "+WMLLVER, 2, 52, 0xffffff);
+				drawStringUsingPixels("WMLL "+wmllVersion(), 2, 52, 0xffffff);
 			else
 				wmllF3.draw();
 		}

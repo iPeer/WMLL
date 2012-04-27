@@ -56,7 +56,7 @@ public class WMLLF3 {
 		wmll.drawStringUsingPixels(mc.o(), 2, 62, 0xffffff);
 		
 		// WMLL Version
-		wmll.drawStringUsingPixels("WMLL "+WMLL.WMLLVER, 2, 72, 0xffffff);
+		wmll.drawStringUsingPixels("WMLL "+WMLL.wmllVersion(), 2, 72, 0xffffff);
 		
 		// Coordinates
 		ael player = wmll.thePlayer();

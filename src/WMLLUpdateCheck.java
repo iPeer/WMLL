@@ -40,7 +40,7 @@ public class WMLLUpdateCheck extends Thread implements Runnable {
 				String line = scanner.nextLine();
 				if (line.equals("EOF"))
 					break;
-				int modver = Integer.parseInt(WMLL.WMLLVER.split(" ")[1]);
+				int modver = Integer.parseInt(WMLL.wmllVersion().split(" ")[1]);
 				int newver = Integer.parseInt(line);
 				System.out.println("[WMLL] Version: "+modver+", "+newver);
 				if (newver > modver) {
