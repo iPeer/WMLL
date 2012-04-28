@@ -41,6 +41,8 @@ public class WMLLUpdateCheck extends Thread implements Runnable {
 				if (line.equals("EOF"))
 					break;
 				int modver = Integer.parseInt(WMLL.wmllVersion().split(" ")[1]);
+				if (WMLL.debugClassPresent)
+					modver = 1;
 				int newver = Integer.parseInt(line);
 				System.out.println("[WMLL] Version: "+modver+", "+newver);
 				if (newver > modver) {

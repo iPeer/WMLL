@@ -26,9 +26,8 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 692";
+		return "Test 695";
 	}
-	
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
 	public static WMLL i = new WMLL();
@@ -51,8 +50,8 @@ public class WMLL {
 	public int F3Type;
 	public boolean showSeedWithCoords;
 
-	private static final int propertiesVersion = 1;
-	private static File settingsFile, outputOptionsFile;
+	private static final int propertiesVersion = 2;
+	public static File settingsFile, outputOptionsFile;
 	public static long lastUpdateCheck = 0;
 	private static final WMLLUpdateCheck wmllUpdateCheck = new WMLLUpdateCheck();
 	private static final Calendar calendar = Calendar.getInstance();
@@ -107,6 +106,10 @@ public class WMLL {
 		else if (getWorld() == null && wmllUpdateCheck.running) {
 			System.out.println("[WMLL] FATAL: World == NULL! -- Stopping update thread.");
 			wmllUpdateCheck.stop1();
+		}
+		if (firstRun && getWorld() != null) {
+			firstRun = false;
+			wmllRenderer.firstRun = true;
 		}
 		if (Rei && !ReiUseMl)
 			ReiMinimap.instance.onTickInGame(h);
@@ -637,7 +640,7 @@ public class WMLL {
 	public void drawString(String t, int i, int j, int k) {
 		int textpos = WMLLI > 5 ? -8 : 2;
 					t = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
-					String t1 = Pattern.compile("\247[0-9a-f]").matcher(t).replaceAll("");
+					String t1 = Pattern.compile("\247[0-9a-f,l-o,r]").matcher(t).replaceAll("");
 					int w = getWindowSize().a();
 					int h = getWindowSize().b();
 					if (outputLocation == 1) { // Top right
@@ -706,6 +709,8 @@ public class WMLL {
 			showSeedWithCoords = Boolean.parseBoolean(options.getProperty("showSeedWithCoords", "true"));
 			debug("[WMLL] Loaded options.");
 			debug(options.toString()+"\n"+outputOptions.toString());
+			if (firstRun)
+				saveOptions();
 		}
 		catch (Exception e) { debug("[WMLL] Unable to load options: "+e.getMessage()); }
 	}

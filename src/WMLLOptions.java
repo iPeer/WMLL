@@ -1,8 +1,10 @@
 import org.lwjgl.input.Keyboard;
 
 public class WMLLOptions extends xa {
-	
-	
+		
+	public WMLLOptions() {
+		this.wmll = WMLL.i;
+	}
 	
 	public WMLLOptions(WMLL i) {
 		this.wmll = i;
@@ -38,7 +40,7 @@ public class WMLLOptions extends xa {
 		s.add(new adi(5, q / 2 - 100, r / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
 		s.add(new adi(6, q / 2 + 2, r / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
 		s.add(new adi(3, q / 2 - 100, r / 4 + 125 + offset, "Output options..."));
-		s.add(new adi(4, q / 2 - 100, r / 4 + 85 + offset, "Force options reload"));
+		s.add(new adi(4, q / 2 - 100, r / 4 + 85 + offset, "Reset settings to defaults"));
 		//s.add(new adi(4, q / 2 - 100, r / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
 		String enabledString = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(wmll.Enabled ? "Yes" : "No");
 		int i = wmll.getFontRenderer().a(enabledString);
@@ -76,7 +78,7 @@ public class WMLLOptions extends xa {
 			p.a(new WMLLGuiOutputOptions(WMLL.i, this));
 		}
 		if (button.f == 4) {
-			wmll.loadOptions();
+			p.a (new WMLLYesNo(wmll, this));
 		}
 		if (button.f == 5) {
 			int a = wmll.clockSetting;
@@ -98,6 +100,7 @@ public class WMLLOptions extends xa {
 				((adi)s.get(x)).h = !a;
 			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(!a ? "Yes" : "No");
 		}
+
 		if (button.f == 9001) // Debug button
 			p.a(new WMLLOptions(wmll));
 	}
@@ -160,7 +163,6 @@ public class WMLLOptions extends xa {
 		r_();
 		// (fontrenderer, text, x, y, colour)
 		a(u, title, q / 2, 20, 0xffffff);
-		a(u, "\247cReloading options will undo any changes you've made!", q / 2, 150, 0xffffff);
 		renderWMLLVersion();
 		super.a(i, j, f);
 	}
@@ -171,10 +173,14 @@ public class WMLLOptions extends xa {
 		String ver = "WMLL "+WMLL.wmllVersion()+" ("+WMLL.getMinecraftVersion()+")";
 		wmll.drawStringUsingPixels(ver, 2, r - 9, 0x444444);
 	}
+	
+	public xa getParent() {
+		return parent;
+	}
 
 	private String title = "WMLL Configuration";;
 	private WMLL wmll;
-	protected xa parent;
+	public xa parent;
 	public static boolean isBinding;
 
 }
