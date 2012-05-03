@@ -1,13 +1,13 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLEnabledOutputs extends xa {
+public class WMLLEnabledOutputs extends yv {
 
 	protected WMLL wmll;
-	protected xa parent;
+	protected yv parent;
 	private String title;
 	
-	public WMLLEnabledOutputs(WMLL wmll, xa parent) {
+	public WMLLEnabledOutputs(WMLL wmll, yv parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		title = "WMLL Enabled Output Configuration";
@@ -17,27 +17,27 @@ public class WMLLEnabledOutputs extends xa {
 	public void c() {
 		byte o = -16;
 		s.clear();
-		s.add(new adi(0, q / 2 - 172, r / 4 - 5 + o, 170, 20, "Just Light: "+(wmll.isOutputEnabled(0) ? "ON" : "OFF")));
-		s.add(new adi(1, q / 2 + 2, r / 4 - 5 + o, 170, 20, "Light & Indicators: "+(wmll.isOutputEnabled(1) ? "ON" : "OFF")));
-		s.add(new adi(2, q / 2 - 172, r / 4 + 20 + o, 170, 20, "Light & FPS: "+(wmll.isOutputEnabled(2) ? "ON" : "OFF")));
-		s.add(new adi(3, q / 2 + 2, r / 4 + 20 + o, 170, 20, "Light & Compass: "+(wmll.isOutputEnabled(3) ? "ON" : "OFF")));
-		s.add(new adi(4, q / 2 - 172, r / 4 + 45 + o, 170, 20, "Light, Indicators & Compass: "+(wmll.isOutputEnabled(4) ? "ON" : "OFF")));
-		s.add(new adi(5, q / 2 + 2, r / 4 + 45 + o, 170, 20, "Light, FPS & Compass: "+(wmll.isOutputEnabled(5) ? "ON" : "OFF")));
-		s.add(new adi(6, q / 2 - 172, r / 4 + 70 + o, 170, 20, "Just Indicators: "+(wmll.isOutputEnabled(6) ? "ON" : "OFF")));
-		s.add(new adi(7, q / 2 + 2, r / 4 + 70 + o, 170, 20, "Just FPS: "+(wmll.isOutputEnabled(7) ? "ON" : "OFF")));
-		s.add(new adi(8, q / 2 - 172, r / 4 + 95 + o, 170, 20, "Just Compass: "+(wmll.isOutputEnabled(8) ? "ON" : "OFF")));
-		s.add(new adi(9, q / 2 + 2, r / 4 + 95 + o, 170, 20, "Indicators & Compass: "+(wmll.isOutputEnabled(9) ? "ON" : "OFF")));
-		s.add(new adi(10, q / 2 - 172, r / 4 + 120 + o, 170, 20, "FPS & Compass: "+(wmll.isOutputEnabled(10) ? "ON" : "OFF")));
-		s.add(new adi(11, q / 2 + 2, r / 4 + 120 + o, 170, 20, "Nothing: "+(wmll.isOutputEnabled(11) ? "ON" : "OFF")));
-		s.add(new adi(12, q / 2 - 172, r / 4 + 145 + o, 85, 20, "All ON"));
-		s.add(new adi(13, q / 2 - 86, r / 4 + 145 + o, 85, 20, "All OFF"));
-		s.add(new adi(14, q / 2 + 2, r / 4 + 145 + o, 170, 20, "Done"));
+		s.add(new afk(0, q / 2 - 172, r / 4 - 5 + o, 170, 20, "Just Light: "+(wmll.isOutputEnabled(0) ? "ON" : "OFF")));
+		s.add(new afk(1, q / 2 + 2, r / 4 - 5 + o, 170, 20, "Light & Indicators: "+(wmll.isOutputEnabled(1) ? "ON" : "OFF")));
+		s.add(new afk(2, q / 2 - 172, r / 4 + 20 + o, 170, 20, "Light & FPS: "+(wmll.isOutputEnabled(2) ? "ON" : "OFF")));
+		s.add(new afk(3, q / 2 + 2, r / 4 + 20 + o, 170, 20, "Light & Compass: "+(wmll.isOutputEnabled(3) ? "ON" : "OFF")));
+		s.add(new afk(4, q / 2 - 172, r / 4 + 45 + o, 170, 20, "Light, Indicators & Compass: "+(wmll.isOutputEnabled(4) ? "ON" : "OFF")));
+		s.add(new afk(5, q / 2 + 2, r / 4 + 45 + o, 170, 20, "Light, FPS & Compass: "+(wmll.isOutputEnabled(5) ? "ON" : "OFF")));
+		s.add(new afk(6, q / 2 - 172, r / 4 + 70 + o, 170, 20, "Just Indicators: "+(wmll.isOutputEnabled(6) ? "ON" : "OFF")));
+		s.add(new afk(7, q / 2 + 2, r / 4 + 70 + o, 170, 20, "Just FPS: "+(wmll.isOutputEnabled(7) ? "ON" : "OFF")));
+		s.add(new afk(8, q / 2 - 172, r / 4 + 95 + o, 170, 20, "Just Compass: "+(wmll.isOutputEnabled(8) ? "ON" : "OFF")));
+		s.add(new afk(9, q / 2 + 2, r / 4 + 95 + o, 170, 20, "Indicators & Compass: "+(wmll.isOutputEnabled(9) ? "ON" : "OFF")));
+		s.add(new afk(10, q / 2 - 172, r / 4 + 120 + o, 170, 20, "FPS & Compass: "+(wmll.isOutputEnabled(10) ? "ON" : "OFF")));
+		s.add(new afk(11, q / 2 + 2, r / 4 + 120 + o, 170, 20, "Nothing: "+(wmll.isOutputEnabled(11) ? "ON" : "OFF")));
+		s.add(new afk(12, q / 2 - 172, r / 4 + 145 + o, 85, 20, "All ON"));
+		s.add(new afk(13, q / 2 - 86, r / 4 + 145 + o, 85, 20, "All OFF"));
+		s.add(new afk(14, q / 2 + 2, r / 4 + 145 + o, 170, 20, "Done"));
 		if (WMLL.debugClassPresent)
-			s.add(new adi(9001, q - 52, r - 22, 50, 20, "Reload"));
+			s.add(new afk(9001, q - 52, r - 22, 50, 20, "Reload"));
 		
 	}
 	
-	protected void a(adi b) {
+	protected void a(afk b) {
 		if (b.f == 9001) // Debug button
 			p.a(new WMLLEnabledOutputs(wmll, parent));
 		else if (b.f == 14) {
@@ -47,8 +47,8 @@ public class WMLLEnabledOutputs extends xa {
 			for (int x = 0; x <= 11; x++) {
 				if (WMLL.options.containsKey("Output"+x))
 					WMLL.options.remove("Output"+x);
-				String buttonText = ((adi)s.get(x)).e;
-				((adi)s.get(x)).e = buttonText.replaceAll("OFF", "ON");
+				String buttonText = ((afk)s.get(x)).e;
+				((afk)s.get(x)).e = buttonText.replaceAll("OFF", "ON");
 				WMLL.options.setProperty("AllOutputsOff", "false");
 				WMLL.Enabled = true;
 			}
@@ -56,8 +56,8 @@ public class WMLLEnabledOutputs extends xa {
 		else if (b.f == 13) { // All off
 			for (int x = 0; x <= 11; x++) {
 				WMLL.options.setProperty("Output"+x, "false");
-				String buttonText = ((adi)s.get(x)).e;
-				((adi)s.get(x)).e = buttonText.replaceAll("ON", "OFF");
+				String buttonText = ((afk)s.get(x)).e;
+				((afk)s.get(x)).e = buttonText.replaceAll("ON", "OFF");
 				WMLL.options.setProperty("AllOutputsOff", "true");
 				WMLL.Enabled = false;
 			}
@@ -70,7 +70,7 @@ public class WMLLEnabledOutputs extends xa {
 				WMLL.options.setProperty("AllOutputsOff", "false");
 				WMLL.Enabled = !enabled;
 			}
-			String buttonText = ((adi)s.get(outputID)).e;
+			String buttonText = ((afk)s.get(outputID)).e;
 			b.e = buttonText.split(":")[0]+": "+(wmll.isOutputEnabled(outputID) ? "ON" : "OFF");
 			System.out.println(wmll.areAllOutputsDisabled());
 			if (wmll.areAllOutputsDisabled() && !enabled == false) {
@@ -91,7 +91,7 @@ public class WMLLEnabledOutputs extends xa {
 	}
 	
 	public void a(int i, int j, float f) {
-		r_();
+		t_();
 		// (fontrenderer, text, x, y, colour)
 		a(u, title, q / 2, 20, 0xffffff);
 		WMLLOptions.renderWMLLVersion();

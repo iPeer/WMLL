@@ -14,7 +14,7 @@ public class WMLLF3 {
 	public WMLLF3(Minecraft mc, WMLL wmll) {
 		this.mc = mc;
 		this.wmll = wmll;
-		MINECRAFT_VERSION = Minecraft.w();
+		MINECRAFT_VERSION = WMLL.getMinecraftVersion();
 	}
 	
 	public void draw() {
@@ -59,11 +59,11 @@ public class WMLLF3 {
 		wmll.drawStringUsingPixels("WMLL "+WMLL.wmllVersion(), 2, 72, 0xffffff);
 		
 		// Coordinates
-		ael player = wmll.thePlayer();
-		double x = player.o;
-		double y = player.p;
-		double z = player.q;
-		double f = gt.c((double)((player.u * 4F) / 360F) + 0.5D) & 3;
+		agp player = wmll.thePlayer();
+		double x = player.s;
+		double y = player.t;
+		double z = player.u;
+		double f = hv.c((double)((player.y * 4F) / 360F) + 0.5D) & 3;
 		String roundingFormat = "#0";
 		DecimalFormat d = new DecimalFormat(roundingFormat);
 		String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+wmll.getPlayerDirection(Integer.parseInt(d.format(f)))+")";
