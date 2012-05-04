@@ -16,8 +16,8 @@ public class WMLLDebug {
 
 	public static void sendChatCommand(String s) {
 		WMLL wmll = WMLL.i;
-		System.out.println(s);
-		wmll.entityPlayer().c(s);
+		//System.out.println(s);
+		wmll.entityPlayer().d(s);
 	}
 	
 	public static void setTimeToNight() {

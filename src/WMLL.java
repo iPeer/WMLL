@@ -26,7 +26,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 700";
+		return "Test 701";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -471,7 +471,6 @@ public class WMLL {
 		if (k < 0 || k > 255)
 			return 0;
 		return getChunk(j, l).c(j & 0xf, k, l & 0xf, (int)getSkyLight(1.0F));
-		//return getWorld().d(j >> 4, l >> 4).c(j & 0xf, k, l & 0xf, getSkyLight(1.0F));
 	}
 
 	public int getSkyLight(float f) {
@@ -512,7 +511,6 @@ public class WMLL {
 
 	private boolean canBlockSeeTheSky(int x, int y, int z) {
 		return getWorld().o(x, y, z);
-		//return getWorld().m(x, y, z);
 	}
 
 	public ame entityPlayer() {
@@ -535,9 +533,8 @@ public class WMLL {
 		return mc.c;
 	}
 	
-	@Deprecated
 	public boolean isCreative() {
-		return /*(getPlayerController() instanceof ug)*/false;
+		return !getPlayerController().b();
 	}
 
 	public zz worldInfo() {
@@ -605,7 +602,7 @@ public class WMLL {
 	}
 
 	private boolean isPlayerSleeping() {
-		return /*thePlayer().az()*/false;
+		return thePlayer().aC();
 	}
 
 	public int[] getPlayerCoordinates() {
@@ -621,7 +618,7 @@ public class WMLL {
 		catch (NumberFormatException n) {
 			return 0;
 		}
-		return /*getWorld().v()*/0L;
+		return getChunk(0, 0).e.w.c().b();
 	}
 
 	public String getFPSString() {
@@ -780,7 +777,7 @@ public class WMLL {
 	}
 
 	public boolean isSeedSet() {
-		if (!isMultiplayer())
+		if (!isMultiplayer()/* || getWorldName().equals("localServer")*/)
 			return true;
 		return options.containsKey("Seed:"+getWorldName().toLowerCase());
 	}
