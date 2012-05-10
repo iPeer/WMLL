@@ -49,8 +49,6 @@ public class WMLLDebug {
 	}
 
 	public static void onGuiTick() {
-		if (timeLocked)
-			WMLL.i.worldInfo().a(currentWorldTime);
 		displayDebugInfo();
 
 	}
