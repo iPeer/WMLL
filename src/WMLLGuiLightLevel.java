@@ -178,6 +178,11 @@ public class WMLLGuiLightLevel extends zp {
 			a(u, b, q / 2, 125, 0xffffff);
 			b = "Returns the current biome.";
 			a(u, b, q / 2, 135, 0xffffff);
+			
+			b = "\247c%x%\247r, \247c%y% \247r&\247c %z%";
+			a(u, b, q / 2 + 15, 145, 0xffffff);
+			b = "Return the coordinate repective to the letter.";
+			a(u, b, q / 2, 155, 0xffffff);
 		}
 		else if (page == 3) {
 			for (int x = 0; x < page3editboxes.size(); x++) {
