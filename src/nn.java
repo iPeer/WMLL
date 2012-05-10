@@ -68,7 +68,7 @@ public class nn extends zp
             break;
 
         case 4: // '\004'
-            p.a((nb)null);
+            p.a((zp)null);
             p.g();
             break;
 
