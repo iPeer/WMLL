@@ -26,7 +26,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 706";
+		return "Test 707";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -321,7 +321,7 @@ public class WMLL {
 				}
 
 				// Crops
-				if (playerIsStandingOnBlock(60) && (light > 8 || canBlockSeeTheSky(playerPos[0], playerPos[1], playerPos[2])))
+				if (playerIsStandingOnBlock(60) && (getLightLevel(playerPos[0], playerPos[1] + 1, playerPos[2]) > 8 || canBlockSeeTheSky(playerPos[0], playerPos[1], playerPos[2])))
 					drawString("\247a"+labels[3], getDimension() == 1 ? 55 : 40, 1, 0xffffff);
 				else
 					drawString("\247c"+labels[3], getDimension() == 1 ? 55 : 40, 1, 0xffffff);
