@@ -1,40 +1,40 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiSMPSeed extends zp {
+public class WMLLGuiSMPSeed extends aag {
 	
 	protected WMLL wmll;
-	private zp parent;
+	private aag parent;
 	private String title;
 	
-	private amd seedBox;
+	private ane seedBox;
 
-	public WMLLGuiSMPSeed(WMLL wmll, zp parent) {
+	public WMLLGuiSMPSeed(WMLL wmll, aag parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.title = "WMLL SMP Seed Configuration";
 	}
 	@SuppressWarnings("unchecked")
-	public void c() {
+	public void b() {
 		Keyboard.enableRepeatEvents(true);
 		s.clear();
 		byte o = -16;
 		if (WMLL.debugClassPresent)
-			s.add(new agk(9001, q - 52, r - 22, 50, 20, "Reload"));
+			s.add(new ahg(9001, q - 52, r - 22, 50, 20, "Reload"));
 		/*
 		 * New Editbox:
-		 * new amd(Gui, fontrenderer, posx, posy, width, height, default text);
+		 * new ane(Gui, fontrenderer, posx, posy, width, height, default text);
 		 */
-		seedBox = new amd(/*this,*/ u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
+		seedBox = new ane(/*this,*/ u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
 		//s.add(seedBox);
 		seedBox.a(72);
 		if (wmll.getWorldSeed() != 0)
 			seedBox.a(Long.toString(wmll.getWorldSeed()));
 		seedBox.b(true);
-		s.add(new agk(0, q / 2 - 100, r / 4 + 90 + o, "Save Seed"));
+		s.add(new ahg(0, q / 2 - 100, r / 4 + 90 + o, "Save Seed"));
 	}
 	
-	protected void a(agk b) {
+	protected void a(ahg b) {
 		if (b.f == 9001) {
 			p.a(new WMLLGuiSMPSeed(wmll, parent));
 		}
@@ -56,8 +56,8 @@ public class WMLLGuiSMPSeed extends zp {
 			p.a(parent);
 		else if (seedBox.j())
 			seedBox.a(c, i);
-		else
-			super.a(c, i);
+//		else
+//			super.a(c, i);
 	}
 	
 	protected void a(int i, int j, int k) {
@@ -76,8 +76,8 @@ public class WMLLGuiSMPSeed extends zp {
 		super.a(i, j, f);
 	}
 	
-	public void e() {
-		Keyboard.enableRepeatEvents(false);
-	}
+//	public void e() {
+//		Keyboard.enableRepeatEvents(false);
+//	}
 
 }

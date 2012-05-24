@@ -1,27 +1,27 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLYesNo extends zp {
+public class WMLLYesNo extends aag {
 
 	protected WMLL wmll;
-	protected zp parent;
+	protected aag parent;
 	byte offset = -16;
 	
-	public WMLLYesNo(WMLL wmll, zp parent) {
+	public WMLLYesNo(WMLL wmll, aag parent) {
 		this.parent = parent;
 		this.wmll = wmll;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void c() {
+	public void b() {
 		s.clear();
-		s.add(new agk(0, q / 2 - 100, r / 2 + 10 + offset, 98, 20, "Yes"));
-		s.add(new agk(1, q / 2 + 2, r / 2 + 10 + offset, 98, 20, "No"));
+		s.add(new ahg(0, q / 2 - 100, r / 2 + 10 + offset, 98, 20, "Yes"));
+		s.add(new ahg(1, q / 2 + 2, r / 2 + 10 + offset, 98, 20, "No"));
 		if (WMLL.debugClassPresent)
-			s.add(new agk(9001, q - 52, r - 22, 50, 20, "Reload"));
+			s.add(new ahg(9001, q - 52, r - 22, 50, 20, "Reload"));
 	}
 	
-	protected void a(agk b) {
+	protected void a(ahg b) {
 		if (b.f == 9001)
 			p.a(new WMLLYesNo(wmll, parent));
 		if (b.f == 0 || b.f == 1) {
@@ -35,7 +35,7 @@ public class WMLLYesNo extends zp {
 				p.a(parent.getClass().newInstance());
 			} catch (Exception e) {
 				e.printStackTrace();
-				p.a((zp)null);
+				p.a((aag)null);
 			}
 		}
 	}

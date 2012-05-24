@@ -8,13 +8,13 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
-public class aom extends rl
+public class apt extends ru
 {
 
-    private static final xp c = new xp();
+    private static final ya c = new ya();
     private final Random d = new Random();
     private final Minecraft e;
-    private final sg f;
+    private final st f;
     private int h;
     private String i;
     private int j;
@@ -22,7 +22,7 @@ public class aom extends rl
     public float a;
     public float b;
 
-    public aom(Minecraft minecraft)
+    public apt(Minecraft minecraft)
     {
         h = 0;
         i = "";
@@ -30,30 +30,30 @@ public class aom extends rl
         k = false;
         b = 1.0F;
         e = minecraft;
-        f = new sg(minecraft);
+        f = new st(minecraft);
     }
 
     public void a(float f1, boolean flag, int l, int i1)
     {
-        all all1 = new all(e.z, e.d, e.e);
-        int j1 = all1.a();
-        int k1 = all1.b();
-        qg qg1 = e.q;
+        aml aml1 = new aml(e.z, e.d, e.e);
+        int j1 = aml1.a();
+        int k1 = aml1.b();
+        qn qn1 = e.q;
         e.u.b();
         GL11.glEnable(3042);
-        if(Minecraft.t())
+        if(Minecraft.s())
         {
             a(e.h.a(f1), j1, k1);
         } else
         {
             GL11.glBlendFunc(770, 771);
         }
-        afg afg1 = e.h.ar.f(3);
-        if(e.z.L == 0 && afg1 != null && afg1.c == se.ba.bR)
+        agd agd1 = e.h.ar.f(3);
+        if(e.z.L == 0 && agd1 != null && agd1.c == sq.ba.bU)
         {
             a(j1, k1);
         }
-        if(!e.h.a(aex.k))
+        if(!e.h.a(afr.k))
         {
             float f2 = e.h.aU + (e.h.aT - e.h.aU) * f1;
             if(f2 > 0.0F)
@@ -65,14 +65,14 @@ public class aom extends rl
         {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glBindTexture(3553, e.p.b("/gui/gui.png"));
-            afe afe1 = e.h.ar;
+            aga aga1 = e.h.ar;
             g = -90F;
-            b(j1 / 2 - 91, k1 - 22, 0, 0, 182, 22);
-            b((j1 / 2 - 91 - 1) + afe1.c * 20, k1 - 22 - 1, 0, 22, 24, 22);
+            c(j1 / 2 - 91, k1 - 22, 0, 0, 182, 22);
+            c((j1 / 2 - 91 - 1) + aga1.c * 20, k1 - 22 - 1, 0, 22, 24, 22);
             GL11.glBindTexture(3553, e.p.b("/gui/icons.png"));
             GL11.glEnable(3042);
             GL11.glBlendFunc(775, 769);
-            b(j1 / 2 - 7, k1 / 2 - 7, 0, 0, 16, 16);
+            c(j1 / 2 - 7, k1 / 2 - 7, 0, 0, 16, 16);
             GL11.glDisable(3042);
             boolean flag1 = (e.h.ac / 3) % 2 == 1;
             if(e.h.ac < 10)
@@ -83,9 +83,9 @@ public class aom extends rl
             int k3 = e.h.bA;
             d.setSeed(h * 0x4c627);
             boolean flag3 = false;
-            py py1 = e.h.aI();
-            int k5 = py1.a();
-            int j6 = py1.b();
+            qf qf1 = e.h.aI();
+            int k5 = qf1.a();
+            int j6 = qf1.b();
             d();
             if(e.c.b())
             {
@@ -97,17 +97,17 @@ public class aom extends rl
                     char c1 = '\266';
                     int l9 = (int)(e.h.aY * (float)(c1 + 1));
                     int k10 = (k1 - 32) + 3;
-                    b(i7, k10, 0, 64, c1, 5);
+                    c(i7, k10, 0, 64, c1, 5);
                     if(l9 > 0)
                     {
-                        b(i7, k10, 0, 69, l9, 5);
+                        c(i7, k10, 0, 69, l9, 5);
                     }
                 }
                 int i9 = k1 - 39;
                 int i10 = i9 - 10;
                 int l10 = e.h.ax();
                 int k11 = -1;
-                if(e.h.a(aex.l))
+                if(e.h.a(afr.l))
                 {
                     k11 = h % 25;
                 }
@@ -118,19 +118,19 @@ public class aom extends rl
                         int k12 = i7 + l11 * 8;
                         if(l11 * 2 + 1 < l10)
                         {
-                            b(k12, i10, 34, 9, 9, 9);
+                            c(k12, i10, 34, 9, 9, 9);
                         }
                         if(l11 * 2 + 1 == l10)
                         {
-                            b(k12, i10, 25, 9, 9, 9);
+                            c(k12, i10, 25, 9, 9, 9);
                         }
                         if(l11 * 2 + 1 > l10)
                         {
-                            b(k12, i10, 16, 9, 9, 9);
+                            c(k12, i10, 16, 9, 9, 9);
                         }
                     }
                     int l12 = 16;
-                    if(e.h.a(aex.u))
+                    if(e.h.a(afr.u))
                     {
                         l12 += 36;
                     }
@@ -154,25 +154,25 @@ public class aom extends rl
                     {
                         byte3 = 5;
                     }
-                    b(j14, l14, 16 + k13 * 9, 9 * byte3, 9, 9);
+                    c(j14, l14, 16 + k13 * 9, 9 * byte3, 9, 9);
                     if(flag1)
                     {
                         if(l11 * 2 + 1 < k3)
                         {
-                            b(j14, l14, l12 + 54, 9 * byte3, 9, 9);
+                            c(j14, l14, l12 + 54, 9 * byte3, 9, 9);
                         }
                         if(l11 * 2 + 1 == k3)
                         {
-                            b(j14, l14, l12 + 63, 9 * byte3, 9, 9);
+                            c(j14, l14, l12 + 63, 9 * byte3, 9, 9);
                         }
                     }
                     if(l11 * 2 + 1 < i2)
                     {
-                        b(j14, l14, l12 + 36, 9 * byte3, 9, 9);
+                        c(j14, l14, l12 + 36, 9 * byte3, 9, 9);
                     }
                     if(l11 * 2 + 1 == i2)
                     {
-                        b(j14, l14, l12 + 45, 9 * byte3, 9, 9);
+                        c(j14, l14, l12 + 45, 9 * byte3, 9, 9);
                     }
                 }
 
@@ -181,7 +181,7 @@ public class aom extends rl
                     int i13 = i9;
                     int l13 = 16;
                     byte byte2 = 0;
-                    if(e.h.a(aex.s))
+                    if(e.h.a(afr.s))
                     {
                         l13 += 36;
                         byte2 = 13;
@@ -195,29 +195,29 @@ public class aom extends rl
                         byte2 = 1;
                     }
                     int i15 = k7 - i12 * 8 - 9;
-                    b(i15, i13, 16 + byte2 * 9, 27, 9, 9);
+                    c(i15, i13, 16 + byte2 * 9, 27, 9, 9);
                     if(flag3)
                     {
                         if(i12 * 2 + 1 < j6)
                         {
-                            b(i15, i13, l13 + 54, 27, 9, 9);
+                            c(i15, i13, l13 + 54, 27, 9, 9);
                         }
                         if(i12 * 2 + 1 == j6)
                         {
-                            b(i15, i13, l13 + 63, 27, 9, 9);
+                            c(i15, i13, l13 + 63, 27, 9, 9);
                         }
                     }
                     if(i12 * 2 + 1 < k5)
                     {
-                        b(i15, i13, l13 + 36, 27, 9, 9);
+                        c(i15, i13, l13 + 36, 27, 9, 9);
                     }
                     if(i12 * 2 + 1 == k5)
                     {
-                        b(i15, i13, l13 + 45, 27, 9, 9);
+                        c(i15, i13, l13 + 45, 27, 9, 9);
                     }
                 }
 
-                if(e.h.a(ahm.g))
+                if(e.h.a(aij.g))
                 {
                     int j12 = e.h.ak();
                     int j13 = (int)Math.ceil(((double)(j12 - 2) * 10D) / 300D);
@@ -226,10 +226,10 @@ public class aom extends rl
                     {
                         if(k14 < j13)
                         {
-                            b(k7 - k14 * 8 - 9, i10, 16, 18, 9, 9);
+                            c(k7 - k14 * 8 - 9, i10, 16, 18, 9, 9);
                         } else
                         {
-                            b(k7 - k14 * 8 - 9, i10, 25, 18, 9, 9);
+                            c(k7 - k14 * 8 - 9, i10, 25, 18, 9, 9);
                         }
                     }
 
@@ -237,7 +237,7 @@ public class aom extends rl
             }
             GL11.glDisable(3042);
             GL11.glEnable(32826);
-            ww.c();
+            xh.c();
             for(int j7 = 0; j7 < 9; j7++)
             {
                 int l7 = (j1 / 2 - 90) + j7 * 20 + 2;
@@ -245,7 +245,7 @@ public class aom extends rl
                 a(j7, l7, k8, f1);
             }
 
-            ww.a();
+            xh.a();
             GL11.glDisable(32826);
         }
         if(e.h.aE() > 0)
@@ -268,65 +268,65 @@ public class aom extends rl
             boolean flag2 = false;
             int k2 = flag2 ? 0xffffff : 0x80ff20;
             String s1 = (new StringBuilder()).append("").append(e.h.aW).toString();
-            int k4 = (j1 - qg1.a(s1)) / 2;
+            int k4 = (j1 - qn1.a(s1)) / 2;
             int i5 = k1 - 31 - 4;
-            qg1.b(s1, k4 + 1, i5, 0);
-            qg1.b(s1, k4 - 1, i5, 0);
-            qg1.b(s1, k4, i5 + 1, 0);
-            qg1.b(s1, k4, i5 - 1, 0);
-            qg1.b(s1, k4, i5, k2);
+            qn1.b(s1, k4 + 1, i5, 0);
+            qn1.b(s1, k4 - 1, i5, 0);
+            qn1.b(s1, k4, i5 + 1, 0);
+            qn1.b(s1, k4, i5 - 1, 0);
+            qn1.b(s1, k4, i5, k2);
         }
-        if(e.q())
+        if(e.p())
         {
             String s = "";
             if(e.f.u() >= 0x1d6b4L)
             {
-                s = dw.a("demo.demoExpired");
+                s = dy.a("demo.demoExpired");
             } else
             {
-                s = String.format(dw.a("demo.remainingTime"), new Object[] {
-                    agy.a((int)(0x1d6b4L - e.f.u()))
+                s = String.format(dy.a("demo.remainingTime"), new Object[] {
+                    ahv.a((int)(0x1d6b4L - e.f.u()))
                 });
             }
-            int i3 = qg1.a(s);
-            qg1.a(s, j1 - i3 - 10, 5, 0xffffff);
+            int i3 = qn1.a(s);
+            qn1.a(s, j1 - i3 - 10, 5, 0xffffff);
         }
         WMLL.i.updategui(e);
         if(e.z.M)
         {
             GL11.glPushMatrix();
-            qg1.a((new StringBuilder()).append("Minecraft 12w19a (").append(e.N).append(")").toString(), 2, 2, 0xffffff);
-            qg1.a(e.m(), 2, 12, 0xffffff);
-            qg1.a(e.n(), 2, 22, 0xffffff);
-            qg1.a(e.p(), 2, 32, 0xffffff);
-            qg1.a(e.o(), 2, 42, 0xffffff);
+            qn1.a((new StringBuilder()).append("Minecraft 12w21a (").append(e.N).append(")").toString(), 2, 2, 0xffffff);
+            qn1.a(e.l(), 2, 12, 0xffffff);
+            qn1.a(e.m(), 2, 22, 0xffffff);
+            qn1.a(e.o(), 2, 32, 0xffffff);
+            qn1.a(e.n(), 2, 42, 0xffffff);
             long l2 = Runtime.getRuntime().maxMemory();
             long l3 = Runtime.getRuntime().totalMemory();
             long l5 = Runtime.getRuntime().freeMemory();
             long l6 = l3 - l5;
             String s2 = (new StringBuilder()).append("Used memory: ").append((l6 * 100L) / l2).append("% (").append(l6 / 1024L / 1024L).append("MB) of ").append(l2 / 1024L / 1024L).append("MB").toString();
-            b(qg1, s2, j1 - qg1.a(s2) - 2, 2, 0xe0e0e0);
+            b(qn1, s2, j1 - qn1.a(s2) - 2, 2, 0xe0e0e0);
             s2 = (new StringBuilder()).append("Allocated memory: ").append((l3 * 100L) / l2).append("% (").append(l3 / 1024L / 1024L).append("MB)").toString();
-            b(qg1, s2, j1 - qg1.a(s2) - 2, 12, 0xe0e0e0);
-            b(qg1, String.format("x: %.5f", new Object[] {
+            b(qn1, s2, j1 - qn1.a(s2) - 2, 12, 0xe0e0e0);
+            b(qn1, String.format("x: %.5f", new Object[] {
                 Double.valueOf(e.h.s)
             }), 2, 64, 0xe0e0e0);
-            b(qg1, String.format("y: %.5f", new Object[] {
+            b(qn1, String.format("y: %.5f", new Object[] {
                 Double.valueOf(e.h.t)
             }), 2, 72, 0xe0e0e0);
-            b(qg1, String.format("z: %.5f", new Object[] {
+            b(qn1, String.format("z: %.5f", new Object[] {
                 Double.valueOf(e.h.u)
             }), 2, 80, 0xe0e0e0);
-            b(qg1, (new StringBuilder()).append("f: ").append(ic.c((double)((e.h.y * 4F) / 360F) + 0.5D) & 3).toString(), 2, 88, 0xe0e0e0);
-            int j9 = ic.c(e.h.s);
-            int j10 = ic.c(e.h.t);
-            int i11 = ic.c(e.h.u);
+            b(qn1, (new StringBuilder()).append("f: ").append(ik.c((double)((e.h.y * 4F) / 360F) + 0.5D) & 3).toString(), 2, 88, 0xe0e0e0);
+            int j9 = ik.c(e.h.s);
+            int j10 = ik.c(e.h.t);
+            int i11 = ik.c(e.h.u);
             if(e.f != null && e.f.l(j9, j10, i11))
             {
-                ahj ahj1 = e.f.d(j9, i11);
-                b(qg1, (new StringBuilder()).append("lc: ").append(ahj1.g() + 15).append(" b: ").append(ahj1.a(j9 & 0xf, i11 & 0xf, e.f.i()).y).append(" bl: ").append(ahj1.a(aao.b, j9 & 0xf, j10, i11 & 0xf)).append(" sl: ").append(ahj1.a(aao.a, j9 & 0xf, j10, i11 & 0xf)).append(" rl: ").append(ahj1.c(j9 & 0xf, j10, i11 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
+                aih aih1 = e.f.d(j9, i11);
+                b(qn1, (new StringBuilder()).append("lc: ").append(aih1.g() + 15).append(" b: ").append(aih1.a(j9 & 0xf, i11 & 0xf, e.f.i()).y).append(" bl: ").append(aih1.a(abg.b, j9 & 0xf, j10, i11 & 0xf)).append(" sl: ").append(aih1.a(abg.a, j9 & 0xf, j10, i11 & 0xf)).append(" rl: ").append(aih1.c(j9 & 0xf, j10, i11 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
             }
-            b(qg1, String.format("ws: %.3f, fs: %.3f, g: %b", new Object[] {
+            b(qn1, String.format("ws: %.3f, fs: %.3f, g: %b", new Object[] {
                 Float.valueOf(e.h.aV.b()), Float.valueOf(e.h.aV.a()), Boolean.valueOf(e.h.D)
             }), 2, 104, 0xe0e0e0);
             GL11.glPopMatrix();
@@ -350,7 +350,7 @@ public class aom extends rl
                 {
                     i4 = Color.HSBtoRGB(f4 / 50F, 0.7F, 0.6F) & 0xffffff;
                 }
-                qg1.b(i, -qg1.a(i) / 2, -4, i4 + (j3 << 24));
+                qn1.b(i, -qn1.a(i) / 2, -4, i4 + (j3 << 24));
                 GL11.glDisable(3042);
                 GL11.glPopMatrix();
             }
@@ -364,9 +364,9 @@ public class aom extends rl
         GL11.glPopMatrix();
         if(e.z.E.e)
         {
-            ain ain1 = e.h.i;
-            java.util.List list = ain1.c;
-            int j4 = ain1.d;
+            ajk ajk1 = e.h.i;
+            java.util.List list = ajk1.c;
+            int j4 = ajk1.d;
             int l4 = j4;
             int j5 = 1;
             for(; l4 > 20; l4 = ((j4 + j5) - 1) / j5)
@@ -393,28 +393,28 @@ public class aom extends rl
                 {
                     continue;
                 }
-                at at1 = (at)list.get(i8);
-                qg1.a(at1.a, l8, k9, 0xffffff);
+                av av1 = (av)list.get(i8);
+                qn1.a(av1.a, l8, k9, 0xffffff);
                 e.p.b(e.p.b("/gui/icons.png"));
                 int j11 = 0;
                 byte byte1 = 0;
-                if(at1.b < 0)
+                if(av1.b < 0)
                 {
                     byte1 = 5;
                 } else
-                if(at1.b < 150)
+                if(av1.b < 150)
                 {
                     byte1 = 0;
                 } else
-                if(at1.b < 300)
+                if(av1.b < 300)
                 {
                     byte1 = 1;
                 } else
-                if(at1.b < 600)
+                if(av1.b < 600)
                 {
                     byte1 = 2;
                 } else
-                if(at1.b < 1000)
+                if(av1.b < 1000)
                 {
                     byte1 = 3;
                 } else
@@ -422,7 +422,7 @@ public class aom extends rl
                     byte1 = 4;
                 }
                 g += 100F;
-                b((l8 + i6) - 12, k9, 0 + j11 * 10, 176 + byte1 * 8, 10, 8);
+                c((l8 + i6) - 12, k9, 0 + j11 * 10, 176 + byte1 * 8, 10, 8);
                 g -= 100F;
             }
 
@@ -434,27 +434,27 @@ public class aom extends rl
 
     private void d()
     {
-        if(rt.c == null)
+        if(se.c == null)
         {
             return;
         }
-        rs rs1 = rt.c;
-        rt.c = null;
-        qg qg1 = e.q;
-        all all1 = new all(e.z, e.d, e.e);
-        int l = all1.a();
+        sc sc1 = se.c;
+        se.c = null;
+        qn qn1 = e.q;
+        aml aml1 = new aml(e.z, e.d, e.e);
+        int l = aml1.a();
         char c1 = '\266';
         int i1 = l / 2 - c1 / 2;
-        int j1 = (int)(((float)rs1.z() / (float)rs1.d()) * (float)(c1 + 1));
+        int j1 = (int)(((float)sc1.z() / (float)sc1.d()) * (float)(c1 + 1));
         byte byte0 = 12;
-        b(i1, byte0, 0, 74, c1, 5);
-        b(i1, byte0, 0, 74, c1, 5);
+        c(i1, byte0, 0, 74, c1, 5);
+        c(i1, byte0, 0, 74, c1, 5);
         if(j1 > 0)
         {
-            b(i1, byte0, 0, 79, j1, 5);
+            c(i1, byte0, 0, 79, j1, 5);
         }
         String s = "Boss health";
-        qg1.a(s, l / 2 - qg1.a(s) / 2, byte0 - 10, 0xff00ff);
+        qn1.a(s, l / 2 - qn1.a(s) / 2, byte0 - 10, 0xff00ff);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glBindTexture(3553, e.p.b("/gui/icons.png"));
     }
@@ -467,13 +467,13 @@ public class aom extends rl
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(3008);
         GL11.glBindTexture(3553, e.p.b("%blur%/misc/pumpkinblur.png"));
-        ajg ajg1 = ajg.a;
-        ajg1.b();
-        ajg1.a(0.0D, i1, -90D, 0.0D, 1.0D);
-        ajg1.a(l, i1, -90D, 1.0D, 1.0D);
-        ajg1.a(l, 0.0D, -90D, 1.0D, 0.0D);
-        ajg1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        ajg1.a();
+        akc akc1 = akc.a;
+        akc1.b();
+        akc1.a(0.0D, i1, -90D, 0.0D, 1.0D);
+        akc1.a(l, i1, -90D, 1.0D, 1.0D);
+        akc1.a(l, 0.0D, -90D, 1.0D, 0.0D);
+        akc1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        akc1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -497,13 +497,13 @@ public class aom extends rl
         GL11.glBlendFunc(0, 769);
         GL11.glColor4f(b, b, b, 1.0F);
         GL11.glBindTexture(3553, e.p.b("%blur%/misc/vignette.png"));
-        ajg ajg1 = ajg.a;
-        ajg1.b();
-        ajg1.a(0.0D, i1, -90D, 0.0D, 1.0D);
-        ajg1.a(l, i1, -90D, 1.0D, 1.0D);
-        ajg1.a(l, 0.0D, -90D, 1.0D, 0.0D);
-        ajg1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        ajg1.a();
+        akc akc1 = akc.a;
+        akc1.b();
+        akc1.a(0.0D, i1, -90D, 0.0D, 1.0D);
+        akc1.a(l, i1, -90D, 1.0D, 1.0D);
+        akc1.a(l, 0.0D, -90D, 1.0D, 0.0D);
+        akc1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        akc1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -524,17 +524,17 @@ public class aom extends rl
         GL11.glBlendFunc(770, 771);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
         GL11.glBindTexture(3553, e.p.b("/terrain.png"));
-        float f2 = (float)(se.be.bQ % 16) / 16F;
-        float f3 = (float)(se.be.bQ / 16) / 16F;
-        float f4 = (float)(se.be.bQ % 16 + 1) / 16F;
-        float f5 = (float)(se.be.bQ / 16 + 1) / 16F;
-        ajg ajg1 = ajg.a;
-        ajg1.b();
-        ajg1.a(0.0D, i1, -90D, f2, f5);
-        ajg1.a(l, i1, -90D, f4, f5);
-        ajg1.a(l, 0.0D, -90D, f4, f3);
-        ajg1.a(0.0D, 0.0D, -90D, f2, f3);
-        ajg1.a();
+        float f2 = (float)(sq.be.bT % 16) / 16F;
+        float f3 = (float)(sq.be.bT / 16) / 16F;
+        float f4 = (float)(sq.be.bT % 16 + 1) / 16F;
+        float f5 = (float)(sq.be.bT / 16 + 1) / 16F;
+        akc akc1 = akc.a;
+        akc1.b();
+        akc1.a(0.0D, i1, -90D, f2, f5);
+        akc1.a(l, i1, -90D, f4, f5);
+        akc1.a(l, 0.0D, -90D, f4, f3);
+        akc1.a(0.0D, 0.0D, -90D, f2, f3);
+        akc1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -543,12 +543,12 @@ public class aom extends rl
 
     private void a(int l, int i1, int j1, float f1)
     {
-        afg afg1 = e.h.ar.a[l];
-        if(afg1 == null)
+        agd agd1 = e.h.ar.a[l];
+        if(agd1 == null)
         {
             return;
         }
-        float f2 = (float)afg1.b - f1;
+        float f2 = (float)agd1.b - f1;
         if(f2 > 0.0F)
         {
             GL11.glPushMatrix();
@@ -557,12 +557,12 @@ public class aom extends rl
             GL11.glScalef(1.0F / f3, (f3 + 1.0F) / 2.0F, 1.0F);
             GL11.glTranslatef(-(i1 + 8), -(j1 + 12), 0.0F);
         }
-        c.a(e.q, e.p, afg1, i1, j1);
+        c.a(e.q, e.p, agd1, i1, j1);
         if(f2 > 0.0F)
         {
             GL11.glPopMatrix();
         }
-        c.b(e.q, e.p, afg1, i1, j1);
+        c.b(e.q, e.p, agd1, i1, j1);
     }
 
     public void a()
@@ -581,7 +581,7 @@ public class aom extends rl
         k = true;
     }
 
-    public sg b()
+    public st b()
     {
         return f;
     }
