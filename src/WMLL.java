@@ -26,7 +26,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 711";
+		return "Test 714";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -74,7 +74,8 @@ public class WMLL {
 		debug("[WMLL] Initializing WMLL "+wmllVersion());
 		fieldNames.put("sendQueue", "i");
 		fieldNames.put("netManager", "g");
-		fieldNames.put("remoteSocketAddress", "a");
+		fieldNames.put("remoteSocketAddress", "j");
+		fieldNames.put("SPremoteSocketAddress", "a");
 		fieldNames.put("genNetherBridge", "c");
 		fieldNames.put("SpawnListEntry", "a");
 		fieldNames.put("localServerWorldName", "b");
@@ -96,7 +97,7 @@ public class WMLL {
 			RadarBro = true;
 		}
 		if (debugClassPresent)
-				RadarBro = false;
+			RadarBro = false;
 		debug("[WMLL] Can run debug: "+debugClassPresent);
 		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
 		debug("[WMLL] RadarBro: "+RadarBro);
@@ -431,7 +432,12 @@ public class WMLL {
 				Field f1 = obj.getClass().getDeclaredField(getField("netManager")); // netManager
 				f1.setAccessible(true);
 				obj = f1.get(obj);
-				Field f2 = obj.getClass().getDeclaredField(getField("remoteSocketAddress")); // remoteSocketAddress
+				Field f2;
+				if (obj.toString().startsWith("atw"))
+					f2 = obj.getClass().getDeclaredField(getField("SPremoteSocketAddress")); // remoteSocketAddress
+				
+				else
+					f2 = obj.getClass().getDeclaredField(getField("remoteSocketAddress"));
 				f2.setAccessible(true);
 				SocketAddress a = (SocketAddress)f2.get(obj);
 				String s = a.toString();
@@ -550,7 +556,7 @@ public class WMLL {
 	public vi getPlayerController() {
 		return mc.c;
 	}
-	
+
 	public boolean isCreative() {
 		return !getPlayerController().b();
 	}
@@ -627,7 +633,7 @@ public class WMLL {
 		int[] a = {ik.c(thePlayer().s), ik.c(thePlayer().t - 1), ik.c(thePlayer().u), ik.c((double)((thePlayer().y * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().s, (int)thePlayer().t, (int)thePlayer().u};
 		return a;
 	}
-	
+
 	public double[] getPlayerCoordinatesAsDouble() {
 		double[] a = {thePlayer().s, thePlayer().t, thePlayer().u, ik.c((double)((thePlayer().y * 4F) / 360F) + 0.5D) & 3};
 		return a;
@@ -666,23 +672,23 @@ public class WMLL {
 
 	public void drawString(String t, int i, int j, int k) {
 		int textpos = WMLLI > 5 ? -8 : 2;
-					t = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
-					String t1 = Pattern.compile("\247[0-9a-f,l-o,r]").matcher(t).replaceAll("");
-					int w = getWindowSize().a();
-					int h = getWindowSize().b();
-					if (outputLocation == 1) { // Top right
-						getFontRenderer().a(t, w - (getFontRenderer().a(t1) + (i - 1)), textpos+(j*10), k);
-						return;
-					}
-					else if (outputLocation == 2) { // Bottom Left
-						getFontRenderer().a(t, i, h - (textpos+(j*10) + 8), k);
-						return;
-					}
-					else if (outputLocation == 3) { // Bottom Right
-						getFontRenderer().a(t,  w - (getFontRenderer().a(t1) + (i - 1)), h - (textpos+(j*10) + 8), k);
-						return;
-					}
-					getFontRenderer().a(t, i, textpos+(j*10), k); // Top Left
+		t = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
+		String t1 = Pattern.compile("\247[0-9a-f,l-o,r]").matcher(t).replaceAll("");
+		int w = getWindowSize().a();
+		int h = getWindowSize().b();
+		if (outputLocation == 1) { // Top right
+			getFontRenderer().a(t, w - (getFontRenderer().a(t1) + (i - 1)), textpos+(j*10), k);
+			return;
+		}
+		else if (outputLocation == 2) { // Bottom Left
+			getFontRenderer().a(t, i, h - (textpos+(j*10) + 8), k);
+			return;
+		}
+		else if (outputLocation == 3) { // Bottom Right
+			getFontRenderer().a(t,  w - (getFontRenderer().a(t1) + (i - 1)), h - (textpos+(j*10) + 8), k);
+			return;
+		}
+		getFontRenderer().a(t, i, textpos+(j*10), k); // Top Left
 	}
 
 	public void saveOptions() {
@@ -776,7 +782,7 @@ public class WMLL {
 				mc.a(new WMLLOptions(this));
 			else
 				if (!(mc.s instanceof WMLLOptions)) {
-						//&& !(mc.s instanceof acr/*GuiChat*/) && !(mc.s instanceof ars/*Sign Editing*/) && !(mc.s instanceof hw/*Book Editing*/)) {
+					//&& !(mc.s instanceof acr/*GuiChat*/) && !(mc.s instanceof ars/*Sign Editing*/) && !(mc.s instanceof hw/*Book Editing*/)) {
 					if (Keyboard.isKeyDown(42)) {
 						WMLLI--;
 						while (!isOutputEnabled(WMLLI))
@@ -802,9 +808,15 @@ public class WMLL {
 	}
 
 	public boolean isSeedSet() {
-		if (!isMultiplayer()/* || getWorldName().equals("localServer")*/)
-			return true;
-		return options.containsKey("Seed:"+getWorldName().toLowerCase());
+		try {
+			if (!isMultiplayer()/* || getWorldName().equals("localServer")*/)
+				return true;
+			return options.containsKey("Seed:"+getWorldName().toLowerCase());
+		}
+		catch (NullPointerException n) {
+			n.printStackTrace();
+			return false;
+		}
 	}
 
 	public void displayUpdateString(int ver) {
@@ -859,5 +871,5 @@ public class WMLL {
 		System.out.println(x);
 		return x > 11;
 	}
-	
+
 }
