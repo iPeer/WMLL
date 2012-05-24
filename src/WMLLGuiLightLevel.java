@@ -28,7 +28,6 @@ public class WMLLGuiLightLevel extends aag {
 		outputOptions = WMLL.outputOptions;
 		if (outputOptions == null)
 			outputOptions = new Properties();
-		Keyboard.enableRepeatEvents(true);
 		byte o = -16;
 		s.clear();
 		
@@ -83,7 +82,6 @@ public class WMLLGuiLightLevel extends aag {
 			if (page == 1) {
 				performSave();
 				p.a(parent);
-				e();
 			}
 			else if (page >= 2) {
 				if (page == 2)
@@ -216,9 +214,9 @@ public class WMLLGuiLightLevel extends aag {
 			lightLevelEditbox.a(i, j, k);
 	}
 	
-	public void e() {
-		Keyboard.enableRepeatEvents(false);
-	}
+//	public void e() {
+//		Keyboard.enableRepeatEvents(false);
+//	}
 	
 	// Custom functions
 	
