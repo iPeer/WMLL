@@ -26,7 +26,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 715";
+		return "Test 716";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -239,11 +239,11 @@ public class WMLL {
 					out = 1;
 				if ((isSeedSet()) || isMultiplayer())
 					out++;
-				aiz player = thePlayer();
+				ajf player = thePlayer();
 				double x = player.s;
 				double y = player.t;
 				double z = player.u;
-				double f = it.c((double)((player.y * 4F) / 360F) + 0.5D) & 3;
+				double f = iv.c((double)((player.y * 4F) / 360F) + 0.5D) & 3;
 				NumberFormat d = new DecimalFormat("#0.00");
 				String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection((int)f)+")";
 				drawString(coords, 2, out, 0xffffff);
@@ -415,8 +415,12 @@ public class WMLL {
 			s = s+" ("+getFormattedWorldTime()+")";
 		return s;
 	}
+	
+//	private act serverInstance() {
+//		return getChunk(0 ,0).e;
+//	}
 
-	private md getWorld() {
+	private mf getWorld() {
 		try {
 			return mc.f;
 		}
@@ -438,7 +442,7 @@ public class WMLL {
 				obj = f1.get(obj);
 				worldNameDebug = worldNameDebug+", "+obj.toString();
 				Field f2;
-				if (obj.toString().startsWith("aui"))
+				if (obj.toString().startsWith("auq"))
 					f2 = obj.getClass().getDeclaredField(getField("SPremoteSocketAddress")); // remoteSocketAddress
 				
 				else
@@ -461,20 +465,24 @@ public class WMLL {
 		}	
 		return "A Minecraft World";
 	}
+	
+//	public String worldName() {
+//		return worldInstance().m()+", "+worldInstance().n();
+//	}
 
-	public qz getFontRenderer() {
+	public rc getFontRenderer() {
 		return mc.q;
 	}
 	
-	public amw getWindowSize() {
-		return new amw(mc.z, mc.d, mc.e);
+	public and getWindowSize() {
+		return new and(mc.z, mc.d, mc.e);
 	}
 
 	private boolean mcDebugOpen() {
 		return getGameSettings().M;
 	}
 
-	private ks getGameSettings() {
+	private ku getGameSettings() {
 		return mc.z;
 	}
 
@@ -486,14 +494,14 @@ public class WMLL {
 		if (y < 0 || y > 255) 
 			return 0;
 		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(abs.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+		return getChunk(playerPos[0], playerPos[2]).a(aby.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
 	}
 
 	public int getRawLightLevel(int x, int y, int z) {
 		if (y < 0 || y > 255) 
 			return 0;
 		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(abs.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+		return getChunk(playerPos[0], playerPos[2]).a(aby.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
 	}
 
 	public int getLightLevel(int j, int k, int l) {
@@ -520,7 +528,7 @@ public class WMLL {
 		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).G);
 	}
 
-	private wc getBiomeGenBase() {
+	private wh getBiomeGenBase() {
 		return getWorld().i();
 	}
 
@@ -542,15 +550,15 @@ public class WMLL {
 		return getWorld().o(x, y, z);
 	}
 
-	public apa entityPlayer() {
+	public aph entityPlayer() {
 		return mc.h;
 	}
 
-	public aiz thePlayer() {
+	public ajf thePlayer() {
 		return mc.i;
 	}
 
-	public hb playerEntity() {
+	public hd playerEntity() {
 		return mc.k;
 	}
 
@@ -558,7 +566,7 @@ public class WMLL {
 		return playerEntity().b;
 	}
 
-	public vu getPlayerController() {
+	public vz getPlayerController() {
 		return mc.c;
 	}
 
@@ -566,7 +574,7 @@ public class WMLL {
 		return !getPlayerController().b();
 	}
 
-	public ash worldInfo() {
+	public aso worldInfo() {
 		return getWorld().x;
 	}
 
@@ -574,7 +582,7 @@ public class WMLL {
 		return mc;
 	}
 
-	private ait getChunk(int x, int z) {
+	private aiz getChunk(int x, int z) {
 		return getWorld().d(x, z);
 	}
 
@@ -584,7 +592,7 @@ public class WMLL {
 
 	private boolean canSlimesSpawnHere(int x, int z) {
 		if (isMultiplayer()) {
-			ait chunk = getChunk(x, z);
+			aiz chunk = getChunk(x, z);
 			int xPos = chunk.g;
 			int zPos = chunk.h;
 			return new Random(getWorldSeed() + (long)(xPos * xPos * 0x4c1906) + (long)(xPos * 0x5ac0db) + (long)(zPos * zPos) * 0x4307a7L + (long) (zPos * 0x5f24f) ^ 0x3ad8025f).nextInt(10) == 0;
@@ -592,11 +600,11 @@ public class WMLL {
 		return getChunk(x, z).a(0x3ad8025fL).nextInt(10) == 0 && getWorldSeed() != 0L;
 	}
 
-	private asu getWorldProvider() {
+	private atb getWorldProvider() {
 		return getWorld().u;
 	}
 
-	private de getChunkProvider() {
+	private dg getChunkProvider() {
 		return getWorldProvider().b();
 	}
 
@@ -631,16 +639,16 @@ public class WMLL {
 	}
 
 	private boolean isPlayerSleeping() {
-		return thePlayer().aC();
+		return thePlayer().aD();
 	}
 
 	public int[] getPlayerCoordinates() {
-		int[] a = {it.c(thePlayer().s), it.c(thePlayer().t - 1), it.c(thePlayer().u), it.c((double)((thePlayer().y * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().s, (int)thePlayer().t, (int)thePlayer().u};
+		int[] a = {iv.c(thePlayer().s), iv.c(thePlayer().t - 1), iv.c(thePlayer().u), iv.c((double)((thePlayer().y * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().s, (int)thePlayer().t, (int)thePlayer().u};
 		return a;
 	}
 
 	public double[] getPlayerCoordinatesAsDouble() {
-		double[] a = {thePlayer().s, thePlayer().t, thePlayer().u, it.c((double)((thePlayer().y * 4F) / 360F) + 0.5D) & 3};
+		double[] a = {thePlayer().s, thePlayer().t, thePlayer().u, iv.c((double)((thePlayer().y * 4F) / 360F) + 0.5D) & 3};
 		return a;
 	}
 
@@ -786,7 +794,7 @@ public class WMLL {
 			if (Keyboard.isKeyDown(29) && mc.s == null)
 				mc.a(new WMLLOptions(this));
 			else
-				if (!(mc.s instanceof WMLLOptions)) {
+				if (mc.s == null) {
 					//&& !(mc.s instanceof acr/*GuiChat*/) && !(mc.s instanceof ars/*Sign Editing*/) && !(mc.s instanceof hw/*Book Editing*/)) {
 					if (Keyboard.isKeyDown(42)) {
 						WMLLI--;
@@ -867,7 +875,7 @@ public class WMLL {
 	}
 
 	public static String getMinecraftVersion() {
-		return "12w21b";
+		return "12w22a";
 	}
 
 	public boolean areAllOutputsDisabled() {
