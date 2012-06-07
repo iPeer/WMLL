@@ -33,7 +33,8 @@ public class WMLLCompatibility {
 	            GL11.glVertex2d(44.5D, -44.5D);
 	            GL11.glEnd();
 	            GL11.glDisable(3042);
-	            RadarBro _tmp = OCR; // Not needed?
+	            @SuppressWarnings("unused")
+				RadarBro _tmp = OCR; // Not needed?
 	            RadarBro.drawTriangle(0, 0, 0xffc0c0c0);
 	            if(RadarBro.RadarAutoRotate)
 	                GL11.glRotatef(-i.h.y, 0.0F, 0.0F, 1.0F);

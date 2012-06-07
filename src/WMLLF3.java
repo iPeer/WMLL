@@ -59,7 +59,7 @@ public class WMLLF3 {
 		wmll.drawStringUsingPixels("WMLL "+WMLL.wmllVersion(), 2, 72, 0xffffff);
 		
 		// Coordinates
-		ajf player = wmll.thePlayer();
+		ajh player = wmll.thePlayer();
 		double x = player.s;
 		double y = player.t;
 		double z = player.u;

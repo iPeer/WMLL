@@ -5,19 +5,19 @@ import java.util.Properties;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiLightLevel extends aay {
+public class WMLLGuiLightLevel extends aba {
 	
 	protected WMLL wmll;
-	private aay parent;
+	private aba parent;
 	private String title;
 	private Properties outputOptions;
 	private String lightString;
 	private int page = 1;
-	private ahy parameterButton, colouringButton, doneButton;
-	private anw lightEditbox, skyEditbox, rawEditbox, blockEditbox, lightLevelEditbox;
-	private final List<anw> page3editboxes = new ArrayList<anw>();
+	private aia parameterButton, colouringButton, doneButton;
+	private any lightEditbox, skyEditbox, rawEditbox, blockEditbox, lightLevelEditbox;
+	private final List<any> page3editboxes = new ArrayList<any>();
 
-	public WMLLGuiLightLevel(WMLL w, aay parent) {
+	public WMLLGuiLightLevel(WMLL w, aba parent) {
 		this.wmll = w;
 		this.parent = parent;
 		title = "WMLL Light Level Customization";
@@ -31,53 +31,53 @@ public class WMLLGuiLightLevel extends aay {
 		byte o = -16;
 		s.clear();
 		
-		doneButton = new ahy(0, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done");
+		doneButton = new aia(0, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done");
 		s.add(doneButton);
 		
 		int a = wmll.getFontRenderer().a("Parameter Help") + 10;
-		parameterButton = new ahy(1, (q - a) / 2, r / 4 + 65 + o, a, 20, "Parameter Help");
+		parameterButton = new aia(1, (q - a) / 2, r / 4 + 65 + o, a, 20, "Parameter Help");
 		s.add(parameterButton);
 		
 		a = wmll.getFontRenderer().a("Colouring Options...") + 10;
-		colouringButton = new ahy(2, (q - a) / 2, r / 4 + 75, a, 20, "Colouring Options...");
+		colouringButton = new aia(2, (q - a) / 2, r / 4 + 75, a, 20, "Colouring Options...");
 		s.add(colouringButton);
 		
 		/*
 		 * New Editbox:
-		 * new anw(fontrenderer, posx, posy, width, height);
+		 * new any(fontrenderer, posx, posy, width, height);
 		 */
-		lightLevelEditbox = new anw(/*this,*/ u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 70, wmll.getWindowSize().a() - 20, 20/*, outputOptions.getProperty("lightString", "Light level: %LightLevel%")*/);
+		lightLevelEditbox = new any(/*this,*/ u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 70, wmll.getWindowSize().a() - 20, 20/*, outputOptions.getProperty("lightString", "Light level: %LightLevel%")*/);
 		lightLevelEditbox.f(76);
 		lightLevelEditbox.a(outputOptions.getProperty("lightString", "Light level: %LightLevel%"));
 		//lightLevelEditbox.a = true;
 		lightLevelEditbox.b(true);
 		
-		blockEditbox = new anw(u, q / 2 - 10, 43, 20, 10);
+		blockEditbox = new any(u, q / 2 - 10, 43, 20, 10);
 		blockEditbox.f(2);
 		blockEditbox.a(outputOptions.getProperty("highlightBlock", "8"));
 		page3editboxes.add(blockEditbox);
 		
-		skyEditbox = new anw( u, q / 2 - 10, 73, 20, 10);
+		skyEditbox = new any( u, q / 2 - 10, 73, 20, 10);
 		skyEditbox.a(outputOptions.getProperty("highlightSky", "8"));
 		skyEditbox.f(2);
 		page3editboxes.add(skyEditbox);
 		
-		rawEditbox = new anw(u, q / 2 - 10, 103, 20, 10);
+		rawEditbox = new any(u, q / 2 - 10, 103, 20, 10);
 		rawEditbox.f(2);
 		rawEditbox.a(outputOptions.getProperty("highlightRaw", "8"));
 		page3editboxes.add(rawEditbox);
 		
-		lightEditbox = new anw(u, q / 2 - 10, 133, 20, 10);
+		lightEditbox = new any(u, q / 2 - 10, 133, 20, 10);
 		lightEditbox.f(2);
 		lightEditbox.a(outputOptions.getProperty("highlightLight", "8"));
 		page3editboxes.add(lightEditbox);
 		
 		if (WMLL.debugClassPresent)
-			s.add(new ahy(9001, q - 52, r - 22, 50, 20, "Reload"));
+			s.add(new aia(9001, q - 52, r - 22, 50, 20, "Reload"));
 		generateLightStringPreview();
 	}
 	
-	protected void a(ahy b) {
+	protected void a(aia b) {
 		if (b.f == 0) {
 			if (page == 1) {
 				performSave();

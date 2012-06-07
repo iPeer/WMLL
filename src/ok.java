@@ -3,14 +3,14 @@
 // Decompiler options: packimports(3) braces deadcode fieldsfirst noconv 
 // Source File Name:   SourceFile
 
-import java.util.List;
-import net.minecraft.client.Minecraft;
 
-public class ok extends aay
+public class ok extends aba
 {
 
-    private int a;
-    private int b;
+    @SuppressWarnings("unused")
+	private int a;
+    @SuppressWarnings("unused")
+	private int b;
 
     public ok()
     {
@@ -18,29 +18,30 @@ public class ok extends aay
         b = 0;
     }
 
-    public void c()
+    @SuppressWarnings("unchecked")
+	public void c()
     {
         a = 0;
         s.clear();
         byte byte0 = -16;
-        s.add(new ahy(1, q / 2 - 100, r / 4 + 120 + byte0, ej.a("menu.returnToMenu")));
+        s.add(new aia(1, q / 2 - 100, r / 4 + 120 + byte0, ej.a("menu.returnToMenu")));
         if(!p.z())
         {
-            ((ahy)s.get(0)).e = ej.a("menu.disconnect");
+            ((aia)s.get(0)).e = ej.a("menu.disconnect");
         }
-        s.add(new ahy(4, q / 2 - 100, r / 4 + 24 + byte0, ej.a("menu.returnToGame")));
-        //s.add(new ahy(0, q / 2 - 100, r / 4 + 96 + byte0, ej.a("menu.options")));
-        s.add(new ahy(5, q / 2 - 100, r / 4 + 48 + byte0, 98, 20, ej.a("gui.achievements")));
-        s.add(new ahy(6, q / 2 + 2, r / 4 + 48 + byte0, 98, 20, ej.a("gui.stats")));
-		s.add(new ahy(0, q / 2 - 100, r / 4 + 96 + byte0, 98, 20, ej.a("menu.options")));
-        s.add(new ahy(7, q / 2 + 2, r / 4 + 96 + byte0, 98, 20, "WMLL Options..."));
+        s.add(new aia(4, q / 2 - 100, r / 4 + 24 + byte0, ej.a("menu.returnToGame")));
+        //s.add(new aia(0, q / 2 - 100, r / 4 + 96 + byte0, ej.a("menu.options")));
+        s.add(new aia(5, q / 2 - 100, r / 4 + 48 + byte0, 98, 20, ej.a("gui.achievements")));
+        s.add(new aia(6, q / 2 + 2, r / 4 + 48 + byte0, 98, 20, ej.a("gui.stats")));
+		s.add(new aia(0, q / 2 - 100, r / 4 + 96 + byte0, 98, 20, ej.a("menu.options")));
+        s.add(new aia(7, q / 2 + 2, r / 4 + 96 + byte0, 98, 20, "WMLL Options..."));
 		if (WMLL.debugClassPresent)
-			s.add(new ahy(9001, q - 52, r - 22, 50, 20, "Reload"));
+			s.add(new aia(9001, q - 52, r - 22, 50, 20, "Reload"));
     }
 
-    protected void a(ahy ahy1)
+    protected void a(aia aia1)
     {
-        switch(ahy1.f)
+        switch(aia1.f)
         {
         case 7:
         	p.a(new WMLLOptions(this));
@@ -56,16 +57,16 @@ public class ok extends aay
             p.I.a(jk.j, 1);
             p.f.f();
             p.a((mf)null);
-            p.a(new adq());
+            p.a(new ads());
             break;
 
         case 4: // '\004'
-            p.a((aay)null);
+            p.a((aba)null);
             p.g();
             break;
 
         case 5: // '\005'
-            p.a(new wb(p.I));
+            p.a(new wd(p.I));
             break;
 
         case 6: // '\006'
