@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public class WMLLRenderer extends sl {
+public class WMLLRenderer extends sg {
 
 	public int updateVersion = 0;
 	private int StringY = 12, notifyTick = 200, StringY1 = 50, notifyTick1 = 800;

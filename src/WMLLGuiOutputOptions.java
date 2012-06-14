@@ -3,18 +3,18 @@ import java.util.Properties;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiOutputOptions extends aba {
+public class WMLLGuiOutputOptions extends aau {
 
 	protected WMLL wmll;
-	private aba parent;
+	private aau parent;
 	private String title;
 	private static final String[] colourNames = {"Black", "Dark Blue", "Dark Green", "Cyan", "Red", "Purple", "Orange", "Light Grey", "Dark Grey", "Lavender?", "Lime Green", "Light Blue", "Bright Red", "Pink", "Yellow", "White"};
 	private static final String[] outputLocations = {"Top Left", "Top Right", "Bottom Left", "Bottom Right"};
 	public static Properties outputOptions;
-	private aia SMPSeedButton;
+	private ahu SMPSeedButton;
 
 	@SuppressWarnings("static-access")
-	public WMLLGuiOutputOptions(WMLL wmll, aba parent) {
+	public WMLLGuiOutputOptions(WMLL wmll, aau parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.outputOptions = WMLL.outputOptions;
@@ -29,20 +29,20 @@ public class WMLLGuiOutputOptions extends aba {
 			int tc = WMLL.TextColour;
 			byte o = -16;
 			if (WMLL.debugClassPresent)
-				s.add(new aia(9001, q - 52, r - 22, 50, 20, "Reload"));
-			s.add(new aia(1, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done"));
-			s.add(new aia(3, q / 2 - 112, r / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
-			s.add(new aia(4, q / 2 + 2, r / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
-			s.add(new aia(5, q / 2 + 2, r / 4 + 100 + o, 112, 20, "Light Level options..."));
-			s.add(new aia(6, q / 2 - 112, r / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
-			s.add(new aia(8, q / 2 + 2, r / 4 + 20 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
-			s.add(SMPSeedButton = new aia(9, q / 2 - 112, r / 4 + 125 + o, 226, 20, "Enter seed for this server..."));
-			s.add(new aia(11, q / 2 - 112, r / 4 + 100 + o, 112, 20, "Enabled outputs..."));
-			s.add(new aia(10, q / 2 - 112, r / 4 + 75 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
+				s.add(new ahu(9001, q - 52, r - 22, 50, 20, "Reload"));
+			s.add(new ahu(1, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done"));
+			s.add(new ahu(3, q / 2 - 112, r / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
+			s.add(new ahu(4, q / 2 + 2, r / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
+			s.add(new ahu(5, q / 2 + 2, r / 4 + 100 + o, 112, 20, "Light Level options..."));
+			s.add(new ahu(6, q / 2 - 112, r / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
+			s.add(new ahu(8, q / 2 + 2, r / 4 + 20 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
+			s.add(SMPSeedButton = new ahu(9, q / 2 - 112, r / 4 + 125 + o, 226, 20, "Enter seed for this server..."));
+			s.add(new ahu(11, q / 2 - 112, r / 4 + 100 + o, 112, 20, "Enabled outputs..."));
+			s.add(new ahu(10, q / 2 - 112, r / 4 + 75 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
 			SMPSeedButton.i = (wmll.isMultiplayer() || WMLL.debugClassPresent);
 		}
 
-	protected void a(aia b) {
+	protected void a(ahu b) {
 		if (b.f == 1 || b.f == 2) {
 			if (b.f == 2) { // Next
 				System.out.println("NO GUI YET!");
