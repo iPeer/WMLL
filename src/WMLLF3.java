@@ -50,10 +50,10 @@ public class WMLLF3 {
 		
 		// Particles, entities, etc.
 		
-		wmll.drawStringUsingPixels(mc.n(), 2, 32, 0xffffff);
-		wmll.drawStringUsingPixels(mc.m()/*.replaceAll("E:", "Entities:")*/, 2, 42, 0xffffff);
+		wmll.drawStringUsingPixels(mc.m(), 2, 32, 0xffffff);
+		wmll.drawStringUsingPixels(mc.n()/*.replaceAll("E:", "Entities:")*/, 2, 42, 0xffffff);
 		wmll.drawStringUsingPixels(mc.p()/*.replaceAll("P:", "Particles:")*/, 2, 52, 0xffffff);
-		wmll.drawStringUsingPixels(mc.p(), 2, 62, 0xffffff);
+		wmll.drawStringUsingPixels(mc.o(), 2, 62, 0xffffff);
 		
 		// WMLL Version
 		wmll.drawStringUsingPixels("WMLL "+WMLL.wmllVersion(), 2, 72, 0xffffff);
