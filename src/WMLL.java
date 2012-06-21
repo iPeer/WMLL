@@ -26,7 +26,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 721";
+		return "Test 722";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -80,6 +80,7 @@ public class WMLL {
 		fieldNames.put("genNetherBridge", "c");
 		fieldNames.put("SpawnListEntry", "a");
 		fieldNames.put("localServerWorldName", "b");
+		fieldNames.put("worldSeed", "a");
 		Rei = ReiUseMl = debugClassPresent = RadarBro = false;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		outputOptionsFile = new File(Minecraft.a("minecraft"), "WMLLOutput.properties");
@@ -178,9 +179,10 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 12, 0xffffff);
 				a = worldNameDebug;
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 11, 0xffffff);
+				a = "Seed: "+getWorldSeed()+", "+(thePlayer() instanceof afa);
+				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 13, 0xffffff);
 
 			}
-
 			WMLLCheckKeys();
 			if (!Enabled)
 				return;
@@ -242,8 +244,8 @@ public class WMLL {
 					out = 1;
 				if ((isSeedSet()) || isMultiplayer())
 					out++;
-//				if (getDimension() == 1)
-//					out--;
+				//				if (getDimension() == 1)
+				//					out--;
 				ajh player = thePlayer();
 				double x = player.s;
 				double y = player.t;
@@ -420,10 +422,10 @@ public class WMLL {
 			s = s+" ("+getFormattedWorldTime()+")";
 		return s;
 	}
-	
-//	private act serverInstance() {
-//		return getChunk(0 ,0).e;
-//	}
+
+	//	private act serverInstance() {
+	//		return getChunk(0 ,0).e;
+	//	}
 
 	private md getWorld() {
 		try {
@@ -432,6 +434,10 @@ public class WMLL {
 		catch (NullPointerException n) {
 			return null;
 		}
+	}
+	
+	private adb getWorldClass() {
+		return thePlayer().o;
 	}
 
 	public String getWorldName() {
@@ -447,9 +453,9 @@ public class WMLL {
 				obj = f1.get(obj);
 				worldNameDebug = worldNameDebug+", "+obj.toString();
 				Field f2;
-				if (obj.toString().startsWith("auq"))
+				if (getWorldClass().y().j().equals("MpServer"))
 					f2 = obj.getClass().getDeclaredField(getField("SPremoteSocketAddress")); // remoteSocketAddress
-				
+
 				else
 					f2 = obj.getClass().getDeclaredField(getField("remoteSocketAddress"));
 				f2.setAccessible(true);
@@ -470,15 +476,15 @@ public class WMLL {
 		}	
 		return "A Minecraft World";
 	}
-	
-//	public String worldName() {
-//		return worldInstance().m()+", "+worldInstance().n();
-//	}
+
+	//	public String worldName() {
+	//		return worldInstance().m()+", "+worldInstance().n();
+	//	}
 
 	public rc getFontRenderer() {
 		return mc.q;
 	}
-	
+
 	public anc getWindowSize() {
 		return new anc(mc.z, mc.d, mc.e);
 	}
@@ -658,14 +664,16 @@ public class WMLL {
 	}
 
 	public long getWorldSeed() {
-		if (isMultiplayer())
+		if (getWorldName().equals("localServer"))
+			return ((afa)thePlayer()).o.t();
+		else {
 			try {
 				return Long.parseLong(options.getProperty("Seed:"+getWorldName().toLowerCase(), "0"));
 			}
-		catch (NumberFormatException n) {
-			return 0;
+			catch (NumberFormatException n) {
+				return 0L;
+			}
 		}
-		return 0;
 		//return getChunk(0, 0).e.x.c().b();
 	}
 
