@@ -1,12 +1,12 @@
 import org.lwjgl.input.Keyboard;
 
-public class WMLLOptions extends aau {
+public class WMLLOptions extends aba {
 		
 	public WMLLOptions() {
 		this.wmll = WMLL.i;
 	}
 	
-	public WMLLOptions(aau parent) {
+	public WMLLOptions(aba parent) {
 		this.parent = parent;
 		this.wmll = WMLL.i;
 	}
@@ -16,7 +16,7 @@ public class WMLLOptions extends aau {
 	}
 
 
-	public WMLLOptions(WMLL wmll, aau parent) {
+	public WMLLOptions(WMLL wmll, aba parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 	}
@@ -37,28 +37,28 @@ public class WMLLOptions extends aau {
 		byte offset = -16;
 		/*
 		 * New button
-		 * ahu((int)ID, x, y[, width, height], text)
+		 * ahz((int)ID, x, y[, width, height], text)
 		 */
-		s.add(new ahu(1, q / 2 - 100, r / 4 + 150 + offset, "Done"));
-		s.add(new ahu(0, q / 2 - 100, r / 4 - 5 + offset, 98, 20, "Debug: "+debug));
-		s.add(new ahu(2, q / 2 + 2, r / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
-		s.add(new ahu(5, q / 2 - 100, r / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
-		s.add(new ahu(6, q / 2 + 2, r / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
-		s.add(new ahu(3, q / 2 - 100, r / 4 + 125 + offset, "Output options..."));
-		s.add(new ahu(4, q / 2 - 100, r / 4 + 85 + offset, "Reset settings to defaults"));
-		//s.add(new ahu(4, q / 2 - 100, r / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
+		s.add(new ahz(1, q / 2 - 100, r / 4 + 150 + offset, "Done"));
+		s.add(new ahz(0, q / 2 - 100, r / 4 - 5 + offset, 98, 20, "Debug: "+debug));
+		s.add(new ahz(2, q / 2 + 2, r / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
+		s.add(new ahz(5, q / 2 - 100, r / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
+		s.add(new ahz(6, q / 2 + 2, r / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
+		s.add(new ahz(3, q / 2 - 100, r / 4 + 125 + offset, "Output options..."));
+		s.add(new ahz(4, q / 2 - 100, r / 4 + 85 + offset, "Reset settings to defaults"));
+		//s.add(new ahz(4, q / 2 - 100, r / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
 		String enabledString = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(wmll.Enabled ? "Yes" : "No");
 		int i = wmll.getFontRenderer().a(enabledString);
-		s.add(new ahu(8, (q - (i + 10)) / 2, r / 4 + 45 + offset, i + 10, 20, enabledString));
+		s.add(new ahz(8, (q - (i + 10)) / 2, r / 4 + 45 + offset, i + 10, 20, enabledString));
 		if (WMLL.debugClassPresent)
-			s.add(new ahu(9001, q - 52, r - 22, 50, 20, "Reload"));
+			s.add(new ahz(9001, q - 52, r - 22, 50, 20, "Reload"));
 		if (!wmll.Enabled)
 			for (int x = 3; x < 6; x++)
-				((ahu)s.get(x)).h = false;
+				((ahz)s.get(x)).h = false;
 	}
 
 	@SuppressWarnings("static-access")
-	protected void a(ahu button) {
+	protected void a(ahz button) {
 		if (button.f == 1) {
 			wmll.optionsOpen = false;
 			wmll.saveOptions();
@@ -102,7 +102,7 @@ public class WMLLOptions extends aau {
 			wmll.Enabled = !a;
 			wmll.options.setProperty("World-"+wmll.getWorldName(), Boolean.toString(!a));
 			for (int x = 3; x < 6; x++)
-				((ahu)s.get(x)).h = !a;
+				((ahz)s.get(x)).h = !a;
 			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(!a ? "Yes" : "No");
 		}
 
@@ -153,7 +153,7 @@ public class WMLLOptions extends aau {
 		else if (isBinding && i1 != Keyboard.KEY_ESCAPE) {
 			WMLL.F4Key = i1;
 			isBinding = false;
-			((ahu)s.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
+			((ahz)s.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
 		}
 		else {
 			super.a(c1, i1);
@@ -179,13 +179,13 @@ public class WMLLOptions extends aau {
 		wmll.drawStringUsingPixels(ver, 2, r - 9, 0x444444);
 	}
 	
-	public aau getParent() {
+	public aba getParent() {
 		return parent;
 	}
 
 	private String title = "WMLL Configuration";;
 	private WMLL wmll;
-	public aau parent;
+	public aba parent;
 	public static boolean isBinding;
 
 }
