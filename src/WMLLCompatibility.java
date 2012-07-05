@@ -37,7 +37,7 @@ public class WMLLCompatibility {
 				RadarBro _tmp = OCR; // Not needed?
 	            RadarBro.drawTriangle(0, 0, 0xffc0c0c0);
 	            if(RadarBro.RadarAutoRotate)
-	                GL11.glRotatef(-i.h.y, 0.0F, 0.0F, 1.0F);
+	                GL11.glRotatef((float) -i.h.y, 0.0F, 0.0F, 1.0F);
 	            OCR.drawIconRadar();
 	            GL11.glPopMatrix();
 	        }

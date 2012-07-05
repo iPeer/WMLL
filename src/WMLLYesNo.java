@@ -1,13 +1,13 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLYesNo extends abf {
+public class WMLLYesNo extends abm {
 
 	protected WMLL wmll;
-	protected abf parent;
+	protected abm parent;
 	byte offset = -16;
 	
-	public WMLLYesNo(WMLL wmll, abf parent) {
+	public WMLLYesNo(WMLL wmll, abm parent) {
 		this.parent = parent;
 		this.wmll = wmll;
 	}
@@ -15,13 +15,13 @@ public class WMLLYesNo extends abf {
 	@SuppressWarnings("unchecked")
 	public void c() {
 		s.clear();
-		s.add(new aie(0, q / 2 - 100, r / 2 + 10 + offset, 98, 20, "Yes"));
-		s.add(new aie(1, q / 2 + 2, r / 2 + 10 + offset, 98, 20, "No"));
+		s.add(new ain(0, q / 2 - 100, r / 2 + 10 + offset, 98, 20, "Yes"));
+		s.add(new ain(1, q / 2 + 2, r / 2 + 10 + offset, 98, 20, "No"));
 		if (WMLL.debugClassPresent)
-			s.add(new aie(9001, q - 52, r - 22, 50, 20, "Reload"));
+			s.add(new ain(9001, q - 52, r - 22, 50, 20, "Reload"));
 	}
 	
-	protected void a(aie b) {
+	protected void a(ain b) {
 		if (b.f == 9001)
 			p.a(new WMLLYesNo(wmll, parent));
 		if (b.f == 0 || b.f == 1) {
@@ -35,7 +35,7 @@ public class WMLLYesNo extends abf {
 				p.a(parent.getClass().newInstance());
 			} catch (Exception e) {
 				e.printStackTrace();
-				p.a((abf)null);
+				p.a((abm)null);
 			}
 		}
 	}
@@ -49,7 +49,7 @@ public class WMLLYesNo extends abf {
 	}
 	
 	public void a(int i, int j, float f) {
-		t_();
+		u_();
 		a(u, "\247cAre you sure you want to reset ALL settings to their defaults?", q / 2, r / 2 - 20, 0xffffff);
 		WMLLOptions.renderWMLLVersion();
 		super.a(i, j, f);
