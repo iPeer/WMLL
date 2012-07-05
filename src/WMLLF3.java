@@ -63,7 +63,7 @@ public class WMLLF3 {
 		double x = player.t;
 		double y = player.u;
 		double z = player.v;
-		double f = ix.c((double)((player.y * 4F) / 360F) + 0.5D) & 3;
+		double f = ix.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
 		String roundingFormat = "#0";
 		DecimalFormat d = new DecimalFormat(roundingFormat);
 		String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+wmll.getPlayerDirection(Integer.parseInt(d.format(f)))+")";

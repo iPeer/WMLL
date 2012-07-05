@@ -26,7 +26,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 734";
+		return "Test 735";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -250,7 +250,7 @@ public class WMLL {
 				double x = player.t;
 				double y = player.u;
 				double z = player.v;
-				double f = ix.c((double)((player.y * 4F) / 360F) + 0.5D) & 3;
+				double f = ix.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
 				NumberFormat d = new DecimalFormat("#0.00");
 				String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection((int)f)+")";
 				drawString(coords, 2, out, 0xffffff);
@@ -436,6 +436,7 @@ public class WMLL {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private adn getWorldClass() {
 		return thePlayer().p;
 	}
@@ -657,12 +658,12 @@ public class WMLL {
 	}
 
 	public int[] getPlayerCoordinates() {
-		int[] a = {ix.c(thePlayer().t), ix.c(thePlayer().u - 1), ix.c(thePlayer().v), ix.c((double)((thePlayer().y * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().t, (int)thePlayer().y, (int)thePlayer().v};
+		int[] a = {ix.c(thePlayer().t), ix.c(thePlayer().u - 1), ix.c(thePlayer().v), ix.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().t, (int)thePlayer().u, (int)thePlayer().v};
 		return a;
 	}
 
 	public double[] getPlayerCoordinatesAsDouble() {
-		double[] a = {thePlayer().t, thePlayer().u, thePlayer().v, ix.c((double)((thePlayer().y * 4F) / 360F) + 0.5D) & 3};
+		double[] a = {thePlayer().t, thePlayer().u, thePlayer().v, ix.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3};
 		return a;
 	}
 
