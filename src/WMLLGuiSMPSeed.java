@@ -1,15 +1,15 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiSMPSeed extends abm {
+public class WMLLGuiSMPSeed extends apm {
 	
 	protected WMLL wmll;
-	private abm parent;
+	private apm parent;
 	private String title;
 	
-	private aoj seedBox;
+	private aor seedBox;
 
-	public WMLLGuiSMPSeed(WMLL wmll, abm parent) {
+	public WMLLGuiSMPSeed(WMLL wmll, apm parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.title = "WMLL SMP Seed Configuration";
@@ -17,33 +17,33 @@ public class WMLLGuiSMPSeed extends abm {
 	@SuppressWarnings("unchecked")
 	public void c() {
 		Keyboard.enableRepeatEvents(true);
-		s.clear();
+		h.clear();
 		byte o = -16;
 		if (WMLL.debugClassPresent)
-			s.add(new ain(9001, q - 52, r - 22, 50, 20, "Reload"));
+			h.add(new aog(9001, f - 52, g - 22, 50, 20, "Reload"));
 		/*
 		 * New Editbox:
 		 * new aoj(Gui, fontrenderer, posx, posy, width, height, default text);
 		 */
-		seedBox = new aoj(/*this,*/ u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
-		//s.add(seedBox);
+		seedBox = new aor(/*this,*/ k, f / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
+		//h.add(seedBox);
 		seedBox.a(72);
 		if (wmll.getWorldSeed() != 0)
 			seedBox.a(Long.toString(wmll.getWorldSeed()));
 		seedBox.b(true);
-		s.add(new ain(0, q / 2 - 100, r / 4 + 90 + o, "Save Seed"));
+		h.add(new aog(0, f / 2 - 100, g / 4 + 90 + o, "Save Seed"));
 	}
 	
-	protected void a(ain b) {
+	protected void a(aog b) {
 		if (b.f == 9001) {
-			p.a(new WMLLGuiSMPSeed(wmll, parent));
+			e.a(new WMLLGuiSMPSeed(wmll, parent));
 		}
 		else if (b.f == 0) {
 			if (!seedBox.b().equals("")) {
 				System.out.println(true+ " | "+seedBox.b());
 				WMLL.options.put("Seed:"+wmll.getWorldName().toLowerCase(), seedBox.b());
 			}
-			p.a(parent);
+			e.a(parent);
 		}
 	}
 	
@@ -53,8 +53,8 @@ public class WMLLGuiSMPSeed extends abm {
 	
 	protected void a(char c, int i) {
 		if (Keyboard.KEY_ESCAPE == i)
-			p.a(parent);
-		else if (seedBox.j())
+			e.a(parent);
+		else if (seedBox.l())
 			seedBox.a(c, i);
 //		else
 //			super.a(c, i);
@@ -66,11 +66,11 @@ public class WMLLGuiSMPSeed extends abm {
 	}
 	
 	public void a(int i, int j, float f) {
-		u_();
+		v_();
 		// (fontrenderer, text, x, y, colour)
-		a(u, title, q / 2, 20, 0xffffff);
-		a(u, "If you know the seed for this server, you can enter it here.", q / 2, 80, 0xffffff);
-		a(u, "This will enable both the seed display and allow Slime chunk detection.", q / 2, 90, 0xffffff);	
+		a(k, title, this.f / 2, 20, 0xffffff);
+		a(k, "If you know the seed for this server, you can enter it here.", this.f / 2, 80, 0xffffff);
+		a(k, "This will enable both the seed display and allow Slime chunk detection.", this.f / 2, 90, 0xffffff);	
 		seedBox.f();
 		WMLLOptions.renderWMLLVersion();
 		super.a(i, j, f);

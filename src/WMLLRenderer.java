@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public class WMLLRenderer extends st {
+public class WMLLRenderer extends aow {
 
 	public int updateVersion = 0;
 	private int StringY = 12, notifyTick = 200, StringY1 = 50, notifyTick1 = 800;
@@ -59,7 +59,7 @@ public class WMLLRenderer extends st {
 	}
 
 	public void renderLightImage(int i) {
-		mc.p.b(mc.p.b("/ipeer/wmll/imagesheet.png"));
+		mc.o.b(mc.o.b("/ipeer/wmll/imagesheet.png"));
 		GL11.glColor3f(1, 1, 1);
 		//(x, y, imageposx, imageposy, imagew, imageh);
 		int pos = WMLL.outputLocation;
@@ -89,7 +89,7 @@ public class WMLLRenderer extends st {
 	}
 
 	public void renderIndicatorImages(int i, int j, int k, boolean s, boolean c) {
-		mc.p.b(mc.p.b("/ipeer/wmll/imagesheet.png"));
+		mc.o.b(mc.o.b("/ipeer/wmll/imagesheet.png"));
 		GL11.glColor3f(1, 1, 1);
 		//(x, y, imageposx, imageposy, imagew, imageh);
 		// Hostile mobs

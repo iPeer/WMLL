@@ -5,90 +5,90 @@ import java.util.Properties;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiLightLevel extends abm {
+public class WMLLGuiLightLevel extends apm {
 	
 	protected WMLL wmll;
-	private abm parent;
+	private apm parent;
 	private String title;
 	private Properties outputOptions;
 	private String lightString;
 	private int page = 1;
-	private ain parameterButton, colouringButton, doneButton;
-	private aoj lightEditbox, skyEditbox, rawEditbox, blockEditbox, lightLevelEditbox;
-	private final List<aoj> page3editboxes = new ArrayList<aoj>();
+	private aog parameterButton, colouringButton, doneButton;
+	private aor lightEditbox, skyEditbox, rawEditbox, blockEditbox, lightLevelEditbox;
+	private final List<aor> page3editboxes = new ArrayList<aor>();
 
-	public WMLLGuiLightLevel(WMLL w, abm parent) {
+	public WMLLGuiLightLevel(WMLL w, apm parent) {
 		this.wmll = w;
 		this.parent = parent;
 		title = "WMLL Light Level Customization";
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void c() {
+	public void w_() {
 		outputOptions = WMLL.outputOptions;
 		if (outputOptions == null)
 			outputOptions = new Properties();
 		byte o = -16;
-		s.clear();
+		h.clear();
 		
-		doneButton = new ain(0, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done");
-		s.add(doneButton);
+		doneButton = new aog(0, f / 2 - 112, g / 4 + 150 + o, 226, 20, "Done");
+		h.add(doneButton);
 		
 		int a = wmll.getFontRenderer().a("Parameter Help") + 10;
-		parameterButton = new ain(1, (q - a) / 2, r / 4 + 65 + o, a, 20, "Parameter Help");
-		s.add(parameterButton);
+		parameterButton = new aog(1, (f - a) / 2, g / 4 + 65 + o, a, 20, "Parameter Help");
+		h.add(parameterButton);
 		
 		a = wmll.getFontRenderer().a("Colouring Options...") + 10;
-		colouringButton = new ain(2, (q - a) / 2, r / 4 + 75, a, 20, "Colouring Options...");
-		s.add(colouringButton);
+		colouringButton = new aog(2, (f - a) / 2, g / 4 + 75, a, 20, "Colouring Options...");
+		h.add(colouringButton);
 		
 		/*
 		 * New Editbox:
-		 * new aoj(fontrenderer, posx, posy, width, height);
+		 * new aor(fontrenderer, posx, posy, width, height);
 		 */
-		lightLevelEditbox = new aoj(/*this,*/ u, q / 2 - ((wmll.getWindowSize().a() - 20) / 2), 70, wmll.getWindowSize().a() - 20, 20/*, outputOptions.getProperty("lightString", "Light level: %LightLevel%")*/);
+		lightLevelEditbox = new aor(/*this,*/ k, f / 2 - ((wmll.getWindowSize().a() - 20) / 2), 70, wmll.getWindowSize().a() - 20, 20/*, outputOptions.getProperty("lightString", "Light level: %LightLevel%")*/);
 		lightLevelEditbox.f(76);
 		lightLevelEditbox.a(outputOptions.getProperty("lightString", "Light level: %LightLevel%"));
 		//lightLevelEditbox.a = true;
 		lightLevelEditbox.b(true);
 		
-		blockEditbox = new aoj(u, q / 2 - 10, 43, 20, 10);
+		blockEditbox = new aor(k, f / 2 - 10, 43, 20, 10);
 		blockEditbox.f(2);
 		blockEditbox.a(outputOptions.getProperty("highlightBlock", "8"));
 		page3editboxes.add(blockEditbox);
 		
-		skyEditbox = new aoj( u, q / 2 - 10, 73, 20, 10);
+		skyEditbox = new aor(k, f / 2 - 10, 73, 20, 10);
 		skyEditbox.a(outputOptions.getProperty("highlightSky", "8"));
 		skyEditbox.f(2);
 		page3editboxes.add(skyEditbox);
 		
-		rawEditbox = new aoj(u, q / 2 - 10, 103, 20, 10);
+		rawEditbox = new aor(k, f / 2 - 10, 103, 20, 10);
 		rawEditbox.f(2);
 		rawEditbox.a(outputOptions.getProperty("highlightRaw", "8"));
 		page3editboxes.add(rawEditbox);
 		
-		lightEditbox = new aoj(u, q / 2 - 10, 133, 20, 10);
+		lightEditbox = new aor(k, f / 2 - 10, 133, 20, 10);
 		lightEditbox.f(2);
 		lightEditbox.a(outputOptions.getProperty("highlightLight", "8"));
 		page3editboxes.add(lightEditbox);
 		
 		if (WMLL.debugClassPresent)
-			s.add(new ain(9001, q - 52, r - 22, 50, 20, "Reload"));
+			h.add(new aog(9001, f - 52, g - 22, 50, 20, "Reload"));
 		generateLightStringPreview();
 	}
 	
-	protected void a(ain b) {
+	protected void a(aog b) {
 		if (b.f == 0) {
 			if (page == 1) {
 				performSave();
-				p.a(parent);
+				e.a(parent);
 			}
 			else if (page >= 2) {
 				if (page == 2)
 					page--;
 				else 
 					page = 1;
-				parameterButton.i = colouringButton.i = true;
+				parameterButton.g = colouringButton.g = true;
 				doneButton.e = "Done";
 				for (int x = 0; x < page3editboxes.size(); x++) {
 					page3editboxes.get(x).b(false);
@@ -101,16 +101,16 @@ public class WMLLGuiLightLevel extends abm {
 			}
 		}
 		else if (b.f == 9001) // Debug button
-			p.a(new WMLLGuiLightLevel(wmll, parent));
+			e.a(new WMLLGuiLightLevel(wmll, parent));
 		else if (b.f == 1 || b.f == 2) {
 			if (b.f == 2) {
 				page = 3;
-				b.i = parameterButton.i = false;
+				b.g = parameterButton.g = false;
 				doneButton.e = "<<";
 			}
 			else {
 				page++;
-				b.i = colouringButton.i = false;
+				b.g = colouringButton.g = false;
 				doneButton.e = "<<";
 			}
 			lightLevelEditbox.b(false);
@@ -121,19 +121,19 @@ public class WMLLGuiLightLevel extends abm {
 	protected void a(char c, int i) {
 		if (Keyboard.KEY_ESCAPE == i) {
 			performSave();
-			p.a(parent);
+			e.a(parent);
 		}
-		else if (lightLevelEditbox.j()) {
+		else if (lightLevelEditbox.l()) {
 			lightLevelEditbox.a(c, i);
 			generateLightStringPreview();
 		}
-		else if (blockEditbox.j())
+		else if (blockEditbox.l())
 			blockEditbox.a(c, i);
-		else if (lightEditbox.j())
+		else if (lightEditbox.l())
 			lightEditbox.a(c, i);
-		else if (rawEditbox.j())
+		else if (rawEditbox.l())
 			rawEditbox.a(c, i);
-		else if (skyEditbox.j())
+		else if (skyEditbox.l())
 			skyEditbox.a(c, i);
 		else
 			super.a(c, i);
@@ -141,56 +141,56 @@ public class WMLLGuiLightLevel extends abm {
 	
 	public void a(int i, int j, float f) {
 		// (fontrenderer, text, x, y, colour)
-		u_();
+		v_();
 		if (page == 1)
-			a(u, title, q / 2, 20, 0xffffff);
+			a(k, title, this.f / 2, 20, 0xffffff);
 		WMLLOptions.renderWMLLVersion();
 		if (page == 1) {
 			lightLevelEditbox.f();
-			a(u, lightString, q / 2, 95, 0xffffff);
+			a(k, lightString, this.f / 2, 95, 0xffffff);
 		}
 		else if (page == 2) {
-			a(u, "Parameters", q / 2, 15, 0xffffff);
+			a(k, "Parameters", this.f / 2, 15, 0xffffff);
 			
 			String b = "\247c%LightLevel%";
-			a(u, b, q / 2, 45, 0xffffff);
+			a(k, b, this.f / 2, 45, 0xffffff);
 			b = "Returns the current light level.";
-			a(u, b, q / 2, 55, 0xffffff);
+			a(k, b, this.f / 2, 55, 0xffffff);
 
 			b = "\247c%RawLight%";
-			a(u, b, q / 2, 65, 0xffffff);
+			a(k, b, this.f / 2, 65, 0xffffff);
 			b = "Returns the current raw light level.";
-			a(u, b, q / 2, 75, 0xffffff);
+			a(k, b, this.f / 2, 75, 0xffffff);
 
 			b = "\247c%SkyLight%";
-			a(u, b, q / 2, 85, 0xffffff);
+			a(k, b, this.f / 2, 85, 0xffffff);
 			b = "Returns the sky's current light level.";
-			a(u, b, q / 2, 95, 0xffffff);
+			a(k, b, this.f / 2, 95, 0xffffff);
 
 			b = "\247c%BlockLight%";
-			a(u, b, q / 2, 105, 0xffffff);
+			a(k, b, this.f / 2, 105, 0xffffff);
 			b = "Returns the block's light level.";
-			a(u, b, q / 2, 115, 0xffffff);
+			a(k, b, this.f / 2, 115, 0xffffff);
 			
 			b = "\247c%Biome%";
-			a(u, b, q / 2, 125, 0xffffff);
+			a(k, b, this.f / 2, 125, 0xffffff);
 			b = "Returns the current biome.";
-			a(u, b, q / 2, 135, 0xffffff);
+			a(k, b, this.f / 2, 135, 0xffffff);
 			
 			b = "\247c%x%\247r, \247c%y% \247r&\247c %z%";
-			a(u, b, q / 2 + 15, 145, 0xffffff);
+			a(k, b, this.f / 2 + 15, 145, 0xffffff);
 			b = "Return the coordinate repective to the letter.";
-			a(u, b, q / 2, 155, 0xffffff);
+			a(k, b, this.f / 2, 155, 0xffffff);
 		}
 		else if (page == 3) {
 			for (int x = 0; x < page3editboxes.size(); x++) {
 				page3editboxes.get(x).f();
 			}
-			a(u, "Highlight block light when less than...", q / 2, 30, 0xffffff);
-			a(u, "Highlight sky light when less than...", q / 2, 60, 0xffffff);
-			a(u, "Highlight raw light when less than...", q / 2, 90, 0xffffff);
-			a(u, "Highlight light level when less than...", q / 2, 120, 0xffffff);
-			a(u, "\247cSetting a value to 0 will disable highlighting for that output", q / 2, 160, 0xffffff);
+			a(k, "Highlight block light when less than...", this.f / 2, 30, 0xffffff);
+			a(k, "Highlight sky light when less than...", this.f / 2, 60, 0xffffff);
+			a(k, "Highlight raw light when less than...", this.f / 2, 90, 0xffffff);
+			a(k, "Highlight light level when less than...", this.f / 2, 120, 0xffffff);
+			a(k, "\247cSetting a value to 0 will disable highlighting for that output", this.f / 2, 160, 0xffffff);
 		}
 		super.a(i, j, f);
 	}

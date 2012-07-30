@@ -26,9 +26,9 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 735";
+		return "Test 740";
 	}
-	public static final List<Integer> blockBlackList = Arrays.asList(0,8,9,44,20);
+	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
 	public static WMLL i = new WMLL();
 	public static boolean Enabled = true;
@@ -43,8 +43,8 @@ public class WMLL {
 	public static int clockSetting;
 	public static boolean optionsOpen = false;
 	public static int[] playerPos;
+	public static boolean debugClassPresent = false;
 	public static boolean militaryclock;
-	public static boolean debugClassPresent;
 	public String worldNameDebug = "";
 
 	public boolean wmllOverrideF3;
@@ -68,6 +68,7 @@ public class WMLL {
 	private String lightString = "Dat Easter Egg";
 	private long lastF4Press = 0;
 	private boolean wmllF3Output = false;
+	private aou fontRenderer;
 
 	protected WMLLCompatibility wmllCompatibility;
 
@@ -81,16 +82,16 @@ public class WMLL {
 		fieldNames.put("SpawnListEntry", "a");
 		fieldNames.put("localServerWorldName", "b");
 		fieldNames.put("worldSeed", "a");
-		Rei = ReiUseMl = debugClassPresent = RadarBro = false;
+		Rei = ReiUseMl = RadarBro = false;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		outputOptionsFile = new File(Minecraft.a("minecraft"), "WMLLOutput.properties");
 		wmllCompatibility = new WMLLCompatibility();
 		debug("[WMLL] Settings file: "+settingsFile);
 		loadOptions();
-		if (getClass().getClassLoader().getResource("WMLLDebug.class") != null) {
-			debugClassPresent = true;
-			debugActive = true;
+		try {
+			debugClassPresent = !(WMLL.class.getProtectionDomain().getCodeSource().getLocation().getPath()).endsWith(".jar");
 		}
+		catch (Exception e1) { }
 		if (getClass().getClassLoader().getResource("mod_ReiMinimap.class") != null) {
 			Rei = true;
 			ReiUseMl = ReiMinimap.instance.useModloader;
@@ -125,6 +126,7 @@ public class WMLL {
 			wmllRenderer = new WMLLRenderer(mc, this);
 			wmllF3 = new WMLLF3(mc, this);
 			ranInit = true;
+			this.fontRenderer = h.p;
 			(new Thread(wmllUpdateCheck)).start();
 		}
 		if (mcDebugOpen() || wmllF3Output) {
@@ -144,8 +146,6 @@ public class WMLL {
 			catch (NoClassDefFoundError n1) { }
 			catch (NoSuchFieldError n2) { }
 			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true")) && !Boolean.parseBoolean(options.getProperty("AllOutputsOff", "false"));
-			if (debugClassPresent)
-				WMLLDebug.onGuiTick();
 			if (WMLLDebugActive()) {
 				int x = getPlayerCoordinates()[0];
 				int z = getPlayerCoordinates()[2];
@@ -179,9 +179,8 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 12, 0xffffff);
 				a = worldNameDebug;
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 11, 0xffffff);
-				a = "Seed: "+getWorldSeed()+", "+(thePlayer() instanceof ajv);
+				a = "S: "+canBlockSeeTheSky(x, getPlayerCoordinates()[1], z);
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 13, 0xffffff);
-
 			}
 			WMLLCheckKeys();
 			if (!Enabled)
@@ -246,11 +245,11 @@ public class WMLL {
 					out++;
 				//				if (getDimension() == 1)
 				//					out--;
-				ajv player = thePlayer();
+				jv player = thePlayer();
 				double x = player.t;
 				double y = player.u;
 				double z = player.v;
-				double f = ix.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
+				double f = ig.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
 				NumberFormat d = new DecimalFormat("#0.00");
 				String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection((int)f)+")";
 				drawString(coords, 2, out, 0xffffff);
@@ -427,71 +426,66 @@ public class WMLL {
 	//		return getChunk(0 ,0).e;
 	//	}
 
-	private mn getWorld() {
+	private atc getWorld() {
 		try {
-			return mc.f;
+			return mc.e;
 		}
 		catch (NullPointerException n) {
 			return null;
 		}
 	}
 
-	@SuppressWarnings("unused")
-	private adn getWorldClass() {
-		return thePlayer().p;
-	}
-
 	public String getWorldName() {
-			try {
-				Object obj = thePlayer();
-				Field f = obj.getClass().getDeclaredField(getField("sendQueue")); // sendQueue
-				f.setAccessible(true);
-				obj = f.get(obj);
-				worldNameDebug = obj.toString();
-				Field f1 = obj.getClass().getDeclaredField(getField("netManager")); // netManager
-				f1.setAccessible(true);
-				obj = f1.get(obj);
-				worldNameDebug = worldNameDebug+", "+obj.toString();
-				Field f2;
-				if (!isMultiplayer())
-					f2 = obj.getClass().getDeclaredField(getField("SPremoteSocketAddress")); // remoteSocketAddress
+		try {
+			Object obj = thePlayer();
+			Field f = obj.getClass().getDeclaredField("a"); // sendQueue
+			f.setAccessible(true);
+			obj = f.get(obj);
+			worldNameDebug = obj.toString();
+			Field f1 = obj.getClass().getDeclaredField(getField("netManager")); // netManager
+			f1.setAccessible(true);
+			obj = f1.get(obj);
+			worldNameDebug = worldNameDebug+", "+obj.toString();
+			Field f2;
+			if (!isMultiplayer())
+				f2 = obj.getClass().getDeclaredField(getField("SPremoteSocketAddress")); // remoteSocketAddress
 
-				else
-					f2 = obj.getClass().getDeclaredField(getField("remoteSocketAddress"));
-				f2.setAccessible(true);
-				SocketAddress a = (SocketAddress)f2.get(obj);
-				String s = a.toString();
-				String server = s.split("/")[0].split(":")[0];
-				if (server == null || server.equals(""))
-					server = s.split("/")[1].split(":")[0];
-				String port = s.split(":")[1];
-				if (!isMultiplayer())
-					return "localServer";
-				return server+":"+port;	
-			}
-			catch (Exception e) {
-				return e.getMessage();
-			}
+			else
+				f2 = obj.getClass().getDeclaredField(getField("remoteSocketAddress"));
+			f2.setAccessible(true);
+			SocketAddress a = (SocketAddress)f2.get(obj);
+			String s = a.toString();
+			String server = s.split("/")[0].split(":")[0];
+			if (server == null || server.equals(""))
+				server = s.split("/")[1].split(":")[0];
+			String port = s.split(":")[1];
+			if (!isMultiplayer())
+				return "localServer";
+			return server+":"+port;	
+		}
+		catch (Exception e) {
+			return e.getMessage();
+		}
 	}
 
 	//	public String worldName() {
 	//		return worldInstance().m()+", "+worldInstance().n();
 	//	}
 
-	public rm getFontRenderer() {
-		return mc.q;
+	public aou getFontRenderer() {
+		return this.fontRenderer;
 	}
 
-	public anq getWindowSize() {
-		return new anq(mc.z, mc.d, mc.e);
+	public apn getWindowSize() {
+		return new apn(mc.y, mc.c, mc.d);
 	}
 
 	private boolean mcDebugOpen() {
-		return getGameSettings().M;
+		return getGameSettings().P;
 	}
 
-	private la getGameSettings() {
-		return mc.z;
+	private any getGameSettings() {
+		return mc.y;
 	}
 
 	public boolean isMultiplayer() {
@@ -502,22 +496,22 @@ public class WMLL {
 		if (y < 0 || y > 255) 
 			return 0;
 		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(acm.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+		return getChunk(playerPos[0], playerPos[2]).a(va.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
 	}
 
 	public int getRawLightLevel(int x, int y, int z) {
 		if (y < 0 || y > 255) 
 			return 0;
 		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(acm.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+		return getChunk(playerPos[0], playerPos[2]).a(va.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
 	}
-	
+
 	public int getBlockLight (int i, int j, int k) {
 		if (j < 0 || j > 255)
 			return 0;
-		return getChunk(i, k).a(acm.b, i & 0xf, j, k & 0xf);
+		return getChunk(i, k).a(va.b, i & 0xf, j, k & 0xf);
 	}
-	
+
 	@Deprecated
 	public int getLightLevel(int j, int k, int l) {
 		if (k < 0 || k > 255)
@@ -543,8 +537,8 @@ public class WMLL {
 		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).G);
 	}
 
-	private wr getBiomeGenBase() {
-		return getWorld().i();
+	private vo getBiomeGenBase() {
+		return getWorld().q();
 	}
 
 	private boolean playerIsStandingOnBlock(int id) {
@@ -562,42 +556,42 @@ public class WMLL {
 	}
 
 	private boolean canBlockSeeTheSky(int x, int y, int z) {
-		return getWorld().p(x, y, z);
+		return getWorld().j(x, y, z);
 	}
 
-	public apt entityPlayer() {
+	public jv entityPlayer() {
 		return mc.h;
 	}
 
-	public ajv thePlayer() {
-		return mc.i;
+	public jv thePlayer() {
+		return mc.h;
 	}
 
-	public hf playerEntity() {
-		return mc.k;
+	public aof playerEntity() {
+		return mc.j;
 	}
 
 	public String getPlayerName() {
 		return playerEntity().b;
 	}
 
-	public wj getPlayerController() {
-		return mc.c;
+	public atb getPlayerController() {
+		return mc.b;
 	}
 
 	public boolean isCreative() {
 		return !getPlayerController().b();
 	}
 
-	public act worldInfo() {
-		return getWorld().x;
+	public aec worldInfo() {
+		return getWorld().A;
 	}
 
 	protected Minecraft getMCInstance() {
 		return mc;
 	}
 
-	private ajp getChunk(int x, int z) {
+	private wk getChunk(int x, int z) {
 		return getWorld().d(x, z);
 	}
 
@@ -607,7 +601,7 @@ public class WMLL {
 
 	private boolean canSlimesSpawnHere(int x, int z) {
 		if (isMultiplayer()) {
-			ajp chunk = getChunk(x, z);
+			wk chunk = getChunk(x, z);
 			int xPos = chunk.g;
 			int zPos = chunk.h;
 			return new Random(getWorldSeed() + (long)(xPos * xPos * 0x4c1906) + (long)(xPos * 0x5ac0db) + (long)(zPos * zPos) * 0x4307a7L + (long) (zPos * 0x5f24f) ^ 0x3ad8025f).nextInt(10) == 0;
@@ -615,16 +609,16 @@ public class WMLL {
 		return getChunk(x, z).a(0x3ad8025fL).nextInt(10) == 0 && getWorldSeed() != 0L;
 	}
 
-	private atp getWorldProvider() {
-		return getWorld().t;
+	private xb getWorldProvider() {
+		return getWorld().w;
 	}
 
-	private dd getChunkProvider() {
-		return getWorldProvider().b();
+	private wh getChunkProvider() {
+		return getWorldProvider().c();
 	}
 
 	public long getWorldTime() {
-		return getWorld().u();
+		return getWorld().D();
 	}
 
 	private String getFormattedWorldTime() {
@@ -654,38 +648,38 @@ public class WMLL {
 	}
 
 	private boolean isPlayerSleeping() {
-		return thePlayer().aE();
+		return thePlayer().bn();
 	}
 
 	public int[] getPlayerCoordinates() {
-		int[] a = {ix.c(thePlayer().t), ix.c(thePlayer().u - 1), ix.c(thePlayer().v), ix.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().t, (int)thePlayer().u, (int)thePlayer().v};
+		int[] a = {ig.c(thePlayer().t), ig.c(thePlayer().u - 1), ig.c(thePlayer().v), ig.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().t, (int)thePlayer().u, (int)thePlayer().v};
 		return a;
 	}
 
 	public double[] getPlayerCoordinatesAsDouble() {
-		double[] a = {thePlayer().t, thePlayer().u, thePlayer().v, ix.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3};
+		double[] a = {thePlayer().t, thePlayer().u, thePlayer().v, ig.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3};
 		return a;
 	}
 
 	public long getWorldSeed() {
-//		if (getWorldName().equals("localServer"))
-//			((ajv)thePlayer()).o.t();
-//		else {
-			try {
-				return Long.parseLong(options.getProperty("Seed:"+getWorldName().toLowerCase(), "0"));
-			}
-			catch (NumberFormatException n) {
-				return 0L;
-			}
-			catch (NullPointerException n1) {
-				return 0L;
-			}
+		//		if (getWorldName().equals("localServer"))
+		//			((ajv)thePlayer()).o.t();
+		//		else {
+		try {
+			return Long.parseLong(options.getProperty("Seed:"+getWorldName().toLowerCase(), "0"));
+		}
+		catch (NumberFormatException n) {
+			return 0L;
+		}
+		catch (NullPointerException n1) {
+			return 0L;
+		}
 		//}
 		//return getChunk(0, 0).e.x.c().b();
 	}
 
 	public String getFPSString() {
-		return mc.L;
+		return mc.K;
 	}
 
 	public static boolean WMLLDebugActive() {
@@ -730,8 +724,8 @@ public class WMLL {
 			if (options == null)
 				options = new Properties();
 			options.setProperty("WMLLI", Integer.toString(WMLLI));
-			if (!debugClassPresent)
-				options.setProperty("WMLLD", Boolean.toString(debugActive));
+			//			if (!debugClassPresent)
+			//				options.setProperty("WMLLD", Boolean.toString(debugActive));
 			options.setProperty("FirstRun", Boolean.toString(firstRun));
 			options.setProperty("version", Integer.toString(propertiesVersion));
 			options.setProperty("F4", Integer.toString(F4Key));
@@ -762,8 +756,8 @@ public class WMLL {
 			if (outputOptionsFile.exists())
 				outputOptions.load(new FileInputStream(outputOptionsFile));
 			firstRun = Integer.parseInt(options.getProperty("version", "0")) < propertiesVersion ? true : false;
-			if (!debugClassPresent)
-				debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
+			//			if (!debugClassPresent)
+			//				debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
 			WMLLI = Integer.parseInt(options.getProperty("WMLLI", "0"));
 			useImages = Boolean.parseBoolean(options.getProperty("useImages", "false"));
 			TextColour = Integer.parseInt(options.getProperty("TextColour", "15"));
@@ -803,12 +797,6 @@ public class WMLL {
 	}
 
 	private void WMLLCheckKeys() {
-		if (Keyboard.isKeyDown(Keyboard.KEY_F7) && debugClassPresent)
-			WMLLDebug.setTimeToNight();
-		if (Keyboard.isKeyDown(Keyboard.KEY_F9) && debugClassPresent)
-			WMLLDebug.setTimeToDay();
-		if (Keyboard.isKeyDown(Keyboard.KEY_G)&& debugClassPresent)
-			WMLLDebug.toggleGameMode();
 		if (Keyboard.isKeyDown(F4Key) && System.currentTimeMillis() - lastF4Press > 150) {
 			lastF4Press = System.currentTimeMillis();
 			if (Keyboard.isKeyDown(29) && mc.s == null)
@@ -833,7 +821,7 @@ public class WMLL {
 
 	private void toggleF3Override() {
 		wmllF3Output = !wmllF3Output;
-		getGameSettings().M = false;
+		getGameSettings().P = false;
 	}
 
 	public int getFPSThreshold() {
@@ -895,7 +883,7 @@ public class WMLL {
 	}
 
 	public static String getMinecraftVersion() {
-		return "12w27a";
+		return "1.3.1";
 	}
 
 	public boolean areAllOutputsDisabled() {
