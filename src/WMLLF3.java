@@ -7,12 +7,14 @@ public class WMLLF3 {
 	
 	protected Minecraft mc;
 	protected WMLL wmll;
+	boolean showSeed;
 	
-	private final String MINECRAFT_VERSION = "1.2.*";
+	private String MINECRAFT_VERSION = "";
 
 	public WMLLF3(Minecraft mc, WMLL wmll) {
 		this.mc = mc;
 		this.wmll = wmll;
+		MINECRAFT_VERSION = WMLL.getMinecraftVersion();
 	}
 	
 	public void draw() {
@@ -54,14 +56,14 @@ public class WMLLF3 {
 		wmll.drawStringUsingPixels(mc.o(), 2, 62, 0xffffff);
 		
 		// WMLL Version
-		wmll.drawStringUsingPixels("WMLL "+WMLL.WMLLVER, 2, 72, 0xffffff);
+		wmll.drawStringUsingPixels("WMLL "+WMLL.wmllVersion(), 2, 72, 0xffffff);
 		
 		// Coordinates
-		acq player = wmll.thePlayer();
-		double x = player.o;
-		double y = player.p;
-		double z = player.q;
-		double f = gk.c((double)((player.u * 4F) / 360F) + 0.5D) & 3;
+		jv player = wmll.thePlayer();
+		double x = player.t;
+		double y = player.u;
+		double z = player.v;
+		double f = ig.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
 		String roundingFormat = "#0";
 		DecimalFormat d = new DecimalFormat(roundingFormat);
 		String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+wmll.getPlayerDirection(Integer.parseInt(d.format(f)))+")";
@@ -69,9 +71,20 @@ public class WMLLF3 {
 		wmll.drawStringUsingPixels(coords, 2, 92, 0xffffff);
 		
 		// Seed
-		if ((!wmll.isMultiplayer() && wmll.isSeedSet()) || wmll.showSeedWithCoords)
+		showSeed = (!wmll.isMultiplayer() && wmll.isSeedSet()) || wmll.showSeedWithCoords;
+		if (showSeed)
 			wmll.drawStringUsingPixels("Seed: "+wmll.getWorldSeed(), 2, 112, 0xffffff);
 		}
+		int[] coords = wmll.getPlayerCoordinates();
+		int x = coords[0];
+		int y = coords[1];
+		int z = coords[2];
+		int lightA = wmll.getLightLevel(x, y, z);
+		int lightB = wmll.getLightLevel(x, y+1, z);
+		
+		wmll.drawStringUsingPixels("\247nLight levels", 2, showSeed ? 132 : 112, 0xffffff);
+		wmll.drawStringUsingPixels("Head: "+lightB, 2, showSeed ? 142 : 122, 0xffffff);
+		wmll.drawStringUsingPixels("Feet: "+lightA, 2, showSeed ? 152 : 132, 0xffffff);
 		
 	}
 	

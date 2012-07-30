@@ -1,16 +1,30 @@
 import org.lwjgl.input.Keyboard;
 
-public class WMLLOptions extends vp {
+public class WMLLOptions extends apm {
+		
+	public WMLLOptions() {
+		this.wmll = WMLL.i;
+	}
+	
+	public WMLLOptions(apm parent) {
+		this.parent = parent;
+		this.wmll = WMLL.i;
+	}
 	
 	public WMLLOptions(WMLL i) {
-		title = "WMLL Configuration";
 		this.wmll = i;
 	}
 
 
+	public WMLLOptions(WMLL wmll, apm parent) {
+		this.wmll = wmll;
+		this.parent = parent;
+	}
+
+
 	@SuppressWarnings({ "unchecked", "static-access" })
-	public void c() {
-		s.clear();
+	public void w_() {
+		h.clear();
 		String debug = WMLL.WMLLDebugActive() == true ? "ON": "OFF";
 		String ikey = Keyboard.getKeyName(wmll.F4Key);
 		String clockformat = "24 hr";
@@ -23,34 +37,44 @@ public class WMLLOptions extends vp {
 		byte offset = -16;
 		/*
 		 * New button
-		 * abp((int)ID, x, y[, width, height], text)
+		 * aog((int)ID, x, y[, width, height], text)
 		 */
-		s.add(new abp(1, q / 2 - 100, r / 4 + 170 + offset, "Done"));
-		s.add(new abp(0, q / 2 - 100, r / 4 - 5 + offset, 98, 20, "Debug: "+debug));
-		s.add(new abp(2, q / 2 + 2, r / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
-		s.add(new abp(5, q / 2 - 100, r / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
-		s.add(new abp(6, q / 2 + 2, r / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
-		s.add(new abp(3, q / 2 - 100, r / 4 + 125 + offset, "Output options..."));
-		s.add(new abp(4, q / 2 - 100, r / 4 + 85 + offset, "Force options reload"));
-		//s.add(new abp(4, q / 2 - 100, r / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
+		h.add(new aog(1, f / 2 - 100, g / 4 + 150 + offset, "Done"));
+		h.add(new aog(0, f / 2 - 100, g / 4 - 5 + offset, 98, 20, "Debug: "+debug));
+		h.add(new aog(2, f / 2 + 2, g / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
+		h.add(new aog(5, f / 2 - 100, g / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
+		h.add(new aog(6, f / 2 + 2, g / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
+		h.add(new aog(3, f / 2 - 100, g / 4 + 125 + offset, "Output options..."));
+		h.add(new aog(4, f / 2 - 100, g / 4 + 85 + offset, "Reset settings to defaults"));
+		//h.add(new aog(4, f / 2 - 100, g / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
 		String enabledString = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(wmll.Enabled ? "Yes" : "No");
-		int i = wmll.getFontRenderer().a(enabledString);
-		s.add(new abp(8, (q - (i + 10)) / 2, r / 4 + 45 + offset, i + 10, 20, enabledString));
+		int i = 0;
+		try {
+			i = wmll.getFontRenderer().a(enabledString);
+		}
+		catch (Exception e1) {
+			System.err.println("Nope");
+		}
+		h.add(new aog(8, (f - (i + 10)) / 2, g / 4 + 45 + offset, i + 10, 20, enabledString));
 		if (WMLL.debugClassPresent)
-			s.add(new abp(9001, 2, r - 22, 50, 20, "Reload"));
+			h.add(new aog(9001, f - 52, g - 22, 50, 20, "Reload"));
 		if (!wmll.Enabled)
 			for (int x = 3; x < 6; x++)
-				((abp)s.get(x)).h = false;
+				((aog)h.get(x)).h = false;
 	}
 
 	@SuppressWarnings("static-access")
-	protected void a(abp button) {
+	protected void a(aog button) {
 		if (button.f == 1) {
-			//p.a(null);
 			wmll.optionsOpen = false;
 			wmll.saveOptions();
-			p.s = null;
-			p.g();
+			if (parent == null) {
+				e.s = null;
+				e.g();
+			}
+			else {
+				e.a(parent);
+			}
 		}
 		if (button.f == 0) {
 			WMLL.toggleDebug();
@@ -62,10 +86,10 @@ public class WMLLOptions extends vp {
 			button.e = "Press a key...";
 		}
 		if (button.f == 3) {
-			p.a(new WMLLGuiOutputOptions(WMLL.i, this));
+			e.a(new WMLLGuiOutputOptions(WMLL.i, this));
 		}
 		if (button.f == 4) {
-			wmll.loadOptions();
+			e.a(new WMLLYesNo(wmll, this));
 		}
 		if (button.f == 5) {
 			int a = wmll.clockSetting;
@@ -84,11 +108,12 @@ public class WMLLOptions extends vp {
 			wmll.Enabled = !a;
 			wmll.options.setProperty("World-"+wmll.getWorldName(), Boolean.toString(!a));
 			for (int x = 3; x < 6; x++)
-				((abp)s.get(x)).h = !a;
+				((aog)h.get(x)).h = !a;
 			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(!a ? "Yes" : "No");
 		}
+
 		if (button.f == 9001) // Debug button
-			p.a(new WMLLOptions(wmll));
+			e.a(new WMLLOptions(wmll));
 	}
 
 	private static String buttonTextForClockSetting(int i) {
@@ -128,10 +153,13 @@ public class WMLLOptions extends vp {
 	}
 
 	protected void a(char c1, int i1) {
-		if (isBinding) {
+		if (i1 == Keyboard.KEY_ESCAPE && parent != null) {
+			e.a(parent);
+		}
+		else if (isBinding && i1 != Keyboard.KEY_ESCAPE) {
 			WMLL.F4Key = i1;
 			isBinding = false;
-			((abp)s.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
+			((aog)h.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
 		}
 		else {
 			super.a(c1, i1);
@@ -143,17 +171,27 @@ public class WMLLOptions extends vp {
 	}
 
 	public void a(int i, int j, float f) {
-		k();
+		v_();
 		// (fontrenderer, text, x, y, colour)
-		a(u, title, q / 2, 20, 0xffffff);
-		a(u, "\247cReloading options will undo any changes you've made!", q / 2, 150, 0xffffff);
-		int a = (q - ((wmll.getFontRenderer().a(WMLL.WMLLVER) + 2) / 2));
-		a(u, WMLL.WMLLVER, a, r - 9, 0x444444);
+		a(k, title, this.f / 2, 20, 0xffffff);
+		renderWMLLVersion();
 		super.a(i, j, f);
 	}
+	
+	public static void renderWMLLVersion() {
+		WMLL wmll = WMLL.i;
+		int r = wmll.getWindowSize().b();
+		String ver = "WMLL "+WMLL.wmllVersion()+" ("+WMLL.getMinecraftVersion()+")";
+		wmll.drawStringUsingPixels(ver, 2, r - 9, 0x444444);
+	}
+	
+	public apm getParent() {
+		return parent;
+	}
 
-	private String title;
+	private String title = "WMLL Configuration";;
 	private WMLL wmll;
+	public apm parent;
 	public static boolean isBinding;
 
 }

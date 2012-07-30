@@ -3,18 +3,18 @@ import java.util.Properties;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiOutputOptions extends vp {
+public class WMLLGuiOutputOptions extends apm {
 
 	protected WMLL wmll;
-	private vp parent;
+	private apm parent;
 	private String title;
 	private static final String[] colourNames = {"Black", "Dark Blue", "Dark Green", "Cyan", "Red", "Purple", "Orange", "Light Grey", "Dark Grey", "Lavender?", "Lime Green", "Light Blue", "Bright Red", "Pink", "Yellow", "White"};
 	private static final String[] outputLocations = {"Top Left", "Top Right", "Bottom Left", "Bottom Right"};
 	public static Properties outputOptions;
-	private abp F3TypeButton, SMPSeedButton;
+	private aog SMPSeedButton;
 
 	@SuppressWarnings("static-access")
-	public WMLLGuiOutputOptions(WMLL wmll, vp parent) {
+	public WMLLGuiOutputOptions(WMLL wmll, apm parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.outputOptions = WMLL.outputOptions;
@@ -22,47 +22,33 @@ public class WMLLGuiOutputOptions extends vp {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void c() {
-		s.clear();
-		if (outputOptions == null)
-			outputOptions = new Properties();
-		int tc = WMLL.TextColour;
-		byte o = -16;
-		/*
-		 * New button
-		 * abp((int)ID, x, y[, width, height], text)
-		 * y = y+25 for each button
-		 */
-		s.add(new abp(1, q / 2 - 112, r / 4 + 150 + o, 226, 20, "Done"));
-		//s.add(new abp(0, q / 2 - 152, r / 4 + 150 + o, 98, 20, "<<"));
-		//s.add(new abp(2, q / 2 + 2, r / 4 + 150 + o, 98, 20, ">>"));
-		s.add(new abp(3, q / 2 - 112, r / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
-		s.add(new abp(4, q / 2 + 2, r / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
-		if (WMLL.debugClassPresent)
-			s.add(new abp(9001, 2, r - 22, 50, 20, "Reload"));
-		s.add(new abp(5, q / 2 - 112, r / 4 + 120 + o, 226, 20, "Light Level options..."));
-		s.add(new abp(6, q / 2 - 112, r / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
-		s.add(F3TypeButton = new abp(7, q / 2 + 2, r / 4 + 20 + o, 112, 20, "F3 Type: "+(wmll.F3Type == 1 ? "Alternate" : "Classic")));
-		s.add(new abp(8, q / 2 - 112, r / 4 + 45 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
-		s.add(SMPSeedButton = new abp(9, q / 2 - 112, r / 4 + 98 + o, 226, 20, "Enter seed for this server..."));
-		/*		s.add(new abp(2, q / 2 + 2, r / 4 + 45 + o, 98, 20, "f"));
-		s.add(new abp(0, q / 2 - 100, r / 4 + 70 + o, 98, 20, "g"));
-		s.add(new abp(2, q / 2 + 2, r / 4 + 70 + o, 98, 20, "h"));
-		s.add(new abp(0, q / 2 - 100, r / 4 + 95 + o, 98, 20, "i"));
-		s.add(new abp(2, q / 2 + 2, r / 4 + 95 + o, 98, 20, "j"));*/
-		s.add(new abp(10, q / 2 - 112, r / 4 + 76 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
-		F3TypeButton.h = false;
-		SMPSeedButton.i = wmll.isMultiplayer();
+	public void w_() {
+			h.clear();
+			if (outputOptions == null)
+				outputOptions = new Properties();
+			int tc = WMLL.TextColour;
+			byte o = -16;
+			if (WMLL.debugClassPresent)
+				h.add(new aog(9001, f - 52, g - 22, 50, 20, "Reload"));
+			h.add(new aog(1, f / 2 - 112, g / 4 + 150 + o, 226, 20, "Done"));
+			h.add(new aog(3, f / 2 - 112, g / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
+			h.add(new aog(4, f / 2 + 2, g / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
+			h.add(new aog(5, f / 2 + 2, g / 4 + 100 + o, 112, 20, "Light Level options..."));
+			h.add(new aog(6, f / 2 - 112, g / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
+			h.add(new aog(8, f / 2 + 2, g / 4 + 20 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
+			h.add(SMPSeedButton = new aog(9, f / 2 - 112, g / 4 + 125 + o, 226, 20, "Enter seed for this server..."));
+			h.add(new aog(11, f / 2 - 112, g / 4 + 100 + o, 112, 20, "Enabled outputs..."));
+			h.add(new aog(10, f / 2 - 112, g / 4 + 75 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
+			SMPSeedButton.g = (wmll.isMultiplayer() || WMLL.debugClassPresent);
+		}
 
-	}
-
-	protected void a(abp b) {
+	protected void a(aog b) {
 		if (b.f == 1 || b.f == 2) {
 			if (b.f == 2) { // Next
 				System.out.println("NO GUI YET!");
 			}
 			else // Done
-				p.a(parent);
+				e.a(parent);
 			WMLL.outputOptions = outputOptions;
 		}
 		else if (b.f == 3) { // Output location
@@ -86,7 +72,7 @@ public class WMLLGuiOutputOptions extends vp {
 			b.e = "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No");
 		}
 		else if (b.f == 5) { // Light level options
-			p.a(new WMLLGuiLightLevel(wmll, this));
+			e.a(new WMLLGuiLightLevel(wmll, this));
 		}
 		else if (b.f == 7) {
 			int a = wmll.F3Type;
@@ -103,7 +89,7 @@ public class WMLLGuiOutputOptions extends vp {
 			b.e = "Seed w/ Coords: "+(a ? "Yes" : "No");
 		}
 		else if (b.f == 9) {
-			p.a(new WMLLGuiSMPSeed(wmll, this));
+			e.a(new WMLLGuiSMPSeed(wmll, this));
 		}
 		else if (b.f == 10) {
 			int i2 = WMLL.WMLLI;
@@ -112,29 +98,27 @@ public class WMLLGuiOutputOptions extends vp {
 				i2 = 0;
 			b.e = "Show: "+getStringForLightOption(i2);
 			WMLL.WMLLI = i2;
-		}            
+		}
+		else if (b.f == 11) {
+			e.a(new WMLLEnabledOutputs(wmll, this));
+		}
 		else if (b.f == 9001) // Debug button
-			p.a(new WMLLGuiOutputOptions(wmll, parent));
+			e.a(new WMLLGuiOutputOptions(wmll, parent));
 	}
 
 	protected void a(char c, int i) {
 		if (Keyboard.KEY_ESCAPE == i)
-			p.a(parent);
+			e.a(parent);
 		else
 			super.a(c, i);
 	}
 
 	public void a(int i, int j, float f) {
-		k();
+		v_();
 		// (fontrenderer, text, x, y, colour)
-		a(u, title, q / 2, 20, 0xffffff);
-		int a = (q - ((wmll.getFontRenderer().a(WMLL.WMLLVER) + 2) / 2));
-		a(u, WMLL.WMLLVER, a, r - 9, 0x444444);
+		a(k, title, this.f / 2, 20, 0xffffff);
+		WMLLOptions.renderWMLLVersion();
 		super.a(i, j, f);
-	}
-
-	public void e() {
-		Keyboard.enableRepeatEvents(false);
 	}
 
 	// Begin custom functions

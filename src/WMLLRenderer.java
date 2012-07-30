@@ -1,13 +1,19 @@
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 import net.minecraft.client.Minecraft;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public class WMLLRenderer extends oo {
+public class WMLLRenderer extends aow {
 
 	public int updateVersion = 0;
-	private int StringY = 12, notifyTick = 200;
+	private int StringY = 12, notifyTick = 200, StringY1 = 50, notifyTick1 = 800;
+	public Minecraft mc;
+	private WMLL wmll;
+	public boolean notifyUpdate;
+	public boolean firstRun;
 
 	public WMLLRenderer(Minecraft m, WMLL w) {
 		this.mc = m;
@@ -16,18 +22,44 @@ public class WMLLRenderer extends oo {
 
 	public void tick() {
 		if (notifyUpdate) {
-			notifyTick--;
+			if (mc.s == null)
+				notifyTick--;
 			if (notifyTick < 10)
 				StringY--;
 			if (StringY <= -13)
 				notifyUpdate = false;
 			String a = "WMLL Stable \247c"+updateVersion+"\247f is available!";
-			wmll.drawStringUsingPixels(a, (wmll.getWindowSize().a() - wmll.getFontRenderer().a(a)) / 2, StringY, 0xffffff);
+			String t = Pattern.compile("\247[0-9a-f,l-o,r]").matcher(a).replaceAll("");
+			wmll.drawStringUsingPixels(a, (wmll.getWindowSize().a() - wmll.getFontRenderer().a(t)) / 2, StringY, 0xffffff);
+		}
+		if (firstRun) {
+			String a = "";
+			if (mc.s == null)
+				notifyTick1--;
+			if (notifyTick1 >= 500)
+				a = "To cycle WMLL's outputs, press \247c"+Keyboard.getKeyName(WMLL.F4Key)+"\247e.";
+			else if (notifyTick1 < 500 && notifyTick1 >= 200)
+				a = "To configure, hit \247c"+Keyboard.getKeyName(Keyboard.KEY_ESCAPE)+"\247r and press \"WMLL Options...\" or press \247c"+Keyboard.getKeyName(29)+"\247r & \247c"+Keyboard.getKeyName(WMLL.F4Key)+"\247r.";
+			else
+				a = "Thanks for using WMLL and have a nice day! :)";
+			if (notifyTick1 < 10) {
+				StringY1 -= 2;
+			}
+			if (StringY1 <= -15) {
+				firstRun = false;
+				StringY1 = 50;
+				notifyTick1 = 800;
+				return;
+			}
+			if (StringY1 >= -14) {
+				String t = Pattern.compile("\247[0-9a-f,l-o,r]").matcher(a).replaceAll("");
+				wmll.drawStringUsingPixels(a, (wmll.getWindowSize().a() - wmll.getFontRenderer().a(t)) / 2, StringY1, 0xffffff);
+			}
 		}
 	}
 
 	public void renderLightImage(int i) {
-		mc.p.b(mc.p.b("/ipeer/wmll/imagesheet.png"));
+		mc.o.b(mc.o.b("/ipeer/wmll/imagesheet.png"));
 		GL11.glColor3f(1, 1, 1);
 		//(x, y, imageposx, imageposy, imagew, imageh);
 		int pos = WMLL.outputLocation;
@@ -57,7 +89,7 @@ public class WMLLRenderer extends oo {
 	}
 
 	public void renderIndicatorImages(int i, int j, int k, boolean s, boolean c) {
-		mc.p.b(mc.p.b("/ipeer/wmll/imagesheet.png"));
+		mc.o.b(mc.o.b("/ipeer/wmll/imagesheet.png"));
 		GL11.glColor3f(1, 1, 1);
 		//(x, y, imageposx, imageposy, imagew, imageh);
 		// Hostile mobs
@@ -142,10 +174,6 @@ public class WMLLRenderer extends oo {
 		b(x, y, imageposx, imageposy, imagewidth, imageheight);
 	}
 
-
-	public Minecraft mc;
-	private WMLL wmll;
-	public boolean notifyUpdate;
 
 }
 
