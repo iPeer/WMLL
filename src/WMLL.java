@@ -26,7 +26,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 24.1";
+		return "Stable 24";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -799,10 +799,10 @@ public class WMLL {
 	private void WMLLCheckKeys() {
 		if (Keyboard.isKeyDown(F4Key) && System.currentTimeMillis() - lastF4Press > 150) {
 			lastF4Press = System.currentTimeMillis();
-			if (Keyboard.isKeyDown(29) && mc.s == null)
+			if (Keyboard.isKeyDown(29) && mc.r == null)
 				mc.a(new WMLLOptions(this));
 			else
-				if (mc.s == null) {
+				if (mc.r == null) {
 					//&& !(mc.s instanceof acr/*GuiChat*/) && !(mc.s instanceof ars/*Sign Editing*/) && !(mc.s instanceof hw/*Book Editing*/)) {
 					if (Keyboard.isKeyDown(42)) {
 						WMLLI--;
