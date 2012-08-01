@@ -6,6 +6,7 @@ public class WMLLGuiSMPSeed extends apm {
 	protected WMLL wmll;
 	private apm parent;
 	private String title;
+	private String seed = "";
 	
 	private aor seedBox;
 
@@ -15,7 +16,7 @@ public class WMLLGuiSMPSeed extends apm {
 		this.title = "WMLL SMP Seed Configuration";
 	}
 	@SuppressWarnings("unchecked")
-	public void c() {
+	public void w_() {
 		Keyboard.enableRepeatEvents(true);
 		h.clear();
 		byte o = -16;
@@ -47,23 +48,24 @@ public class WMLLGuiSMPSeed extends apm {
 		}
 	}
 	
-	public void a() {
-		seedBox.a();
-	}
+//	public void a() {
+//		seedBox.a();
+//	}
 	
 	protected void a(char c, int i) {
-		if (Keyboard.KEY_ESCAPE == i)
-			e.a(parent);
-		else if (seedBox.l())
+		if (seedBox.l()) {
 			seedBox.a(c, i);
-//		else
-//			super.a(c, i);
+		}
+		else {
+			super.a(c, i);
+		}
+
 	}
 	
-	protected void a(int i, int j, int k) {
-		super.a(i, j, k);
-		seedBox.a(i, j, k);
-	}
+//	protected void a(int i, int j, int k) {
+//		super.a(i, j, k);
+//		seedBox.a(i, j, k);
+//	}
 	
 	public void a(int i, int j, float f) {
 		v_();
