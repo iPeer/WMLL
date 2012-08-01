@@ -70,7 +70,7 @@ public class WMLLOptions extends apm {
 			wmll.saveOptions();
 			if (parent == null) {
 				e.s = null;
-				e.g();
+				e.h();
 			}
 			else {
 				e.a(parent);
