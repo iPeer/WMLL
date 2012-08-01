@@ -88,7 +88,7 @@ public class WMLLGuiLightLevel extends apm {
 					page--;
 				else 
 					page = 1;
-				parameterButton.g = colouringButton.g = true;
+				parameterButton.h = colouringButton.h = true;
 				doneButton.e = "Done";
 				for (int x = 0; x < page3editboxes.size(); x++) {
 					page3editboxes.get(x).b(false);
@@ -105,12 +105,12 @@ public class WMLLGuiLightLevel extends apm {
 		else if (b.f == 1 || b.f == 2) {
 			if (b.f == 2) {
 				page = 3;
-				b.g = parameterButton.g = false;
+				b.h = parameterButton.h = false;
 				doneButton.e = "<<";
 			}
 			else {
 				page++;
-				b.g = colouringButton.g = false;
+				b.h = colouringButton.h = false;
 				doneButton.e = "<<";
 			}
 			lightLevelEditbox.b(false);
