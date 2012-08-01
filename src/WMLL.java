@@ -51,7 +51,7 @@ public class WMLL {
 	public int F3Type;
 	public boolean showSeedWithCoords;
 
-	private static final int propertiesVersion = 2;
+	private static final int propertiesVersion = 3;
 	public static File settingsFile, outputOptionsFile;
 	public static long lastUpdateCheck = 0;
 	private static final WMLLUpdateCheck wmllUpdateCheck = new WMLLUpdateCheck();
@@ -107,6 +107,7 @@ public class WMLL {
 	}
 
 	public void updategui(Minecraft h) {
+		
 		if (getWorld() != null && !wmllUpdateCheck.running) {
 			wmllUpdateCheck.start();
 		}
