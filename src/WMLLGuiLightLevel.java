@@ -25,6 +25,7 @@ public class WMLLGuiLightLevel extends apm {
 	
 	@SuppressWarnings("unchecked")
 	public void w_() {
+		Keyboard.enableRepeatEvents(true);
 		outputOptions = WMLL.outputOptions;
 		if (outputOptions == null)
 			outputOptions = new Properties();
@@ -220,9 +221,9 @@ public class WMLLGuiLightLevel extends apm {
 			lightLevelEditbox.a(i, j, k);
 	}
 	
-//	public void e() {
-//		Keyboard.enableRepeatEvents(false);
-//	}
+	public void b() {
+		Keyboard.enableRepeatEvents(false);
+	}
 	
 	// Custom functions
 	

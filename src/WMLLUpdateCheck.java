@@ -33,21 +33,25 @@ public class WMLLUpdateCheck extends Thread implements Runnable {
 	private void checkForUpdates() {
 		try {
 			WMLL.lastUpdateCheck = System.currentTimeMillis();
-			URL updateURL = new URL("http://dl.dropbox.com/u/21719562/Minecraft/Mods/WMLL/version.txt");
+			URL updateURL = new URL("http://dl.dropbox.com/u/21719562/Minecraft/Mods/WMLL/ver.txt");
 			InputStream in = updateURL.openStream();
-			Scanner scanner = new Scanner(in, "UTF-8");
+			Scanner scanner = new Scanner(in);
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
+				System.err.println(line);
 				if (line.equals("EOF"))
 					break;
 				int modver = Integer.parseInt(WMLL.wmllVersion().split(" ")[1]);
 //				if (WMLL.debugClassPresent)
 //					modver = 1;
-				int newver = Integer.parseInt(line);
+				String[] version = line.split(",");
+				int newver = Integer.parseInt(version[0]);
+				String mcVersion = version[1];
 				System.out.println("[WMLL] Version: "+modver+", "+newver);
-				if (newver > modver) {
+				if (newver > modver && !WMLL.hasUpdateBeenAnnounced(newver)) {
 					WMLL wmll = WMLL.i;
-					wmll.displayUpdateString(newver);
+					wmll.displayUpdateString(newver, mcVersion);
+					wmll.setUpdateAsAnnounced(newver);
 					in.close();
 				}
 			}

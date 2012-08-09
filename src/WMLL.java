@@ -26,7 +26,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 25";
+		return "Stable 26";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -107,7 +107,7 @@ public class WMLL {
 	}
 
 	public void updategui(Minecraft h) {
-		
+
 		if (getWorld() != null && !wmllUpdateCheck.running) {
 			wmllUpdateCheck.start();
 		}
@@ -379,6 +379,9 @@ public class WMLL {
 		int x = getPlayerCoordinates()[0];
 		int y = getPlayerCoordinates()[1];
 		int z = getPlayerCoordinates()[2];
+		double x1 = getPlayerCoordinatesAsDouble()[0];
+		double y1 = getPlayerCoordinatesAsDouble()[1];
+		double z1 = getPlayerCoordinatesAsDouble()[2];
 		int highlightSky = Integer.parseInt(outputOptions.getProperty("highlightSky", "8"));
 		int highlightBlock = Integer.parseInt(outputOptions.getProperty("highlightBlock", "8"));
 		int highlightRaw = Integer.parseInt(outputOptions.getProperty("highlightRaw", "8"));
@@ -394,6 +397,12 @@ public class WMLL {
 		Pattern fullCompass = Pattern.compile("%fullcompass%", Pattern.CASE_INSENSITIVE);
 		Pattern chunkUpdates = Pattern.compile("%(cu|chunkupdates)%", Pattern.CASE_INSENSITIVE);
 		Pattern heading = Pattern.compile("%heading%", Pattern.CASE_INSENSITIVE);
+		Pattern fx = Pattern.compile("%fx%", Pattern.CASE_INSENSITIVE);
+		Pattern fy = Pattern.compile("%fy%", Pattern.CASE_INSENSITIVE);
+		Pattern fz = Pattern.compile("%fz%", Pattern.CASE_INSENSITIVE);
+		Pattern cx = Pattern.compile("%cx%", Pattern.CASE_INSENSITIVE);
+		Pattern cy = Pattern.compile("%cy%", Pattern.CASE_INSENSITIVE);
+		Pattern cz = Pattern.compile("%cz%", Pattern.CASE_INSENSITIVE);
 		String lightLevel = (a < highlightLight ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
 		a = getSavedBlockLight(x, y, z);
 		String blockLight = (a < highlightBlock ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
@@ -417,9 +426,18 @@ public class WMLL {
 		s = m.replaceAll(getFPSString().split(",")[0]);
 		m = chunkUpdates.matcher(s);
 		s = m.replaceAll(getFPSString().split(",")[1].substring(1));
-		double x1 = getPlayerCoordinatesAsDouble()[0];
-		double y1 = getPlayerCoordinatesAsDouble()[1];
-		double z1 = getPlayerCoordinatesAsDouble()[2];
+		m = fx.matcher(s);
+		s = m.replaceAll(Integer.toString((int)Math.floor(x1)));
+		m = fy.matcher(s);
+		s = m.replaceAll(Integer.toString((int)Math.floor(y1)));
+		m = fz.matcher(s);
+		s = m.replaceAll(Integer.toString((int)Math.floor(z1)));
+		m = cx.matcher(s);
+		s = m.replaceAll(Integer.toString((int)Math.ceil(x1)));
+		m = cy.matcher(s);
+		s = m.replaceAll(Integer.toString((int)Math.ceil(y1)));
+		m = cz.matcher(s);
+		s = m.replaceAll(Integer.toString((int)Math.ceil(z1)));
 		int f1 = getPlayerCoordinates()[3];
 		NumberFormat n = new DecimalFormat("#0.00");
 		String coords = "("+n.format(x1)+", "+n.format(y1)+", "+n.format(z1)+", "+getPlayerDirection((int)f1)+")";
@@ -868,9 +886,9 @@ public class WMLL {
 		}
 	}
 
-	public void displayUpdateString(int ver/*, float mcver*/) {
+	public void displayUpdateString(int ver, String mcVersion) {
 		wmllRenderer.updateVersion = ver;
-		//wmllRenderer.updateMCVersion = mcver;
+		wmllRenderer.updateMCVersion = mcVersion;
 		wmllRenderer.notifyUpdate = true;
 	}
 
@@ -920,6 +938,15 @@ public class WMLL {
 		for (; Boolean.parseBoolean(options.getProperty("Output"+x, "true")) == false && x <= 11; x++) { }	
 		System.out.println(x);
 		return x > 11;
+	}
+
+	public static boolean hasUpdateBeenAnnounced(int i) {
+		return options.containsKey("Update"+i);
+	}
+
+	public void setUpdateAsAnnounced(int i) {
+		options.put("Update"+Integer.toString(i), "true");
+		saveOptions();
 	}
 
 }
