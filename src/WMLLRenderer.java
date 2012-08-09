@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 public class WMLLRenderer extends aow {
 
 	public int updateVersion = 0;
+	public float updateMCVersion = 1.0f;
 	private int StringY = 12, notifyTick = 200, StringY1 = 50, notifyTick1 = 800;
 	public Minecraft mc;
 	private WMLL wmll;
@@ -28,7 +29,7 @@ public class WMLLRenderer extends aow {
 				StringY--;
 			if (StringY <= -13)
 				notifyUpdate = false;
-			String a = "WMLL Stable \247c"+updateVersion+"\247f is available!";
+			String a = "WMLL Stable \247c"+updateVersion+"\247f for Minecraft\247c "+updateMCVersion+"z247f is available!";
 			String t = Pattern.compile("\247[0-9a-f,l-o,r]").matcher(a).replaceAll("");
 			wmll.drawStringUsingPixels(a, (wmll.getWindowSize().a() - wmll.getFontRenderer().a(t)) / 2, StringY, 0xffffff);
 		}

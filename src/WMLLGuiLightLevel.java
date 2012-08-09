@@ -34,13 +34,13 @@ public class WMLLGuiLightLevel extends apm {
 		doneButton = new aog(0, f / 2 - 112, g / 4 + 150 + o, 226, 20, "Done");
 		h.add(doneButton);
 		
-		int a = wmll.getFontRenderer().a("Parameter Help") + 10;
-		parameterButton = new aog(1, (f - a) / 2, g / 4 + 65 + o, a, 20, "Parameter Help");
-		h.add(parameterButton);
-		
-		a = wmll.getFontRenderer().a("Colouring Options...") + 10;
-		colouringButton = new aog(2, (f - a) / 2, g / 4 + 75, a, 20, "Colouring Options...");
-		h.add(colouringButton);
+//		int a = wmll.getFontRenderer().a("Parameter Help") + 10;
+//		parameterButton = new aog(1, (f - a) / 2, g / 4 + 65 + o, a, 20, "Parameter Help");
+//		h.add(parameterButton);
+//		
+//		a = wmll.getFontRenderer().a("Colouring Options...") + 10;
+//		colouringButton = new aog(2, (f - a) / 2, g / 4 + 75, a, 20, "Colouring Options...");
+//		h.add(colouringButton);
 		
 		/*
 		 * New Editbox:
@@ -142,12 +142,18 @@ public class WMLLGuiLightLevel extends apm {
 	public void a(int i, int j, float f) {
 		// (fontrenderer, text, x, y, colour)
 		v_();
-		if (page == 1)
-			a(k, title, this.f / 2, 20, 0xffffff);
 		WMLLOptions.renderWMLLVersion();
 		if (page == 1) {
+			a(k, title, this.f / 2, 20, 0xffffff);
 			lightLevelEditbox.f();
-			a(k, lightString, this.f / 2, 95, 0xffffff);
+			a(k, "Preview:", this.f / 2, 100, 0xbbbbbb);
+			String[] a = lightString.split("\\\\n");
+			int b = 0;
+			for (String c : a)
+				a(k, c, this.f / 2, 115+(b++*12), 0xffffff);
+			
+			a(k, "For a full list of parameters and what they symbolise, please check", this.f / 2, 45, 0xbbbbbb);
+			a(k, "the WMLL forum thread.", this.f / 2, 57, 0xbbbbbb);
 		}
 		else if (page == 2) {
 			a(k, "Parameters", this.f / 2, 15, 0xffffff);
