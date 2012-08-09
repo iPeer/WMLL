@@ -26,7 +26,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 24";
+		return "Stable 25";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -65,7 +65,7 @@ public class WMLL {
 	private boolean firstRun = true;
 	private final String[] sleepstrings = {"Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
 	private boolean sleepingStringSet = false;
-	private String lightString = "Dat Easter Egg";
+	private String lightString = "Light level: 9001";
 	private long lastF4Press = 0;
 	private boolean wmllF3Output = false;
 	private aou fontRenderer;
@@ -182,6 +182,8 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 11, 0xffffff);
 				a = "S: "+canBlockSeeTheSky(x, getPlayerCoordinates()[1], z);
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 13, 0xffffff);
+				a = lightString+", "+lightString.contains("\\n");
+				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 14, 0xffffff);
 			}
 			WMLLCheckKeys();
 			if (!Enabled)
@@ -387,6 +389,11 @@ public class WMLL {
 		Pattern RawLight = Pattern.compile("%rawlight%", Pattern.CASE_INSENSITIVE);
 		Pattern Light = Pattern.compile("%LightLevel%", Pattern.CASE_INSENSITIVE);
 		Pattern Biome = Pattern.compile("%Biome%", Pattern.CASE_INSENSITIVE);
+		Pattern FPS = Pattern.compile("%fps%", Pattern.CASE_INSENSITIVE);
+		Pattern FPS_noCU = Pattern.compile("%fps2%", Pattern.CASE_INSENSITIVE);
+		Pattern fullCompass = Pattern.compile("%fullcompass%", Pattern.CASE_INSENSITIVE);
+		Pattern chunkUpdates = Pattern.compile("%(cu|chunkupdates)%", Pattern.CASE_INSENSITIVE);
+		Pattern heading = Pattern.compile("%heading%", Pattern.CASE_INSENSITIVE);
 		String lightLevel = (a < highlightLight ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
 		a = getSavedBlockLight(x, y, z);
 		String blockLight = (a < highlightBlock ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
@@ -404,10 +411,22 @@ public class WMLL {
 		s = m.replaceAll(lightLevel);
 		m = Biome.matcher(s);
 		s = m.replaceAll(getBiome());
+		m = FPS.matcher(s);
+		s = m.replaceAll(getFPSString());
+		m = FPS_noCU.matcher(s);
+		s = m.replaceAll(getFPSString().split(",")[0]);
+		m = chunkUpdates.matcher(s);
+		s = m.replaceAll(getFPSString().split(",")[1].substring(1));
 		double x1 = getPlayerCoordinatesAsDouble()[0];
 		double y1 = getPlayerCoordinatesAsDouble()[1];
 		double z1 = getPlayerCoordinatesAsDouble()[2];
+		int f1 = getPlayerCoordinates()[3];
 		NumberFormat n = new DecimalFormat("#0.00");
+		String coords = "("+n.format(x1)+", "+n.format(y1)+", "+n.format(z1)+", "+getPlayerDirection((int)f1)+")";
+		m = fullCompass.matcher(s);
+		s = m.replaceAll(coords);
+		m = heading.matcher(s);
+		s = m.replaceAll(getPlayerDirection((int)f1));
 		Pattern coordsX = Pattern.compile("%x%", Pattern.CASE_INSENSITIVE);
 		m = coordsX.matcher(s);
 		s = m.replaceAll(n.format(x1));
@@ -704,6 +723,14 @@ public class WMLL {
 		String t1 = Pattern.compile("\247[0-9a-f,l-o,r]").matcher(t).replaceAll("");
 		int w = getWindowSize().a();
 		int h = getWindowSize().b();
+		if (t.contains("\\n")) {
+			String[] lines = t.split("\\\\n");
+			int l = 0;
+			for (String a : lines) {
+				getFontRenderer().a(a, i, textpos+((j*10)+(10*l++)), k);
+			}
+			return;
+		}
 		if (outputLocation == 1) { // Top right
 			getFontRenderer().a(t, w - (getFontRenderer().a(t1) + (i - 1)), textpos+(j*10), k);
 			return;
@@ -841,8 +868,9 @@ public class WMLL {
 		}
 	}
 
-	public void displayUpdateString(int ver) {
+	public void displayUpdateString(int ver/*, float mcver*/) {
 		wmllRenderer.updateVersion = ver;
+		//wmllRenderer.updateMCVersion = mcver;
 		wmllRenderer.notifyUpdate = true;
 	}
 
