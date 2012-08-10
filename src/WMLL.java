@@ -26,7 +26,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 26";
+		return "Test 743";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -63,7 +63,7 @@ public class WMLL {
 	private boolean Rei, ReiUseMl, RadarBro;
 	private boolean ranInit = false;
 	private boolean firstRun = true;
-	private final String[] sleepstrings = {"Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
+	private final String[] sleepstrings = {"Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
 	private boolean sleepingStringSet = false;
 	private String lightString = "Light level: 9001";
 	private long lastF4Press = 0;
@@ -89,7 +89,7 @@ public class WMLL {
 		debug("[WMLL] Settings file: "+settingsFile);
 		loadOptions();
 		try {
-			debugClassPresent = !(WMLL.class.getProtectionDomain().getCodeSource().getLocation().getPath()).endsWith(".jar");
+			debugClassPresent = !((WMLL.class.getProtectionDomain().getCodeSource().getLocation().getPath()).endsWith(".jar"));
 		}
 		catch (Exception e1) { }
 		if (getClass().getClassLoader().getResource("mod_ReiMinimap.class") != null) {
@@ -403,6 +403,8 @@ public class WMLL {
 		Pattern cx = Pattern.compile("%cx%", Pattern.CASE_INSENSITIVE);
 		Pattern cy = Pattern.compile("%cy%", Pattern.CASE_INSENSITIVE);
 		Pattern cz = Pattern.compile("%cz%", Pattern.CASE_INSENSITIVE);
+		Pattern clock = Pattern.compile("%clock%", Pattern.CASE_INSENSITIVE);
+		Pattern clock2 = Pattern.compile("%12hclock%", Pattern.CASE_INSENSITIVE);
 		String lightLevel = (a < highlightLight ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
 		a = getSavedBlockLight(x, y, z);
 		String blockLight = (a < highlightBlock ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
@@ -438,6 +440,10 @@ public class WMLL {
 		s = m.replaceAll(Integer.toString((int)Math.ceil(y1)));
 		m = cz.matcher(s);
 		s = m.replaceAll(Integer.toString((int)Math.ceil(z1)));
+		m = clock.matcher(s);
+		s = m.replaceAll(getFormattedWorldTime(2));
+		m = clock2.matcher(s);
+		s = m.replaceAll(getFormattedWorldTime(3));
 		int f1 = getPlayerCoordinates()[3];
 		NumberFormat n = new DecimalFormat("#0.00");
 		String coords = "("+n.format(x1)+", "+n.format(y1)+", "+n.format(z1)+", "+getPlayerDirection((int)f1)+")";
@@ -455,8 +461,6 @@ public class WMLL {
 		m = coordsZ.matcher(s);
 		s = m.replaceAll(n.format(z1));
 		//String b = s.replaceAll("%LightLevel%", lightLevel).replaceAll("%BlockLight%", blockLight).replaceAll("%RawLight%", rawLight).replaceAll("%SkyLight%", skyLight).replaceAll("%Biome%", getBiome());	
-		if (clockSetting < 3)
-			s = s+" ("+getFormattedWorldTime()+")";
 		return s;
 	}
 
@@ -659,13 +663,13 @@ public class WMLL {
 		return getWorld().D();
 	}
 
-	private String getFormattedWorldTime() {
+	private String getFormattedWorldTime(int i) {
 		long a = getWorldTime();
 		int h = (int)(((a + 6000L) % 24000L) / 1000L);
 		int m = (int)(((a % 1000L) * 60L)  / 1000L);
 		String suffix = "AM";
 		String out = "00:00";
-		if (clockSetting == 2) {
+		if (i == 2) {
 			out = pad(h)+":"+pad(m);
 		}
 		else {
