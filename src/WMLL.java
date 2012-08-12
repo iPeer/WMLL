@@ -26,7 +26,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 743";
+		return "Test 744";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -405,6 +405,8 @@ public class WMLL {
 		Pattern cz = Pattern.compile("%cz%", Pattern.CASE_INSENSITIVE);
 		Pattern clock = Pattern.compile("%clock%", Pattern.CASE_INSENSITIVE);
 		Pattern clock2 = Pattern.compile("%12hclock%", Pattern.CASE_INSENSITIVE);
+		Pattern chunkx = Pattern.compile("%chunkx%", Pattern.CASE_INSENSITIVE);
+		Pattern chunkz = Pattern.compile("%chunkz%", Pattern.CASE_INSENSITIVE);
 		String lightLevel = (a < highlightLight ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
 		a = getSavedBlockLight(x, y, z);
 		String blockLight = (a < highlightBlock ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
@@ -444,6 +446,10 @@ public class WMLL {
 		s = m.replaceAll(getFormattedWorldTime(2));
 		m = clock2.matcher(s);
 		s = m.replaceAll(getFormattedWorldTime(3));
+		m = chunkx.matcher(s);
+		s = m.replaceAll(Integer.toString(getChunk(x, z).g));
+		m = chunkz.matcher(s);
+		s = m.replaceAll(Integer.toString(getChunk(x, z).h));
 		int f1 = getPlayerCoordinates()[3];
 		NumberFormat n = new DecimalFormat("#0.00");
 		String coords = "("+n.format(x1)+", "+n.format(y1)+", "+n.format(z1)+", "+getPlayerDirection((int)f1)+")";
@@ -460,13 +466,8 @@ public class WMLL {
 		Pattern coordsZ = Pattern.compile("%z%", Pattern.CASE_INSENSITIVE);
 		m = coordsZ.matcher(s);
 		s = m.replaceAll(n.format(z1));
-		//String b = s.replaceAll("%LightLevel%", lightLevel).replaceAll("%BlockLight%", blockLight).replaceAll("%RawLight%", rawLight).replaceAll("%SkyLight%", skyLight).replaceAll("%Biome%", getBiome());	
 		return s;
 	}
-
-	//	private act serverInstance() {
-	//		return getChunk(0 ,0).e;
-	//	}
 
 	private atc getWorld() {
 		try {
@@ -742,30 +743,22 @@ public class WMLL {
 	public void drawString(String t, int i, int j, int k) {
 		int textpos = WMLLI > 5 ? -8 : 2;
 		t = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
-		String t1 = Pattern.compile("\247[0-9a-f,l-o,r]").matcher(t).replaceAll("");
+		Pattern re = Pattern.compile("\247[0-9a-f,l-o,r]");
 		int w = getWindowSize().a();
 		int h = getWindowSize().b();
-		if (t.contains("\\n")) {
 			String[] lines = t.split("\\\\n");
 			int l = 0;
 			for (String a : lines) {
-				getFontRenderer().a(a, i, textpos+((j*10)+(10*l++)), k);
+				String a1 = re.matcher(a).replaceAll("");
+				if (outputLocation == 1) // Top right
+					getFontRenderer().a(a, w - (getFontRenderer().a(a1) + (i - 1)), textpos+(j*10+(10*l++)), k);
+				else if (outputLocation == 2) // Bottom left
+					getFontRenderer().a(a, i, h - (textpos+(j*10+(10*l++)) + 8), k);
+				else if (outputLocation == 3) // Bottom Right
+					getFontRenderer().a(a,  w - (getFontRenderer().a(a1) + (i - 1)), h - (textpos+(j*10+(10*l++)) + 8), k);
+				else // Top Left
+					getFontRenderer().a(a, i, textpos+((j*10)+(10*l++)), k);
 			}
-			return;
-		}
-		if (outputLocation == 1) { // Top right
-			getFontRenderer().a(t, w - (getFontRenderer().a(t1) + (i - 1)), textpos+(j*10), k);
-			return;
-		}
-		else if (outputLocation == 2) { // Bottom Left
-			getFontRenderer().a(t, i, h - (textpos+(j*10) + 8), k);
-			return;
-		}
-		else if (outputLocation == 3) { // Bottom Right
-			getFontRenderer().a(t,  w - (getFontRenderer().a(t1) + (i - 1)), h - (textpos+(j*10) + 8), k);
-			return;
-		}
-		getFontRenderer().a(t, i, textpos+(j*10), k); // Top Left
 	}
 
 	public void saveOptions() {
