@@ -38,12 +38,9 @@ public class WMLLUpdateCheck extends Thread implements Runnable {
 			Scanner scanner = new Scanner(in);
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
-				System.err.println(line);
 				if (line.equals("EOF"))
 					break;
 				int modver = Integer.parseInt(WMLL.wmllVersion().split(" ")[1]);
-//				if (WMLL.debugClassPresent)
-//					modver = 1;
 				String[] version = line.split(",");
 				int newver = Integer.parseInt(version[0]);
 				String mcVersion = version[1];

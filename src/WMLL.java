@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -26,7 +27,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 744";
+		return "Test 745";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -39,13 +40,15 @@ public class WMLL {
 	public static Properties options;
 	public static Properties outputOptions;
 	public static int outputLocation;
-	public static boolean useImages;
+	public static boolean useImages = false;;
 	public static int clockSetting;
 	public static boolean optionsOpen = false;
 	public static int[] playerPos;
 	public static boolean debugClassPresent = false;
 	public static boolean militaryclock;
 	public String worldNameDebug = "";
+	public long worldSeed = 0L;
+	public boolean autoSeed = true;
 
 	public boolean wmllOverrideF3;
 	public int F3Type;
@@ -69,6 +72,8 @@ public class WMLL {
 	private long lastF4Press = 0;
 	private boolean wmllF3Output = false;
 	private aou fontRenderer;
+	private atc lastWorld = null;
+	private boolean worldSeedSet = false;
 
 	protected WMLLCompatibility wmllCompatibility;
 
@@ -82,12 +87,14 @@ public class WMLL {
 		fieldNames.put("SpawnListEntry", "a");
 		fieldNames.put("localServerWorldName", "b");
 		fieldNames.put("worldSeed", "a");
+		fieldNames.put("chatLines", "c");
 		Rei = ReiUseMl = RadarBro = false;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		outputOptionsFile = new File(Minecraft.a("minecraft"), "WMLLOutput.properties");
 		wmllCompatibility = new WMLLCompatibility();
 		debug("[WMLL] Settings file: "+settingsFile);
 		loadOptions();
+		this.autoSeed = Boolean.parseBoolean(options.getProperty("autoAquireSeed", "true"));
 		try {
 			debugClassPresent = !((WMLL.class.getProtectionDomain().getCodeSource().getLocation().getPath()).endsWith(".jar"));
 		}
@@ -99,14 +106,16 @@ public class WMLL {
 		if (getClass().getClassLoader().getResource("RadarBro.class") != null) {
 			RadarBro = true;
 		}
-		if (debugClassPresent)
+		if (debugClassPresent) {
 			RadarBro = false;
+			debugActive = true;
+		}
 		debug("[WMLL] Can run debug: "+debugClassPresent);
 		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
 		debug("[WMLL] RadarBro: "+RadarBro);
 	}
 
-	public void updategui(Minecraft h) {
+	public void updategui(Minecraft h, aov guii) {
 
 		if (getWorld() != null && !wmllUpdateCheck.running) {
 			wmllUpdateCheck.start();
@@ -114,6 +123,39 @@ public class WMLL {
 		else if (getWorld() == null && wmllUpdateCheck.running) {
 			System.out.println("[WMLL] FATAL: World == NULL! -- Stopping update thread.");
 			wmllUpdateCheck.stop1();
+		}
+		if (getWorld() != lastWorld && !isMultiplayer() && autoSeed) {
+			worldSeedSet = false;
+			lastWorld = getWorld();
+			entityPlayer().d("/seed");
+			debug("[WMLL] World instance differs, re-acquiring seed...");
+		}
+		if (!worldSeedSet) {
+			try {
+				Object obj = guii.b();
+				Field f = obj.getClass().getDeclaredField(getField("chatLines"));
+				f.setAccessible(true);
+				obj = f.get(obj);
+				@SuppressWarnings("unchecked")
+				List<String> a = (List<String>)obj;
+				@SuppressWarnings("rawtypes")
+				Iterator c = a.iterator();
+				while (c.hasNext()) {
+					and d = (and)c.next();
+					String b = d.a();
+					if (b.startsWith("Seed: ")) {
+						guii.b().a();
+						long worldSeed = Long.parseLong(b.split("Seed: ")[1]);
+						worldSeedSet = true;
+						debug("[WMLL] Seed set to "+worldSeed);
+						this.worldSeed = worldSeed;
+						break;
+					}
+					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		if (firstRun && getWorld() != null) {
 			firstRun = false;
@@ -158,7 +200,7 @@ public class WMLL {
 				int blockID = getBlockID(getPlayerCoordinates()[0], getPlayerCoordinates()[1] - 1, getPlayerCoordinates()[2]);
 				drawDebug(Integer.toString(blockID), (getWindowSize().a() - (getFontRenderer().a(Integer.toString(blockID)) + 1)), 4, 0xffffff);
 				try {
-					drawDebug(mc.s.toString(), (getWindowSize().a() - (getFontRenderer().a(mc.s.toString()) + 1)), 5, 0xffffff);
+					drawDebug(mc.r.toString(), (getWindowSize().a() - (getFontRenderer().a(mc.r.toString()) + 1)), 5, 0xffffff);
 				}
 				catch (NullPointerException e) {
 					drawDebug("null", (getWindowSize().a() - (getFontRenderer().a("null") + 1)), 5, 0xffffff);
@@ -182,8 +224,6 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 11, 0xffffff);
 				a = "S: "+canBlockSeeTheSky(x, getPlayerCoordinates()[1], z);
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 13, 0xffffff);
-				a = lightString+", "+lightString.contains("\\n");
-				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 14, 0xffffff);
 			}
 			WMLLCheckKeys();
 			if (!Enabled)
@@ -407,6 +447,7 @@ public class WMLL {
 		Pattern clock2 = Pattern.compile("%12hclock%", Pattern.CASE_INSENSITIVE);
 		Pattern chunkx = Pattern.compile("%chunkx%", Pattern.CASE_INSENSITIVE);
 		Pattern chunkz = Pattern.compile("%chunkz%", Pattern.CASE_INSENSITIVE);
+		Pattern seed = Pattern.compile("%seed%", Pattern.CASE_INSENSITIVE);
 		String lightLevel = (a < highlightLight ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
 		a = getSavedBlockLight(x, y, z);
 		String blockLight = (a < highlightBlock ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
@@ -450,6 +491,8 @@ public class WMLL {
 		s = m.replaceAll(Integer.toString(getChunk(x, z).g));
 		m = chunkz.matcher(s);
 		s = m.replaceAll(Integer.toString(getChunk(x, z).h));
+		m = seed.matcher(s);
+		s = m.replaceAll(""+(getWorldSeed() != 0L ? getWorldSeed() : ""));
 		int f1 = getPlayerCoordinates()[3];
 		NumberFormat n = new DecimalFormat("#0.00");
 		String coords = "("+n.format(x1)+", "+n.format(y1)+", "+n.format(z1)+", "+getPlayerDirection((int)f1)+")";
@@ -602,8 +645,8 @@ public class WMLL {
 		return getWorld().j(x, y, z);
 	}
 
-	public jv entityPlayer() {
-		return mc.h;
+	public atf entityPlayer() {
+		return mc.g;
 	}
 
 	public jv thePlayer() {
@@ -705,17 +748,18 @@ public class WMLL {
 	}
 
 	public long getWorldSeed() {
-		//		if (getWorldName().equals("localServer"))
-		//			((ajv)thePlayer()).o.t();
-		//		else {
-		try {
-			return Long.parseLong(options.getProperty("Seed:"+getWorldName().toLowerCase(), "0"));
-		}
-		catch (NumberFormatException n) {
-			return 0L;
-		}
-		catch (NullPointerException n1) {
-			return 0L;
+		if (worldSeedSet)
+			return this.worldSeed;
+		else {
+			try {
+				return Long.parseLong(options.getProperty("Seed:"+getWorldName().toLowerCase(), "0"));
+			}
+			catch (NumberFormatException n) {
+				return 0L;
+			}
+			catch (NullPointerException n1) {
+				return 0L;
+			}
 		}
 		//}
 		//return getChunk(0, 0).e.x.c().b();
@@ -746,19 +790,19 @@ public class WMLL {
 		Pattern re = Pattern.compile("\247[0-9a-f,l-o,r]");
 		int w = getWindowSize().a();
 		int h = getWindowSize().b();
-			String[] lines = t.split("\\\\n");
-			int l = 0;
-			for (String a : lines) {
-				String a1 = re.matcher(a).replaceAll("");
-				if (outputLocation == 1) // Top right
-					getFontRenderer().a(a, w - (getFontRenderer().a(a1) + (i - 1)), textpos+(j*10+(10*l++)), k);
-				else if (outputLocation == 2) // Bottom left
-					getFontRenderer().a(a, i, h - (textpos+(j*10+(10*l++)) + 8), k);
-				else if (outputLocation == 3) // Bottom Right
-					getFontRenderer().a(a,  w - (getFontRenderer().a(a1) + (i - 1)), h - (textpos+(j*10+(10*l++)) + 8), k);
-				else // Top Left
-					getFontRenderer().a(a, i, textpos+((j*10)+(10*l++)), k);
-			}
+		String[] lines = t.split("\\\\n");
+		int l = 0;
+		for (String a : lines) {
+			String a1 = re.matcher(a).replaceAll("");
+			if (outputLocation == 1) // Top right
+				getFontRenderer().a(a, w - (getFontRenderer().a(a1) + (i - 1)), textpos+(j*10+(10*l++)), k);
+			else if (outputLocation == 2) // Bottom left
+				getFontRenderer().a(a, i, h - (textpos+(j*10+(10*l++)) + 8), k);
+			else if (outputLocation == 3) // Bottom Right
+				getFontRenderer().a(a,  w - (getFontRenderer().a(a1) + (i - 1)), h - (textpos+(j*10+(10*l++)) + 8), k);
+			else // Top Left
+				getFontRenderer().a(a, i, textpos+((j*10)+(10*l++)), k);
+		}
 	}
 
 	public void saveOptions() {
@@ -802,7 +846,7 @@ public class WMLL {
 			//			if (!debugClassPresent)
 			//				debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
 			WMLLI = Integer.parseInt(options.getProperty("WMLLI", "0"));
-			useImages = Boolean.parseBoolean(options.getProperty("useImages", "false"));
+			//useImages = Boolean.parseBoolean(options.getProperty("useImages", "false"));
 			TextColour = Integer.parseInt(options.getProperty("TextColour", "15"));
 			F4Key = Integer.parseInt(options.getProperty("F4", "62"));
 			clockSetting = Integer.parseInt(options.getProperty("clockSetting", "2"));

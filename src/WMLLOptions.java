@@ -43,9 +43,10 @@ public class WMLLOptions extends apm {
 		h.add(new aog(0, f / 2 - 100, g / 4 - 5 + offset, 98, 20, "Debug: "+debug));
 		h.add(new aog(2, f / 2 + 2, g / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
 		h.add(new aog(5, f / 2 - 100, g / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
-		h.add(new aog(6, f / 2 + 2, g / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
+		//h.add(new aog(6, f / 2 + 2, g / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
 		h.add(new aog(3, f / 2 - 100, g / 4 + 125 + offset, "Output options..."));
 		h.add(new aog(4, f / 2 - 100, g / 4 + 85 + offset, "Reset settings to defaults"));
+		h.add(new aog(9, f / 2 - 100, g / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
 		//h.add(new aog(4, f / 2 - 100, g / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
 		String enabledString = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(wmll.Enabled ? "Yes" : "No");
 		int i = 0;
@@ -53,9 +54,8 @@ public class WMLLOptions extends apm {
 			i = wmll.getFontRenderer().a(enabledString);
 		}
 		catch (Exception e1) {
-			System.err.println("Nope");
 		}
-		h.add(new aog(8, (f - (i + 10)) / 2, g / 4 + 45 + offset, i + 10, 20, enabledString));
+		h.add(new aog(8, f / 2 - 100, g / 4 + 45 + offset, enabledString));
 		if (WMLL.debugClassPresent)
 			h.add(new aog(9001, f - 52, g - 22, 50, 20, "Reload"));
 		if (!wmll.Enabled)
@@ -109,7 +109,13 @@ public class WMLLOptions extends apm {
 			wmll.options.setProperty("World-"+wmll.getWorldName(), Boolean.toString(!a));
 			for (int x = 3; x < 6; x++)
 				((aog)h.get(x)).h = !a;
-			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(!a ? "Yes" : "No");
+			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "this server" : "this world")+": "+(!a ? "Yes" : "No");
+		}
+		if (button.f == 9) {
+			boolean a = !wmll.autoSeed;
+			wmll.autoSeed = a;
+			wmll.options.put("autoAcquireSeed", Boolean.toString(a));
+			button.e = "Auto acquire seed: "+(a ? "Yes" : "No");
 		}
 
 		if (button.f == 9001) // Debug button

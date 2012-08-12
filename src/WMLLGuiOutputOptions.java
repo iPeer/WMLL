@@ -39,7 +39,8 @@ public class WMLLGuiOutputOptions extends apm {
 			h.add(SMPSeedButton = new aog(9, f / 2 - 112, g / 4 + 125 + o, 226, 20, "Enter seed for this server..."));
 			h.add(new aog(11, f / 2 - 112, g / 4 + 100 + o, 112, 20, "Enabled outputs..."));
 			h.add(new aog(10, f / 2 - 112, g / 4 + 75 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
-		}
+			SMPSeedButton.g = wmll.isMultiplayer();
+	}
 
 	protected void a(aog b) {
 		if (b.f == 1 || b.f == 2) {
