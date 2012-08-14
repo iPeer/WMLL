@@ -27,7 +27,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 746";
+		return "Test 747";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -95,10 +95,6 @@ public class WMLL {
 		debug("[WMLL] Settings file: "+settingsFile);
 		loadOptions();
 		this.autoSeed = Boolean.parseBoolean(options.getProperty("autoAquireSeed", "true"));
-		try {
-			debugClassPresent = !((WMLL.class.getProtectionDomain().getCodeSource().getLocation().getPath()).endsWith(".jar"));
-		}
-		catch (Exception e1) { }
 		if (getClass().getClassLoader().getResource("mod_ReiMinimap.class") != null) {
 			Rei = true;
 			ReiUseMl = ReiMinimap.instance.useModloader;
@@ -108,7 +104,6 @@ public class WMLL {
 		}
 		if (debugClassPresent) {
 			RadarBro = false;
-			debugActive = true;
 		}
 		debug("[WMLL] Can run debug: "+debugClassPresent);
 		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
