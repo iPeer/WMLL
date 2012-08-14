@@ -8,20 +8,20 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
-public class aov extends aow
+public class aow extends aox
 {
 
-    private static final awg b = new awg();
+    private static final awh b = new awh();
     private final Random c = new Random();
     private final Minecraft d;
-    private final aoh e;
+    private final aoi e;
     private int f;
     private String g;
     private int h;
     private boolean j;
     public float a;
 
-    public aov(Minecraft minecraft)
+    public aow(Minecraft minecraft)
     {
         f = 0;
         g = "";
@@ -29,15 +29,15 @@ public class aov extends aow
         j = false;
         a = 1.0F;
         d = minecraft;
-        e = new aoh(minecraft);
+        e = new aoi(minecraft);
     }
 
     public void a(float f1, boolean flag, int i, int k)
     {
-        apn apn1 = new apn(d.y, d.c, d.d);
-        int l = apn1.a();
-        int i1 = apn1.b();
-        aou aou1 = d.p;
+        apo apo1 = new apo(d.y, d.c, d.d);
+        int l = apo1.a();
+        int i1 = apo1.b();
+        aov aov1 = d.p;
         d.t.c();
         GL11.glEnable(3042);
         if(Minecraft.t())
@@ -47,12 +47,12 @@ public class aov extends aow
         {
             GL11.glBlendFunc(770, 771);
         }
-        ri ri1 = d.g.by.f(3);
-        if(d.y.O == 0 && ri1 != null && ri1.c == aif.ba.ca)
+        rj rj1 = d.g.by.f(3);
+        if(d.y.P == 0 && rj1 != null && rj1.c == aig.ba.ca)
         {
             a(l, i1);
         }
-        if(!d.g.a(jh.k))
+        if(!d.g.a(ji.k))
         {
             float f2 = d.g.cy + (d.g.bY - d.g.cy) * f1;
             if(f2 > 0.0F)
@@ -64,10 +64,10 @@ public class aov extends aow
         {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glBindTexture(3553, d.o.b("/gui/gui.png"));
-            oe oe1 = d.g.by;
+            of of1 = d.g.by;
             this.i = -90F;
             b(l / 2 - 91, i1 - 22, 0, 0, 182, 22);
-            b((l / 2 - 91 - 1) + oe1.c * 20, i1 - 22 - 1, 0, 22, 24, 22);
+            b((l / 2 - 91 - 1) + of1.c * 20, i1 - 22 - 1, 0, 22, 24, 22);
             GL11.glBindTexture(3553, d.o.b("/gui/icons.png"));
             GL11.glEnable(3042);
             GL11.glBlendFunc(775, 769);
@@ -82,9 +82,9 @@ public class aov extends aow
             int i3 = d.g.aL;
             c.setSeed(f * 0x4c627);
             boolean flag3 = false;
-            ot ot1 = d.g.bL();
-            int j5 = ot1.a();
-            int l5 = ot1.b();
+            ou ou1 = d.g.bL();
+            int j5 = ou1.a();
+            int l5 = ou1.b();
             d.I.a("bossHealth");
             d();
             d.I.b();
@@ -109,7 +109,7 @@ public class aov extends aow
                 int k9 = k8 - 10;
                 int j10 = d.g.aO();
                 int i11 = -1;
-                if(d.g.a(jh.l))
+                if(d.g.a(ji.l))
                 {
                     i11 = f % 25;
                 }
@@ -133,7 +133,7 @@ public class aov extends aow
                         }
                     }
                     int j12 = 16;
-                    if(d.g.a(jh.u))
+                    if(d.g.a(ji.u))
                     {
                         j12 += 36;
                     }
@@ -185,7 +185,7 @@ public class aov extends aow
                     int k12 = k8;
                     int j13 = 16;
                     byte byte2 = 0;
-                    if(d.g.a(jh.s))
+                    if(d.g.a(ji.s))
                     {
                         j13 += 36;
                         byte2 = 13;
@@ -222,11 +222,11 @@ public class aov extends aow
                 }
 
                 d.I.c("air");
-                if(d.g.a(acn.g))
+                if(d.g.a(aco.g))
                 {
                     int l11 = d.g.ai();
-                    int l12 = ig.f(((double)(l11 - 2) * 10D) / 300D);
-                    int k13 = ig.f(((double)l11 * 10D) / 300D) - l12;
+                    int l12 = ih.f(((double)(l11 - 2) * 10D) / 300D);
+                    int k13 = ih.f(((double)l11 * 10D) / 300D) - l12;
                     for(int i14 = 0; i14 < l12 + k13; i14++)
                     {
                         if(i14 < l12)
@@ -244,7 +244,7 @@ public class aov extends aow
             GL11.glDisable(3042);
             d.I.a("actionBar");
             GL11.glEnable(32826);
-            anf.c();
+            ang.c();
             for(int k6 = 0; k6 < 9; k6++)
             {
                 int j7 = (l / 2 - 90) + k6 * 20 + 2;
@@ -252,7 +252,7 @@ public class aov extends aow
                 a(k6, j7, i8, f1);
             }
 
-            anf.a();
+            ang.a();
             GL11.glDisable(32826);
             d.I.b();
         }
@@ -279,13 +279,13 @@ public class aov extends aow
             boolean flag2 = false;
             int j2 = flag2 ? 0xffffff : 0x80ff20;
             String s1 = (new StringBuilder()).append("").append(d.g.ca).toString();
-            int i4 = (l - aou1.a(s1)) / 2;
+            int i4 = (l - aov1.a(s1)) / 2;
             int k4 = i1 - 31 - 4;
-            aou1.b(s1, i4 + 1, k4, 0);
-            aou1.b(s1, i4 - 1, k4, 0);
-            aou1.b(s1, i4, k4 + 1, 0);
-            aou1.b(s1, i4, k4 - 1, 0);
-            aou1.b(s1, i4, k4, j2);
+            aov1.b(s1, i4 + 1, k4, 0);
+            aov1.b(s1, i4 - 1, k4, 0);
+            aov1.b(s1, i4, k4 + 1, 0);
+            aov1.b(s1, i4, k4 - 1, 0);
+            aov1.b(s1, i4, k4, j2);
             d.I.b();
         }
         if(d.q())
@@ -298,52 +298,50 @@ public class aov extends aow
             } else
             {
                 s = String.format(aj.a("demo.remainingTime"), new Object[] {
-                    io.a((int)(0x1d6b4L - d.e.D()))
+                    ip.a((int)(0x1d6b4L - d.e.D()))
                 });
             }
-            int k2 = aou1.a(s);
-            aou1.a(s, l - k2 - 10, 5, 0xffffff);
+            int k2 = aov1.a(s);
+            aov1.a(s, l - k2 - 10, 5, 0xffffff);
             d.I.b();
         }
-        d.I.a("wmll");
-        WMLL.i.updategui(d, this);
-        d.i.b();
-        if(d.y.P)
+		WMLL.i.updategui(d, this);
+        if(d.y.Q)
         {
             d.I.a("debug");
             GL11.glPushMatrix();
-            aou1.a((new StringBuilder()).append("Minecraft 1.3.1 (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
-            aou1.a(d.m(), 2, 12, 0xffffff);
-            aou1.a(d.n(), 2, 22, 0xffffff);
-            aou1.a(d.p(), 2, 32, 0xffffff);
-            aou1.a(d.o(), 2, 42, 0xffffff);
+            aov1.a((new StringBuilder()).append("Minecraft 1.3.2 (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
+            aov1.a(d.m(), 2, 12, 0xffffff);
+            aov1.a(d.n(), 2, 22, 0xffffff);
+            aov1.a(d.p(), 2, 32, 0xffffff);
+            aov1.a(d.o(), 2, 42, 0xffffff);
             long l1 = Runtime.getRuntime().maxMemory();
             long l3 = Runtime.getRuntime().totalMemory();
             long l4 = Runtime.getRuntime().freeMemory();
             long l6 = l3 - l4;
             String s2 = (new StringBuilder()).append("Used memory: ").append((l6 * 100L) / l1).append("% (").append(l6 / 1024L / 1024L).append("MB) of ").append(l1 / 1024L / 1024L).append("MB").toString();
-            b(aou1, s2, l - aou1.a(s2) - 2, 2, 0xe0e0e0);
+            b(aov1, s2, l - aov1.a(s2) - 2, 2, 0xe0e0e0);
             s2 = (new StringBuilder()).append("Allocated memory: ").append((l3 * 100L) / l1).append("% (").append(l3 / 1024L / 1024L).append("MB)").toString();
-            b(aou1, s2, l - aou1.a(s2) - 2, 12, 0xe0e0e0);
-            b(aou1, String.format("x: %.5f", new Object[] {
+            b(aov1, s2, l - aov1.a(s2) - 2, 12, 0xe0e0e0);
+            b(aov1, String.format("x: %.5f", new Object[] {
                 Double.valueOf(d.g.t)
             }), 2, 64, 0xe0e0e0);
-            b(aou1, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {
+            b(aov1, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {
                 Double.valueOf(d.g.D.b), Double.valueOf(d.g.u)
             }), 2, 72, 0xe0e0e0);
-            b(aou1, String.format("z: %.5f", new Object[] {
+            b(aov1, String.format("z: %.5f", new Object[] {
                 Double.valueOf(d.g.v)
             }), 2, 80, 0xe0e0e0);
-            b(aou1, (new StringBuilder()).append("f: ").append(ig.c((double)((d.g.z * 4F) / 360F) + 0.5D) & 3).toString(), 2, 88, 0xe0e0e0);
-            int l8 = ig.c(d.g.t);
-            int l9 = ig.c(d.g.u);
-            int k10 = ig.c(d.g.v);
+            b(aov1, (new StringBuilder()).append("f: ").append(ih.c((double)((d.g.z * 4F) / 360F) + 0.5D) & 3).toString(), 2, 88, 0xe0e0e0);
+            int l8 = ih.c(d.g.t);
+            int l9 = ih.c(d.g.u);
+            int k10 = ih.c(d.g.v);
             if(d.e != null && d.e.e(l8, l9, k10))
             {
-                wk wk1 = d.e.d(l8, k10);
-                b(aou1, (new StringBuilder()).append("lc: ").append(wk1.h() + 15).append(" b: ").append(wk1.a(l8 & 0xf, k10 & 0xf, d.e.q()).y).append(" bl: ").append(wk1.a(va.b, l8 & 0xf, l9, k10 & 0xf)).append(" sl: ").append(wk1.a(va.a, l8 & 0xf, l9, k10 & 0xf)).append(" rl: ").append(wk1.c(l8 & 0xf, l9, k10 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
+                wl wl1 = d.e.d(l8, k10);
+                b(aov1, (new StringBuilder()).append("lc: ").append(wl1.h() + 15).append(" b: ").append(wl1.a(l8 & 0xf, k10 & 0xf, d.e.r()).y).append(" bl: ").append(wl1.a(vb.b, l8 & 0xf, l9, k10 & 0xf)).append(" sl: ").append(wl1.a(vb.a, l8 & 0xf, l9, k10 & 0xf)).append(" rl: ").append(wl1.c(l8 & 0xf, l9, k10 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
             }
-            b(aou1, String.format("ws: %.3f, fs: %.3f, g: %b", new Object[] {
+            b(aov1, String.format("ws: %.3f, fs: %.3f, g: %b", new Object[] {
                 Float.valueOf(d.g.bZ.b()), Float.valueOf(d.g.bZ.a()), Boolean.valueOf(d.g.E)
             }), 2, 104, 0xe0e0e0);
             GL11.glPopMatrix();
@@ -369,7 +367,7 @@ public class aov extends aow
                 {
                     j3 = Color.HSBtoRGB(f4 / 50F, 0.7F, 0.6F) & 0xffffff;
                 }
-                aou1.b(g, -aou1.a(g) / 2, -4, j3 + (l2 << 24));
+                aov1.b(g, -aov1.a(g) / 2, -4, j3 + (l2 << 24));
                 GL11.glDisable(3042);
                 GL11.glPopMatrix();
             }
@@ -384,12 +382,12 @@ public class aov extends aow
         e.a(f);
         d.I.b();
         GL11.glPopMatrix();
-        if(d.y.H.e && (!d.A() || d.g.a.c.size() > 1))
+        if(d.y.I.e && (!d.A() || d.g.a.c.size() > 1))
         {
             d.I.a("playerList");
-            asu asu1 = d.g.a;
-            java.util.List list = asu1.c;
-            int k3 = asu1.d;
+            asv asv1 = d.g.a;
+            java.util.List list = asv1.c;
+            int k3 = asv1.d;
             int j4 = k3;
             int i5 = 1;
             for(; j4 > 20; j4 = ((k3 + i5) - 1) / i5)
@@ -416,28 +414,28 @@ public class aov extends aow
                 {
                     continue;
                 }
-                atg atg1 = (atg)list.get(k7);
-                aou1.a(atg1.a, j8, i9, 0xffffff);
+                ath ath1 = (ath)list.get(k7);
+                aov1.a(ath1.a, j8, i9, 0xffffff);
                 d.o.b(d.o.b("/gui/icons.png"));
                 int l10 = 0;
                 byte byte1 = 0;
-                if(atg1.b < 0)
+                if(ath1.b < 0)
                 {
                     byte1 = 5;
                 } else
-                if(atg1.b < 150)
+                if(ath1.b < 150)
                 {
                     byte1 = 0;
                 } else
-                if(atg1.b < 300)
+                if(ath1.b < 300)
                 {
                     byte1 = 1;
                 } else
-                if(atg1.b < 600)
+                if(ath1.b < 600)
                 {
                     byte1 = 2;
                 } else
-                if(atg1.b < 1000)
+                if(ath1.b < 1000)
                 {
                     byte1 = 3;
                 } else
@@ -457,18 +455,18 @@ public class aov extends aow
 
     private void d()
     {
-        if(avv.a == null)
+        if(avw.a == null)
         {
             return;
         }
-        nc nc1 = avv.a;
-        avv.a = null;
-        aou aou1 = d.p;
-        apn apn1 = new apn(d.y, d.c, d.d);
-        int i = apn1.a();
+        nd nd1 = avw.a;
+        avw.a = null;
+        aov aov1 = d.p;
+        apo apo1 = new apo(d.y, d.c, d.d);
+        int i = apo1.a();
         char c1 = '\266';
         int k = i / 2 - c1 / 2;
-        int l = (int)(((float)nc1.i() / (float)nc1.aM()) * (float)(c1 + 1));
+        int l = (int)(((float)nd1.i() / (float)nd1.aM()) * (float)(c1 + 1));
         byte byte0 = 12;
         b(k, byte0, 0, 74, c1, 5);
         b(k, byte0, 0, 74, c1, 5);
@@ -477,7 +475,7 @@ public class aov extends aow
             b(k, byte0, 0, 79, l, 5);
         }
         String s = "Boss health";
-        aou1.a(s, i / 2 - aou1.a(s) / 2, byte0 - 10, 0xff00ff);
+        aov1.a(s, i / 2 - aov1.a(s) / 2, byte0 - 10, 0xff00ff);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glBindTexture(3553, d.o.b("/gui/icons.png"));
     }
@@ -490,13 +488,13 @@ public class aov extends aow
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(3008);
         GL11.glBindTexture(3553, d.o.b("%blur%/misc/pumpkinblur.png"));
-        avd avd1 = avd.a;
-        avd1.b();
-        avd1.a(0.0D, k, -90D, 0.0D, 1.0D);
-        avd1.a(i, k, -90D, 1.0D, 1.0D);
-        avd1.a(i, 0.0D, -90D, 1.0D, 0.0D);
-        avd1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        avd1.a();
+        ave ave1 = ave.a;
+        ave1.b();
+        ave1.a(0.0D, k, -90D, 0.0D, 1.0D);
+        ave1.a(i, k, -90D, 1.0D, 1.0D);
+        ave1.a(i, 0.0D, -90D, 1.0D, 0.0D);
+        ave1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        ave1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -520,13 +518,13 @@ public class aov extends aow
         GL11.glBlendFunc(0, 769);
         GL11.glColor4f(a, a, a, 1.0F);
         GL11.glBindTexture(3553, d.o.b("%blur%/misc/vignette.png"));
-        avd avd1 = avd.a;
-        avd1.b();
-        avd1.a(0.0D, k, -90D, 0.0D, 1.0D);
-        avd1.a(i, k, -90D, 1.0D, 1.0D);
-        avd1.a(i, 0.0D, -90D, 1.0D, 0.0D);
-        avd1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        avd1.a();
+        ave ave1 = ave.a;
+        ave1.b();
+        ave1.a(0.0D, k, -90D, 0.0D, 1.0D);
+        ave1.a(i, k, -90D, 1.0D, 1.0D);
+        ave1.a(i, 0.0D, -90D, 1.0D, 0.0D);
+        ave1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        ave1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -547,17 +545,17 @@ public class aov extends aow
         GL11.glBlendFunc(770, 771);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
         GL11.glBindTexture(3553, d.o.b("/terrain.png"));
-        float f2 = (float)(aif.be.bZ % 16) / 16F;
-        float f3 = (float)(aif.be.bZ / 16) / 16F;
-        float f4 = (float)(aif.be.bZ % 16 + 1) / 16F;
-        float f5 = (float)(aif.be.bZ / 16 + 1) / 16F;
-        avd avd1 = avd.a;
-        avd1.b();
-        avd1.a(0.0D, k, -90D, f2, f5);
-        avd1.a(i, k, -90D, f4, f5);
-        avd1.a(i, 0.0D, -90D, f4, f3);
-        avd1.a(0.0D, 0.0D, -90D, f2, f3);
-        avd1.a();
+        float f2 = (float)(aig.be.bZ % 16) / 16F;
+        float f3 = (float)(aig.be.bZ / 16) / 16F;
+        float f4 = (float)(aig.be.bZ % 16 + 1) / 16F;
+        float f5 = (float)(aig.be.bZ / 16 + 1) / 16F;
+        ave ave1 = ave.a;
+        ave1.b();
+        ave1.a(0.0D, k, -90D, f2, f5);
+        ave1.a(i, k, -90D, f4, f5);
+        ave1.a(i, 0.0D, -90D, f4, f3);
+        ave1.a(0.0D, 0.0D, -90D, f2, f3);
+        ave1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -566,12 +564,12 @@ public class aov extends aow
 
     private void a(int i, int k, int l, float f1)
     {
-        ri ri1 = d.g.by.a[i];
-        if(ri1 == null)
+        rj rj1 = d.g.by.a[i];
+        if(rj1 == null)
         {
             return;
         }
-        float f2 = (float)ri1.b - f1;
+        float f2 = (float)rj1.b - f1;
         if(f2 > 0.0F)
         {
             GL11.glPushMatrix();
@@ -580,12 +578,12 @@ public class aov extends aow
             GL11.glScalef(1.0F / f3, (f3 + 1.0F) / 2.0F, 1.0F);
             GL11.glTranslatef(-(k + 8), -(l + 12), 0.0F);
         }
-        b.a(d.p, d.o, ri1, k, l);
+        b.a(d.p, d.o, rj1, k, l);
         if(f2 > 0.0F)
         {
             GL11.glPopMatrix();
         }
-        b.b(d.p, d.o, ri1, k, l);
+        b.b(d.p, d.o, rj1, k, l);
     }
 
     public void a()
@@ -604,7 +602,7 @@ public class aov extends aow
         j = true;
     }
 
-    public aoh b()
+    public aoi b()
     {
         return e;
     }

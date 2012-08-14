@@ -1,13 +1,13 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLYesNo extends apm {
+public class WMLLYesNo extends apn {
 
 	protected WMLL wmll;
-	protected apm parent;
+	protected apn parent;
 	byte offset = -16;
 	
-	public WMLLYesNo(WMLL wmll, apm parent) {
+	public WMLLYesNo(WMLL wmll, apn parent) {
 		this.parent = parent;
 		this.wmll = wmll;
 	}
@@ -15,13 +15,13 @@ public class WMLLYesNo extends apm {
 	@SuppressWarnings("unchecked")
 	public void w_() {
 		h.clear();
-		h.add(new aog(0, f / 2 - 100, g / 2 + 10 + offset, 98, 20, "Yes"));
-		h.add(new aog(1, f / 2 + 2, g / 2 + 10 + offset, 98, 20, "No"));
+		h.add(new aoh(0, f / 2 - 100, g / 2 + 10 + offset, 98, 20, "Yes"));
+		h.add(new aoh(1, f / 2 + 2, g / 2 + 10 + offset, 98, 20, "No"));
 		if (WMLL.debugClassPresent)
-			h.add(new aog(9001, f - 52, g - 22, 50, 20, "Reload"));
+			h.add(new aoh(9001, f - 52, g - 22, 50, 20, "Reload"));
 	}
 	
-	protected void a(aog b) {
+	protected void a(aoh b) {
 		if (b.f == 9001)
 			e.a(new WMLLYesNo(wmll, parent));
 		if (b.f == 0 || b.f == 1) {
@@ -35,7 +35,7 @@ public class WMLLYesNo extends apm {
 				e.a(parent.getClass().newInstance());
 			} catch (Exception e1) {
 				e1.printStackTrace();
-				e.a((apm)null);
+				e.a((apn)null);
 			}
 		}
 	}
