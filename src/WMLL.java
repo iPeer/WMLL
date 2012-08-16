@@ -102,7 +102,7 @@ public class WMLL {
 		if (getClass().getClassLoader().getResource("RadarBro.class") != null) {
 			RadarBro = true;
 		}
-		if (debugClassPresent) {
+		if (isDebug()) {
 			RadarBro = false;
 		}
 		debug("[WMLL] Can run debug: "+debugClassPresent);
@@ -577,14 +577,14 @@ public class WMLL {
 		if (y < 0 || y > 255) 
 			return 0;
 		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(vb.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+		return getChunk(playerPos[0], playerPos[2]).a(vb.b, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
 	}
 
 	public int getRawLightLevel(int x, int y, int z) {
 		if (y < 0 || y > 255) 
 			return 0;
 		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(vb.a, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+		return getChunk(playerPos[0], playerPos[2]).a(vb.a, x & 0xf, y, z & 0xf);
 	}
 
 	public int getBlockLight (int i, int j, int k) {
@@ -983,6 +983,10 @@ public class WMLL {
 	public void setUpdateAsAnnounced(int i) {
 		options.put("Update"+Integer.toString(i), "true");
 		saveOptions();
+	}
+	
+	private boolean isDebug() {
+		return !(WMLL.class.getProtectionDomain().getCodeSource().getLocation().getPath()).endsWith(".jar");
 	}
 
 }
