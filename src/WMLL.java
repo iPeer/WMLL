@@ -27,7 +27,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 747";
+		return "Stable 27";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -40,7 +40,7 @@ public class WMLL {
 	public static Properties options;
 	public static Properties outputOptions;
 	public static int outputLocation;
-	public static boolean useImages = false;;
+	public static boolean useImages = false;
 	public static int clockSetting;
 	public static boolean optionsOpen = false;
 	public static int[] playerPos;
