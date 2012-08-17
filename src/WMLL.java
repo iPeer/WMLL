@@ -27,7 +27,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 748";
+		return "Test 749";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -784,10 +784,11 @@ public class WMLL {
 
 	public void drawString(String t, int i, int j, int k) {
 		int textpos = WMLLI > 5 ? -8 : 2;
-		t = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
+		//t = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
 		Pattern re = Pattern.compile("\247[0-9a-f,l-o,r]");
 		int w = getWindowSize().a();
 		int h = getWindowSize().b();
+		t = t.replaceAll("\t", "    ");
 		String[] lines = t.split("\\\\n");
 		int l = 0;
 		for (String a : lines) {
