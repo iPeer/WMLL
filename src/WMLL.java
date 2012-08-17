@@ -27,7 +27,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 27";
+		return "Stable 28";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -49,6 +49,7 @@ public class WMLL {
 	public String worldNameDebug = "";
 	public long worldSeed = 0L;
 	public boolean autoSeed = true;
+	public boolean useForge;
 
 	public boolean wmllOverrideF3;
 	public int F3Type;
@@ -105,9 +106,11 @@ public class WMLL {
 		if (isDebug()) {
 			RadarBro = false;
 		}
+		useForge = getClass().getClassLoader().getResource("Forge/net/minecraftforge/common/ForgeHooks.class") != null;
 		debug("[WMLL] Can run debug: "+debugClassPresent);
 		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
 		debug("[WMLL] RadarBro: "+RadarBro);
+		debug("[WMLL] Forge: "+useForge);
 	}
 
 	public void updategui(Minecraft h, aow aow) {
