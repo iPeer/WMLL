@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 public class WMLLCompatibility {
 	
 	private int i;
-
+	
 	public static int forgeA(Minecraft d) {
         if (WMLL.i.useForge)
         	return ForgeHooks.getTotalArmorValue(d.g);

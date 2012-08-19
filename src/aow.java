@@ -109,7 +109,7 @@ public class aow extends aox
                 }
                 int k8 = i1 - 39;
                 int k9 = k8 - 10;
-                int j10 = WMLLCompatibility.forgeA(d);
+                int j10 = d.g.aO();
                 int i11 = -1;
                 if(d.g.a(ji.l))
                 {

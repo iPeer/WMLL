@@ -27,7 +27,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 749";
+		return "Test 750";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -40,7 +40,7 @@ public class WMLL {
 	public static Properties options;
 	public static Properties outputOptions;
 	public static int outputLocation;
-	public static boolean useImages = false;
+	public static boolean useImages;
 	public static int clockSetting;
 	public static boolean optionsOpen = false;
 	public static int[] playerPos;
@@ -106,7 +106,7 @@ public class WMLL {
 		if (isDebug()) {
 			RadarBro = false;
 		}
-		useForge = getClass().getClassLoader().getResource("Forge/net/minecraftforge/common/ForgeHooks.class") != null;
+		useForge = (getClass().getClassLoader().getResource("FMLRenderAccessLibrary.class") != null);
 		debug("[WMLL] Can run debug: "+debugClassPresent);
 		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
 		debug("[WMLL] RadarBro: "+RadarBro);
@@ -846,7 +846,7 @@ public class WMLL {
 			//			if (!debugClassPresent)
 			//				debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
 			WMLLI = Integer.parseInt(options.getProperty("WMLLI", "0"));
-			//useImages = Boolean.parseBoolean(options.getProperty("useImages", "false"));
+			useImages = Boolean.parseBoolean(options.getProperty("useImages", "false"));
 			TextColour = Integer.parseInt(options.getProperty("TextColour", "15"));
 			F4Key = Integer.parseInt(options.getProperty("F4", "62"));
 			clockSetting = Integer.parseInt(options.getProperty("clockSetting", "2"));
