@@ -42,13 +42,13 @@ public class WMLLOptions extends apn {
 		h.add(new aoh(1, f / 2 - 100, g / 4 + 150 + offset, "Done"));
 		h.add(new aoh(0, f / 2 - 100, g / 4 - 5 + offset, 98, 20, "Debug: "+debug));
 		h.add(new aoh(2, f / 2 + 2, g / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
-		h.add(new aoh(5, f / 2 - 100, g / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
+		//h.add(new aoh(5, f / 2 - 100, g / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
 		h.add(new aoh(6, f / 2 + 2, g / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
 		h.add(new aoh(3, f / 2 - 100, g / 4 + 125 + offset, "Output options..."));
 		h.add(new aoh(4, f / 2 - 100, g / 4 + 85 + offset, "Reset settings to defaults"));
 		h.add(new aoh(9, f / 2 - 100, g / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
 		//h.add(new aoh(4, f / 2 - 100, g / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
-		String enabledString = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "SMP" : "this world")+": "+(wmll.Enabled ? "Yes" : "No");
+		String enabledString = "Enabled on "+(wmll.isMultiplayer() ? "this server" : "singple player")+": "+(wmll.Enabled ? "Yes" : "No");
 		int i = 0;
 		try {
 			i = wmll.getFontRenderer().a(enabledString);
