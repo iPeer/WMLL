@@ -48,7 +48,7 @@ public class WMLLOptions extends apn {
 		h.add(new aoh(4, f / 2 - 100, g / 4 + 85 + offset, "Reset settings to defaults"));
 		h.add(new aoh(9, f / 2 - 100, g / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
 		//h.add(new aoh(4, f / 2 - 100, g / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
-		String enabledString = "Enabled on "+(wmll.isMultiplayer() ? "this server" : "singple player")+": "+(wmll.Enabled ? "Yes" : "No");
+		String enabledString = "Enabled on "+(wmll.isMultiplayer() ? "this server" : "single player")+": "+(wmll.Enabled ? "Yes" : "No");
 		int i = 0;
 		try {
 			i = wmll.getFontRenderer().a(enabledString);
