@@ -43,7 +43,7 @@ public class WMLLOptions extends apn {
 		h.add(new aoh(0, f / 2 - 100, g / 4 - 5 + offset, 98, 20, "Debug: "+debug));
 		h.add(new aoh(2, f / 2 + 2, g / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
 		//h.add(new aoh(5, f / 2 - 100, g / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
-		h.add(new aoh(6, f / 2 + 2, g / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
+		h.add(new aoh(6, f / 2 + - 100, g / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
 		h.add(new aoh(3, f / 2 - 100, g / 4 + 125 + offset, "Output options..."));
 		h.add(new aoh(4, f / 2 - 100, g / 4 + 85 + offset, "Reset settings to defaults"));
 		h.add(new aoh(9, f / 2 - 100, g / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
@@ -56,7 +56,7 @@ public class WMLLOptions extends apn {
 		catch (Exception e1) {
 		}
 		h.add(new aoh(8, f / 2 - 100, g / 4 + 45 + offset, enabledString));
-		if (WMLL.debugClassPresent)
+		if (wmll.debugClassPresent)
 			h.add(new aoh(9001, f - 52, g - 22, 50, 20, "Reload"));
 		if (!wmll.Enabled)
 			for (int x = 3; x < 6; x++)

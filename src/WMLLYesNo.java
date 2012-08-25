@@ -17,7 +17,7 @@ public class WMLLYesNo extends apn {
 		h.clear();
 		h.add(new aoh(0, f / 2 - 100, g / 2 + 10 + offset, 98, 20, "Yes"));
 		h.add(new aoh(1, f / 2 + 2, g / 2 + 10 + offset, 98, 20, "No"));
-		if (WMLL.debugClassPresent)
+		if (wmll.debugClassPresent)
 			h.add(new aoh(9001, f - 52, g - 22, 50, 20, "Reload"));
 	}
 	

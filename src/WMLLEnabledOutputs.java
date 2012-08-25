@@ -32,7 +32,7 @@ public class WMLLEnabledOutputs extends apn {
 		h.add(new aoh(12, f / 2 - 172, g / 4 + 145 + o, 85, 20, "All ON"));
 		h.add(new aoh(13, f / 2 - 86, g / 4 + 145 + o, 85, 20, "All OFF"));
 		h.add(new aoh(14, f / 2 + 2, g / 4 + 145 + o, 170, 20, "Done"));
-		if (WMLL.debugClassPresent)
+		if (wmll.debugClassPresent)
 			h.add(new aoh(9001, f - 52, g - 22, 50, 20, "Reload"));
 		
 	}

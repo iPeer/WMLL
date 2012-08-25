@@ -11,7 +11,7 @@ public class WMLLGuiOutputOptions extends apn {
 	private static final String[] colourNames = {"Black", "Dark Blue", "Dark Green", "Cyan", "Red", "Purple", "Orange", "Light Grey", "Dark Grey", "Lavender?", "Lime Green", "Light Blue", "Bright Red", "Pink", "Yellow", "White"};
 	private static final String[] outputLocations = {"Top Left", "Top Right", "Bottom Left", "Bottom Right"};
 	public static Properties outputOptions;
-	private aoh SMPSeedButton;
+	private aoh SMPSeedButton, showButton, eOutputsButton;
 
 	@SuppressWarnings("static-access")
 	public WMLLGuiOutputOptions(WMLL wmll, apn parent) {
@@ -28,18 +28,19 @@ public class WMLLGuiOutputOptions extends apn {
 				outputOptions = new Properties();
 			int tc = WMLL.TextColour;
 			byte o = -16;
-			if (WMLL.debugClassPresent)
+			if (wmll.debugClassPresent)
 				h.add(new aoh(9001, f - 52, g - 22, 50, 20, "Reload"));
 			h.add(new aoh(1, f / 2 - 112, g / 4 + 150 + o, 226, 20, "Done"));
 			h.add(new aoh(3, f / 2 - 112, g / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
 			h.add(new aoh(4, f / 2 + 2, g / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
-			h.add(new aoh(5, f / 2 + 2, g / 4 + 100 + o, 112, 20, "Light Level options..."));
+			h.add(new aoh(5, f / 2 - 112, g / 4 + 75 + o, 226, 20, "Customize output"));
 			h.add(new aoh(6, f / 2 - 112, g / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
 			h.add(new aoh(8, f / 2 + 2, g / 4 + 20 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
-			h.add(SMPSeedButton = new aoh(9, f / 2 - 112, g / 4 + 125 + o, 226, 20, "Enter seed for this server..."));
-			h.add(new aoh(11, f / 2 - 112, g / 4 + 100 + o, 112, 20, "Enabled outputs..."));
-			h.add(new aoh(10, f / 2 - 112, g / 4 + 75 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
-			SMPSeedButton.g = wmll.isMultiplayer();
+			h.add(SMPSeedButton = new aoh(9, f / 2 - 112, g / 4 + 100 + o, 226, 20, "Enter seed for this server..."));
+			h.add(eOutputsButton = new aoh(11, f / 2 - 112, g / 4 + 125 + o, 226, 20, "Enabled outputs..."));
+			h.add(showButton = new aoh(10, f / 2 - 112, g / 4 + 50 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
+			SMPSeedButton.g = wmll.isMultiplayer() || !wmll.autoSeed;
+			eOutputsButton.h = showButton.h = WMLL.useImages;
 	}
 
 	protected void a(aoh b) {

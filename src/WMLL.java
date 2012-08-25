@@ -27,9 +27,9 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 753";
+		return "Test 754";
 	}
-	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
+	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
 	public static WMLL i = new WMLL();
 	public static boolean Enabled = true;
@@ -44,7 +44,6 @@ public class WMLL {
 	public static int clockSetting;
 	public static boolean optionsOpen = false;
 	public static int[] playerPos;
-	public static boolean debugClassPresent = false;
 	public static boolean militaryclock;
 	public String worldNameDebug = "";
 	public long worldSeed = 0L;
@@ -54,6 +53,7 @@ public class WMLL {
 	public boolean wmllOverrideF3;
 	public int F3Type;
 	public boolean showSeedWithCoords;
+	public boolean debugClassPresent = false;
 
 	private static final int propertiesVersion = 3;
 	public static File settingsFile, outputOptionsFile;
@@ -90,13 +90,15 @@ public class WMLL {
 		fieldNames.put("worldSeed", "a");
 		fieldNames.put("chatLines", "c");
 		Rei = ReiUseMl = RadarBro = false;
-		debugClassPresent = (getClass().getClassLoader().getResource("ipeer_wmll_debug") != null);
+		this.debugClassPresent = (getClass().getClassLoader().getResource("ipeer_wmll_debug") != null);
+		debugActive = this.debugClassPresent;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		outputOptionsFile = new File(Minecraft.a("minecraft"), "WMLLOutput.properties");
 		wmllCompatibility = new WMLLCompatibility();
 		debug("[WMLL] Settings file: "+settingsFile);
 		loadOptions();
 		this.autoSeed = Boolean.parseBoolean(options.getProperty("autoAquireSeed", "true"));
+		useForge = (getClass().getClassLoader().getResource("net/minecraftforge/common/ForgeHooks.class") != null);
 		if (getClass().getClassLoader().getResource("mod_ReiMinimap.class") != null) {
 			Rei = true;
 			ReiUseMl = ReiMinimap.instance.useModloader;
@@ -106,8 +108,8 @@ public class WMLL {
 		}
 		if (debugClassPresent) {
 			RadarBro = false;
+			//useForge = false;
 		}
-		useForge = (getClass().getClassLoader().getResource("net/minecraftforge/common/ForgeHooks.class") != null);
 		debug("[WMLL] Can run debug: "+debugClassPresent);
 		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
 		debug("[WMLL] RadarBro: "+RadarBro);
@@ -272,135 +274,136 @@ public class WMLL {
 
 
 			// Compass
-
-			if (Arrays.asList(3, 4, 5, 8, 9, 10).contains(WMLLI)) {
-				int out = 1;
-				if (WMLLI == 9 || WMLLI == 4) {
-					out = isMultiplayer() && !isSeedSet() ? 3 : 4;
-					if (getDimension() == 1)
-						out--;
-				}
-				else if (WMLLI == 8 || WMLLI == 3)
-					out = 0;
-				else if (WMLLI == 10 || WMLLI == 5) 
-					out = 1;
-				if ((isSeedSet()) || isMultiplayer())
-					out++;
-				//				if (getDimension() == 1)
-				//					out--;
-				jw player = thePlayer();
-				double x = player.t;
-				double y = player.u;
-				double z = player.v;
-				double f = ih.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
-				NumberFormat d = new DecimalFormat("#0.00");
-				String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection((int)f)+")";
-				drawString(coords, 2, out, 0xffffff);
-				if (WMLLI != 5 && WMLLI != 10) {
-					boolean showSeed = (!isMultiplayer() || isSeedSet()/* || getWorldName().equals("localServer")*/) && showSeedWithCoords;
-					if (showSeed)
-						drawString("Seed: "+getWorldSeed(), 2, out + 1, 0xffffff);
-					//drawString("Facing: "+getPlayerDirection(playerPos[3]), 2, out, 0xffffff);
-					drawString("Biome: "+getBiome()+" (T: "+getTemperature()+", H: "+getHumidity()+")", 2, showSeed ? out + 2 : out + 1, 0xffffff);
-				}
-			}
-
-			// Indicators
-
-			if (Arrays.asList(1, 4, 6, 9).contains(WMLLI)) {
-				if (useImages) {
-					wmllRenderer.renderIndicatorImages(light, getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]), getDimension(), canSlimesSpawnHere(playerPos[0], playerPos[2]), canBlockSeeTheSky(playerPos[0], playerPos[1] - 1, playerPos[2]));
-					return;
-				}
-				boolean showSlimes = true;
-				if (isMultiplayer())
-					showSlimes = isSeedSet();
-				String[] labels = {"Mobs", "Animals", "Trees", "Crops", "Mushrooms", "Slimes", "Ghasts", "Pigmen", "Blaze", "Endermen", "Grass"};
-				if (getDimension() == -1) { // Nether
-
-					if (!isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]))) {
-						drawString("\247a"+labels[6], 2, 1, 0xffffff); // Ghasts
-						drawString("\247a"+labels[7], 2, 2, 0xffffff); // Pigmen
-						if (light < 12)
-							drawString("\247a"+labels[8], 2, 3, 0xffffff); // Blaze
-						else
-							drawString("\247c"+labels[8], 2, 3, 0xffffff); // Blaze
-						drawString("\247a"+labels[5], 2, 4, 0xffffff); // Slimes
+			if (useImages) {
+				if (Arrays.asList(3, 4, 5, 8, 9, 10).contains(WMLLI)) {
+					int out = 1;
+					if (WMLLI == 9 || WMLLI == 4) {
+						out = isMultiplayer() && !isSeedSet() ? 3 : 4;
+						if (getDimension() == 1)
+							out--;
 					}
-					else {
-						drawString("\247c"+labels[6], 2, 1, 0xffffff); // Ghasts
-						drawString("\247c"+labels[7], 2, 2, 0xffffff); // Pigmen
-						drawString("\247c"+labels[8], 2, 3, 0xffffff); // Blaze
-						drawString("\247c"+labels[5], 2, 4, 0xffffff); // Slimes
+					else if (WMLLI == 8 || WMLLI == 3 || WMLLI == 4)
+						out = 0;
+					else if (WMLLI == 10 || WMLLI == 5) 
+						out = 1;
+					if ((isSeedSet()) || isMultiplayer())
+						out++;
+					//				if (getDimension() == 1)
+					//					out--;
+					jw player = thePlayer();
+					double x = player.t;
+					double y = player.u;
+					double z = player.v;
+					double f = ih.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
+					NumberFormat d = new DecimalFormat("#0.00");
+					String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection((int)f)+")";
+					drawString(coords, 2, out, 0xffffff);
+					if (WMLLI != 5 && WMLLI != 10) {
+						boolean showSeed = (!isMultiplayer() || isSeedSet()/* || getWorldName().equals("localServer")*/) && showSeedWithCoords;
+						if (showSeed)
+							drawString("Seed: "+getWorldSeed(), 2, out + 1, 0xffffff);
+						//drawString("Facing: "+getPlayerDirection(playerPos[3]), 2, out, 0xffffff);
+						drawString("Biome: "+getBiome()+" (T: "+getTemperature()+", H: "+getHumidity()+")", 2, showSeed ? out + 2 : out + 1, 0xffffff);
 					}
-
-
-
-
 				}
-				else if (getDimension() == 1) { // End
-					if (light < 7 && !isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2])))
-						drawString("\247a"+labels[9], 2, 1, 0xffffff);
-					else
-						drawString("\247c"+labels[9], 2, 1, 0xffffff);
-				}
-				else { // Normal world
-					// Hostiles
-					if ((light < 8 && !isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]))) && (getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]) != 110 && !getBiome().startsWith("MushroomIsland")))
-						drawString("\247a"+labels[0], 2, 1, 0xffffff);
-					else
-						drawString("\247c"+labels[0], 2, 1 , 0xffffff);
 
-					// Animals
-					if (playerIsStandingOnBlock(2))
-						if (light < 9)
-							drawString((!canBlockSeeTheSky(playerPos[0], playerPos[1], playerPos[2]) ? "\247c" : "\247e")+labels[1], 2, 2, 0xffffff);
-						else
-							drawString("\247a"+labels[1], 2, 2, 0xffffff);
-					else
-						drawString("\247c"+labels[1], 2, 2, 0xffffff);
+				// Indicators
 
-					// Slimes
-					if (showSlimes) {
-						if (canSlimesSpawnHere(playerPos[0], playerPos[2]))
-							if ((playerPos[1] - 1) <= 40)
-								drawString("\247a"+labels[5], 2, 3, 0xffffff);
+				if (Arrays.asList(1, 4, 6, 9).contains(WMLLI)) {
+					if (useImages) {
+						wmllRenderer.renderIndicatorImages(light, getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]), getDimension(), canSlimesSpawnHere(playerPos[0], playerPos[2]), canBlockSeeTheSky(playerPos[0], playerPos[1] - 1, playerPos[2]));
+						return;
+					}
+					boolean showSlimes = true;
+					if (isMultiplayer())
+						showSlimes = isSeedSet();
+					String[] labels = {"Mobs", "Animals", "Trees", "Crops", "Mushrooms", "Slimes", "Ghasts", "Pigmen", "Blaze", "Endermen", "Grass"};
+					if (getDimension() == -1) { // Nether
+
+						if (!isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]))) {
+							drawString("\247a"+labels[6], 2, 1, 0xffffff); // Ghasts
+							drawString("\247a"+labels[7], 2, 2, 0xffffff); // Pigmen
+							if (light < 12)
+								drawString("\247a"+labels[8], 2, 3, 0xffffff); // Blaze
 							else
-								drawString("\247e"+labels[5], 2, 3, 0xffffff);
-						else
-							drawString("\247c"+labels[5], 2, 3, 0xffffff);
+								drawString("\247c"+labels[8], 2, 3, 0xffffff); // Blaze
+							drawString("\247a"+labels[5], 2, 4, 0xffffff); // Slimes
+						}
+						else {
+							drawString("\247c"+labels[6], 2, 1, 0xffffff); // Ghasts
+							drawString("\247c"+labels[7], 2, 2, 0xffffff); // Pigmen
+							drawString("\247c"+labels[8], 2, 3, 0xffffff); // Blaze
+							drawString("\247c"+labels[5], 2, 4, 0xffffff); // Slimes
+						}
+
+
+
+
 					}
+					else if (getDimension() == 1) { // End
+						if (light < 7 && !isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2])))
+							drawString("\247a"+labels[9], 2, 1, 0xffffff);
+						else
+							drawString("\247c"+labels[9], 2, 1, 0xffffff);
+					}
+					else { // Normal world
+						// Hostiles
+						if ((light < 8 && !isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]))) && (getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]) != 110 && !getBiome().startsWith("MushroomIsland")))
+							drawString("\247a"+labels[0], 2, 1, 0xffffff);
+						else
+							drawString("\247c"+labels[0], 2, 1 , 0xffffff);
+
+						// Animals
+						if (playerIsStandingOnBlock(2))
+							if (light < 9)
+								drawString((!canBlockSeeTheSky(playerPos[0], playerPos[1], playerPos[2]) ? "\247c" : "\247e")+labels[1], 2, 2, 0xffffff);
+							else
+								drawString("\247a"+labels[1], 2, 2, 0xffffff);
+						else
+							drawString("\247c"+labels[1], 2, 2, 0xffffff);
+
+						// Slimes
+						if (showSlimes) {
+							if (canSlimesSpawnHere(playerPos[0], playerPos[2]))
+								if ((playerPos[1] - 1) <= 40)
+									drawString("\247a"+labels[5], 2, 3, 0xffffff);
+								else
+									drawString("\247e"+labels[5], 2, 3, 0xffffff);
+							else
+								drawString("\247c"+labels[5], 2, 3, 0xffffff);
+						}
+
+					}
+
+					// Crops
+					if (playerIsStandingOnBlock(60) && (getLightLevel(playerPos[0], playerPos[1] + 1, playerPos[2]) > 8 || canBlockSeeTheSky(playerPos[0], playerPos[1], playerPos[2])))
+						drawString("\247a"+labels[3], getDimension() == 1 ? 55 : 40, 1, 0xffffff);
+					else
+						drawString("\247c"+labels[3], getDimension() == 1 ? 55 : 40, 1, 0xffffff);
+
+					// Trees
+					if ((playerIsStandingOnBlock(2) || playerIsStandingOnBlock(3)) && (light > 8 || canBlockSeeTheSky(playerPos[0], playerPos[1], playerPos[2])))
+						drawString("\247a"+labels[2], getDimension() == 1 ? 2 : 40, 2, 0xffffff);
+					else
+						drawString("\247c"+labels[2], getDimension() == 1 ? 2 : 40, 2, 0xffffff);
+
+					// Mushrooms
+					if ((playerIsStandingOnBlock(110) || light < 13) && !isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2])))
+						drawString("\247a"+labels[4], getDimension() == 0 ? 40 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
+					else
+						drawString("\247c"+labels[4], getDimension() == 0 ? 40 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
+
+					// Grass
+					if ((playerIsStandingOnBlock(3) && light > 8))
+						drawString("\247a"+labels[10], getDimension() == -1 ? 40 : 2, getDimension() == 1 ? 3 : getDimension() == -1 ? 4 : !showSlimes ? 3 : 4, 0xffffff);
+					else
+						drawString("\247c"+labels[10], getDimension() == -1 ? 40 : 2, getDimension() == 1 ? 3 : getDimension() == -1 ? 4 : !showSlimes ? 3 : 4, 0xffffff);
 
 				}
 
-				// Crops
-				if (playerIsStandingOnBlock(60) && (getLightLevel(playerPos[0], playerPos[1] + 1, playerPos[2]) > 8 || canBlockSeeTheSky(playerPos[0], playerPos[1], playerPos[2])))
-					drawString("\247a"+labels[3], getDimension() == 1 ? 55 : 40, 1, 0xffffff);
-				else
-					drawString("\247c"+labels[3], getDimension() == 1 ? 55 : 40, 1, 0xffffff);
-
-				// Trees
-				if ((playerIsStandingOnBlock(2) || playerIsStandingOnBlock(3)) && (light > 8 || canBlockSeeTheSky(playerPos[0], playerPos[1], playerPos[2])))
-					drawString("\247a"+labels[2], getDimension() == 1 ? 2 : 40, 2, 0xffffff);
-				else
-					drawString("\247c"+labels[2], getDimension() == 1 ? 2 : 40, 2, 0xffffff);
-
-				// Mushrooms
-				if ((playerIsStandingOnBlock(110) || light < 13) && !isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2])))
-					drawString("\247a"+labels[4], getDimension() == 0 ? 40 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
-				else
-					drawString("\247c"+labels[4], getDimension() == 0 ? 40 : 40, getDimension() == 1 ? 2 : 3, 0xffffff);
-
-				// Grass
-				if ((playerIsStandingOnBlock(3) && light > 8))
-					drawString("\247a"+labels[10], getDimension() == -1 ? 40 : 2, getDimension() == 1 ? 3 : getDimension() == -1 ? 4 : !showSlimes ? 3 : 4, 0xffffff);
-				else
-					drawString("\247c"+labels[10], getDimension() == -1 ? 40 : 2, getDimension() == 1 ? 3 : getDimension() == -1 ? 4 : !showSlimes ? 3 : 4, 0xffffff);
-
+				if (Arrays.asList(2, 5, 7, 10).contains(WMLLI))
+					drawString(getFPSString(),2, 1, 0xffffff);
 			}
-
-			if (Arrays.asList(2, 5, 7, 10).contains(WMLLI))
-				drawString(getFPSString(),2, 1, 0xffffff);
 		}
 		wmllRenderer.tick();
 
@@ -509,6 +512,12 @@ public class WMLL {
 		Pattern coordsZ = Pattern.compile("%z%", Pattern.CASE_INSENSITIVE);
 		m = coordsZ.matcher(s);
 		s = m.replaceAll(n.format(z1));
+		Pattern indicators = Pattern.compile("%ind:([\\p{Alnum}\\p{Punct}&&[^\\\\ ]]+)%", Pattern.CASE_INSENSITIVE);
+		m = indicators.matcher(s);
+		while (m.find()) {
+			String ind = m.group().replaceAll("%ind:|%", "").toLowerCase();
+			s = s.replaceAll("%ind:"+ind+"%", getIdenString(ind));
+		}
 		return s;
 	}
 
@@ -598,7 +607,6 @@ public class WMLL {
 		return getChunk(i, k).a(vb.a, i & 0xf, j, k & 0xf);
 	}
 
-	@Deprecated
 	public int getLightLevel(int j, int k, int l) {
 		if (k < 0 || k > 255)
 			return 0;
@@ -790,7 +798,7 @@ public class WMLL {
 		Pattern re = Pattern.compile("\247[0-9a-f,l-o,r]");
 		int w = getWindowSize().a();
 		int h = getWindowSize().b();
-		t = t.replaceAll("\t", "    ");
+		t = t.replaceAll("\\\\t", "    ");
 		String[] lines = t.split("\\\\n");
 		int l = 0;
 		for (String a : lines) {
@@ -813,8 +821,8 @@ public class WMLL {
 			if (options == null)
 				options = new Properties();
 			options.setProperty("WMLLI", Integer.toString(WMLLI));
-			//			if (!debugClassPresent)
-			//				options.setProperty("WMLLD", Boolean.toString(debugActive));
+			if (!debugClassPresent)
+				options.setProperty("WMLLD", Boolean.toString(debugActive));
 			options.setProperty("FirstRun", Boolean.toString(firstRun));
 			options.setProperty("version", Integer.toString(propertiesVersion));
 			options.setProperty("F4", Integer.toString(F4Key));
@@ -893,17 +901,19 @@ public class WMLL {
 			else
 				if (mc.r == null) {
 					//&& !(mc.s instanceof acr/*GuiChat*/) && !(mc.s instanceof ars/*Sign Editing*/) && !(mc.s instanceof hw/*Book Editing*/)) {
-					if (Keyboard.isKeyDown(42)) {
-						WMLLI--;
-						while (!isOutputEnabled(WMLLI))
+					if (useImages) {
+						if (Keyboard.isKeyDown(42)) {
 							WMLLI--;
-					}
-					else {
-						WMLLI++;
-						while (!isOutputEnabled(WMLLI))
+							while (!isOutputEnabled(WMLLI))
+								WMLLI--;
+						}
+						else {
 							WMLLI++;
+							while (!isOutputEnabled(WMLLI))
+								WMLLI++;
+						}
+						saveOptions();
 					}
-					saveOptions();
 				}
 		}
 	}
@@ -990,6 +1000,107 @@ public class WMLL {
 	public void setUpdateAsAnnounced(int i) {
 		options.put("Update"+Integer.toString(i), "true");
 		saveOptions();
+	}
+
+	public String getIdenString(String i) {
+		int x = getPlayerCoordinates()[0];
+		int y = getPlayerCoordinates()[1];
+		int z = getPlayerCoordinates()[2];
+		int l = getLightLevel(x, y, z);
+		int b = getBlockID(x, y - 1, z);
+		int d = getDimension();
+		Boolean sk = canBlockSeeTheSky(x, y, z);
+		Boolean c = canSlimesSpawnHere(x, z);
+		Boolean v = blockBlackList.contains(b);
+		String s = "\247cInvalid indicator!";
+		String bi = getBiome();
+		if (i.equals("mobs")) {
+			if (d == 0) {
+				if (l > 7 && !v || bi.startsWith("MushroomIsland"))
+					s = "\247cMobs";
+				else if (l < 8 && !v)
+					s = "\247aMobs";
+				else
+					s = "\247cMobs";
+			}
+			else if (d == -1)
+				if (v)
+					s = "\247cGhasts";
+				else
+					s = "\247aGhasts";
+			else
+				s = (!v && l < 8 ? "\247aEndermen" : "\247cEndermen");
+		}
+		else if (i.equals("animals")) {
+			if (d == -1)
+				if (!v)
+					s = "\247aPigmen";
+				else
+					s = "\247cPigmen";
+			else if (d == 0)
+				if (b == 2)
+					if (l < 9 && !sk)
+						s = "\247cAnimals";
+					else if (l < 9 && sk)
+						s = "\247eAnimals";
+					else
+						s = "\247aAnimals";
+				else
+					s = "\247cAnimals";
+			else
+				s = "\247cAnimals";
+		}
+		else if (i.equals("slimes")) {
+			if (d == 0)
+				if (c && y + 1 > 40)
+					s = "\247eSlimes";
+				else if (c && y + 1 < 41 && v)
+					s = "\247cSlimes";
+				else if (c && y + 1 < 41)
+					s = "\247aSlimes";
+				else
+					s = "\247cSlimes";
+			else if (d == -1)
+				if (!v)
+					s = "\247aSlimes";
+				else
+					s = "\247cSlimes";
+			else
+				s = "\247cSlimes";
+		}
+		else if (i.equals("crops")) {
+			if (b == 60)
+				s = (l > 9 ? "\247aCrops" : "\247cCrops");
+			else
+				s = "\247cCrops";
+		}
+		else if (i.equals("trees")) {
+			if (Arrays.asList(2, 3).contains(b))
+				s = (l > 9 ? "\247aTrees" : "\247cTrees");
+			else
+				s = "\247cTrees";
+		}
+		else if (i.equals("grass")) {
+			//			Boolean a = getBlockID(x - 1, y - 1, z) == 2;
+			//			Boolean e = getBlockID(x + 1, y - 1, z) == 2;
+			//			Boolean f = getBlockID(x, y - 1, z + 1) == 2;
+			//			Boolean g = getBlockID(x, y - 1, z - 1) == 2;
+			//			Boolean h = getBlockID(x - 1, y - 1, z - 1) == 2;
+			//			Boolean j = getBlockID(x + 1, y - 1, z + 1) == 2;
+			if (l > 9 && b == 3/* && (a || e || f || g || h || j)*/)
+				s = "\247aGrass";
+			else
+				s = "\247cGrass";
+
+		}
+		else if (i.equals("mushrooms")) {
+			if ((l > 12 || v) && b != 110)
+				s = "\247cMushrooms";
+			else
+				s = "\247aMushrooms";
+		}
+
+		return s+(debugActive ? ", "+l+", "+v+", "+sk : "")+"\247"+Integer.toHexString(TextColour);
 	}
 
 }

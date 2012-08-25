@@ -35,7 +35,7 @@ public class apk extends apn
         h.add(new aoh(5, f / 2 - 100, g / 4 + 48 + byte0, 98, 20, aj.a("gui.achievements")));
         h.add(new aoh(6, f / 2 + 2, g / 4 + 48 + byte0, 98, 20, aj.a("gui.stats")));
 		h.add(new aoh(8, f / 2 - 100, g / 4 + 144 + byte0, "WMLL Options..."));
-		if (WMLL.debugClassPresent)
+		if (WMLL.i.debugClassPresent)
 			h.add(new aoh(9001, f - 52, g - 22, 50, 20, "Reload"));
         aoh1.g = e.B() && !e.C().c();
     }

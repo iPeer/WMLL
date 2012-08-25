@@ -20,7 +20,7 @@ public class WMLLGuiSMPSeed extends apn {
 		Keyboard.enableRepeatEvents(true);
 		h.clear();
 		byte o = -16;
-		if (WMLL.debugClassPresent)
+		if (wmll.debugClassPresent)
 			h.add(new aoh(9001, f - 52, g - 22, 50, 20, "Reload"));
 		/*
 		 * New Editbox:

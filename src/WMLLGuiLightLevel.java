@@ -1,3 +1,7 @@
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -20,7 +24,7 @@ public class WMLLGuiLightLevel extends apn {
 	public WMLLGuiLightLevel(WMLL w, apn parent) {
 		this.wmll = w;
 		this.parent = parent;
-		title = "WMLL Light Level Customization";
+		title = "WMLL Output Customization";
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -32,8 +36,9 @@ public class WMLLGuiLightLevel extends apn {
 		byte o = -16;
 		h.clear();
 		
-		doneButton = new aoh(0, f / 2 - 112, g / 4 + 150 + o, 226, 20, "Done");
-		h.add(doneButton);
+		//doneButton = new aoh(0, f / 2 - 112, g / 4 + 150 + o, 226, 20, "Done");
+		//h.add(doneButton);
+		h.add(new aoh(3, f / 2 - 112, g / 4 + o, 226, 20, "View full parameter list"));
 		
 //		int a = wmll.getFontRenderer().a("Parameter Help") + 10;
 //		parameterButton = new aoh(1, (f - a) / 2, g / 4 + 65 + o, a, 20, "Parameter Help");
@@ -48,7 +53,7 @@ public class WMLLGuiLightLevel extends apn {
 		 * new aos(fontrenderer, posx, posy, width, height);
 		 */
 		lightLevelEditbox = new aos(/*this,*/ k, f / 2 - ((wmll.getWindowSize().a() - 20) / 2), 70, wmll.getWindowSize().a() - 20, 20/*, outputOptions.getProperty("lightString", "Light level: %LightLevel%")*/);
-		lightLevelEditbox.f(76);
+		lightLevelEditbox.f(500);
 		lightLevelEditbox.a(outputOptions.getProperty("lightString", "Light level: %LightLevel%"));
 		//lightLevelEditbox.a = true;
 		lightLevelEditbox.b(true);
@@ -73,12 +78,34 @@ public class WMLLGuiLightLevel extends apn {
 		lightEditbox.a(outputOptions.getProperty("highlightLight", "8"));
 		page3editboxes.add(lightEditbox);
 		
-		if (WMLL.debugClassPresent)
+		if (wmll.debugClassPresent)
 			h.add(new aoh(9001, f - 52, g - 22, 50, 20, "Reload"));
 		generateLightStringPreview();
 	}
 	
 	protected void a(aoh b) {
+		if (b.f == 3) {
+			if (!Desktop.isDesktopSupported()) {
+				System.err.println("[WMLL] FATAL: System doesn't support Desktop!");
+				return;
+			}
+			Desktop a = Desktop.getDesktop();
+			if (!a.isSupported(Desktop.Action.BROWSE)) {
+				System.err.println("[WMLL] FATAL: System doesn't support Desktop.BROWSE!");
+				return;
+			}
+			try {
+				URI c = new URI("http://www.minecraftforum.net/topic/170739-#parameters");
+				a.browse(c);
+			} catch (URISyntaxException e1) {
+				System.err.println("[WMLL] Invalid URI syntax!\nStacktrace:");
+				e1.printStackTrace();
+			} catch (IOException e2) {
+				System.err.println("[WMLL] SystemIO error!\nStacktrace:");
+
+				e2.printStackTrace();
+			}
+		}
 		if (b.f == 0) {
 			if (page == 1) {
 				performSave();
@@ -120,7 +147,7 @@ public class WMLLGuiLightLevel extends apn {
 	}
 	
 	protected void a(char c, int i) {
-		if (Keyboard.KEY_ESCAPE == i) {
+		if (Keyboard.KEY_ESCAPE == i || Keyboard.KEY_RETURN == i) {
 			performSave();
 			e.a(parent);
 		}
@@ -144,61 +171,18 @@ public class WMLLGuiLightLevel extends apn {
 		// (fontrenderer, text, x, y, colour)
 		v_();
 		WMLLOptions.renderWMLLVersion();
-		if (page == 1) {
 			a(k, title, this.f / 2, 20, 0xffffff);
 			lightLevelEditbox.f();
-			a(k, "Preview:", this.f / 2, 100, 0xbbbbbb);
+			a(k, "\247aOnce done, hit enter or escape to save.", this.f / 2, 93, 0xffffff);
+			a(k, "Preview:", this.f / 2, 105, 0xbbbbbb);
+			lightString = lightString.replaceAll("\\\\t", "");
 			String[] a = lightString.split("\\\\n");
 			int b = 0;
 			for (String c : a)
 				a(k, c, this.f / 2, 115+(b++*12), 0xffffff);
 			
-			a(k, "For a full list of parameters and what they symbolise, please check", this.f / 2, 45, 0xbbbbbb);
-			a(k, "the WMLL forum thread.", this.f / 2, 57, 0xbbbbbb);
-		}
-		else if (page == 2) {
-			a(k, "Parameters", this.f / 2, 15, 0xffffff);
-			
-			String b = "\247c%LightLevel%";
-			a(k, b, this.f / 2, 45, 0xffffff);
-			b = "Returns the current light level.";
-			a(k, b, this.f / 2, 55, 0xffffff);
-
-			b = "\247c%RawLight%";
-			a(k, b, this.f / 2, 65, 0xffffff);
-			b = "Returns the current raw light level.";
-			a(k, b, this.f / 2, 75, 0xffffff);
-
-			b = "\247c%SkyLight%";
-			a(k, b, this.f / 2, 85, 0xffffff);
-			b = "Returns the sky's current light level.";
-			a(k, b, this.f / 2, 95, 0xffffff);
-
-			b = "\247c%BlockLight%";
-			a(k, b, this.f / 2, 105, 0xffffff);
-			b = "Returns the block's light level.";
-			a(k, b, this.f / 2, 115, 0xffffff);
-			
-			b = "\247c%Biome%";
-			a(k, b, this.f / 2, 125, 0xffffff);
-			b = "Returns the current biome.";
-			a(k, b, this.f / 2, 135, 0xffffff);
-			
-			b = "\247c%x%\247r, \247c%y% \247r&\247c %z%";
-			a(k, b, this.f / 2 + 15, 145, 0xffffff);
-			b = "Return the coordinate repective to the letter.";
-			a(k, b, this.f / 2, 155, 0xffffff);
-		}
-		else if (page == 3) {
-			for (int x = 0; x < page3editboxes.size(); x++) {
-				page3editboxes.get(x).f();
-			}
-			a(k, "Highlight block light when less than...", this.f / 2, 30, 0xffffff);
-			a(k, "Highlight sky light when less than...", this.f / 2, 60, 0xffffff);
-			a(k, "Highlight raw light when less than...", this.f / 2, 90, 0xffffff);
-			a(k, "Highlight light level when less than...", this.f / 2, 120, 0xffffff);
-			a(k, "\247cSetting a value to 0 will disable highlighting for that output", this.f / 2, 160, 0xffffff);
-		}
+			//a(k, "For a full list of parameters and what they symbolise, please check", this.f / 2, 45, 0xbbbbbb);
+			//a(k, "the WMLL forum thread.", this.f / 2, 57, 0xbbbbbb);
 		super.a(i, j, f);
 	}
 	
