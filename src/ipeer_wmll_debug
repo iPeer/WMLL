@@ -1,0 +1,2 @@
+This file is so that WMLL runs in debug mode automatically while in the development environment.
+Do NOT include this file with public distributions of WMLL.

@@ -27,7 +27,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 752";
+		return "Test 753";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0,8,7,9,44,20);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -90,6 +90,7 @@ public class WMLL {
 		fieldNames.put("worldSeed", "a");
 		fieldNames.put("chatLines", "c");
 		Rei = ReiUseMl = RadarBro = false;
+		debugClassPresent = (getClass().getClassLoader().getResource("ipeer_wmll_debug") != null);
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		outputOptionsFile = new File(Minecraft.a("minecraft"), "WMLLOutput.properties");
 		wmllCompatibility = new WMLLCompatibility();
@@ -103,14 +104,15 @@ public class WMLL {
 		if (getClass().getClassLoader().getResource("RadarBro.class") != null) {
 			RadarBro = true;
 		}
-		if (isDebug()) {
+		if (debugClassPresent) {
 			RadarBro = false;
 		}
-		useForge = (getClass().getClassLoader().getResource("FMLRenderAccessLibrary.class") != null);
+		useForge = (getClass().getClassLoader().getResource("net/minecraftforge/common/ForgeHooks.class") != null);
 		debug("[WMLL] Can run debug: "+debugClassPresent);
 		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
 		debug("[WMLL] RadarBro: "+RadarBro);
 		debug("[WMLL] Forge: "+useForge);
+		debug("[WMLL] WMLL "+wmllVersion()+" initialized.");
 	}
 
 	public void updategui(Minecraft h, aow aow) {
@@ -149,7 +151,7 @@ public class WMLL {
 						this.worldSeed = worldSeed;
 						break;
 					}
-					
+
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -988,10 +990,6 @@ public class WMLL {
 	public void setUpdateAsAnnounced(int i) {
 		options.put("Update"+Integer.toString(i), "true");
 		saveOptions();
-	}
-	
-	private boolean isDebug() {
-		return !(WMLL.class.getProtectionDomain().getCodeSource().getLocation().getPath()).endsWith(".jar");
 	}
 
 }
