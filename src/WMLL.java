@@ -2,6 +2,7 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.SocketAddress;
 import java.text.DecimalFormat;
@@ -27,7 +28,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 30";
+		return "Test 755";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -109,6 +110,21 @@ public class WMLL {
 		if (debugClassPresent) {
 			RadarBro = false;
 			//useForge = false;
+		}
+		if (outputOptionsFile.exists()) {
+			debug("[WMLL] WMLLOutout.properties exists, merging with WMLL.properties");
+			try {
+				Properties a = new Properties();
+				a.load(new FileInputStream(outputOptionsFile));
+				options.putAll(a);
+				saveOptions();
+				outputOptionsFile.deleteOnExit();
+				debug("[WMLL] Succesfully merged files.");
+			}
+			catch (IOException w) {
+				debug("[WMLL] Unable to merge files (IOException)\n");
+				w.printStackTrace();
+			}
 		}
 		debug("[WMLL] Can run debug: "+debugClassPresent);
 		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
@@ -415,7 +431,7 @@ public class WMLL {
 	}
 
 	public String generateLightString() {
-		return generateLightString(outputOptions.getProperty("lightString", "Light level: %LightLevel%"));
+		return generateLightString(options.getProperty("lightString", "Light level: %LightLevel%"));
 	}
 
 	public String generateLightString(String s) { // [Roxy] Now Case insensitive
@@ -834,10 +850,10 @@ public class WMLL {
 			options.setProperty("showSeedWithCoords", Boolean.toString(showSeedWithCoords));
 			options.setProperty("F3Type", Integer.toString(F3Type));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
-			if (!outputOptions.isEmpty())
-				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
+//			if (!outputOptions.isEmpty())
+//				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
 			debug("[WMLL] Options saved.");
-			debug(options.toString()+"\n"+outputOptions.toString());
+			//debug(options.toString()+"\n"+outputOptions.toString());
 		}
 		catch (Exception e) { debug("[WMLL] Unable to save options: "+e.getMessage()); e.printStackTrace(); }
 	}
@@ -865,7 +881,7 @@ public class WMLL {
 			F3Type = Integer.parseInt(options.getProperty("F3Type", "0"));
 			showSeedWithCoords = Boolean.parseBoolean(options.getProperty("showSeedWithCoords", "true"));
 			debug("[WMLL] Loaded options.");
-			debug(options.toString()+"\n"+outputOptions.toString());
+			//debug(options.toString()+"\n"+outputOptions.toString());
 			if (firstRun)
 				saveOptions();
 		}

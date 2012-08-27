@@ -18,7 +18,7 @@ public class WMLLGuiOutputOptions extends apn {
 	public WMLLGuiOutputOptions(WMLL wmll, apn parent) {
 		this.wmll = wmll;
 		this.parent = parent;
-		this.outputOptions = WMLL.outputOptions;
+		this.outputOptions = WMLL.options;
 		title = "WMLL Output Configuration";
 	}
 

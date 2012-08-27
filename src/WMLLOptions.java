@@ -28,11 +28,6 @@ public class WMLLOptions extends apn {
 		h.clear();
 		String debug = WMLL.WMLLDebugActive() == true ? "ON": "OFF";
 		String ikey = Keyboard.getKeyName(wmll.F4Key);
-		String clockformat = "24 hr";
-		int a = wmll.clockSetting;
-		if (a < 3)
-			clockformat = (a == 2 ? "24 hr" : "12 hr");
-		else clockformat = "OFF";
 
 		//String clockformat = wmll.clockSetting == 2 ? "24 hr" : "12 hr";
 		byte offset = -16;
@@ -50,12 +45,6 @@ public class WMLLOptions extends apn {
 		h.add(new aoh(9, f / 2 - 100, g / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
 		//h.add(new aoh(4, f / 2 - 100, g / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
 		String enabledString = "Enabled on "+(wmll.isMultiplayer() ? "this server" : "single player")+": "+(wmll.Enabled ? "Yes" : "No");
-		int i = 0;
-		try {
-			i = wmll.getFontRenderer().a(enabledString);
-		}
-		catch (Exception e1) {
-		}
 		h.add(new aoh(8, f / 2 - 100, g / 4 + 45 + offset, enabledString));
 		if (wmll.debugClassPresent)
 			h.add(new aoh(9001, f - 52, g - 22, 50, 20, "Reload"));

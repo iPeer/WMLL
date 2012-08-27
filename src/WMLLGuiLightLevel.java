@@ -31,7 +31,7 @@ public class WMLLGuiLightLevel extends apn {
 	@SuppressWarnings("unchecked")
 	public void w_() {
 		Keyboard.enableRepeatEvents(true);
-		outputOptions = WMLL.outputOptions;
+		outputOptions = WMLL.options;
 		if (outputOptions == null)
 			outputOptions = new Properties();
 		byte o = -16;
@@ -218,8 +218,8 @@ public class WMLLGuiLightLevel extends apn {
 	
 	public void performSave() {
 		outputOptions.put("lightString", lightLevelEditbox.b());
-		WMLLGuiOutputOptions.outputOptions = WMLL.outputOptions = outputOptions;
-		System.out.println(outputOptions);
+		WMLLGuiOutputOptions.outputOptions = WMLL.options = outputOptions;
+		wmll.saveOptions();
 	}
 	
 	private String verify(String a) {

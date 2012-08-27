@@ -7,7 +7,6 @@ public class WMLLGuiSMPSeed extends apn {
 	protected WMLL wmll;
 	private apn parent;
 	private String title;
-	private String seed = "";
 	
 	private aos seedBox;
 
@@ -42,7 +41,7 @@ public class WMLLGuiSMPSeed extends apn {
 		}
 		else if (b.f == 0) {
 			if (!seedBox.b().equals("")) {
-				System.out.println(true+ " | "+seedBox.b());
+				//System.out.println(true+ " | "+seedBox.b());
 				WMLL.options.put("Seed:"+wmll.getWorldName().toLowerCase(), seedBox.b());
 			}
 			e.a(parent);
