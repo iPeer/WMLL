@@ -1,13 +1,9 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode fieldsfirst noconv 
-// Source File Name:   SourceFile
+
 
 import java.awt.Color;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.common.ForgeHooks;
 
 import org.lwjgl.opengl.GL11;
 
@@ -110,11 +106,7 @@ public class aow extends aox
                 }
                 int k8 = i1 - 39;
                 int k9 = k8 - 10;
-                int j10;
-                if (getClass().getClassLoader().getResource("net/minecraftforge/common/ForgeHooks.class") != null)
-                	j10 = ForgeHooks.getTotalArmorValue(d.g);
-                else
-                	j10 = d.g.aO();
+                int j10 = WMLLCompatibility.forgeA(d);
                 int i11 = -1;
                 if(d.g.a(ji.l))
                 {

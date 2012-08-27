@@ -1,3 +1,4 @@
+
 import org.lwjgl.input.Keyboard;
 
 public class WMLLOptions extends apn {
@@ -189,6 +190,8 @@ public class WMLLOptions extends apn {
 		int r = wmll.getWindowSize().b();
 		String ver = "WMLL "+WMLL.wmllVersion()+" ("+WMLL.getMinecraftVersion()+")";
 		wmll.drawStringUsingPixels(ver, 2, r - 9, 0x444444);
+		String[] a = (wmll.mc.r).toString().split("@");
+		wmll.drawStringUsingPixels("GUI: "+a[0]+" (@"+a[1]+")", 2, r - 18, 0x333333);
 	}
 	
 	public apn getParent() {

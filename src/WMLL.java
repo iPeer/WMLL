@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,7 +19,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.minecraft.client.Minecraft;
-
 import org.lwjgl.input.Keyboard;
 
 import reifnsk.minimap.ReiMinimap;
@@ -27,7 +27,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 754";
+		return "Stable 30";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -49,6 +49,7 @@ public class WMLL {
 	public long worldSeed = 0L;
 	public boolean autoSeed = true;
 	public boolean useForge;
+	public Minecraft mc;
 
 	public boolean wmllOverrideF3;
 	public int F3Type;
@@ -63,7 +64,6 @@ public class WMLL {
 
 	private WMLLRenderer wmllRenderer;
 	private WMLLF3 wmllF3;
-	private Minecraft mc;
 	private boolean Rei, ReiUseMl, RadarBro;
 	private boolean ranInit = false;
 	private boolean firstRun = true;
@@ -118,7 +118,7 @@ public class WMLL {
 	}
 
 	public void updategui(Minecraft h, aow aow) {
-
+        h.I.a("WMLL");
 		if (getWorld() != null && !wmllUpdateCheck.running) {
 			wmllUpdateCheck.start();
 		}
@@ -192,6 +192,7 @@ public class WMLL {
 			catch (NoSuchFieldError n2) { }
 			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true")) && !Boolean.parseBoolean(options.getProperty("AllOutputsOff", "false"));
 			if (WMLLDebugActive()) {
+				mc.I.c("WMLL Debug");
 				int x = getPlayerCoordinates()[0];
 				int z = getPlayerCoordinates()[2];
 				String worldName = getWorldName()+" ("+isMultiplayer()+")";
@@ -271,7 +272,6 @@ public class WMLL {
 				else
 					drawString(lightString, 2, 0, 0xffffff);
 			}
-
 
 			// Compass
 			if (useImages) {
@@ -406,7 +406,7 @@ public class WMLL {
 			}
 		}
 		wmllRenderer.tick();
-
+		h.I.b();
 	}
 
 	private void drawLightImage(int light) {
@@ -1099,7 +1099,6 @@ public class WMLL {
 			else
 				s = "\247aMushrooms";
 		}
-
 		return s+(debugActive ? ", "+l+", "+v+", "+sk : "")+"\247"+Integer.toHexString(TextColour);
 	}
 
