@@ -28,7 +28,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 755";
+		return "Test 756";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -112,7 +112,7 @@ public class WMLL {
 			//useForge = false;
 		}
 		if (outputOptionsFile.exists()) {
-			debug("[WMLL] WMLLOutout.properties exists, merging with WMLL.properties");
+			debug("[WMLL] WMLLOutput.properties exists, merging with WMLL.properties");
 			try {
 				Properties a = new Properties();
 				a.load(new FileInputStream(outputOptionsFile));
@@ -282,7 +282,7 @@ public class WMLL {
 				lightString = generateLightString();
 				sleepingStringSet = false;			
 			}
-			if (WMLLI < 6) {
+			if (WMLLI < 6 || !useImages) {
 				if (!isPlayerSleeping() && useImages)
 					drawLightImage(light);
 				else
@@ -710,11 +710,11 @@ public class WMLL {
 	}
 
 	private boolean canSlimesSpawnHere(int x, int z) {
-		if (isMultiplayer()) {
+		if (isSeedSet()) {
 			wl chunk = getChunk(x, z);
-			int xPos = chunk.g;
-			int zPos = chunk.h;
-			return new Random(getWorldSeed() + (long)(xPos * xPos * 0x4c1906) + (long)(xPos * 0x5ac0db) + (long)(zPos * zPos) * 0x4307a7L + (long) (zPos * 0x5f24f) ^ 0x3ad8025f).nextInt(10) == 0;
+			int g = chunk.g;
+			int h = chunk.h;
+			return new Random(getWorldSeed() + (long)(g * g * 0x4c1906) + (long)(g * 0x5ac0db) + (long)(h * h) * 0x4307a7L + (long)(h * 0x5f24f) ^ 0x3ad8025fL).nextInt(10) == 0;
 		}
 		return getChunk(x, z).a(0x3ad8025fL).nextInt(10) == 0 && getWorldSeed() != 0L;
 	}

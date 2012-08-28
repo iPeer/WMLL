@@ -10,10 +10,16 @@ public class WMLLCompatibility {
 	private int i;
 	
 	public static int forgeA(Minecraft d) {
-        if (WMLL.i.useForge)
-        	return ForgeHooks.getTotalArmorValue(d.g);
-        else
-        	return d.g.aO();
+		int a = d.g.aO();
+		if (WMLL.i.useForge)
+			try {
+				return ForgeHooks.getTotalArmorValue(d.g);
+			}
+		catch (IllegalAccessError e) { return a; }
+		catch (NoClassDefFoundError e) { return a; }
+		catch (NoSuchFieldError e) { return a; }
+		else
+			return a;
 	}
 	
 	public void RadarBroRun(Minecraft i, WMLL w) {
