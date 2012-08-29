@@ -304,7 +304,7 @@ public class aow extends aox
             aov1.a(s, l - k2 - 10, 5, 0xffffff);
             d.I.b();
         }
-		WMLL.i.updategui(d, this);
+		WMLL.i.updategui(d);
         if(d.y.Q)
         {
             d.I.a("debug");

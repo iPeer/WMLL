@@ -56,6 +56,7 @@ public class WMLL {
 	public int F3Type;
 	public boolean showSeedWithCoords;
 	public boolean debugClassPresent = false;
+	public boolean classicOutput = false;
 
 	private static final int propertiesVersion = 3;
 	public static File settingsFile, outputOptionsFile;
@@ -133,6 +134,10 @@ public class WMLL {
 		debug("[WMLL] WMLL "+wmllVersion()+" initialized.");
 	}
 
+	public void updategui(Minecraft h) {
+		updategui(h, h.v);
+	}
+	
 	public void updategui(Minecraft h, aow aow) {
         h.I.a("WMLL");
 		if (getWorld() != null && !wmllUpdateCheck.running) {
@@ -282,7 +287,7 @@ public class WMLL {
 				lightString = generateLightString();
 				sleepingStringSet = false;			
 			}
-			if (WMLLI < 6 || !useImages) {
+			if (WMLLI < 6 || (!useImages || !classicOutput)) {
 				if (!isPlayerSleeping() && useImages)
 					drawLightImage(light);
 				else
@@ -290,7 +295,7 @@ public class WMLL {
 			}
 
 			// Compass
-			if (useImages) {
+			if (useImages || classicOutput) {
 				if (Arrays.asList(3, 4, 5, 8, 9, 10).contains(WMLLI)) {
 					int out = 1;
 					if (WMLLI == 9 || WMLLI == 4) {
@@ -809,13 +814,19 @@ public class WMLL {
 	}
 
 	public void drawString(String t, int i, int j, int k) {
-		int textpos = WMLLI > 5 ? -8 : 2;
+		int textpos = (WMLLI > 5 && classicOutput ? -8 : 2);
 		//t = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
 		Pattern re = Pattern.compile("\247[0-9a-f,l-o,r]");
 		int w = getWindowSize().a();
 		int h = getWindowSize().b();
-		t = t.replaceAll("\\\\t", "    ");
-		String[] lines = t.split("\\\\n");
+		t = t.replaceAll("\\\\t", (classicOutput ? " " : "    "));
+		String[] lines = {};
+		if (classicOutput) {
+			lines = new String[1];
+			lines[0] = t.replaceAll("\\\\n", " ");
+		}
+		else
+			lines = t.split("\\\\n");
 		int l = 0;
 		for (String a : lines) {
 			String a1 = re.matcher(a).replaceAll("");
@@ -880,6 +891,7 @@ public class WMLL {
 			wmllOverrideF3 = Boolean.parseBoolean(options.getProperty("OverrideIngameF3", "false")); // Now defaults to false due to Minecraft's native Shift + F3
 			F3Type = Integer.parseInt(options.getProperty("F3Type", "0"));
 			showSeedWithCoords = Boolean.parseBoolean(options.getProperty("showSeedWithCoords", "true"));
+			classicOutput = Boolean.parseBoolean(options.getProperty("classicOutput", "false"));
 			debug("[WMLL] Loaded options.");
 			//debug(options.toString()+"\n"+outputOptions.toString());
 			if (firstRun)
@@ -917,7 +929,7 @@ public class WMLL {
 			else
 				if (mc.r == null) {
 					//&& !(mc.s instanceof acr/*GuiChat*/) && !(mc.s instanceof ars/*Sign Editing*/) && !(mc.s instanceof hw/*Book Editing*/)) {
-					if (useImages) {
+					if (useImages || classicOutput) {
 						if (Keyboard.isKeyDown(42)) {
 							WMLLI--;
 							while (!isOutputEnabled(WMLLI))

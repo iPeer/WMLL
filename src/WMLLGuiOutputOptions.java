@@ -37,7 +37,8 @@ public class WMLLGuiOutputOptions extends apn {
 			h.add(new aoh(5, f / 2 - 112, g / 4 + 75 + o, 226, 20, "Customize output"));
 			h.add(new aoh(6, f / 2 - 112, g / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
 			h.add(new aoh(8, f / 2 + 2, g / 4 + 20 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
-			h.add(SMPSeedButton = new aoh(9, f / 2 - 112, g / 4 + 100 + o, 226, 20, "Enter seed for this server..."));
+			h.add(new aoh(7, f / 2 + 2, g / 4 + 100 + o, 112, 20, "Output type: "+(wmll.classicOutput ? "Classic" : "Custom")));
+			h.add(SMPSeedButton = new aoh(9, f / 2 - 112, g / 4 + 100 + o, 112, 20, "Enter seed"));
 			h.add(eOutputsButton = new aoh(11, f / 2 - 112, g / 4 + 125 + o, 226, 20, "Enabled outputs..."));
 			h.add(showButton = new aoh(10, f / 2 - 112, g / 4 + 50 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
 			SMPSeedButton.g = wmll.isMultiplayer() || !wmll.autoSeed;
@@ -77,12 +78,9 @@ public class WMLLGuiOutputOptions extends apn {
 			e.a(new WMLLGuiLightLevel(wmll, this));
 		}
 		else if (b.f == 7) {
-			int a = wmll.F3Type;
-			a++;
-			if (a > 1)
-				a = 0;
-			wmll.F3Type = a;
-			b.e = "F3 Type: "+(a == 1 ? "Alternate" : "Classic");
+			boolean a = !wmll.classicOutput;
+			b.e = "Output type: "+(a ? "Classic" : "Custom");
+			wmll.classicOutput = a;
 		}
 		else if (b.f == 8) {
 			boolean a = wmll.showSeedWithCoords;
