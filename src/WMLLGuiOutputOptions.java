@@ -42,7 +42,7 @@ public class WMLLGuiOutputOptions extends apn {
 			h.add(eOutputsButton = new aoh(11, f / 2 - 112, g / 4 + 125 + o, 226, 20, "Enabled outputs..."));
 			h.add(showButton = new aoh(10, f / 2 - 112, g / 4 + 50 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
 			SMPSeedButton.g = wmll.isMultiplayer() || !wmll.autoSeed;
-			eOutputsButton.h = showButton.h = WMLL.useImages;
+			eOutputsButton.h = showButton.h = (WMLL.useImages || wmll.classicOutput);
 	}
 
 	protected void a(aoh b) {

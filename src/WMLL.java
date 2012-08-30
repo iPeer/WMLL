@@ -28,7 +28,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 31";
+		return "Test 758";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -860,6 +860,7 @@ public class WMLL {
 			options.setProperty("OverrideIngameF3", Boolean.toString(wmllOverrideF3));
 			options.setProperty("showSeedWithCoords", Boolean.toString(showSeedWithCoords));
 			options.setProperty("F3Type", Integer.toString(F3Type));
+			options.setProperty("classicOutput", Boolean.toString(classicOutput));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
 //			if (!outputOptions.isEmpty())
 //				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
