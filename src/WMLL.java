@@ -28,10 +28,11 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 32";
+		return "Test 759";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
+	public static final WMLLUpdateCheck wmllUpdateCheck = new WMLLUpdateCheck();
 	public static WMLL i = new WMLL();
 	public static boolean Enabled = true;
 	public static int WMLLI;
@@ -57,11 +58,11 @@ public class WMLL {
 	public boolean showSeedWithCoords;
 	public boolean debugClassPresent = false;
 	public boolean classicOutput = false;
-
+	public boolean autoUpdateCheck = true;
+	
 	private static final int propertiesVersion = 3;
 	public static File settingsFile, outputOptionsFile;
 	public static long lastUpdateCheck = 0;
-	private static final WMLLUpdateCheck wmllUpdateCheck = new WMLLUpdateCheck();
 	private static final Calendar calendar = Calendar.getInstance();
 
 	private WMLLRenderer wmllRenderer;
@@ -140,7 +141,7 @@ public class WMLL {
 	
 	public void updategui(Minecraft h, aow aow) {
         h.I.a("WMLL");
-		if (getWorld() != null && !wmllUpdateCheck.running) {
+		if (getWorld() != null && !wmllUpdateCheck.running && autoUpdateCheck) {
 			wmllUpdateCheck.start();
 		}
 		else if (getWorld() == null && wmllUpdateCheck.running) {
@@ -861,6 +862,7 @@ public class WMLL {
 			options.setProperty("showSeedWithCoords", Boolean.toString(showSeedWithCoords));
 			options.setProperty("F3Type", Integer.toString(F3Type));
 			options.setProperty("classicOutput", Boolean.toString(classicOutput));
+			options.setProperty("autoUpdateCheck", Boolean.toString(autoUpdateCheck));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
 //			if (!outputOptions.isEmpty())
 //				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
@@ -893,6 +895,7 @@ public class WMLL {
 			F3Type = Integer.parseInt(options.getProperty("F3Type", "0"));
 			showSeedWithCoords = Boolean.parseBoolean(options.getProperty("showSeedWithCoords", "true"));
 			classicOutput = Boolean.parseBoolean(options.getProperty("classicOutput", "false"));
+			autoUpdateCheck= Boolean.parseBoolean(options.getProperty("autoUpdateCheck", "true"));
 			debug("[WMLL] Loaded options.");
 			//debug(options.toString()+"\n"+outputOptions.toString());
 			if (firstRun)

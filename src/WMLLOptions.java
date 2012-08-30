@@ -40,7 +40,8 @@ public class WMLLOptions extends apn {
 		h.add(new aoh(2, f / 2 + 2, g / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
 		//h.add(new aoh(5, f / 2 - 100, g / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
 		h.add(new aoh(6, f / 2 + - 100, g / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
-		h.add(new aoh(3, f / 2 - 100, g / 4 + 125 + offset, "Output options..."));
+		h.add(new aoh(7, f / 2 - 100, g / 4 + 105 + offset, "Check for updates: "+(wmll.autoUpdateCheck ? "Yes" : "No")));
+		h.add(new aoh(3, f / 2 - 100, g / 4 + 130 + offset, "Output options..."));
 		h.add(new aoh(4, f / 2 - 100, g / 4 + 85 + offset, "Reset settings to defaults"));
 		h.add(new aoh(9, f / 2 - 100, g / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
 		//h.add(new aoh(4, f / 2 - 100, g / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
@@ -92,6 +93,15 @@ public class WMLLOptions extends apn {
 		if (button.f == 6) {
 			wmll.useImages = !wmll.useImages;
 			button.e = "Images: "+(wmll.useImages ? "ON" : "OFF");
+		}
+		if (button.f == 7) {
+			boolean a = !wmll.autoUpdateCheck;
+			button.e = "Check for updates: "+(a ? "Yes" : "No");
+			if (!a && wmll.wmllUpdateCheck.running)
+				wmll.wmllUpdateCheck.stop1();
+			else if (a && wmll.wmllUpdateCheck.running)
+				wmll.wmllUpdateCheck.start();
+			wmll.autoUpdateCheck = a;
 		}
 		if (button.f == 8) {
 			boolean a = wmll.Enabled;

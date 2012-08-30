@@ -15,6 +15,7 @@ public class WMLLUpdateCheck extends Thread implements Runnable {
 
 	public void stop1() {
 		running = false;
+		WMLL.lastUpdateCheck = 0L;
 	}
 
 	@Override
