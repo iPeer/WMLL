@@ -28,7 +28,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 759";
+		return "Test 760";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -111,7 +111,7 @@ public class WMLL {
 		}
 		if (debugClassPresent) {
 			RadarBro = false;
-			//useForge = false;
+			useForge = false;
 		}
 		if (outputOptionsFile.exists()) {
 			debug("[WMLL] WMLLOutput.properties exists, merging with WMLL.properties");
@@ -128,10 +128,16 @@ public class WMLL {
 				w.printStackTrace();
 			}
 		}
-		debug("[WMLL] Can run debug: "+debugClassPresent);
-		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
-		debug("[WMLL] RadarBro: "+RadarBro);
-		debug("[WMLL] Forge: "+useForge);
+		debug("[WMLL] WMLL is"+(debugClassPresent ? "" : " not")+" running in debug mode");
+//		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
+//		debug("[WMLL] RadarBro: "+RadarBro);
+//		debug("[WMLL] Forge: "+useForge);
+		if (Rei)
+			debug("[WMLL] WMLL is running in Rei's Minimap Compatibility mode");
+		if (useForge)
+			debug("[WMLL] WMLL is running in Forge Compatibility mode");
+		if (RadarBro)
+			debug("[WMLL] WMLL is running in RadarBro Compatibility mode");
 		debug("[WMLL] WMLL "+wmllVersion()+" initialized.");
 	}
 
@@ -164,11 +170,14 @@ public class WMLL {
 				List<String> a = (List<String>)obj;
 				@SuppressWarnings("rawtypes")
 				Iterator c = a.iterator();
+				int e = 0;
 				while (c.hasNext()) {
+					e++;
 					ane d = (ane)c.next();
 					String b = d.a();
 					if (b.startsWith("Seed: ")) {
-						aow.b().a();
+						//aow.b().a();
+						a.remove(e - 1);
 						long worldSeed = Long.parseLong(b.split("Seed: ")[1]);
 						worldSeedSet = true;
 						debug("[WMLL] Seed set to "+worldSeed);
@@ -194,7 +203,8 @@ public class WMLL {
 			wmllF3 = new WMLLF3(mc, this);
 			ranInit = true;
 			this.fontRenderer = h.p;
-			(new Thread(wmllUpdateCheck)).start();
+			entityPlayer().a("Test");
+			//(new Thread(wmllUpdateCheck)).start();
 		}
 		if (mcDebugOpen() || wmllF3Output) {
 			if (mcDebugOpen() && wmllOverrideF3)
