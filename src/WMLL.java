@@ -28,7 +28,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 760";
+		return "Test 761";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -457,10 +457,6 @@ public class WMLL {
 		double x1 = getPlayerCoordinatesAsDouble()[0];
 		double y1 = getPlayerCoordinatesAsDouble()[1];
 		double z1 = getPlayerCoordinatesAsDouble()[2];
-		int highlightSky = Integer.parseInt(outputOptions.getProperty("highlightSky", "8"));
-		int highlightBlock = Integer.parseInt(outputOptions.getProperty("highlightBlock", "8"));
-		int highlightRaw = Integer.parseInt(outputOptions.getProperty("highlightRaw", "8"));
-		int highlightLight = Integer.parseInt(outputOptions.getProperty("highlightLight", "8"));
 		int a = getLightLevel(x, y, z);
 		Pattern SkyLight = Pattern.compile("%skylight%", Pattern.CASE_INSENSITIVE);
 		Pattern BlockLight = Pattern.compile("%blocklight%", Pattern.CASE_INSENSITIVE);
@@ -483,13 +479,14 @@ public class WMLL {
 		Pattern chunkx = Pattern.compile("%chunkx%", Pattern.CASE_INSENSITIVE);
 		Pattern chunkz = Pattern.compile("%chunkz%", Pattern.CASE_INSENSITIVE);
 		Pattern seed = Pattern.compile("%seed%", Pattern.CASE_INSENSITIVE);
-		String lightLevel = (a < highlightLight ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
+		Pattern localTime = Pattern.compile("%localtime%", Pattern.CASE_INSENSITIVE);
+		String lightLevel = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
 		a = getSavedBlockLight(x, y, z);
-		String blockLight = (a < highlightBlock ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
+		String blockLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
 		a = getRawLightLevel(x, y, z);
-		String rawLight = (a < highlightRaw ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
+		String rawLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
 		a = getSkyLight(1.0f);
-		String skyLight = (a < highlightSky ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
+		String skyLight = (a > 7 ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
 		Matcher m = SkyLight.matcher(s);
 		s = m.replaceAll(skyLight);
 		m = BlockLight.matcher(s);
@@ -550,6 +547,10 @@ public class WMLL {
 			String ind = m.group().replaceAll("%ind:|%", "").toLowerCase();
 			s = s.replaceAll("%ind:"+ind+"%", getIdenString(ind));
 		}
+		m = localTime.matcher(s);
+		Calendar b = Calendar.getInstance();
+		b.setTime(new Date(System.currentTimeMillis()));
+		s = m.replaceAll(b.getTime().toString().split(" ")[3]);
 		return s;
 	}
 
@@ -630,7 +631,7 @@ public class WMLL {
 		if (y < 0 || y > 255) 
 			return 0;
 		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(vb.a, x & 0xf, y, z & 0xf);
+		return getChunk(playerPos[0], playerPos[2]).c(x & 0xf, y, z & 0xf, 0);
 	}
 
 	public int getBlockLight (int i, int j, int k) {
