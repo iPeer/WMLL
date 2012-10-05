@@ -10,26 +10,26 @@ import java.util.Properties;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiLightLevel extends apn {
+public class WMLLGuiLightLevel extends ask {
 	
 	protected WMLL wmll;
-	private apn parent;
+	private ask parent;
 	private String title;
 	private Properties outputOptions;
 	private String lightString;
 	private int page = 1;
-	private aoh parameterButton, colouringButton, doneButton;
-	private aos lightEditbox, skyEditbox, rawEditbox, blockEditbox, lightLevelEditbox;
-	private final List<aos> page3editboxes = new ArrayList<aos>();
+	private aqz parameterButton, colouringButton, doneButton;
+	private arm lightEditbox, skyEditbox, rawEditbox, blockEditbox, lightLevelEditbox;
+	private final List<arm> page3editboxes = new ArrayList<arm>();
 
-	public WMLLGuiLightLevel(WMLL w, apn parent) {
+	public WMLLGuiLightLevel(WMLL w, ask parent) {
 		this.wmll = w;
 		this.parent = parent;
 		title = "WMLL Output Customization";
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void w_() {
+	public void A_() {
 		Keyboard.enableRepeatEvents(true);
 		outputOptions = WMLL.options;
 		if (outputOptions == null)
@@ -39,7 +39,7 @@ public class WMLLGuiLightLevel extends apn {
 		
 		//doneButton = new aoh(0, f / 2 - 112, g / 4 + 150 + o, 226, 20, "Done");
 		//h.add(doneButton);
-		h.add(new aoh(3, f / 2 - 112, g / 4 + o, 226, 20, "View full parameter list"));
+		h.add(new aqz(3, f / 2 - 112, g / 4 + o, 226, 20, "View full parameter list"));
 		
 //		int a = wmll.getFontRenderer().a("Parameter Help") + 10;
 //		parameterButton = new aoh(1, (f - a) / 2, g / 4 + 65 + o, a, 20, "Parameter Help");
@@ -51,40 +51,40 @@ public class WMLLGuiLightLevel extends apn {
 		
 		/*
 		 * New Editbox:
-		 * new aos(fontrenderer, posx, posy, width, height);
+		 * new arm(fontrenderer, posx, posy, width, height);
 		 */
-		lightLevelEditbox = new aos(/*this,*/ k, f / 2 - ((wmll.getWindowSize().a() - 20) / 2), 70, wmll.getWindowSize().a() - 20, 20/*, outputOptions.getProperty("lightString", "Light level: %LightLevel%")*/);
+		lightLevelEditbox = new arm(/*this,*/ k, f / 2 - ((wmll.getWindowSize().a() - 20) / 2), 70, wmll.getWindowSize().a() - 20, 20/*, outputOptions.getProperty("lightString", "Light level: %LightLevel%")*/);
 		lightLevelEditbox.f(500);
 		lightLevelEditbox.a(outputOptions.getProperty("lightString", "Light level: %LightLevel%"));
 		//lightLevelEditbox.a = true;
 		lightLevelEditbox.b(true);
 		
-		blockEditbox = new aos(k, f / 2 - 10, 43, 20, 10);
+		blockEditbox = new arm(k, f / 2 - 10, 43, 20, 10);
 		blockEditbox.f(2);
 		blockEditbox.a(outputOptions.getProperty("highlightBlock", "8"));
 		page3editboxes.add(blockEditbox);
 		
-		skyEditbox = new aos(k, f / 2 - 10, 73, 20, 10);
+		skyEditbox = new arm(k, f / 2 - 10, 73, 20, 10);
 		skyEditbox.a(outputOptions.getProperty("highlightSky", "8"));
 		skyEditbox.f(2);
 		page3editboxes.add(skyEditbox);
 		
-		rawEditbox = new aos(k, f / 2 - 10, 103, 20, 10);
+		rawEditbox = new arm(k, f / 2 - 10, 103, 20, 10);
 		rawEditbox.f(2);
 		rawEditbox.a(outputOptions.getProperty("highlightRaw", "8"));
 		page3editboxes.add(rawEditbox);
 		
-		lightEditbox = new aos(k, f / 2 - 10, 133, 20, 10);
+		lightEditbox = new arm(k, f / 2 - 10, 133, 20, 10);
 		lightEditbox.f(2);
 		lightEditbox.a(outputOptions.getProperty("highlightLight", "8"));
 		page3editboxes.add(lightEditbox);
 		
 		if (wmll.debugClassPresent)
-			h.add(new aoh(9001, f - 52, g - 22, 50, 20, "Reload"));
+			h.add(new aqz(9001, f - 52, g - 22, 50, 20, "Reload"));
 		generateLightStringPreview();
 	}
 	
-	protected void a(aoh b) {
+	protected void a(aqz b) {
 		if (b.f == 3) {
 			if (!Desktop.isDesktopSupported()) {
 				System.err.println("[WMLL] FATAL: System doesn't support Desktop!");
@@ -170,7 +170,7 @@ public class WMLLGuiLightLevel extends apn {
 	
 	public void a(int i, int j, float f) {
 		// (fontrenderer, text, x, y, colour)
-		v_();
+		z_();
 		WMLLOptions.renderWMLLVersion();
 			a(k, title, this.f / 2, 20, 0xffffff);
 			lightLevelEditbox.f();

@@ -2,40 +2,40 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiSMPSeed extends apn {
+public class WMLLGuiSMPSeed extends ask {
 	
 	protected WMLL wmll;
-	private apn parent;
+	private ask parent;
 	private String title;
 	
-	private aos seedBox;
+	private arm seedBox;
 
-	public WMLLGuiSMPSeed(WMLL wmll, apn parent) {
+	public WMLLGuiSMPSeed(WMLL wmll, ask parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.title = "WMLL SMP Seed Configuration";
 	}
 	@SuppressWarnings("unchecked")
-	public void w_() {
+	public void A_() {
 		Keyboard.enableRepeatEvents(true);
 		h.clear();
 		byte o = -16;
 		if (wmll.debugClassPresent)
-			h.add(new aoh(9001, f - 52, g - 22, 50, 20, "Reload"));
+			h.add(new aqz(9001, f - 52, g - 22, 50, 20, "Reload"));
 		/*
 		 * New Editbox:
 		 * new aoj(Gui, fontrenderer, posx, posy, width, height, default text);
 		 */
-		seedBox = new aos(/*this,*/ k, f / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
+		seedBox = new arm(/*this,*/ k, f / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
 		//h.add(seedBox);
 		seedBox.a(72);
 		if (wmll.getWorldSeed() != 0)
 			seedBox.a(Long.toString(wmll.getWorldSeed()));
 		seedBox.b(true);
-		h.add(new aoh(0, f / 2 - 100, g / 4 + 90 + o, "Save Seed"));
+		h.add(new aqz(0, f / 2 - 100, g / 4 + 90 + o, "Save Seed"));
 	}
 	
-	protected void a(aoh b) {
+	protected void a(aqz b) {
 		if (b.f == 9001) {
 			e.a(new WMLLGuiSMPSeed(wmll, parent));
 		}
@@ -68,7 +68,7 @@ public class WMLLGuiSMPSeed extends apn {
 //	}
 	
 	public void a(int i, int j, float f) {
-		v_();
+		z_();
 		// (fontrenderer, text, x, y, colour)
 		a(k, title, this.f / 2, 20, 0xffffff);
 		a(k, "If you know the seed for this server, you can enter it here.", this.f / 2, 80, 0xffffff);

@@ -1,13 +1,13 @@
 
 import org.lwjgl.input.Keyboard;
 
-public class WMLLOptions extends apn {
+public class WMLLOptions extends ask {
 		
 	public WMLLOptions() {
 		this.wmll = WMLL.i;
 	}
 	
-	public WMLLOptions(apn parent) {
+	public WMLLOptions(ask parent) {
 		this.parent = parent;
 		this.wmll = WMLL.i;
 	}
@@ -17,14 +17,14 @@ public class WMLLOptions extends apn {
 	}
 
 
-	public WMLLOptions(WMLL wmll, apn parent) {
+	public WMLLOptions(WMLL wmll, ask parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 	}
 
 
 	@SuppressWarnings({ "unchecked", "static-access" })
-	public void w_() {
+	public void A_() {
 		h.clear();
 		String debug = WMLL.WMLLDebugActive() == true ? "ON": "OFF";
 		String ikey = Keyboard.getKeyName(wmll.F4Key);
@@ -33,29 +33,29 @@ public class WMLLOptions extends apn {
 		byte offset = -16;
 		/*
 		 * New button
-		 * aoh((int)ID, x, y[, width, height], text)
+		 * aqz((int)ID, x, y[, width, height], text)
 		 */
-		h.add(new aoh(1, f / 2 - 100, g / 4 + 150 + offset, "Done"));
-		h.add(new aoh(0, f / 2 - 100, g / 4 - 5 + offset, 98, 20, "Debug: "+debug));
-		h.add(new aoh(2, f / 2 + 2, g / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
-		//h.add(new aoh(5, f / 2 - 100, g / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
-		h.add(new aoh(6, f / 2 + - 100, g / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
-		h.add(new aoh(7, f / 2 - 100, g / 4 + 105 + offset, "Check for updates: "+(wmll.autoUpdateCheck ? "Yes" : "No")));
-		h.add(new aoh(3, f / 2 - 100, g / 4 + 130 + offset, "Output options..."));
-		h.add(new aoh(4, f / 2 - 100, g / 4 + 85 + offset, "Reset settings to defaults"));
-		h.add(new aoh(9, f / 2 - 100, g / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
-		//h.add(new aoh(4, f / 2 - 100, g / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
+		h.add(new aqz(1, f / 2 - 100, g / 4 + 150 + offset, "Done"));
+		h.add(new aqz(0, f / 2 - 100, g / 4 - 5 + offset, 98, 20, "Debug: "+debug));
+		h.add(new aqz(2, f / 2 + 2, g / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
+		//h.add(new aqz(5, f / 2 - 100, g / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
+		h.add(new aqz(6, f / 2 + - 100, g / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
+		h.add(new aqz(7, f / 2 - 100, g / 4 + 105 + offset, "Check for updates: "+(wmll.autoUpdateCheck ? "Yes" : "No")));
+		h.add(new aqz(3, f / 2 - 100, g / 4 + 130 + offset, "More options..."));
+		h.add(new aqz(4, f / 2 - 100, g / 4 + 85 + offset, "Reset settings to defaults"));
+		h.add(new aqz(9, f / 2 - 100, g / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
+		//h.add(new aqz(4, f / 2 - 100, g / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
 		String enabledString = "Enabled on "+(wmll.isMultiplayer() ? "this server" : "single player")+": "+(wmll.Enabled ? "Yes" : "No");
-		h.add(new aoh(8, f / 2 - 100, g / 4 + 45 + offset, enabledString));
+		h.add(new aqz(8, f / 2 - 100, g / 4 + 45 + offset, enabledString));
 		if (wmll.debugClassPresent)
-			h.add(new aoh(9001, f - 52, g - 22, 50, 20, "Reload"));
+			h.add(new aqz(9001, f - 52, g - 22, 50, 20, "Reload"));
 		if (!wmll.Enabled)
 			for (int x = 3; x < 6; x++)
-				((aoh)h.get(x)).h = false;
+				((aqz)h.get(x)).h = false;
 	}
 
 	@SuppressWarnings("static-access")
-	protected void a(aoh button) {
+	protected void a(aqz button) {
 		if (button.f == 1) {
 			wmll.optionsOpen = false;
 			wmll.saveOptions();
@@ -108,7 +108,7 @@ public class WMLLOptions extends apn {
 			wmll.Enabled = !a;
 			wmll.options.setProperty("World-"+wmll.getWorldName(), Boolean.toString(!a));
 			for (int x = 3; x < 6; x++)
-				((aoh)h.get(x)).h = !a;
+				((aqz)h.get(x)).h = !a;
 			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "this server" : "this world")+": "+(!a ? "Yes" : "No");
 		}
 		if (button.f == 9) {
@@ -165,7 +165,7 @@ public class WMLLOptions extends apn {
 		else if (isBinding && i1 != Keyboard.KEY_ESCAPE) {
 			WMLL.F4Key = i1;
 			isBinding = false;
-			((aoh)h.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
+			((aqz)h.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
 		}
 		else {
 			super.a(c1, i1);
@@ -177,7 +177,7 @@ public class WMLLOptions extends apn {
 	}
 
 	public void a(int i, int j, float f) {
-		v_();
+		z_();
 		// (fontrenderer, text, x, y, colour)
 		a(k, title, this.f / 2, 20, 0xffffff);
 		renderWMLLVersion();
@@ -193,13 +193,13 @@ public class WMLLOptions extends apn {
 		wmll.drawStringUsingPixels("GUI: "+a[0]+" (@"+a[1]+")", 2, r - 18, 0x333333);
 	}
 	
-	public apn getParent() {
+	public ask getParent() {
 		return parent;
 	}
 
 	private String title = "WMLL Configuration";;
 	private WMLL wmll;
-	public apn parent;
+	public ask parent;
 	public static boolean isBinding;
 
 }

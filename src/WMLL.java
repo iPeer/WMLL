@@ -28,7 +28,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 761";
+		return "Test 765";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -59,7 +59,7 @@ public class WMLL {
 	public boolean debugClassPresent = false;
 	public boolean classicOutput = false;
 	public boolean autoUpdateCheck = true;
-	
+
 	private static final int propertiesVersion = 3;
 	public static File settingsFile, outputOptionsFile;
 	public static long lastUpdateCheck = 0;
@@ -68,6 +68,7 @@ public class WMLL {
 	private WMLLRenderer wmllRenderer;
 	private WMLLF3 wmllF3;
 	private boolean Rei, ReiUseMl, RadarBro;
+	public boolean satBar;
 	private boolean ranInit = false;
 	private boolean firstRun = true;
 	private final String[] sleepstrings = {"Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
@@ -75,8 +76,8 @@ public class WMLL {
 	private String lightString = "Light level: 9001";
 	private long lastF4Press = 0;
 	private boolean wmllF3Output = false;
-	private aov fontRenderer;
-	private atd lastWorld = null;
+	private arp fontRenderer;
+	private awm lastWorld = null;
 	private boolean worldSeedSet = false;
 
 	protected WMLLCompatibility wmllCompatibility;
@@ -97,14 +98,19 @@ public class WMLL {
 		debugActive = this.debugClassPresent;
 		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
 		outputOptionsFile = new File(Minecraft.a("minecraft"), "WMLLOutput.properties");
-		wmllCompatibility = new WMLLCompatibility();
+		//wmllCompatibility = new WMLLCompatibility();
 		debug("[WMLL] Settings file: "+settingsFile);
 		loadOptions();
 		this.autoSeed = Boolean.parseBoolean(options.getProperty("autoAquireSeed", "true"));
 		useForge = (getClass().getClassLoader().getResource("net/minecraftforge/common/ForgeHooks.class") != null);
 		if (getClass().getClassLoader().getResource("mod_ReiMinimap.class") != null) {
-			Rei = true;
-			ReiUseMl = ReiMinimap.instance.useModloader;
+			try {
+				Rei = true;
+				ReiUseMl = ReiMinimap.instance.useModloader;
+			}
+			catch(VerifyError e) { // 12W40 ERROR
+				Rei = ReiUseMl = false;
+			}
 		}
 		if (getClass().getClassLoader().getResource("RadarBro.class") != null) {
 			RadarBro = true;
@@ -129,24 +135,26 @@ public class WMLL {
 			}
 		}
 		debug("[WMLL] WMLL is"+(debugClassPresent ? "" : " not")+" running in debug mode");
-//		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
-//		debug("[WMLL] RadarBro: "+RadarBro);
-//		debug("[WMLL] Forge: "+useForge);
+		//		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
+		//		debug("[WMLL] RadarBro: "+RadarBro);
+		//		debug("[WMLL] Forge: "+useForge);
 		if (Rei)
 			debug("[WMLL] WMLL is running in Rei's Minimap Compatibility mode");
 		if (useForge)
 			debug("[WMLL] WMLL is running in Forge Compatibility mode");
 		if (RadarBro)
 			debug("[WMLL] WMLL is running in RadarBro Compatibility mode");
+		if (satBar)
+			debug("[WMLL] WMLL is running in Saturation Bar Compatibility mode");
 		debug("[WMLL] WMLL "+wmllVersion()+" initialized.");
 	}
 
 	public void updategui(Minecraft h) {
 		updategui(h, h.v);
 	}
-	
-	public void updategui(Minecraft h, aow aow) {
-        h.I.a("WMLL");
+
+	public void updategui(Minecraft h, arq v) {
+		h.I.a("WMLL");
 		if (getWorld() != null && !wmllUpdateCheck.running && autoUpdateCheck) {
 			wmllUpdateCheck.start();
 		}
@@ -157,12 +165,12 @@ public class WMLL {
 		if (getWorld() != lastWorld && !isMultiplayer() && autoSeed) {
 			worldSeedSet = false;
 			lastWorld = getWorld();
-			entityPlayer().d("/seed");
+			entityPlayer().c("/seed");
 			debug("[WMLL] World instance differs, re-acquiring seed...");
 		}
 		if (!worldSeedSet) {
 			try {
-				Object obj = aow.b();
+				Object obj = v.b();
 				Field f = obj.getClass().getDeclaredField(getField("chatLines"));
 				f.setAccessible(true);
 				obj = f.get(obj);
@@ -173,7 +181,7 @@ public class WMLL {
 				int e = 0;
 				while (c.hasNext()) {
 					e++;
-					ane d = (ane)c.next();
+					apw d = (apw)c.next();
 					String b = d.a();
 					if (b.startsWith("Seed: ")) {
 						//aow.b().a();
@@ -196,14 +204,14 @@ public class WMLL {
 		}
 		if (Rei && !ReiUseMl)
 			ReiMinimap.instance.onTickInGame(h);
-
 		if (!ranInit) {
 			this.mc = h;
 			wmllRenderer = new WMLLRenderer(mc, this);
 			wmllF3 = new WMLLF3(mc, this);
 			ranInit = true;
 			this.fontRenderer = h.p;
-			entityPlayer().a("Test");
+			if (debugClassPresent)
+				entityPlayer().a("Test");
 			//(new Thread(wmllUpdateCheck)).start();
 		}
 		if (mcDebugOpen() || wmllF3Output) {
@@ -215,6 +223,16 @@ public class WMLL {
 				wmllF3.draw();
 		}
 		else {
+			if (satBar) {
+				try {
+					wmllCompatibility.drawSaturationBar(mc, this);
+				}
+				catch (NoSuchMethodError n) { }
+				catch (NoClassDefFoundError n1) { }
+				catch (NoSuchFieldError n2) { }
+				catch (NullPointerException n3) { satBar = false; } // 12W40 ERROR
+			}
+
 			if (RadarBro)
 				try {
 					wmllCompatibility.RadarBroRun(mc, this);
@@ -322,11 +340,11 @@ public class WMLL {
 						out++;
 					//				if (getDimension() == 1)
 					//					out--;
-					jw player = thePlayer();
+					li player = thePlayer();
 					double x = player.t;
 					double y = player.u;
 					double z = player.v;
-					double f = ih.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
+					double f = jq.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
 					NumberFormat d = new DecimalFormat("#0.00");
 					String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection((int)f)+")";
 					drawString(coords, 2, out, 0xffffff);
@@ -396,7 +414,17 @@ public class WMLL {
 
 						// Slimes
 						if (showSlimes) {
-							if (canSlimesSpawnHere(playerPos[0], playerPos[2]))
+							if (getBiome().startsWith("Swamp")) {
+								boolean a = isBlockInBlacklist(getBlockID(playerPos[0], playerPos[1] - 1, playerPos[2]));
+								if (light < 8 && !a)
+									drawString("\247a"+labels[5], 2, 3, 0xffffff);
+								else if (light > 7 && !a)
+									drawString("\247e"+labels[5], 2, 3, 0xffffff);
+								else
+									drawString("\247c"+labels[5], 2, 3, 0xffffff);
+								
+							}
+							else if (canSlimesSpawnHere(playerPos[0], playerPos[2]) && !getBiome().startsWith("Swamp"))
 								if ((playerPos[1] - 1) <= 40)
 									drawString("\247a"+labels[5], 2, 3, 0xffffff);
 								else
@@ -548,13 +576,12 @@ public class WMLL {
 			s = s.replaceAll("%ind:"+ind+"%", getIdenString(ind));
 		}
 		m = localTime.matcher(s);
-		Calendar b = Calendar.getInstance();
-		b.setTime(new Date(System.currentTimeMillis()));
-		s = m.replaceAll(b.getTime().toString().split(" ")[3]);
+		calendar.setTime(new Date(System.currentTimeMillis()));
+		s = m.replaceAll(calendar.getTime().toString().split(" ")[3]);
 		return s;
 	}
 
-	private atd getWorld() {
+	private awm getWorld() {
 		try {
 			return mc.e;
 		}
@@ -600,19 +627,19 @@ public class WMLL {
 	//		return worldInstance().m()+", "+worldInstance().n();
 	//	}
 
-	public aov getFontRenderer() {
+	public arp getFontRenderer() {
 		return this.fontRenderer;
 	}
 
-	public apo getWindowSize() {
-		return new apo(mc.y, mc.c, mc.d);
+	public asl getWindowSize() {
+		return new asl(mc.y, mc.c, mc.d);
 	}
 
 	private boolean mcDebugOpen() {
-		return getGameSettings().Q;
+		return getGameSettings().S;
 	}
 
-	private anz getGameSettings() {
+	private aqr getGameSettings() {
 		return mc.y;
 	}
 
@@ -624,7 +651,7 @@ public class WMLL {
 		if (y < 0 || y > 255) 
 			return 0;
 		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(vb.b, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+		return getChunk(playerPos[0], playerPos[2]).a(xh.b, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
 	}
 
 	public int getRawLightLevel(int x, int y, int z) {
@@ -637,7 +664,7 @@ public class WMLL {
 	public int getBlockLight (int i, int j, int k) {
 		if (j < 0 || j > 255)
 			return 0;
-		return getChunk(i, k).a(vb.a, i & 0xf, j, k & 0xf);
+		return getChunk(i, k).a(xh.a, i & 0xf, j, k & 0xf);
 	}
 
 	public int getLightLevel(int j, int k, int l) {
@@ -649,11 +676,15 @@ public class WMLL {
 	public int getSkyLight(float f) {
 		return getWorld().a(f);
 	}
+	
+	public String getBiome(int x, int z) {
+		return getChunk(x, z).a(x & 0xf, z & 0xf, getBiomeGenBase()).y;
+	}
 
 	public String getBiome() {
 		int x = getPlayerCoordinates()[0];
 		int z = getPlayerCoordinates()[2];
-		return getChunk(x, z).a(x & 0xf, z & 0xf, getBiomeGenBase()).y;
+		return getBiome(x, z);
 	}
 
 	private String getTemperature() {
@@ -664,8 +695,8 @@ public class WMLL {
 		return NumberFormat.getPercentInstance().format(getBiomeGenBase().a(getPlayerCoordinates()[0], getPlayerCoordinates()[2]).G);
 	}
 
-	private vp getBiomeGenBase() {
-		return getWorld().r();
+	private xv getBiomeGenBase() {
+		return getWorld().s();
 	}
 
 	private boolean playerIsStandingOnBlock(int id) {
@@ -686,15 +717,15 @@ public class WMLL {
 		return getWorld().j(x, y, z);
 	}
 
-	public atg entityPlayer() {
+	public awp entityPlayer() {
 		return mc.g;
 	}
 
-	public jw thePlayer() {
+	public li thePlayer() {
 		return mc.h;
 	}
 
-	public aog playerEntity() {
+	public aqy playerEntity() {
 		return mc.j;
 	}
 
@@ -702,7 +733,7 @@ public class WMLL {
 		return playerEntity().b;
 	}
 
-	public atc getPlayerController() {
+	public awl getPlayerController() {
 		return mc.b;
 	}
 
@@ -710,37 +741,37 @@ public class WMLL {
 		return !getPlayerController().b();
 	}
 
-	public aed worldInfo() {
-		return getWorld().A;
+	public agm worldInfo() {
+		return getWorld().z;
 	}
 
 	protected Minecraft getMCInstance() {
 		return mc;
 	}
 
-	private wl getChunk(int x, int z) {
+	private yr getChunk(int x, int z) {
 		return getWorld().d(x, z);
 	}
 
 	private int getDimension() {
-		return getWorldProvider().g;
+		return getWorldProvider().h;
 	}
 
 	private boolean canSlimesSpawnHere(int x, int z) {
 		if (isSeedSet()) {
-			wl chunk = getChunk(x, z);
+			yr chunk = getChunk(x, z);
 			int g = chunk.g;
 			int h = chunk.h;
 			return new Random(getWorldSeed() + (long)(g * g * 0x4c1906) + (long)(g * 0x5ac0db) + (long)(h * h) * 0x4307a7L + (long)(h * 0x5f24f) ^ 0x3ad8025fL).nextInt(10) == 0;
 		}
-		return getChunk(x, z).a(0x3ad8025fL).nextInt(10) == 0 && getWorldSeed() != 0L;
+		return (getChunk(x, z).a(0x3ad8025fL).nextInt(10) == 0 && getWorldSeed() != 0L)/* || (getBiome(x, z).startsWith("Swamp") && getLightLevel(x, getPlayerCoordinates()[1], x) < 8)*/;
 	}
 
-	private xc getWorldProvider() {
-		return getWorld().w;
+	private zi getWorldProvider() {
+		return getWorld().v;
 	}
 
-	private wi getChunkProvider() {
+	private yo getChunkProvider() {
 		return getWorldProvider().c();
 	}
 
@@ -775,16 +806,16 @@ public class WMLL {
 	}
 
 	private boolean isPlayerSleeping() {
-		return thePlayer().bn();
+		return thePlayer().bs();
 	}
 
 	public int[] getPlayerCoordinates() {
-		int[] a = {ih.c(thePlayer().t), ih.c(thePlayer().u - 1), ih.c(thePlayer().v), ih.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().t, (int)thePlayer().u, (int)thePlayer().v};
+		int[] a = {jq.c(thePlayer().t), jq.c(thePlayer().u - 1), jq.c(thePlayer().v), jq.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().t, (int)thePlayer().u, (int)thePlayer().v};
 		return a;
 	}
 
 	public double[] getPlayerCoordinatesAsDouble() {
-		double[] a = {thePlayer().t, thePlayer().u, thePlayer().v, ih.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3};
+		double[] a = {thePlayer().t, thePlayer().u, thePlayer().v, jq.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3};
 		return a;
 	}
 
@@ -874,9 +905,10 @@ public class WMLL {
 			options.setProperty("F3Type", Integer.toString(F3Type));
 			options.setProperty("classicOutput", Boolean.toString(classicOutput));
 			options.setProperty("autoUpdateCheck", Boolean.toString(autoUpdateCheck));
+			options.setProperty("SaturationBar", Boolean.toString(satBar));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
-//			if (!outputOptions.isEmpty())
-//				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
+			//			if (!outputOptions.isEmpty())
+			//				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
 			debug("[WMLL] Options saved.");
 			//debug(options.toString()+"\n"+outputOptions.toString());
 		}
@@ -907,6 +939,7 @@ public class WMLL {
 			showSeedWithCoords = Boolean.parseBoolean(options.getProperty("showSeedWithCoords", "true"));
 			classicOutput = Boolean.parseBoolean(options.getProperty("classicOutput", "false"));
 			autoUpdateCheck= Boolean.parseBoolean(options.getProperty("autoUpdateCheck", "true"));
+			satBar = Boolean.parseBoolean(options.getProperty("SaturationBar", "false"));
 			debug("[WMLL] Loaded options.");
 			//debug(options.toString()+"\n"+outputOptions.toString());
 			if (firstRun)
@@ -1026,13 +1059,12 @@ public class WMLL {
 	}
 
 	public static String getMinecraftVersion() {
-		return "1.3.2";
+		return "12w40b";
 	}
 
 	public boolean areAllOutputsDisabled() {
 		int x = 0;
 		for (; Boolean.parseBoolean(options.getProperty("Output"+x, "true")) == false && x <= 11; x++) { }	
-		System.out.println(x);
 		return x > 11;
 	}
 
@@ -1095,11 +1127,11 @@ public class WMLL {
 		}
 		else if (i.equals("slimes")) {
 			if (d == 0)
-				if (c && y + 1 > 40)
+				if ((c && y + 1 > 40) || (l > 7 && bi.startsWith("Swamp")))
 					s = "\247eSlimes";
 				else if (c && y + 1 < 41 && v)
 					s = "\247cSlimes";
-				else if (c && y + 1 < 41)
+				else if ((c && y + 1 < 41) || (l < 8 && bi.startsWith("Swamp")))
 					s = "\247aSlimes";
 				else
 					s = "\247cSlimes";
