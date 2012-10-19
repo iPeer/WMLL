@@ -10,7 +10,7 @@ import net.minecraftforge.common.ForgeHooks;
 import org.lwjgl.opengl.GL11;
 
 
-public class WMLLCompatibility extends arr {
+public class WMLLCompatibility extends asc {
 	
 	private int i;
 	
@@ -18,7 +18,7 @@ public class WMLLCompatibility extends arr {
 		int a = d.g.aT();
 		if (WMLL.i.useForge)
 			try {
-				return ForgeHooks.getTotalArmorValue(d.g); // 12W40 ERROR
+				return ForgeHooks.getTotalArmorValue(d.g); // 12W40 & 1.4PRE ERROR
 			}
 		catch (IllegalAccessError e) { return a; }
 		catch (NoClassDefFoundError e) { return a; }

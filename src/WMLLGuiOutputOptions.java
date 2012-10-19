@@ -4,18 +4,18 @@ import java.util.Properties;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiOutputOptions extends ask {
+public class WMLLGuiOutputOptions extends asv {
 
 	protected WMLL wmll;
-	private ask parent;
+	private asv parent;
 	private String title;
 	private static final String[] colourNames = {"Black", "Dark Blue", "Dark Green", "Cyan", "Red", "Purple", "Orange", "Light Grey", "Dark Grey", "Lavender?", "Lime Green", "Light Blue", "Bright Red", "Pink", "Yellow", "White"};
 	private static final String[] outputLocations = {"Top Left", "Top Right", "Bottom Left", "Bottom Right"};
 	public static Properties outputOptions;
-	private aqz SMPSeedButton, showButton, eOutputsButton;
+	private ark SMPSeedButton, showButton, eOutputsButton;
 
 	@SuppressWarnings("static-access")
-	public WMLLGuiOutputOptions(WMLL wmll, ask parent) {
+	public WMLLGuiOutputOptions(WMLL wmll, asv parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.outputOptions = WMLL.options;
@@ -30,23 +30,23 @@ public class WMLLGuiOutputOptions extends ask {
 			int tc = WMLL.TextColour;
 			byte o = -16;
 			if (wmll.debugClassPresent)
-				h.add(new aqz(9001, f - 52, g - 22, 50, 20, "Reload"));
-			h.add(new aqz(1, f / 2 - 112, g / 4 + 150 + o, 226, 20, "Done"));
-			h.add(new aqz(3, f / 2 - 112, g / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
-			h.add(new aqz(4, f / 2 + 2, g / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
-			h.add(new aqz(5, f / 2 - 112, g / 4 + 75 + o, 226, 20, "Customize output"));
-			h.add(new aqz(12, f / 2 - 112, g / 4 + 45 + o, 226, 20, "Enable Saturation bar Compatibility: "+(wmll.satBar ? "Yes" : "No")));
-			h.add(new aqz(6, f / 2 - 112, g / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
-			h.add(new aqz(8, f / 2 + 2, g / 4 + 20 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
-			h.add(new aqz(7, f / 2 + 2, g / 4 + 100 + o, 112, 20, "Output type: "+(wmll.classicOutput ? "Classic" : "Custom")));
-			h.add(SMPSeedButton = new aqz(9, f / 2 - 112, g / 4 + 100 + o, 112, 20, "Enter seed"));
-			h.add(eOutputsButton = new aqz(11, f / 2 - 112, g / 4 + 125 + o, 226, 20, "Enabled outputs..."));
-			h.add(showButton = new aqz(10, f / 2 - 112, g / 4 + 50 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
+				h.add(new ark(9001, f - 52, g - 22, 50, 20, "Reload"));
+			h.add(new ark(1, f / 2 - 112, g / 4 + 150 + o, 226, 20, "Done"));
+			h.add(new ark(3, f / 2 - 112, g / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
+			h.add(new ark(4, f / 2 + 2, g / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
+			h.add(new ark(5, f / 2 - 112, g / 4 + 75 + o, 226, 20, "Customize output"));
+			h.add(new ark(12, f / 2 - 112, g / 4 + 45 + o, 226, 20, "Enable Saturation bar Compatibility: "+(wmll.satBar ? "Yes" : "No")));
+			h.add(new ark(6, f / 2 - 112, g / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
+			h.add(new ark(8, f / 2 + 2, g / 4 + 20 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
+			h.add(new ark(7, f / 2 + 2, g / 4 + 100 + o, 112, 20, "Output type: "+(wmll.classicOutput ? "Classic" : "Custom")));
+			h.add(SMPSeedButton = new ark(9, f / 2 - 112, g / 4 + 100 + o, 112, 20, "Enter seed"));
+			h.add(eOutputsButton = new ark(11, f / 2 - 112, g / 4 + 125 + o, 226, 20, "Enabled outputs..."));
+			h.add(showButton = new ark(10, f / 2 - 112, g / 4 + 50 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
 			SMPSeedButton.g = wmll.isMultiplayer() || !wmll.autoSeed;
 			eOutputsButton.h = showButton.h = (WMLL.useImages || wmll.classicOutput);
 	}
 
-	protected void a(aqz b) {
+	protected void a(ark b) {
 		if (b.f == 1 || b.f == 2) {
 			if (b.f == 2) { // Next
 				System.out.println("NO GUI YET!");

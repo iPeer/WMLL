@@ -8,20 +8,20 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
-public class arq extends arr
+public class asb extends asc
 {
 
-    private static final azt b = new azt();
+    private static final baf b = new baf();
     private final Random c = new Random();
     private final Minecraft d;
-    private final ara e;
+    private final arl e;
     private int f;
     private String g;
     private int h;
     private boolean i;
     public float a;
 
-    public arq(Minecraft minecraft)
+    public asb(Minecraft minecraft)
     {
         f = 0;
         g = "";
@@ -29,15 +29,15 @@ public class arq extends arr
         i = false;
         a = 1.0F;
         d = minecraft;
-        e = new ara(minecraft);
+        e = new arl(minecraft);
     }
 
     public void a(float f1, boolean flag, int j, int k)
     {
-        asl asl1 = new asl(d.y, d.c, d.d);
-        int l = asl1.a();
-        int i1 = asl1.b();
-        arp arp1 = d.p;
+        asw asw1 = new asw(d.y, d.c, d.d);
+        int l = asw1.a();
+        int i1 = asw1.b();
+        asa asa1 = d.p;
         d.t.c();
         GL11.glEnable(3042);
         if(Minecraft.t())
@@ -47,12 +47,12 @@ public class arq extends arr
         {
             GL11.glBlendFunc(770, 771);
         }
-        tm tm1 = d.g.bJ.f(3);
-        if(d.y.R == 0 && tm1 != null && tm1.c == akv.bc.ck)
+        tu tu1 = d.g.bJ.f(3);
+        if(d.y.S == 0 && tu1 != null && tu1.c == ale.bd.cm)
         {
             a(l, i1);
         }
-        if(!d.g.a(kr.k))
+        if(!d.g.a(kv.k))
         {
             float f2 = d.g.cl + (d.g.j - d.g.cl) * f1;
             if(f2 > 0.0F)
@@ -64,10 +64,10 @@ public class arq extends arr
         {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glBindTexture(3553, d.o.b("/gui/gui.png"));
-            qa qa1 = d.g.bJ;
+            qe qe1 = d.g.bJ;
             this.j = -90F;
             b(l / 2 - 91, i1 - 22, 0, 0, 182, 22);
-            b((l / 2 - 91 - 1) + qa1.c * 20, i1 - 22 - 1, 0, 22, 24, 22);
+            b((l / 2 - 91 - 1) + qe1.c * 20, i1 - 22 - 1, 0, 22, 24, 22);
             GL11.glBindTexture(3553, d.o.b("/gui/icons.png"));
             GL11.glEnable(3042);
             GL11.glBlendFunc(775, 769);
@@ -78,13 +78,13 @@ public class arq extends arr
             {
                 flag1 = false;
             }
-            int k1 = d.g.aS();
+            int k1 = d.g.aT();
             int i3 = d.g.aR;
             c.setSeed(f * 0x4c627);
             boolean flag3 = false;
-            qs qs1 = d.g.bY();
-            int j5 = qs1.a();
-            int l5 = qs1.b();
+            qw qw1 = d.g.bZ();
+            int j5 = qw1.a();
+            int l5 = qw1.b();
             d.I.a("bossHealth");
             d();
             d.I.b();
@@ -93,7 +93,7 @@ public class arq extends arr
                 int j6 = l / 2 - 91;
                 int i7 = l / 2 + 91;
                 d.I.a("expBar");
-                int l7 = d.g.bX();
+                int l7 = d.g.bY();
                 if(l7 > 0)
                 {
                     char c1 = '\266';
@@ -109,136 +109,136 @@ public class arq extends arr
                 int k9 = k8 - 10;
                 int j10 = WMLLCompatibility.forgeA(d);
                 int i11 = -1;
-                if(d.g.a(kr.l))
+                if(d.g.a(kv.l))
                 {
                     i11 = f % 25;
                 }
                 d.I.c("healthArmor");
-                for(int j11 = 0; j11 < 10; j11++)
+                for(int k11 = 0; k11 < 10; k11++)
                 {
                     if(j10 > 0)
                     {
-                        int i12 = j6 + j11 * 8;
-                        if(j11 * 2 + 1 < j10)
+                        int j12 = j6 + k11 * 8;
+                        if(k11 * 2 + 1 < j10)
                         {
-                            b(i12, k9, 34, 9, 9, 9);
+                            b(j12, k9, 34, 9, 9, 9);
                         }
-                        if(j11 * 2 + 1 == j10)
+                        if(k11 * 2 + 1 == j10)
                         {
-                            b(i12, k9, 25, 9, 9, 9);
+                            b(j12, k9, 25, 9, 9, 9);
                         }
-                        if(j11 * 2 + 1 > j10)
+                        if(k11 * 2 + 1 > j10)
                         {
-                            b(i12, k9, 16, 9, 9, 9);
+                            b(j12, k9, 16, 9, 9, 9);
                         }
                     }
-                    int j12 = 16;
-                    if(d.g.a(kr.u))
+                    int k12 = 16;
+                    if(d.g.a(kv.u))
                     {
-                        j12 += 36;
+                        k12 += 36;
                     } else
-                    if(d.g.a(kr.v))
+                    if(d.g.a(kv.v))
                     {
-                        j12 += 72;
+                        k12 += 72;
                     }
-                    int i13 = 0;
+                    int j13 = 0;
                     if(flag1)
                     {
-                        i13 = 1;
+                        j13 = 1;
                     }
-                    int l13 = j6 + j11 * 8;
-                    int j14 = k8;
+                    int i14 = j6 + k11 * 8;
+                    int k14 = k8;
                     if(k1 <= 4)
                     {
-                        j14 += c.nextInt(2);
+                        k14 += c.nextInt(2);
                     }
-                    if(j11 == i11)
+                    if(k11 == i11)
                     {
-                        j14 -= 2;
+                        k14 -= 2;
                     }
                     byte byte3 = 0;
                     if(d.e.J().t())
                     {
                         byte3 = 5;
                     }
-                    b(l13, j14, 16 + i13 * 9, 9 * byte3, 9, 9);
+                    b(i14, k14, 16 + j13 * 9, 9 * byte3, 9, 9);
                     if(flag1)
                     {
-                        if(j11 * 2 + 1 < i3)
+                        if(k11 * 2 + 1 < i3)
                         {
-                            b(l13, j14, j12 + 54, 9 * byte3, 9, 9);
+                            b(i14, k14, k12 + 54, 9 * byte3, 9, 9);
                         }
-                        if(j11 * 2 + 1 == i3)
+                        if(k11 * 2 + 1 == i3)
                         {
-                            b(l13, j14, j12 + 63, 9 * byte3, 9, 9);
+                            b(i14, k14, k12 + 63, 9 * byte3, 9, 9);
                         }
                     }
-                    if(j11 * 2 + 1 < k1)
+                    if(k11 * 2 + 1 < k1)
                     {
-                        b(l13, j14, j12 + 36, 9 * byte3, 9, 9);
+                        b(i14, k14, k12 + 36, 9 * byte3, 9, 9);
                     }
-                    if(j11 * 2 + 1 == k1)
+                    if(k11 * 2 + 1 == k1)
                     {
-                        b(l13, j14, j12 + 45, 9 * byte3, 9, 9);
+                        b(i14, k14, k12 + 45, 9 * byte3, 9, 9);
                     }
                 }
 
                 d.I.c("food");
-                for(int k11 = 0; k11 < 10; k11++)
+                for(int l11 = 0; l11 < 10; l11++)
                 {
-                    int k12 = k8;
-                    int j13 = 16;
+                    int l12 = k8;
+                    int k13 = 16;
                     byte byte2 = 0;
-                    if(d.g.a(kr.s))
+                    if(d.g.a(kv.s))
                     {
-                        j13 += 36;
+                        k13 += 36;
                         byte2 = 13;
                     }
-                    if(d.g.bY().e() <= 0.0F && f % (j5 * 3 + 1) == 0)
+                    if(d.g.bZ().e() <= 0.0F && f % (j5 * 3 + 1) == 0)
                     {
-                        k12 += c.nextInt(3) - 1;
+                        l12 += c.nextInt(3) - 1;
                     }
                     if(flag3)
                     {
                         byte2 = 1;
                     }
-                    int k14 = i7 - k11 * 8 - 9;
-                    b(k14, k12, 16 + byte2 * 9, 27, 9, 9);
+                    int l14 = i7 - l11 * 8 - 9;
+                    b(l14, l12, 16 + byte2 * 9, 27, 9, 9);
                     if(flag3)
                     {
-                        if(k11 * 2 + 1 < l5)
+                        if(l11 * 2 + 1 < l5)
                         {
-                            b(k14, k12, j13 + 54, 27, 9, 9);
+                            b(l14, l12, k13 + 54, 27, 9, 9);
                         }
-                        if(k11 * 2 + 1 == l5)
+                        if(l11 * 2 + 1 == l5)
                         {
-                            b(k14, k12, j13 + 63, 27, 9, 9);
+                            b(l14, l12, k13 + 63, 27, 9, 9);
                         }
                     }
-                    if(k11 * 2 + 1 < j5)
+                    if(l11 * 2 + 1 < j5)
                     {
-                        b(k14, k12, j13 + 36, 27, 9, 9);
+                        b(l14, l12, k13 + 36, 27, 9, 9);
                     }
-                    if(k11 * 2 + 1 == j5)
+                    if(l11 * 2 + 1 == j5)
                     {
-                        b(k14, k12, j13 + 45, 27, 9, 9);
+                        b(l14, l12, k13 + 45, 27, 9, 9);
                     }
                 }
 
                 d.I.c("air");
-                if(d.g.a(aex.g))
+                if(d.g.a(aff.h))
                 {
-                    int l11 = d.g.al();
-                    int l12 = jq.f(((double)(l11 - 2) * 10D) / 300D);
-                    int k13 = jq.f(((double)l11 * 10D) / 300D) - l12;
-                    for(int i14 = 0; i14 < l12 + k13; i14++)
+                    int i12 = d.g.al();
+                    int i13 = ju.f(((double)(i12 - 2) * 10D) / 300D);
+                    int l13 = ju.f(((double)i12 * 10D) / 300D) - i13;
+                    for(int j14 = 0; j14 < i13 + l13; j14++)
                     {
-                        if(i14 < l12)
+                        if(j14 < i13)
                         {
-                            b(i7 - i14 * 8 - 9, k9, 16, 18, 9, 9);
+                            b(i7 - j14 * 8 - 9, k9, 16, 18, 9, 9);
                         } else
                         {
-                            b(i7 - i14 * 8 - 9, k9, 25, 18, 9, 9);
+                            b(i7 - j14 * 8 - 9, k9, 25, 18, 9, 9);
                         }
                     }
 
@@ -248,7 +248,7 @@ public class arq extends arr
             GL11.glDisable(3042);
             d.I.a("actionBar");
             GL11.glEnable(32826);
-            apy.c();
+            aqi.c();
             for(int k6 = 0; k6 < 9; k6++)
             {
                 int j7 = (l / 2 - 90) + k6 * 20 + 2;
@@ -256,16 +256,16 @@ public class arq extends arr
                 a(k6, j7, i8, f1);
             }
 
-            apy.a();
+            aqi.a();
             GL11.glDisable(32826);
             d.I.b();
         }
-        if(d.g.bU() > 0)
+        if(d.g.bV() > 0)
         {
             d.I.a("sleep");
             GL11.glDisable(2929);
             GL11.glDisable(3008);
-            int j1 = d.g.bU();
+            int j1 = d.g.bV();
             float f3 = (float)j1 / 100F;
             if(f3 > 1.0F)
             {
@@ -283,13 +283,13 @@ public class arq extends arr
             boolean flag2 = false;
             int j2 = flag2 ? 0xffffff : 0x80ff20;
             String s1 = (new StringBuilder()).append("").append(d.g.cf).toString();
-            int i4 = (l - arp1.a(s1)) / 2;
+            int i4 = (l - asa1.a(s1)) / 2;
             int k4 = i1 - 31 - 4;
-            arp1.b(s1, i4 + 1, k4, 0);
-            arp1.b(s1, i4 - 1, k4, 0);
-            arp1.b(s1, i4, k4 + 1, 0);
-            arp1.b(s1, i4, k4 - 1, 0);
-            arp1.b(s1, i4, k4, j2);
+            asa1.b(s1, i4 + 1, k4, 0);
+            asa1.b(s1, i4 - 1, k4, 0);
+            asa1.b(s1, i4, k4 + 1, 0);
+            asa1.b(s1, i4, k4 - 1, 0);
+            asa1.b(s1, i4, k4, j2);
             d.I.b();
         }
         if(d.q())
@@ -302,50 +302,51 @@ public class arq extends arr
             } else
             {
                 s = String.format(bc.a("demo.remainingTime"), new Object[] {
-                    jy.a((int)(0x1d6b4L - d.e.E()))
+                    kc.a((int)(0x1d6b4L - d.e.E()))
                 });
             }
-            int k2 = arp1.a(s);
-            arp1.a(s, l - k2 - 10, 5, 0xffffff);
+            int k2 = asa1.a(s);
+            asa1.a(s, l - k2 - 10, 5, 0xffffff);
             d.I.b();
         }
         WMLL.i.updategui(d, this);
-        if(d.y.S)
+        if(d.y.T)
         {
             d.I.a("debug");
             GL11.glPushMatrix();
-            arp1.a((new StringBuilder()).append("Minecraft 12w40b (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
-            arp1.a(d.m(), 2, 12, 0xffffff);
-            arp1.a(d.n(), 2, 22, 0xffffff);
-            arp1.a(d.p(), 2, 32, 0xffffff);
-            arp1.a(d.o(), 2, 42, 0xffffff);
+            asa1.a((new StringBuilder()).append("Minecraft 1.4 (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
+            asa1.a(d.m(), 2, 12, 0xffffff);
+            asa1.a(d.n(), 2, 22, 0xffffff);
+            asa1.a(d.p(), 2, 32, 0xffffff);
+            asa1.a(d.o(), 2, 42, 0xffffff);
             long l1 = Runtime.getRuntime().maxMemory();
             long l3 = Runtime.getRuntime().totalMemory();
             long l4 = Runtime.getRuntime().freeMemory();
             long l6 = l3 - l4;
             String s2 = (new StringBuilder()).append("Used memory: ").append((l6 * 100L) / l1).append("% (").append(l6 / 1024L / 1024L).append("MB) of ").append(l1 / 1024L / 1024L).append("MB").toString();
-            b(arp1, s2, l - arp1.a(s2) - 2, 2, 0xe0e0e0);
+            b(asa1, s2, l - asa1.a(s2) - 2, 2, 0xe0e0e0);
             s2 = (new StringBuilder()).append("Allocated memory: ").append((l3 * 100L) / l1).append("% (").append(l3 / 1024L / 1024L).append("MB)").toString();
-            b(arp1, s2, l - arp1.a(s2) - 2, 12, 0xe0e0e0);
-            int l8 = jq.c(d.g.t);
-            int l9 = jq.c(d.g.u);
-            int k10 = jq.c(d.g.v);
-            b(arp1, String.format("x: %.5f (%d) // c: %d (%d)", new Object[] {
+            b(asa1, s2, l - asa1.a(s2) - 2, 12, 0xe0e0e0);
+            int l8 = ju.c(d.g.t);
+            int l9 = ju.c(d.g.u);
+            int k10 = ju.c(d.g.v);
+            b(asa1, String.format("x: %.5f (%d) // c: %d (%d)", new Object[] {
                 Double.valueOf(d.g.t), Integer.valueOf(l8), Integer.valueOf(l8 >> 4), Integer.valueOf(l8 & 0xf)
             }), 2, 64, 0xe0e0e0);
-            b(arp1, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {
+            b(asa1, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {
                 Double.valueOf(d.g.D.b), Double.valueOf(d.g.u)
             }), 2, 72, 0xe0e0e0);
-            b(arp1, String.format("z: %.5f (%d) // c: %d (%d)", new Object[] {
+            b(asa1, String.format("z: %.5f (%d) // c: %d (%d)", new Object[] {
                 Double.valueOf(d.g.v), Integer.valueOf(k10), Integer.valueOf(k10 >> 4), Integer.valueOf(k10 & 0xf)
             }), 2, 80, 0xe0e0e0);
-            b(arp1, (new StringBuilder()).append("f: ").append(jq.c((double)((d.g.z * 4F) / 360F) + 0.5D) & 3).append(" / ").append(jq.g(d.g.z)).toString(), 2, 88, 0xe0e0e0);
+            int j11 = ju.c((double)((d.g.z * 4F) / 360F) + 0.5D) & 3;
+            b(asa1, (new StringBuilder()).append("f: ").append(j11).append(" (").append(WMLL.i.getPlayerDirection(j11)/*h.c[j11]/* h is a damn int, Mojang... */).append(") / ").append(ju.g(d.g.z)).toString(), 2, 88, 0xe0e0e0); 
             if(d.e != null && d.e.e(l8, l9, k10))
             {
-                yr yr1 = d.e.d(l8, k10);
-                b(arp1, (new StringBuilder()).append("lc: ").append(yr1.h() + 15).append(" b: ").append(yr1.a(l8 & 0xf, k10 & 0xf, d.e.s()).y).append(" bl: ").append(yr1.a(xh.b, l8 & 0xf, l9, k10 & 0xf)).append(" sl: ").append(yr1.a(xh.a, l8 & 0xf, l9, k10 & 0xf)).append(" rl: ").append(yr1.c(l8 & 0xf, l9, k10 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
+                yz yz1 = d.e.d(l8, k10);
+                b(asa1, (new StringBuilder()).append("lc: ").append(yz1.h() + 15).append(" b: ").append(yz1.a(l8 & 0xf, k10 & 0xf, d.e.s()).y).append(" bl: ").append(yz1.a(xp.b, l8 & 0xf, l9, k10 & 0xf)).append(" sl: ").append(yz1.a(xp.a, l8 & 0xf, l9, k10 & 0xf)).append(" rl: ").append(yz1.c(l8 & 0xf, l9, k10 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
             }
-            b(arp1, String.format("ws: %.3f, fs: %.3f, g: %b, fl: %d", new Object[] {
+            b(asa1, String.format("ws: %.3f, fs: %.3f, g: %b, fl: %d", new Object[] {
                 Float.valueOf(d.g.ce.b()), Float.valueOf(d.g.ce.a()), Boolean.valueOf(d.g.E), Integer.valueOf(d.e.f(l8, k10))
             }), 2, 104, 0xe0e0e0);
             GL11.glPopMatrix();
@@ -371,7 +372,7 @@ public class arq extends arr
                 {
                     j3 = Color.HSBtoRGB(f4 / 50F, 0.7F, 0.6F) & 0xffffff;
                 }
-                arp1.b(g, -arp1.a(g) / 2, -4, j3 + (l2 << 24));
+                asa1.b(g, -asa1.a(g) / 2, -4, j3 + (l2 << 24));
                 GL11.glDisable(3042);
                 GL11.glPopMatrix();
             }
@@ -386,12 +387,12 @@ public class arq extends arr
         e.a(f);
         d.I.b();
         GL11.glPopMatrix();
-        if(d.y.K.e && (!d.A() || d.g.a.c.size() > 1))
+        if(d.y.L.e && (!d.A() || d.g.a.c.size() > 1))
         {
             d.I.a("playerList");
-            awe awe1 = d.g.a;
-            java.util.List list = awe1.c;
-            int k3 = awe1.d;
+            awq awq1 = d.g.a;
+            java.util.List list = awq1.c;
+            int k3 = awq1.d;
             int j4 = k3;
             int i5 = 1;
             for(; j4 > 20; j4 = ((k3 + i5) - 1) / i5)
@@ -418,28 +419,28 @@ public class arq extends arr
                 {
                     continue;
                 }
-                awq awq1 = (awq)list.get(k7);
-                arp1.a(awq1.a, j8, i9, 0xffffff);
+                axc axc1 = (axc)list.get(k7);
+                asa1.a(axc1.a, j8, i9, 0xffffff);
                 d.o.b(d.o.b("/gui/icons.png"));
                 int l10 = 0;
                 byte byte1 = 0;
-                if(awq1.b < 0)
+                if(axc1.b < 0)
                 {
                     byte1 = 5;
                 } else
-                if(awq1.b < 150)
+                if(axc1.b < 150)
                 {
                     byte1 = 0;
                 } else
-                if(awq1.b < 300)
+                if(axc1.b < 300)
                 {
                     byte1 = 1;
                 } else
-                if(awq1.b < 600)
+                if(axc1.b < 600)
                 {
                     byte1 = 2;
                 } else
-                if(awq1.b < 1000)
+                if(axc1.b < 1000)
                 {
                     byte1 = 3;
                 } else
@@ -459,17 +460,17 @@ public class arq extends arr
 
     private void d()
     {
-        if(ayb.c == null || ayb.b <= 0)
+        if(ayn.c == null || ayn.b <= 0)
         {
             return;
         }
-        ayb.b--;
-        arp arp1 = d.p;
-        asl asl1 = new asl(d.y, d.c, d.d);
-        int j = asl1.a();
+        ayn.b--;
+        asa asa1 = d.p;
+        asw asw1 = new asw(d.y, d.c, d.d);
+        int j = asw1.a();
         char c1 = '\266';
         int k = j / 2 - c1 / 2;
-        int l = (int)(ayb.a * (float)(c1 + 1));
+        int l = (int)(ayn.a * (float)(c1 + 1));
         byte byte0 = 12;
         b(k, byte0, 0, 74, c1, 5);
         b(k, byte0, 0, 74, c1, 5);
@@ -477,8 +478,8 @@ public class arq extends arr
         {
             b(k, byte0, 0, 79, l, 5);
         }
-        String s = ayb.c;
-        arp1.a(s, j / 2 - arp1.a(s) / 2, byte0 - 10, 0xffffff);
+        String s = ayn.c;
+        asa1.a(s, j / 2 - asa1.a(s) / 2, byte0 - 10, 0xffffff);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glBindTexture(3553, d.o.b("/gui/icons.png"));
     }
@@ -491,13 +492,13 @@ public class arq extends arr
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(3008);
         GL11.glBindTexture(3553, d.o.b("%blur%/misc/pumpkinblur.png"));
-        ayo ayo1 = ayo.a;
-        ayo1.b();
-        ayo1.a(0.0D, k, -90D, 0.0D, 1.0D);
-        ayo1.a(j, k, -90D, 1.0D, 1.0D);
-        ayo1.a(j, 0.0D, -90D, 1.0D, 0.0D);
-        ayo1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        ayo1.a();
+        aza aza1 = aza.a;
+        aza1.b();
+        aza1.a(0.0D, k, -90D, 0.0D, 1.0D);
+        aza1.a(j, k, -90D, 1.0D, 1.0D);
+        aza1.a(j, 0.0D, -90D, 1.0D, 0.0D);
+        aza1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        aza1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -521,13 +522,13 @@ public class arq extends arr
         GL11.glBlendFunc(0, 769);
         GL11.glColor4f(a, a, a, 1.0F);
         GL11.glBindTexture(3553, d.o.b("%blur%/misc/vignette.png"));
-        ayo ayo1 = ayo.a;
-        ayo1.b();
-        ayo1.a(0.0D, k, -90D, 0.0D, 1.0D);
-        ayo1.a(j, k, -90D, 1.0D, 1.0D);
-        ayo1.a(j, 0.0D, -90D, 1.0D, 0.0D);
-        ayo1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        ayo1.a();
+        aza aza1 = aza.a;
+        aza1.b();
+        aza1.a(0.0D, k, -90D, 0.0D, 1.0D);
+        aza1.a(j, k, -90D, 1.0D, 1.0D);
+        aza1.a(j, 0.0D, -90D, 1.0D, 0.0D);
+        aza1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        aza1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -548,17 +549,17 @@ public class arq extends arr
         GL11.glBlendFunc(770, 771);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
         GL11.glBindTexture(3553, d.o.b("/terrain.png"));
-        float f2 = (float)(akv.bg.cj % 16) / 16F;
-        float f3 = (float)(akv.bg.cj / 16) / 16F;
-        float f4 = (float)(akv.bg.cj % 16 + 1) / 16F;
-        float f5 = (float)(akv.bg.cj / 16 + 1) / 16F;
-        ayo ayo1 = ayo.a;
-        ayo1.b();
-        ayo1.a(0.0D, k, -90D, f2, f5);
-        ayo1.a(j, k, -90D, f4, f5);
-        ayo1.a(j, 0.0D, -90D, f4, f3);
-        ayo1.a(0.0D, 0.0D, -90D, f2, f3);
-        ayo1.a();
+        float f2 = (float)(ale.bh.cl % 16) / 16F;
+        float f3 = (float)(ale.bh.cl / 16) / 16F;
+        float f4 = (float)(ale.bh.cl % 16 + 1) / 16F;
+        float f5 = (float)(ale.bh.cl / 16 + 1) / 16F;
+        aza aza1 = aza.a;
+        aza1.b();
+        aza1.a(0.0D, k, -90D, f2, f5);
+        aza1.a(j, k, -90D, f4, f5);
+        aza1.a(j, 0.0D, -90D, f4, f3);
+        aza1.a(0.0D, 0.0D, -90D, f2, f3);
+        aza1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -567,12 +568,12 @@ public class arq extends arr
 
     private void a(int j, int k, int l, float f1)
     {
-        tm tm1 = d.g.bJ.a[j];
-        if(tm1 == null)
+        tu tu1 = d.g.bJ.a[j];
+        if(tu1 == null)
         {
             return;
         }
-        float f2 = (float)tm1.b - f1;
+        float f2 = (float)tu1.b - f1;
         if(f2 > 0.0F)
         {
             GL11.glPushMatrix();
@@ -581,12 +582,12 @@ public class arq extends arr
             GL11.glScalef(1.0F / f3, (f3 + 1.0F) / 2.0F, 1.0F);
             GL11.glTranslatef(-(k + 8), -(l + 12), 0.0F);
         }
-        b.b(d.p, d.o, tm1, k, l);
+        b.b(d.p, d.o, tu1, k, l);
         if(f2 > 0.0F)
         {
             GL11.glPopMatrix();
         }
-        b.c(d.p, d.o, tm1, k, l);
+        b.c(d.p, d.o, tu1, k, l);
     }
 
     public void a()
@@ -605,7 +606,7 @@ public class arq extends arr
         i = true;
     }
 
-    public ara b()
+    public arl b()
     {
         return e;
     }
