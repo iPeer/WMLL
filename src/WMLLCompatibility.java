@@ -10,22 +10,23 @@ import net.minecraftforge.common.ForgeHooks;
 import org.lwjgl.opengl.GL11;
 
 
-public class WMLLCompatibility extends asc {
+public class WMLLCompatibility extends asd {
 	
 	private int i;
-	
-	public static int forgeA(Minecraft d) {
-		int a = d.g.aT();
-		if (WMLL.i.useForge)
-			try {
-				return ForgeHooks.getTotalArmorValue(d.g); // 12W40 & 1.4PRE ERROR
-			}
-		catch (IllegalAccessError e) { return a; }
-		catch (NoClassDefFoundError e) { return a; }
-		catch (NoSuchFieldError e) { return a; }
-		else
-			return a;
-	}
+
+//	Not needed in 1.4?
+//	public static int forgeA(Minecraft d) {
+//		int a = d.g.aT();
+//		if (WMLL.i.useForge)
+//			try {
+//				return ForgeHooks.getTotalArmorValue(d.g); // 12W40 & 1.4PRE ERROR
+//			}
+//		catch (IllegalAccessError e) { return a; }
+//		catch (NoClassDefFoundError e) { return a; }
+//		catch (NoSuchFieldError e) { return a; }
+//		else
+//			return a;
+//	}
 	
 	public void RadarBroRun(Minecraft i, WMLL w) {
 		 if(RadarBro.RadarEnabled)
@@ -66,7 +67,7 @@ public class WMLLCompatibility extends asc {
 	
 	public void drawSaturationBar(Minecraft mc, WMLL wmll) {
 		mc.I.c("saturation");
-		int sat = (int)mc.g.bY().e();
+		int sat = (int)mc.g.bY().e(); // Cannot find the corresponding method in 1.4 pre...
 		int var19 = wmll.getWindowSize().a() / 2 + 91;
 		int var47 = wmll.getWindowSize().b() - 39;
 		int var22 = var47 - 10;

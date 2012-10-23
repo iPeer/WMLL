@@ -6,13 +6,13 @@
 import java.util.List;
 import net.minecraft.client.Minecraft;
 
-public class asp extends asv
+public class asq extends asw
 {
 
     private int a;
     private int b;
 
-    public asp()
+    public asq()
     {
         a = 0;
         b = 0;
@@ -23,26 +23,26 @@ public class asp extends asv
         a = 0;
         h.clear();
         byte byte0 = -16;
-        h.add(new ark(1, f / 2 - 100, g / 4 + 120 + byte0, bc.a("menu.returnToMenu")));
+        h.add(new arl(1, f / 2 - 100, g / 4 + 120 + byte0, bd.a("menu.returnToMenu")));
         if(!e.A())
         {
-            ((ark)h.get(0)).e = bc.a("menu.disconnect");
+            ((arl)h.get(0)).e = bd.a("menu.disconnect");
         }
-        h.add(new ark(4, f / 2 - 100, g / 4 + 24 + byte0, bc.a("menu.returnToGame")));
-        h.add(new ark(0, f / 2 - 100, g / 4 + 96 + byte0, 98, 20, bc.a("menu.options")));
-        ark ark1;
-        h.add(ark1 = new ark(7, f / 2 + 2, g / 4 + 96 + byte0, 98, 20, bc.a("menu.shareToLan")));
-        h.add(new ark(5, f / 2 - 100, g / 4 + 48 + byte0, 98, 20, bc.a("gui.achievements")));
-        h.add(new ark(6, f / 2 + 2, g / 4 + 48 + byte0, 98, 20, bc.a("gui.stats")));
-		h.add(new ark(8, f / 2 - 100, g / 4 + 144 + byte0, "WMLL Options..."));
+        h.add(new arl(4, f / 2 - 100, g / 4 + 24 + byte0, bd.a("menu.returnToGame")));
+        h.add(new arl(0, f / 2 - 100, g / 4 + 96 + byte0, 98, 20, bd.a("menu.options")));
+        arl arl1;
+        h.add(arl1 = new arl(7, f / 2 + 2, g / 4 + 96 + byte0, 98, 20, bd.a("menu.shareToLan")));
+        h.add(new arl(5, f / 2 - 100, g / 4 + 48 + byte0, 98, 20, bd.a("gui.achievements")));
+        h.add(new arl(6, f / 2 + 2, g / 4 + 48 + byte0, 98, 20, bd.a("gui.stats")));
+		h.add(new arl(8, f / 2 - 100, g / 4 + 144 + byte0, "WMLL Options..."));
 		if (WMLL.i.debugClassPresent)
-			h.add(new ark(9001, f - 52, g - 22, 50, 20, "Reload"));
-        ark1.g = e.B() && !e.C().al();
+			h.add(new arl(9001, f - 52, g - 22, 50, 20, "Reload"));
+        arl1.g = e.B() && !e.C().al();
     }
 
-    protected void a(ark ark1)
+    protected void a(arl arl1)
     {
-        switch(ark1.f)
+        switch(arl1.f)
         {
         case 8:
         	e.a(new WMLLOptions());
@@ -51,15 +51,15 @@ public class asp extends asv
         	e.a(new asp());
         	break;
         case 0: // '\0'
-            e.a(new asn(this, e.y));
+            e.a(new aso(this, e.y));
             break;
 
         case 1: // '\001'
-            ark1.g = false;
-            e.E.a(jg.j, 1);
+            arl1.g = false;
+            e.E.a(jh.j, 1);
             e.e.B();
-            e.a((awy)null);
-            e.a(new bcy());
+            e.a((awz)null);
+            e.a(new bcz());
             break;
 
         case 4: // '\004'
@@ -69,15 +69,15 @@ public class asp extends asv
             break;
 
         case 5: // '\005'
-            e.a(new ath(e.E));
+            e.a(new ati(e.E));
             break;
 
         case 6: // '\006'
-            e.a(new ati(this, e.E));
+            e.a(new atj(this, e.E));
             break;
 
         case 7: // '\007'
-            e.a(new ata(this));
+            e.a(new atb(this));
             break;
         }
     }
