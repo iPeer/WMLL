@@ -39,7 +39,7 @@ public class WMLLGuiLightLevel extends asw {
 		
 		//doneButton = new aoh(0, f / 2 - 112, g / 4 + 150 + o, 226, 20, "Done");
 		//h.add(doneButton);
-		h.add(new arl(3, f / 2 - 112, g / 4 + o, 226, 20, "View full parameter list"));
+		h.add(new arl(3, f / 2 - 112, 45, 226, 20, "View full parameter list"));
 		
 //		int a = wmll.getFontRenderer().a("Parameter Help") + 10;
 //		parameterButton = new aoh(1, (f - a) / 2, g / 4 + 65 + o, a, 20, "Parameter Help");

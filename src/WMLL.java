@@ -28,7 +28,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 767";
+		return "Test 768";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -185,7 +185,8 @@ public class WMLL {
 					String b = d.a();
 					if (b.startsWith("Seed: ")) {
 						//aow.b().a();
-						a.remove(e - 1);
+						if (!isMultiplayer())
+							a.remove(e - 1);
 						long worldSeed = Long.parseLong(b.split("Seed: ")[1]);
 						worldSeedSet = true;
 						debug("[WMLL] Seed set to "+worldSeed);
@@ -277,6 +278,8 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 11, 0xffffff);
 				a = "S: "+canBlockSeeTheSky(x, getPlayerCoordinates()[1], z);
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 13, 0xffffff);
+				a = "WS: "+getWindowSize().a()+"x"+getWindowSize().b();
+				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 14, 0xffffff);
 			}
 			WMLLCheckKeys();
 			if (!Enabled)
