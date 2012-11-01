@@ -1,19 +1,19 @@
 
 import org.lwjgl.input.Keyboard;
 
-public class WMLLOptions extends asw {
+public class WMLLOptions extends aub {
 	
 
 	private String title = "WMLL Configuration";;
 	private WMLL wmll;
-	public asw parent;
+	public aub parent;
 	public static boolean isBinding;
 		
 	public WMLLOptions() {
 		this.wmll = WMLL.i;
 	}
 	
-	public WMLLOptions(asw parent) {
+	public WMLLOptions(aub parent) {
 		this.parent = parent;
 		this.wmll = WMLL.i;
 	}
@@ -23,7 +23,7 @@ public class WMLLOptions extends asw {
 	}
 
 
-	public WMLLOptions(WMLL wmll, asw parent) {
+	public WMLLOptions(WMLL wmll, aub parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 	}
@@ -39,29 +39,29 @@ public class WMLLOptions extends asw {
 		byte offset = -16;
 		/*
 		 * New button
-		 * arl((int)ID, x, y[, width, height], text)
+		 * asq((int)ID, x, y[, width, height], text)
 		 */
-		h.add(new arl(1, f / 2 - 100, g / 4 + 150 + offset, "Done"));
-		h.add(new arl(0, f / 2 - 100, g / 4 - 5 + offset, 98, 20, "Debug: "+debug));
-		h.add(new arl(2, f / 2 + 2, g / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
-		//h.add(new arl(5, f / 2 - 100, g / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
-		h.add(new arl(6, f / 2 + - 100, g / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
-		h.add(new arl(7, f / 2 - 100, g / 4 + 105 + offset, "Check for updates: "+(wmll.autoUpdateCheck ? "Yes" : "No")));
-		h.add(new arl(3, f / 2 - 100, g / 4 + 130 + offset, "More options..."));
-		h.add(new arl(4, f / 2 - 100, g / 4 + 85 + offset, "Reset settings to defaults"));
-		h.add(new arl(9, f / 2 - 100, g / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
-		//h.add(new arl(4, f / 2 - 100, g / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
+		h.add(new asq(1, f / 2 - 100, g / 4 + 150 + offset, "Done"));
+		h.add(new asq(0, f / 2 - 100, g / 4 - 5 + offset, 98, 20, "Debug: "+debug));
+		h.add(new asq(2, f / 2 + 2, g / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
+		//h.add(new asq(5, f / 2 - 100, g / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
+		h.add(new asq(6, f / 2 + - 100, g / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
+		h.add(new asq(7, f / 2 - 100, g / 4 + 105 + offset, "Check for updates: "+(wmll.autoUpdateCheck ? "Yes" : "No")));
+		h.add(new asq(3, f / 2 - 100, g / 4 + 130 + offset, "More options..."));
+		h.add(new asq(4, f / 2 - 100, g / 4 + 85 + offset, "Reset settings to defaults"));
+		h.add(new asq(9, f / 2 - 100, g / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
+		//h.add(new asq(4, f / 2 - 100, g / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
 		String enabledString = "Enabled on "+(wmll.isMultiplayer() ? "this server" : "single player")+": "+(wmll.Enabled ? "Yes" : "No");
-		h.add(new arl(8, f / 2 - 100, g / 4 + 45 + offset, enabledString));
+		h.add(new asq(8, f / 2 - 100, g / 4 + 45 + offset, enabledString));
 		if (wmll.debugClassPresent)
-			h.add(new arl(9001, f - 52, g - 22, 50, 20, "Reload"));
+			h.add(new asq(9001, f - 52, g - 22, 50, 20, "Reload"));
 		if (!wmll.Enabled)
 			for (int x = 3; x < 6; x++)
-				((arl)h.get(x)).h = false;
+				((asq)h.get(x)).h = false;
 	}
 
 	@SuppressWarnings("static-access")
-	protected void a(arl button) {
+	protected void a(asq button) {
 		if (button.f == 1) {
 			wmll.optionsOpen = false;
 			wmll.saveOptions();
@@ -114,7 +114,7 @@ public class WMLLOptions extends asw {
 			wmll.Enabled = !a;
 			wmll.options.setProperty("World-"+wmll.getWorldName(), Boolean.toString(!a));
 			for (int x = 3; x < 6; x++)
-				((arl)h.get(x)).h = !a;
+				((asq)h.get(x)).h = !a;
 			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "this server" : "this world")+": "+(!a ? "Yes" : "No");
 		}
 		if (button.f == 9) {
@@ -171,7 +171,7 @@ public class WMLLOptions extends asw {
 		else if (isBinding && i1 != Keyboard.KEY_ESCAPE) {
 			WMLL.F4Key = i1;
 			isBinding = false;
-			((arl)h.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
+			((asq)h.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
 		}
 		else {
 			super.a(c1, i1);
@@ -199,7 +199,7 @@ public class WMLLOptions extends asw {
 		wmll.drawStringUsingPixels("GUI: "+a[0]+" (@"+a[1]+")", 2, r - 18, 0x333333);
 	}
 	
-	public asw getParent() {
+	public aub getParent() {
 		return parent;
 	}
 

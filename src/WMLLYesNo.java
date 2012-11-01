@@ -2,13 +2,13 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLYesNo extends asw {
+public class WMLLYesNo extends aub {
 
 	protected WMLL wmll;
-	protected asw parent;
+	protected aub parent;
 	byte offset = -16;
 	
-	public WMLLYesNo(WMLL wmll, asw parent) {
+	public WMLLYesNo(WMLL wmll, aub parent) {
 		this.parent = parent;
 		this.wmll = wmll;
 	}
@@ -16,13 +16,13 @@ public class WMLLYesNo extends asw {
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		h.clear();
-		h.add(new arl(0, f / 2 - 100, g / 2 + 10 + offset, 98, 20, "Yes"));
-		h.add(new arl(1, f / 2 + 2, g / 2 + 10 + offset, 98, 20, "No"));
+		h.add(new asq(0, f / 2 - 100, g / 2 + 10 + offset, 98, 20, "Yes"));
+		h.add(new asq(1, f / 2 + 2, g / 2 + 10 + offset, 98, 20, "No"));
 		if (wmll.debugClassPresent)
-			h.add(new arl(9001, f - 52, g - 22, 50, 20, "Reload"));
+			h.add(new asq(9001, f - 52, g - 22, 50, 20, "Reload"));
 	}
 	
-	protected void a(arl b) {
+	protected void a(asq b) {
 		if (b.f == 9001)
 			e.a(new WMLLYesNo(wmll, parent));
 		if (b.f == 0 || b.f == 1) {

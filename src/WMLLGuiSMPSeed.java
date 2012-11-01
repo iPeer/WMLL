@@ -2,15 +2,15 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiSMPSeed extends asw {
+public class WMLLGuiSMPSeed extends aub {
 	
 	protected WMLL wmll;
-	private asw parent;
+	private aub parent;
 	private String title;
 	
-	private ary seedBox;
+	private atd seedBox;
 
-	public WMLLGuiSMPSeed(WMLL wmll, asw parent) {
+	public WMLLGuiSMPSeed(WMLL wmll, aub parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.title = "WMLL SMP Seed Configuration";
@@ -21,21 +21,21 @@ public class WMLLGuiSMPSeed extends asw {
 		h.clear();
 		byte o = -16;
 		if (wmll.debugClassPresent)
-			h.add(new arl(9001, f - 52, g - 22, 50, 20, "Reload"));
+			h.add(new asq(9001, f - 52, g - 22, 50, 20, "Reload"));
 		/*
 		 * New Editbox:
 		 * new aoj(Gui, fontrenderer, posx, posy, width, height, default text);
 		 */
-		seedBox = new ary(/*this,*/ k, f / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
+		seedBox = new atd(/*this,*/ k, f / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
 		//h.add(seedBox);
 		seedBox.a(72);
 		if (wmll.getWorldSeed() != 0)
 			seedBox.a(Long.toString(wmll.getWorldSeed()));
 		seedBox.b(true);
-		h.add(new arl(0, f / 2 - 100, g / 4 + 90 + o, "Save Seed"));
+		h.add(new asq(0, f / 2 - 100, g / 4 + 90 + o, "Save Seed"));
 	}
 	
-	protected void a(arl b) {
+	protected void a(asq b) {
 		if (b.f == 9001) {
 			e.a(new WMLLGuiSMPSeed(wmll, parent));
 		}

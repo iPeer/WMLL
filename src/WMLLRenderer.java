@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public class WMLLRenderer extends asd {
+public class WMLLRenderer extends ati {
 
 	public int updateVersion = 0;
 	public String updateMCVersion = "1.0";

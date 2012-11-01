@@ -10,23 +10,22 @@ import net.minecraftforge.common.ForgeHooks;
 import org.lwjgl.opengl.GL11;
 
 
-public class WMLLCompatibility extends asd {
+public class WMLLCompatibility extends ati {
 	
 	private int i;
 
-//	Not needed in 1.4?
-//	public static int forgeA(Minecraft d) {
-//		int a = d.g.aT();
-//		if (WMLL.i.useForge)
-//			try {
-//				return ForgeHooks.getTotalArmorValue(d.g); // 12W40 & 1.4PRE ERROR
-//			}
-//		catch (IllegalAccessError e) { return a; }
-//		catch (NoClassDefFoundError e) { return a; }
-//		catch (NoSuchFieldError e) { return a; }
-//		else
-//			return a;
-//	}
+	public static int forgeA(Minecraft d) {
+		int a = d.g.aT();
+		if (WMLL.i.useForge)
+			try {
+				return ForgeHooks.getTotalArmorValue(WMLL.i.entityPlayer()); // 12W40 & 1.4PRE ERROR
+			}
+		catch (IllegalAccessError e) { return a; }
+		catch (NoClassDefFoundError e) { return a; }
+		catch (NoSuchFieldError e) { return a; }
+		else
+			return a;
+	}
 	
 	public void RadarBroRun(Minecraft i, WMLL w) {
 		 if(RadarBro.RadarEnabled)
