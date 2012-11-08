@@ -1,19 +1,19 @@
 
 import org.lwjgl.input.Keyboard;
 
-public class WMLLOptions extends aub {
+public class WMLLOptions extends aue {
 	
 
 	private String title = "WMLL Configuration";;
 	private WMLL wmll;
-	public aub parent;
+	public aue parent;
 	public static boolean isBinding;
 		
 	public WMLLOptions() {
 		this.wmll = WMLL.i;
 	}
 	
-	public WMLLOptions(aub parent) {
+	public WMLLOptions(aue parent) {
 		this.parent = parent;
 		this.wmll = WMLL.i;
 	}
@@ -23,7 +23,7 @@ public class WMLLOptions extends aub {
 	}
 
 
-	public WMLLOptions(WMLL wmll, aub parent) {
+	public WMLLOptions(WMLL wmll, aue parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 	}
@@ -31,7 +31,7 @@ public class WMLLOptions extends aub {
 
 	@SuppressWarnings({ "unchecked", "static-access" })
 	public void A_() {
-		h.clear();
+		i.clear();
 		String debug = WMLL.WMLLDebugActive() == true ? "ON": "OFF";
 		String ikey = Keyboard.getKeyName(wmll.F4Key);
 
@@ -39,38 +39,38 @@ public class WMLLOptions extends aub {
 		byte offset = -16;
 		/*
 		 * New button
-		 * asq((int)ID, x, y[, width, height], text)
+		 * ast((int)ID, x, y[, width, height], text)
 		 */
-		h.add(new asq(1, f / 2 - 100, g / 4 + 150 + offset, "Done"));
-		h.add(new asq(0, f / 2 - 100, g / 4 - 5 + offset, 98, 20, "Debug: "+debug));
-		h.add(new asq(2, f / 2 + 2, g / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
-		//h.add(new asq(5, f / 2 - 100, g / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
-		h.add(new asq(6, f / 2 + - 100, g / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
-		h.add(new asq(7, f / 2 - 100, g / 4 + 105 + offset, "Check for updates: "+(wmll.autoUpdateCheck ? "Yes" : "No")));
-		h.add(new asq(3, f / 2 - 100, g / 4 + 130 + offset, "More options..."));
-		h.add(new asq(4, f / 2 - 100, g / 4 + 85 + offset, "Reset settings to defaults"));
-		h.add(new asq(9, f / 2 - 100, g / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
-		//h.add(new asq(4, f / 2 - 100, g / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
+		i.add(new ast(1, g / 2 - 100, h / 4 + 150 + offset, "Done"));
+		i.add(new ast(0, g / 2 - 100, h / 4 - 5 + offset, 98, 20, "Debug: "+debug));
+		i.add(new ast(2, g / 2 + 2, h / 4 - 5 + offset, 98, 20, "Cycle Key: "+ikey));
+		//i.add(new ast(5, g / 2 - 100, h / 4 + 20 + offset, 98, 20, (clockformat == "OFF" ? "Clock is " : "Time Format: ")+clockformat));
+		i.add(new ast(6, g / 2 + - 100, h / 4 + 20 + offset, 98, 20, "Images: "+(wmll.useImages ? "ON" : "OFF")));
+		i.add(new ast(7, g / 2 - 100, h / 4 + 105 + offset, "Check for updates: "+(wmll.autoUpdateCheck ? "Yes" : "No")));
+		i.add(new ast(3, g / 2 - 100, h / 4 + 130 + offset, "More options..."));
+		i.add(new ast(4, g / 2 - 100, h / 4 + 85 + offset, "Reset settings to defaults"));
+		i.add(new ast(9, g / 2 - 100, h / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
+		//i.add(new ast(4, g / 2 - 100, h / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
 		String enabledString = "Enabled on "+(wmll.isMultiplayer() ? "this server" : "single player")+": "+(wmll.Enabled ? "Yes" : "No");
-		h.add(new asq(8, f / 2 - 100, g / 4 + 45 + offset, enabledString));
+		i.add(new ast(8, g / 2 - 100, h / 4 + 45 + offset, enabledString));
 		if (wmll.debugClassPresent)
-			h.add(new asq(9001, f - 52, g - 22, 50, 20, "Reload"));
+			i.add(new ast(9001, g - 52, g - 22, 50, 20, "Reload"));
 		if (!wmll.Enabled)
 			for (int x = 3; x < 6; x++)
-				((asq)h.get(x)).h = false;
+				((ast)i.get(x)).h = false;
 	}
 
 	@SuppressWarnings("static-access")
-	protected void a(asq button) {
+	protected void a(ast button) {
 		if (button.f == 1) {
 			wmll.optionsOpen = false;
 			wmll.saveOptions();
 			if (parent == null) {
-				e.s = null;
-				e.h();
+				f.a((aue)null);
+				f.h();
 			}
 			else {
-				e.a(parent);
+				f.a(parent);
 			}
 		}
 		if (button.f == 0) {
@@ -83,10 +83,10 @@ public class WMLLOptions extends aub {
 			button.e = "Press a key...";
 		}
 		if (button.f == 3) {
-			e.a(new WMLLGuiOutputOptions(WMLL.i, this));
+			f.a(new WMLLGuiOutputOptions(WMLL.i, this));
 		}
 		if (button.f == 4) {
-			e.a(new WMLLYesNo(wmll, this));
+			f.a(new WMLLYesNo(wmll, this));
 		}
 		if (button.f == 5) {
 			int a = wmll.clockSetting;
@@ -114,7 +114,7 @@ public class WMLLOptions extends aub {
 			wmll.Enabled = !a;
 			wmll.options.setProperty("World-"+wmll.getWorldName(), Boolean.toString(!a));
 			for (int x = 3; x < 6; x++)
-				((asq)h.get(x)).h = !a;
+				((ast)i.get(x)).h = !a;
 			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "this server" : "this world")+": "+(!a ? "Yes" : "No");
 		}
 		if (button.f == 9) {
@@ -125,7 +125,7 @@ public class WMLLOptions extends aub {
 		}
 
 		if (button.f == 9001) // Debug button
-			e.a(new WMLLOptions(wmll));
+			f.a(new WMLLOptions(wmll));
 	}
 
 	private static String buttonTextForClockSetting(int i) {
@@ -166,12 +166,12 @@ public class WMLLOptions extends aub {
 
 	protected void a(char c1, int i1) {
 		if (i1 == Keyboard.KEY_ESCAPE && parent != null) {
-			e.a(parent);
+			f.a(parent);
 		}
 		else if (isBinding && i1 != Keyboard.KEY_ESCAPE) {
 			WMLL.F4Key = i1;
 			isBinding = false;
-			((asq)h.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
+			((ast)i.get(2)).e = "Cycle Key: "+Keyboard.getKeyName(i1);
 		}
 		else {
 			super.a(c1, i1);
@@ -185,7 +185,7 @@ public class WMLLOptions extends aub {
 	public void a(int i, int j, float f) {
 		z_();
 		// (fontrenderer, text, x, y, colour)
-		a(k, title, this.f / 2, 20, 0xffffff);
+		a(l, title, this.g / 2, 20, 0xffffff);
 		renderWMLLVersion();
 		super.a(i, j, f);
 	}
@@ -199,7 +199,7 @@ public class WMLLOptions extends aub {
 		wmll.drawStringUsingPixels("GUI: "+a[0]+" (@"+a[1]+")", 2, r - 18, 0x333333);
 	}
 	
-	public aub getParent() {
+	public aue getParent() {
 		return parent;
 	}
 

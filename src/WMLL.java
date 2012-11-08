@@ -28,7 +28,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 769";
+		return "Test 770";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -77,8 +77,8 @@ public class WMLL {
 	private String lightString = "Light level: 9001";
 	private long lastF4Press = 0;
 	private boolean wmllF3Output = false;
-	private atg fontRenderer;
-	private aye lastWorld = null;
+	private atj fontRenderer;
+	private ayh lastWorld = null;
 	private boolean worldSeedSet = false;
 
 	protected WMLLCompatibility wmllCompatibility;
@@ -168,7 +168,7 @@ public class WMLL {
 			updategui(h, h.v);
 		}
 
-		public void updategui(Minecraft h, ath ath) {
+		public void updategui(Minecraft h, atk atk) {
 			h.I.a("WMLL");
 			if (getWorld() != null && !wmllUpdateCheck.running && autoUpdateCheck) {
 				wmllUpdateCheck.start();
@@ -185,7 +185,7 @@ public class WMLL {
 			}
 			if (!worldSeedSet) {
 				try {
-					Object obj = ath.b();
+					Object obj = atk.b();
 					Field f = obj.getClass().getDeclaredField(getField("chatLines"));
 					f.setAccessible(true);
 					obj = f.get(obj);
@@ -359,11 +359,11 @@ public class WMLL {
 							out++;
 						//				if (getDimension() == 1)
 						//					out--;
-						mc player = thePlayer();
+						md player = thePlayer();
 						double x = player.t;
 						double y = player.u;
 						double z = player.v;
-						double f = kd.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
+						double f = ke.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
 						NumberFormat d = new DecimalFormat("#0.00");
 						String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection((int)f)+")";
 						drawString(coords, 2, out, 0xffffff);
@@ -615,7 +615,7 @@ public class WMLL {
 			return calendar.getTime().toString().split(" ")[3];
 		}
 
-		private aye getWorld() {
+		private ayh getWorld() {
 			try {
 				return mc.e;
 			}
@@ -661,19 +661,19 @@ public class WMLL {
 		//		return worldInstance().m()+", "+worldInstance().n();
 		//	}
 
-		public atg getFontRenderer() {
+		public atj getFontRenderer() {
 			return this.fontRenderer;
 		}
 
-		public auc getWindowSize() {
-			return new auc(mc.y, mc.c, mc.d);
+		public auf getWindowSize() {
+			return new auf(mc.y, mc.c, mc.d);
 		}
 
 		private boolean mcDebugOpen() {
 			return getGameSettings().U;
 		}
 
-		private asi getGameSettings() {
+		private asl getGameSettings() {
 			return mc.y;
 		}
 
@@ -751,15 +751,15 @@ public class WMLL {
 			return getWorld().k(x, y, z);
 		}
 
-		public ayh entityPlayer() {
+		public ayk entityPlayer() {
 			return mc.g;
 		}
 
-		public mc thePlayer() {
+		public md thePlayer() {
 			return mc.h;
 		}
 
-		public asp playerEntity() {
+		public ass playerEntity() {
 			return mc.j;
 		}
 
@@ -767,7 +767,7 @@ public class WMLL {
 			return playerEntity().b;
 		}
 
-		public ayd getPlayerController() {
+		public ayg getPlayerController() {
 			return mc.b;
 		}
 
@@ -840,16 +840,16 @@ public class WMLL {
 		}
 
 		private boolean isPlayerSleeping() {
-			return thePlayer().bv();
+			return thePlayer().bw();
 		}
 
 		public int[] getPlayerCoordinates() {
-			int[] a = {kd.c(thePlayer().t), kd.c(thePlayer().u - 1), kd.c(thePlayer().v), kd.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().t, (int)thePlayer().u, (int)thePlayer().v};
+			int[] a = {ke.c(thePlayer().t), ke.c(thePlayer().u - 1), ke.c(thePlayer().v), ke.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().t, (int)thePlayer().u, (int)thePlayer().v};
 			return a;
 		}
 
 		public double[] getPlayerCoordinatesAsDouble() {
-			double[] a = {thePlayer().t, thePlayer().u, thePlayer().v, kd.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3};
+			double[] a = {thePlayer().t, thePlayer().u, thePlayer().v, ke.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3};
 			return a;
 		}
 
@@ -1093,7 +1093,7 @@ public class WMLL {
 		}
 
 		public static String getMinecraftVersion() {
-			return "1.4.3PRE";
+			return "1.4.4PRE";
 		}
 
 		public boolean areAllOutputsDisabled() {

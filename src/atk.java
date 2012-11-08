@@ -8,20 +8,20 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
-public class ath extends ati
+public class atk extends atl
 {
 
-    private static final bbm b = new bbm();
+    private static final bbt b = new bbt();
     private final Random c = new Random();
     private final Minecraft d;
-    private final asr e;
+    private final asu e;
     private int f;
     private String g;
     private int h;
     private boolean i;
     public float a;
 
-    public ath(Minecraft minecraft)
+    public atk(Minecraft minecraft)
     {
         f = 0;
         g = "";
@@ -29,15 +29,15 @@ public class ath extends ati
         i = false;
         a = 1.0F;
         d = minecraft;
-        e = new asr(minecraft);
+        e = new asu(minecraft);
     }
 
     public void a(float f1, boolean flag, int j, int k)
     {
-        auc auc1 = new auc(d.y, d.c, d.d);
-        int l = auc1.a();
-        int i1 = auc1.b();
-        atg atg1 = d.p;
+        auf auf1 = new auf(d.y, d.c, d.d);
+        int l = auf1.a();
+        int i1 = auf1.b();
+        atj atj1 = d.p;
         d.t.c();
         GL11.glEnable(3042);
         if(Minecraft.t())
@@ -52,7 +52,7 @@ public class ath extends ati
         {
             a(l, i1);
         }
-        if(!d.g.a(lk.k))
+        if(!d.g.a(ll.k))
         {
             float f2 = d.g.cj + (d.g.j - d.g.cj) * f1;
             if(f2 > 0.0F)
@@ -78,11 +78,11 @@ public class ath extends ati
             {
                 flag1 = false;
             }
-            int k1 = d.g.aT();
+            int k1 = d.g.aU();
             int i3 = d.g.aR;
             c.setSeed(f * 0x4c627);
             boolean flag3 = false;
-            ro ro1 = d.g.cc();
+            ro ro1 = d.g.cd();
             int j5 = ro1.a();
             int l5 = ro1.b();
             d.I.a("bossHealth");
@@ -93,7 +93,7 @@ public class ath extends ati
                 int j6 = l / 2 - 91;
                 int i7 = l / 2 + 91;
                 d.I.a("expBar");
-                int l7 = d.g.cb();
+                int l7 = d.g.cc();
                 if(l7 > 0)
                 {
                     char c1 = '\266';
@@ -107,9 +107,9 @@ public class ath extends ati
                 }
                 int k8 = i1 - 39;
                 int k9 = k8 - 10;
-                int j10 = d.g.aV();
+                int j10 = d.g.aW();
                 int i11 = -1;
-                if(d.g.a(lk.l))
+                if(d.g.a(ll.l))
                 {
                     i11 = f % 25;
                 }
@@ -133,11 +133,11 @@ public class ath extends ati
                         }
                     }
                     int k12 = 16;
-                    if(d.g.a(lk.u))
+                    if(d.g.a(ll.u))
                     {
                         k12 += 36;
                     } else
-                    if(d.g.a(lk.v))
+                    if(d.g.a(ll.v))
                     {
                         k12 += 72;
                     }
@@ -189,12 +189,12 @@ public class ath extends ati
                     int l12 = k8;
                     int k13 = 16;
                     byte byte2 = 0;
-                    if(d.g.a(lk.s))
+                    if(d.g.a(ll.s))
                     {
                         k13 += 36;
                         byte2 = 13;
                     }
-                    if(d.g.cc().e() <= 0.0F && f % (j5 * 3 + 1) == 0)
+                    if(d.g.cd().e() <= 0.0F && f % (j5 * 3 + 1) == 0)
                     {
                         l12 += c.nextInt(3) - 1;
                     }
@@ -229,8 +229,8 @@ public class ath extends ati
                 if(d.g.a(agb.h))
                 {
                     int i12 = d.g.al();
-                    int i13 = kd.f(((double)(i12 - 2) * 10D) / 300D);
-                    int l13 = kd.f(((double)i12 * 10D) / 300D) - i13;
+                    int i13 = ke.f(((double)(i12 - 2) * 10D) / 300D);
+                    int l13 = ke.f(((double)i12 * 10D) / 300D) - i13;
                     for(int j14 = 0; j14 < i13 + l13; j14++)
                     {
                         if(j14 < i13)
@@ -260,12 +260,12 @@ public class ath extends ati
             GL11.glDisable(32826);
             d.I.b();
         }
-        if(d.g.bY() > 0)
+        if(d.g.bZ() > 0)
         {
             d.I.a("sleep");
             GL11.glDisable(2929);
             GL11.glDisable(3008);
-            int j1 = d.g.bY();
+            int j1 = d.g.bZ();
             float f3 = (float)j1 / 100F;
             if(f3 > 1.0F)
             {
@@ -283,13 +283,13 @@ public class ath extends ati
             boolean flag2 = false;
             int j2 = flag2 ? 0xffffff : 0x80ff20;
             String s1 = (new StringBuilder()).append("").append(d.g.cd).toString();
-            int i4 = (l - atg1.a(s1)) / 2;
+            int i4 = (l - atj1.a(s1)) / 2;
             int k4 = i1 - 31 - 4;
-            atg1.b(s1, i4 + 1, k4, 0);
-            atg1.b(s1, i4 - 1, k4, 0);
-            atg1.b(s1, i4, k4 + 1, 0);
-            atg1.b(s1, i4, k4 - 1, 0);
-            atg1.b(s1, i4, k4, j2);
+            atj1.b(s1, i4 + 1, k4, 0);
+            atj1.b(s1, i4 - 1, k4, 0);
+            atj1.b(s1, i4, k4 + 1, 0);
+            atj1.b(s1, i4, k4 - 1, 0);
+            atj1.b(s1, i4, k4, j2);
             d.I.b();
         }
         if(d.q())
@@ -298,15 +298,15 @@ public class ath extends ati
             String s = "";
             if(d.e.F() >= 0x1d6b4L)
             {
-                s = bl.a("demo.demoExpired");
+                s = bm.a("demo.demoExpired");
             } else
             {
-                s = String.format(bl.a("demo.remainingTime"), new Object[] {
-                    kl.a((int)(0x1d6b4L - d.e.F()))
+                s = String.format(bm.a("demo.remainingTime"), new Object[] {
+                    km.a((int)(0x1d6b4L - d.e.F()))
                 });
             }
-            int k2 = atg1.a(s);
-            atg1.a(s, l - k2 - 10, 5, 0xffffff);
+            int k2 = atj1.a(s);
+            atj1.a(s, l - k2 - 10, 5, 0xffffff);
             d.I.b();
         }
         WMLL.i.updategui(d, this);
@@ -314,39 +314,39 @@ public class ath extends ati
         {
             d.I.a("debug");
             GL11.glPushMatrix();
-            atg1.a((new StringBuilder()).append("Minecraft 1.4.3 (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
-            atg1.a(d.m(), 2, 12, 0xffffff);
-            atg1.a(d.n(), 2, 22, 0xffffff);
-            atg1.a(d.p(), 2, 32, 0xffffff);
-            atg1.a(d.o(), 2, 42, 0xffffff);
+            atj1.a((new StringBuilder()).append("Minecraft 1.4.4 (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
+            atj1.a(d.m(), 2, 12, 0xffffff);
+            atj1.a(d.n(), 2, 22, 0xffffff);
+            atj1.a(d.p(), 2, 32, 0xffffff);
+            atj1.a(d.o(), 2, 42, 0xffffff);
             long l1 = Runtime.getRuntime().maxMemory();
             long l3 = Runtime.getRuntime().totalMemory();
             long l4 = Runtime.getRuntime().freeMemory();
             long l6 = l3 - l4;
             String s2 = (new StringBuilder()).append("Used memory: ").append((l6 * 100L) / l1).append("% (").append(l6 / 1024L / 1024L).append("MB) of ").append(l1 / 1024L / 1024L).append("MB").toString();
-            b(atg1, s2, l - atg1.a(s2) - 2, 2, 0xe0e0e0);
+            b(atj1, s2, l - atj1.a(s2) - 2, 2, 0xe0e0e0);
             s2 = (new StringBuilder()).append("Allocated memory: ").append((l3 * 100L) / l1).append("% (").append(l3 / 1024L / 1024L).append("MB)").toString();
-            b(atg1, s2, l - atg1.a(s2) - 2, 12, 0xe0e0e0);
-            int l8 = kd.c(d.g.t);
-            int l9 = kd.c(d.g.u);
-            int k10 = kd.c(d.g.v);
-            b(atg1, String.format("x: %.5f (%d) // c: %d (%d)", new Object[] {
+            b(atj1, s2, l - atj1.a(s2) - 2, 12, 0xe0e0e0);
+            int l8 = ke.c(d.g.t);
+            int l9 = ke.c(d.g.u);
+            int k10 = ke.c(d.g.v);
+            b(atj1, String.format("x: %.5f (%d) // c: %d (%d)", new Object[] {
                 Double.valueOf(d.g.t), Integer.valueOf(l8), Integer.valueOf(l8 >> 4), Integer.valueOf(l8 & 0xf)
             }), 2, 64, 0xe0e0e0);
-            b(atg1, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {
+            b(atj1, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {
                 Double.valueOf(d.g.D.b), Double.valueOf(d.g.u)
             }), 2, 72, 0xe0e0e0);
-            b(atg1, String.format("z: %.5f (%d) // c: %d (%d)", new Object[] {
+            b(atj1, String.format("z: %.5f (%d) // c: %d (%d)", new Object[] {
                 Double.valueOf(d.g.v), Integer.valueOf(k10), Integer.valueOf(k10 >> 4), Integer.valueOf(k10 & 0xf)
             }), 2, 80, 0xe0e0e0);
-            int j11 = kd.c((double)((d.g.z * 4F) / 360F) + 0.5D) & 3;
-            b(atg1, (new StringBuilder()).append("f: ").append(j11).append(" (").append(q.c[j11]).append(") / ").append(kd.g(d.g.z)).toString(), 2, 88, 0xe0e0e0);
+            int j11 = ke.c((double)((d.g.z * 4F) / 360F) + 0.5D) & 3;
+            b(atj1, (new StringBuilder()).append("f: ").append(j11).append(" (").append(q.c[j11]).append(") / ").append(ke.g(d.g.z)).toString(), 2, 88, 0xe0e0e0);
             if(d.e != null && d.e.f(l8, l9, k10))
             {
                 zs zs1 = d.e.d(l8, k10);
-                b(atg1, (new StringBuilder()).append("lc: ").append(zs1.h() + 15).append(" b: ").append(zs1.a(l8 & 0xf, k10 & 0xf, d.e.t()).y).append(" bl: ").append(zs1.a(yh.b, l8 & 0xf, l9, k10 & 0xf)).append(" sl: ").append(zs1.a(yh.a, l8 & 0xf, l9, k10 & 0xf)).append(" rl: ").append(zs1.c(l8 & 0xf, l9, k10 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
+                b(atj1, (new StringBuilder()).append("lc: ").append(zs1.h() + 15).append(" b: ").append(zs1.a(l8 & 0xf, k10 & 0xf, d.e.t()).y).append(" bl: ").append(zs1.a(yh.b, l8 & 0xf, l9, k10 & 0xf)).append(" sl: ").append(zs1.a(yh.a, l8 & 0xf, l9, k10 & 0xf)).append(" rl: ").append(zs1.c(l8 & 0xf, l9, k10 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
             }
-            b(atg1, String.format("ws: %.3f, fs: %.3f, g: %b, fl: %d", new Object[] {
+            b(atj1, String.format("ws: %.3f, fs: %.3f, g: %b, fl: %d", new Object[] {
                 Float.valueOf(d.g.cc.b()), Float.valueOf(d.g.cc.a()), Boolean.valueOf(d.g.E), Integer.valueOf(d.e.f(l8, k10))
             }), 2, 104, 0xe0e0e0);
             GL11.glPopMatrix();
@@ -372,7 +372,7 @@ public class ath extends ati
                 {
                     j3 = Color.HSBtoRGB(f4 / 50F, 0.7F, 0.6F) & 0xffffff;
                 }
-                atg1.b(g, -atg1.a(g) / 2, -4, j3 + (l2 << 24));
+                atj1.b(g, -atj1.a(g) / 2, -4, j3 + (l2 << 24));
                 GL11.glDisable(3042);
                 GL11.glPopMatrix();
             }
@@ -390,9 +390,9 @@ public class ath extends ati
         if(d.y.M.e && (!d.A() || d.g.a.c.size() > 1))
         {
             d.I.a("playerList");
-            axw axw1 = d.g.a;
-            java.util.List list = axw1.c;
-            int k3 = axw1.d;
+            axz axz1 = d.g.a;
+            java.util.List list = axz1.c;
+            int k3 = axz1.d;
             int j4 = k3;
             int i5 = 1;
             for(; j4 > 20; j4 = ((k3 + i5) - 1) / i5)
@@ -419,28 +419,28 @@ public class ath extends ati
                 {
                     continue;
                 }
-                ayi ayi1 = (ayi)list.get(k7);
-                atg1.a(ayi1.a, j8, i9, 0xffffff);
+                ayl ayl1 = (ayl)list.get(k7);
+                atj1.a(ayl1.a, j8, i9, 0xffffff);
                 d.o.b(d.o.b("/gui/icons.png"));
                 int l10 = 0;
                 byte byte1 = 0;
-                if(ayi1.b < 0)
+                if(ayl1.b < 0)
                 {
                     byte1 = 5;
                 } else
-                if(ayi1.b < 150)
+                if(ayl1.b < 150)
                 {
                     byte1 = 0;
                 } else
-                if(ayi1.b < 300)
+                if(ayl1.b < 300)
                 {
                     byte1 = 1;
                 } else
-                if(ayi1.b < 600)
+                if(ayl1.b < 600)
                 {
                     byte1 = 2;
                 } else
-                if(ayi1.b < 1000)
+                if(ayl1.b < 1000)
                 {
                     byte1 = 3;
                 } else
@@ -460,17 +460,17 @@ public class ath extends ati
 
     private void d()
     {
-        if(azt.c == null || azt.b <= 0)
+        if(azx.c == null || azx.b <= 0)
         {
             return;
         }
-        azt.b--;
-        atg atg1 = d.p;
-        auc auc1 = new auc(d.y, d.c, d.d);
-        int j = auc1.a();
+        azx.b--;
+        atj atj1 = d.p;
+        auf auf1 = new auf(d.y, d.c, d.d);
+        int j = auf1.a();
         char c1 = '\266';
         int k = j / 2 - c1 / 2;
-        int l = (int)(azt.a * (float)(c1 + 1));
+        int l = (int)(azx.a * (float)(c1 + 1));
         byte byte0 = 12;
         b(k, byte0, 0, 74, c1, 5);
         b(k, byte0, 0, 74, c1, 5);
@@ -478,8 +478,8 @@ public class ath extends ati
         {
             b(k, byte0, 0, 79, l, 5);
         }
-        String s = azt.c;
-        atg1.a(s, j / 2 - atg1.a(s) / 2, byte0 - 10, 0xffffff);
+        String s = azx.c;
+        atj1.a(s, j / 2 - atj1.a(s) / 2, byte0 - 10, 0xffffff);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glBindTexture(3553, d.o.b("/gui/icons.png"));
     }
@@ -492,13 +492,13 @@ public class ath extends ati
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(3008);
         GL11.glBindTexture(3553, d.o.b("%blur%/misc/pumpkinblur.png"));
-        bah bah1 = bah.a;
-        bah1.b();
-        bah1.a(0.0D, k, -90D, 0.0D, 1.0D);
-        bah1.a(j, k, -90D, 1.0D, 1.0D);
-        bah1.a(j, 0.0D, -90D, 1.0D, 0.0D);
-        bah1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        bah1.a();
+        bao bao1 = bao.a;
+        bao1.b();
+        bao1.a(0.0D, k, -90D, 0.0D, 1.0D);
+        bao1.a(j, k, -90D, 1.0D, 1.0D);
+        bao1.a(j, 0.0D, -90D, 1.0D, 0.0D);
+        bao1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        bao1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -522,13 +522,13 @@ public class ath extends ati
         GL11.glBlendFunc(0, 769);
         GL11.glColor4f(a, a, a, 1.0F);
         GL11.glBindTexture(3553, d.o.b("%blur%/misc/vignette.png"));
-        bah bah1 = bah.a;
-        bah1.b();
-        bah1.a(0.0D, k, -90D, 0.0D, 1.0D);
-        bah1.a(j, k, -90D, 1.0D, 1.0D);
-        bah1.a(j, 0.0D, -90D, 1.0D, 0.0D);
-        bah1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        bah1.a();
+        bao bao1 = bao.a;
+        bao1.b();
+        bao1.a(0.0D, k, -90D, 0.0D, 1.0D);
+        bao1.a(j, k, -90D, 1.0D, 1.0D);
+        bao1.a(j, 0.0D, -90D, 1.0D, 0.0D);
+        bao1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        bao1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -553,13 +553,13 @@ public class ath extends ati
         float f3 = (float)(amj.bh.cl / 16) / 16F;
         float f4 = (float)(amj.bh.cl % 16 + 1) / 16F;
         float f5 = (float)(amj.bh.cl / 16 + 1) / 16F;
-        bah bah1 = bah.a;
-        bah1.b();
-        bah1.a(0.0D, k, -90D, f2, f5);
-        bah1.a(j, k, -90D, f4, f5);
-        bah1.a(j, 0.0D, -90D, f4, f3);
-        bah1.a(0.0D, 0.0D, -90D, f2, f3);
-        bah1.a();
+        bao bao1 = bao.a;
+        bao1.b();
+        bao1.a(0.0D, k, -90D, f2, f5);
+        bao1.a(j, k, -90D, f4, f5);
+        bao1.a(j, 0.0D, -90D, f4, f3);
+        bao1.a(0.0D, 0.0D, -90D, f2, f3);
+        bao1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -606,7 +606,7 @@ public class ath extends ati
         i = true;
     }
 
-    public asr b()
+    public asu b()
     {
         return e;
     }

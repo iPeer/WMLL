@@ -4,18 +4,18 @@ import java.util.Properties;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiOutputOptions extends aub {
+public class WMLLGuiOutputOptions extends aue {
 
 	protected WMLL wmll;
-	private aub parent;
+	private aue parent;
 	private String title;
 	private static final String[] colourNames = {"Black", "Dark Blue", "Dark Green", "Cyan", "Red", "Purple", "Orange", "Light Grey", "Dark Grey", "Lavender?", "Lime Green", "Light Blue", "Bright Red", "Pink", "Yellow", "White"};
 	private static final String[] outputLocations = {"Top Left", "Top Right", "Bottom Left", "Bottom Right"};
 	public static Properties outputOptions;
-	private asq SMPSeedButton, showButton, eOutputsButton, satBarButton;
+	private ast SMPSeedButton, showButton, eOutputsButton, satBarButton;
 
 	@SuppressWarnings("static-access")
-	public WMLLGuiOutputOptions(WMLL wmll, aub parent) {
+	public WMLLGuiOutputOptions(WMLL wmll, aue parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.outputOptions = WMLL.options;
@@ -24,39 +24,39 @@ public class WMLLGuiOutputOptions extends aub {
 
 	@SuppressWarnings("unchecked")
 	public void A_() {
-			h.clear();
+			i.clear();
 			if (outputOptions == null)
 				outputOptions = new Properties();
 			int tc = WMLL.TextColour;
 			byte o = -16;
 			if (wmll.debugClassPresent)
-				h.add(new asq(9001, f - 52, g - 22, 50, 20, "Reload"));
-			h.add(new asq(1, f / 2 - 112, g / 4 + 150 + o, 226, 20, "Done"));
-			h.add(new asq(3, f / 2 - 112, g / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
-			h.add(new asq(4, f / 2 + 2, g / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
-			h.add(new asq(5, f / 2 - 112, g / 4 + 75 + o, (wmll.classicOutput ? 112 : 226), 20, "Customize output"));
+				i.add(new ast(9001, g - 52, h - 22, 50, 20, "Reload"));
+			i.add(new ast(1, g / 2 - 112, h / 4 + 150 + o, 226, 20, "Done"));
+			i.add(new ast(3, g / 2 - 112, h / 4 - 5 + o, 112, 20, outputLocations[WMLL.outputLocation]));
+			i.add(new ast(4, g / 2 + 2, h / 4 - 5 + o, 112, 20, "\247"+Integer.toHexString(tc)+colourNames[tc]));
+			i.add(new ast(5, g / 2 - 112, h / 4 + 75 + o, (wmll.classicOutput ? 112 : 226), 20, "Customize output"));
 			if (wmll.classicOutput)
-				h.add(satBarButton = new asq(12, f / 2 + 2, g / 4 + 75 + o, 112, 20, "Sat Bar Enabled?: "+(wmll.satBar ? "Yes" : "No")));
+				i.add(satBarButton = new ast(12, g / 2 + 2, h / 4 + 75 + o, 112, 20, "Sat Bar Enabled?: "+(wmll.satBar ? "Yes" : "No")));
 			else
-				h.add(satBarButton = new asq(12, f / 2 - 112, g / 4 + 45 + o, 226, 20, "Enable Saturation bar Compatibility: "+(wmll.satBar ? "Yes" : "No")));
-			h.add(new asq(6, f / 2 - 112, g / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
-			h.add(new asq(8, f / 2 + 2, g / 4 + 20 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
-			h.add(new asq(7, f / 2 + 2, g / 4 + 100 + o, 112, 20, "Output type: "+(wmll.classicOutput ? "Classic" : "Custom")));
-			h.add(SMPSeedButton = new asq(9, f / 2 - 112, g / 4 + 100 + o, 112, 20, "Enter seed"));
-			h.add(eOutputsButton = new asq(11, f / 2 - 112, g / 4 + 125 + o, 226, 20, "Enabled outputs..."));
-			h.add(showButton = new asq(10, f / 2 - 112, g / 4 + 45 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
+				i.add(satBarButton = new ast(12, g / 2 - 112, h / 4 + 45 + o, 226, 20, "Enable Saturation bar Compatibility: "+(wmll.satBar ? "Yes" : "No")));
+			i.add(new ast(6, g / 2 - 112, h / 4 + 20 + o, 112, 20, "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No")));
+			i.add(new ast(8, g / 2 + 2, h / 4 + 20 + o, 112, 20, "Seed w/ Coords: "+(wmll.showSeedWithCoords ? "Yes" : "No")));
+			i.add(new ast(7, g / 2 + 2, h / 4 + 100 + o, 112, 20, "Output type: "+(wmll.classicOutput ? "Classic" : "Custom")));
+			i.add(SMPSeedButton = new ast(9, g / 2 - 112, h / 4 + 100 + o, 112, 20, "Enter seed"));
+			i.add(eOutputsButton = new ast(11, g / 2 - 112, h / 4 + 125 + o, 226, 20, "Enabled outputs..."));
+			i.add(showButton = new ast(10, g / 2 - 112, h / 4 + 45 + o, 226, 20, "Show: "+getStringForLightOption(WMLL.WMLLI)));
 			SMPSeedButton.g = wmll.isMultiplayer() || !wmll.autoSeed;
 			eOutputsButton.h = showButton.h = (WMLL.useImages || wmll.classicOutput);
 			satBarButton.g = !wmll.compatDisabled;
 	}
 
-	protected void a(asq b) {
+	protected void a(ast b) {
 		if (b.f == 1 || b.f == 2) {
 			if (b.f == 2) { // Next
 				System.out.println("NO GUI YET!");
 			}
 			else // Done
-				e.a(parent);
+				f.a(parent);
 			WMLL.outputOptions = outputOptions;
 		}
 		else if (b.f == 3) { // Output location
@@ -80,13 +80,13 @@ public class WMLLGuiOutputOptions extends aub {
 			b.e = "Override F3: "+(wmll.wmllOverrideF3 ? "Yes" : "No");
 		}
 		else if (b.f == 5) { // Light level options
-			e.a(new WMLLGuiLightLevel(wmll, this));
+			f.a(new WMLLGuiLightLevel(wmll, this));
 		}
 		else if (b.f == 7) {
 			boolean a = !wmll.classicOutput;
 			b.e = "Output type: "+(a ? "Classic" : "Custom");
 			wmll.classicOutput = a;
-			e.a(new WMLLGuiOutputOptions(wmll, parent));
+			f.a(new WMLLGuiOutputOptions(wmll, parent));
 		}
 		else if (b.f == 8) {
 			boolean a = wmll.showSeedWithCoords;
@@ -95,7 +95,7 @@ public class WMLLGuiOutputOptions extends aub {
 			b.e = "Seed w/ Coords: "+(a ? "Yes" : "No");
 		}
 		else if (b.f == 9) {
-			e.a(new WMLLGuiSMPSeed(wmll, this));
+			f.a(new WMLLGuiSMPSeed(wmll, this));
 		}
 		else if (b.f == 10) {
 			int i2 = WMLL.WMLLI;
@@ -106,7 +106,7 @@ public class WMLLGuiOutputOptions extends aub {
 			WMLL.WMLLI = i2;
 		}
 		else if (b.f == 11) {
-			e.a(new WMLLEnabledOutputs(wmll, this));
+			f.a(new WMLLEnabledOutputs(wmll, this));
 		}
 		else if (b.f == 12) {
 			wmll.toggleSatBar();
@@ -115,12 +115,12 @@ public class WMLLGuiOutputOptions extends aub {
 			b.e = pre+(a ? "Yes" : "No");
 		}
 		else if (b.f == 9001) // Debug button
-			e.a(new WMLLGuiOutputOptions(wmll, parent));
+			f.a(new WMLLGuiOutputOptions(wmll, parent));
 	}
 
 	protected void a(char c, int i) {
 		if (Keyboard.KEY_ESCAPE == i)
-			e.a(parent);
+			f.a(parent);
 		else
 			super.a(c, i);
 	}
@@ -128,7 +128,7 @@ public class WMLLGuiOutputOptions extends aub {
 	public void a(int i, int j, float f) {
 		z_();
 		// (fontrenderer, text, x, y, colour)
-		a(k, title, this.f / 2, 20, 0xffffff);
+		a(l, title, this.g / 2, 20, 0xffffff);
 		WMLLOptions.renderWMLLVersion();
 		super.a(i, j, f);
 	}

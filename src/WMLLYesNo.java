@@ -2,29 +2,29 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLYesNo extends aub {
+public class WMLLYesNo extends aue {
 
 	protected WMLL wmll;
-	protected aub parent;
+	protected aue parent;
 	byte offset = -16;
 	
-	public WMLLYesNo(WMLL wmll, aub parent) {
+	public WMLLYesNo(WMLL wmll, aue parent) {
 		this.parent = parent;
 		this.wmll = wmll;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public void A_() {
-		h.clear();
-		h.add(new asq(0, f / 2 - 100, g / 2 + 10 + offset, 98, 20, "Yes"));
-		h.add(new asq(1, f / 2 + 2, g / 2 + 10 + offset, 98, 20, "No"));
+		i.clear();
+		i.add(new ast(0, g / 2 - 100, g / 2 + 10 + offset, 98, 20, "Yes"));
+		i.add(new ast(1, g / 2 + 2, g / 2 + 10 + offset, 98, 20, "No"));
 		if (wmll.debugClassPresent)
-			h.add(new asq(9001, f - 52, g - 22, 50, 20, "Reload"));
+			i.add(new ast(9001, g - 52, g - 22, 50, 20, "Reload"));
 	}
 	
-	protected void a(asq b) {
+	protected void a(ast b) {
 		if (b.f == 9001)
-			e.a(new WMLLYesNo(wmll, parent));
+			f.a(new WMLLYesNo(wmll, parent));
 		if (b.f == 0 || b.f == 1) {
 			if (b.f == 0) {
 				WMLL.options = WMLL.outputOptions = null;
@@ -33,17 +33,17 @@ public class WMLLYesNo extends aub {
 				wmll.loadOptions();
 			}
 			try {
-				e.a(parent.getClass().newInstance());
+				f.a(parent.getClass().newInstance());
 			} catch (Exception e1) {
 				e1.printStackTrace();
-				e.a((asv)null);
+				f.a((asv)null);
 			}
 		}
 	}
 	
 	protected void a(char c1, int i1) {
 		if (i1 == Keyboard.KEY_ESCAPE && parent != null) {
-			e.a(parent);
+			f.a(parent);
 		}
 		else
 			super.a(c1, i1);
@@ -51,7 +51,7 @@ public class WMLLYesNo extends aub {
 	
 	public void a(int i, int j, float f) {
 		z_();
-		a(k, "\247cAre you sure you want to reset ALL settings to their defaults?", this.f / 2, g / 2 - 20, 0xffffff);
+		a(l, "\247cAre you sure you want to reset ALL settings to their defaults?", this.g / 2, g / 2 - 20, 0xffffff);
 		WMLLOptions.renderWMLLVersion();
 		super.a(i, j, f);
 	}

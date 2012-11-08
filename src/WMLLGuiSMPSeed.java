@@ -2,15 +2,15 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLGuiSMPSeed extends aub {
+public class WMLLGuiSMPSeed extends aue {
 	
 	protected WMLL wmll;
-	private aub parent;
+	private aue parent;
 	private String title;
 	
-	private atd seedBox;
+	private atg seedBox;
 
-	public WMLLGuiSMPSeed(WMLL wmll, aub parent) {
+	public WMLLGuiSMPSeed(WMLL wmll, aue parent) {
 		this.wmll = wmll;
 		this.parent = parent;
 		this.title = "WMLL SMP Seed Configuration";
@@ -18,33 +18,33 @@ public class WMLLGuiSMPSeed extends aub {
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		Keyboard.enableRepeatEvents(true);
-		h.clear();
+		i.clear();
 		byte o = -16;
 		if (wmll.debugClassPresent)
-			h.add(new asq(9001, f - 52, g - 22, 50, 20, "Reload"));
+			i.add(new ast(9001, g - 52, h - 22, 50, 20, "Reload"));
 		/*
 		 * New Editbox:
 		 * new aoj(Gui, fontrenderer, posx, posy, width, height, default text);
 		 */
-		seedBox = new atd(/*this,*/ k, f / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
+		seedBox = new atg(/*this,*/ l, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), 110, wmll.getWindowSize().a() - 20, 20/*, WMLL.options.getProperty("Seed:"+wmll.getWorldName().toLowerCase(), "")*/);
 		//h.add(seedBox);
 		seedBox.a(72);
 		if (wmll.getWorldSeed() != 0)
 			seedBox.a(Long.toString(wmll.getWorldSeed()));
 		seedBox.b(true);
-		h.add(new asq(0, f / 2 - 100, g / 4 + 90 + o, "Save Seed"));
+		i.add(new ast(0, g / 2 - 100, h / 4 + 90 + o, "Save Seed"));
 	}
 	
-	protected void a(asq b) {
+	protected void a(ast b) {
 		if (b.f == 9001) {
-			e.a(new WMLLGuiSMPSeed(wmll, parent));
+			f.a(new WMLLGuiSMPSeed(wmll, parent));
 		}
 		else if (b.f == 0) {
 			if (!seedBox.b().equals("")) {
 				//System.out.println(true+ " | "+seedBox.b());
 				WMLL.options.put("Seed:"+wmll.getWorldName().toLowerCase(), seedBox.b());
 			}
-			e.a(parent);
+			f.a(parent);
 		}
 	}
 	
@@ -70,9 +70,9 @@ public class WMLLGuiSMPSeed extends aub {
 	public void a(int i, int j, float f) {
 		z_();
 		// (fontrenderer, text, x, y, colour)
-		a(k, title, this.f / 2, 20, 0xffffff);
-		a(k, "If you know the seed for this server, you can enter it here.", this.f / 2, 80, 0xffffff);
-		a(k, "This will enable both the seed display and allow Slime chunk detection.", this.f / 2, 90, 0xffffff);	
+		a(l, title, this.g / 2, 20, 0xffffff);
+		a(l, "If you know the seed for this server, you can enter it here.", this.g / 2, 80, 0xffffff);
+		a(l, "This will enable both the seed display and allow Slime chunk detection.", this.g / 2, 90, 0xffffff);	
 		seedBox.f();
 		WMLLOptions.renderWMLLVersion();
 		super.a(i, j, f);
