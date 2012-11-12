@@ -28,7 +28,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 770";
+		return "Test 771";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -810,7 +810,7 @@ public class WMLL {
 		}
 
 		public long getWorldTime() {
-			return getWorld().F();
+			return getWorld().G();
 		}
 
 		private String getFormattedWorldTime(int i) {
