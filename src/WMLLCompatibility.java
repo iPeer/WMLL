@@ -15,7 +15,7 @@ public class WMLLCompatibility extends atl {
 	private int i;
 
 	public static int forgeA(Minecraft d) {
-		int a = d.g.aT();
+		int a = d.g.aW();
 		if (WMLL.i.useForge)
 			try {
 				return ForgeHooks.getTotalArmorValue(WMLL.i.entityPlayer()); // 12W40 & 1.4PRE ERROR
@@ -65,24 +65,26 @@ public class WMLLCompatibility extends atl {
 	}
 	
 	public void drawSaturationBar(Minecraft mc, WMLL wmll) {
-		mc.I.c("saturation");
-		int sat = (int)mc.g.bY().e(); // Cannot find the corresponding method in 1.4 pre...
-		int var19 = wmll.getWindowSize().a() / 2 + 91;
-		int var47 = wmll.getWindowSize().b() - 39;
-		int var22 = var47 - 10;
-		GL11.glBindTexture(3553, mc.o.b("/gui/icons.png"));
-		 for(int var99 = 0; var99 < 10; var99++)
-         {
-             int var26 = var22;
-             int var52 = 16;
-             byte var53 = 0;
-             int var29 = var19 - var99 * 8 - 9;
-             b(var29, var26, 16 + var53 * 9, 27, 9, 9);
-             if(var99 * 2 + 1 < sat)
-                 b(var29, var26, var52 + 36 + 18, 27, 9, 9);
-             if(var99 * 2 + 1 == sat)
-                 b(var29, var26, var52 + 45 + 18, 27, 9, 9);
-         }
+		return;
+		// Disabled due to lack of updates.
+//		mc.I.c("saturation");
+//		int sat = (int)mc.g.bY().e(); // Cannot find the corresponding method in 1.4 pre...
+//		int var19 = wmll.getWindowSize().a() / 2 + 91;
+//		int var47 = wmll.getWindowSize().b() - 39;
+//		int var22 = var47 - 10;
+//		GL11.glBindTexture(3553, mc.o.b("/gui/icons.png"));
+//		 for(int var99 = 0; var99 < 10; var99++)
+//         {
+//             int var26 = var22;
+//             int var52 = 16;
+//             byte var53 = 0;
+//             int var29 = var19 - var99 * 8 - 9;
+//             b(var29, var26, 16 + var53 * 9, 27, 9, 9);
+//             if(var99 * 2 + 1 < sat)
+//                 b(var29, var26, var52 + 36 + 18, 27, 9, 9);
+//             if(var99 * 2 + 1 == sat)
+//                 b(var29, var26, var52 + 45 + 18, 27, 9, 9);
+//         }
 	}
 
 	

@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 public class WMLLRenderer extends atl {
 
-	public int updateVersion = 0;
+	public String updateVersion = "0";
 	public String updateMCVersion = "1.0";
 	private int StringY = 30, notifyTick = 200, StringY1 = 50, notifyTick1 = 800;
 	public Minecraft mc;

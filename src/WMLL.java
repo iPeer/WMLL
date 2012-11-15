@@ -28,7 +28,10 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 35"; // Test 771
+		return "Stable 36"; // Test 771
+	}
+	public static final String getMinecraftVersion() {
+		return "1.4.4";
 	}
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
@@ -117,7 +120,7 @@ public class WMLL {
 				ReiUseMl = ReiMinimap.instance.useModloader;
 			}
 			catch(VerifyError e) { // 12W40 & 1.4PRE ERROR
-				Rei = ReiUseMl = false;
+				shitBricks(2, e);
 			}
 		}
 		if (getClass().getClassLoader().getResource("RadarBro.class") != null) {
@@ -1049,8 +1052,8 @@ public class WMLL {
 			}
 		}
 
-		public void displayUpdateString(int ver, String mcVersion) {
-			wmllRenderer.updateVersion = ver;
+		public void displayUpdateString(String newver, String mcVersion) {
+			wmllRenderer.updateVersion = newver;
 			wmllRenderer.updateMCVersion = mcVersion;
 			wmllRenderer.notifyUpdate = true;
 		}
@@ -1092,22 +1095,18 @@ public class WMLL {
 			return fieldNames.get(n);
 		}
 
-		public static String getMinecraftVersion() {
-			return "1.4.4PRE";
-		}
-
 		public boolean areAllOutputsDisabled() {
 			int x = 0;
 			for (; Boolean.parseBoolean(options.getProperty("Output"+x, "true")) == false && x <= 11; x++) { }	
 			return x > 11;
 		}
 
-		public static boolean hasUpdateBeenAnnounced(int i) {
-			return options.containsKey("Update"+i);
+		public static boolean hasUpdateBeenAnnounced(String i) {
+			return options.containsKey("Update"+i.replaceAll(" ", "_"));
 		}
 
-		public void setUpdateAsAnnounced(int i) {
-			options.put("Update"+Integer.toString(i), "true");
+		public void setUpdateAsAnnounced(String i) {
+			options.put("Update"+i.replaceAll(" ", "_"), "true");
 			saveOptions();
 		}
 
@@ -1221,6 +1220,11 @@ public class WMLL {
 				System.err.println("[WMLL] Error creating compatibility object.");
 				printStackTrace(e);
 				compatDisabled = true;
+				break;
+			case 2:
+				System.err.println("[WMLL] Error creating Rei's Minimap Compatibility.");
+				printStackTrace(e);
+				Rei = ReiUseMl = false;
 				break;
 			}
 		}

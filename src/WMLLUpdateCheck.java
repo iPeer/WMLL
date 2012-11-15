@@ -42,12 +42,12 @@ public class WMLLUpdateCheck extends Thread implements Runnable {
 				String line = scanner.nextLine();
 				if (line.equals("EOF"))
 					break;
-				int modver = Integer.parseInt(WMLL.wmllVersion().split(" ")[1]);
+				String modver = WMLL.wmllVersion();
 				String[] version = line.split(",");
-				int newver = Integer.parseInt(version[0]);
+				String newver = version[2];
 				String mcVersion = version[1];
 				System.out.println("[WMLL] Version: "+modver+", "+newver);
-				if (newver > modver && !WMLL.hasUpdateBeenAnnounced(newver)) {
+				if (!newver.equals(modver) && !WMLL.hasUpdateBeenAnnounced(newver)) {
 					WMLL wmll = WMLL.i;
 					wmll.displayUpdateString(newver, mcVersion);
 					wmll.setUpdateAsAnnounced(newver);
