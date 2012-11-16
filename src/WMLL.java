@@ -20,7 +20,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.server.MinecraftServer;
 
 import org.lwjgl.input.Keyboard;
 
@@ -30,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 36 - FORGE CRASH FIX"; // Test 771
+		return "Test 772";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.4";
@@ -629,10 +628,6 @@ public class WMLL {
 			catch (NullPointerException n) {
 				return null;
 			}
-		}
-		
-		private ahq getWorldInfo() {
-			return getWorld().K();
 		}
 
 		public String getWorldName() {
