@@ -62,6 +62,7 @@ public class WMLLOptions extends aue {
 					((ast)i.get(x)).h = false;
 		}
 		catch (NullPointerException e) {
+			i.clear();
 			hasErrored = true;
 		}
 	}
@@ -194,7 +195,6 @@ public class WMLLOptions extends aue {
 	public void a(int i, int j, float f) {
 		z_();
 		if (hasErrored) {
-			// (fontrenderer, text, x, y, colour)
 			boolean rei = (getClass().getClassLoader().getResource("mod_ReiMinimap.class") != null);
 			int y = 0;
 			a(l, "Uh oh, looks like something went wrong when trying to initialize this wondow.", this.g / 2, h / 4, 0xffffff);
@@ -206,7 +206,6 @@ public class WMLLOptions extends aue {
 			}
 			a(l, "Don't worry, none of your progress has been lost.", this.g / 2, h / 4 + (y+=24), 0xffffff);
 			a(l, "You can return to the game by pressing ESCAPE.", this.g / 2, h / 4 + (y+=12), 0xffffff);
-			renderWMLLVersion();
 		}
 		else {
 			// (fontrenderer, text, x, y, colour)
