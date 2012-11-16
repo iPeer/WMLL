@@ -53,7 +53,7 @@ public class WMLLOptions extends aue {
 			i.add(new ast(4, g / 2 - 100, h / 4 + 85 + offset, "Reset settings to defaults"));
 			i.add(new ast(9, g / 2 - 100, h / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
 			//i.add(new ast(4, g / 2 - 100, h / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
-			String enabledString = "Enabled on "+(wmll.isMultiplayer() ? "this server" : "single player")+": "+(wmll.Enabled ? "Yes" : "No");
+			String enabledString = "Enabled on "+(wmll.isMultiplayer() ? wmll.getWorldName().split(":")[0] : wmll.getWorldName())+": "+(wmll.Enabled ? "Yes" : "No");
 			i.add(new ast(8, g / 2 - 100, h / 4 + 45 + offset, enabledString));
 			if (wmll.debugClassPresent)
 				i.add(new ast(9001, g - 52, g - 22, 50, 20, "Reload"));
@@ -122,7 +122,7 @@ public class WMLLOptions extends aue {
 			wmll.options.setProperty("World-"+wmll.getWorldName(), Boolean.toString(!a));
 			for (int x = 3; x < 6; x++)
 				((ast)i.get(x)).h = !a;
-			button.e = "Enabled on "+(wmll.getWorldName() == "MpServer" ? "this server" : "this world")+": "+(!a ? "Yes" : "No");
+			button.e = "Enabled on "+(wmll.isMultiplayer() ? wmll.getWorldName().split(":")[0] : wmll.getWorldName())+": "+(!a ? "Yes" : "No");
 		}
 		if (button.f == 9) {
 			boolean a = !wmll.autoSeed;

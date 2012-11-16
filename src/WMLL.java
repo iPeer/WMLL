@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 773";
+		return "Test 776";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.4";
@@ -101,7 +101,10 @@ public class WMLL {
 		Rei = ReiUseMl = RadarBro = false;
 		this.debugClassPresent = (getClass().getClassLoader().getResource("ipeer_wmll_debug") != null);
 		debugActive = this.debugClassPresent;
-		settingsFile = new File(Minecraft.a("minecraft"), "WMLL.properties");
+		settingsFile = Minecraft.a("minecraft\\mods\\WMLL\\");
+		if (!settingsFile.exists())
+			settingsFile.mkdirs();
+		settingsFile = new File(settingsFile, "WMLL.properties");
 		outputOptionsFile = new File(Minecraft.a("minecraft"), "WMLLOutput.properties");
 		try {
 			wmllCompatibility = new WMLLCompatibility();
@@ -109,7 +112,7 @@ public class WMLL {
 		catch (Exception e) { shitBricks(1, e); }
 		catch (Error e) { shitBricks(1, e); }
 		compatDisabled = (getClass().getClassLoader().getResource("WMLLCompatibility.class") == null);
-		debug("[WMLL] Settings file: "+settingsFile);
+		//debug("[WMLL] Settings file: "+settingsFile);
 		if (compatDisabled)
 			debug("[WMLL] Couldn't create compatibility object (class missing).");
 		loadOptions();
@@ -294,7 +297,7 @@ public class WMLL {
 					drawDebug(Boolean.toString(isSeedSet()), (getWindowSize().a() - (getFontRenderer().a(Boolean.toString(isSeedSet())) + 1)), 10, 0xffffff);
 					a = getChunkProvider().toString();
 					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 12, 0xffffff);
-					a = worldNameDebug;
+					a = Minecraft.a("minecraft").getAbsolutePath();
 					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 11, 0xffffff);
 					a = "S: "+canBlockSeeTheSky(x, getPlayerCoordinates()[1], z);
 					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 13, 0xffffff);
@@ -629,10 +632,14 @@ public class WMLL {
 				return null;
 			}
 		}
+		
+		public bdo sspServer() {
+			return mc.C();
+		}
 
 		public String getWorldName() {
 			if (!isMultiplayer())
-				return "localServer";
+				return sspServer().K();
 			try {
 				Object obj = thePlayer();
 				Field f = obj.getClass().getDeclaredField("a"); // sendQueue
@@ -755,6 +762,10 @@ public class WMLL {
 
 		private boolean canBlockSeeTheSky(int x, int y, int z) {
 			return getWorld().k(x, y, z);
+		}
+		
+		public void sendChatMessage(String t) {
+			entityPlayer().a(t);
 		}
 
 		public ayk entityPlayer() {
@@ -957,12 +968,22 @@ public class WMLL {
 
 		public void loadOptions() {
 			try {
+				boolean updatedFormat = false;
 				if (options == null)
 					options = new Properties();
 				if (outputOptions == null)
 					outputOptions = new Properties();
 				if (settingsFile.exists())
 					options.load(new FileInputStream(settingsFile));
+				else {
+					File a = new File(Minecraft.a("minecraft"), "WMLL.properties");
+					if (a.exists()) {
+						options.load(new FileInputStream(a));
+						System.err.println(">> "+a.getAbsolutePath());
+						a.deleteOnExit();
+						updatedFormat = true;
+					}
+				}
 				if (outputOptionsFile.exists())
 					outputOptions.load(new FileInputStream(outputOptionsFile));
 				firstRun = Integer.parseInt(options.getProperty("version", "0")) < propertiesVersion ? true : false;
@@ -982,7 +1003,7 @@ public class WMLL {
 				satBar = Boolean.parseBoolean(options.getProperty("SaturationBar", "false"));
 				debug("[WMLL] Loaded options.");
 				//debug(options.toString()+"\n"+outputOptions.toString());
-				if (firstRun)
+				if (firstRun || updatedFormat)
 					saveOptions();
 			}
 			catch (Exception e) { debug("[WMLL] Unable to load options: "+e.getMessage()); }
@@ -1056,9 +1077,7 @@ public class WMLL {
 		}
 
 		public void displayUpdateString(String newver, String mcVersion) {
-			wmllRenderer.updateVersion = newver;
-			wmllRenderer.updateMCVersion = mcVersion;
-			wmllRenderer.notifyUpdate = true;
+			sendChatMessage("WMLL \247c"+newver+"\247f is now available for Minecraft \247c"+mcVersion);
 		}
 
 		public String getCalendarDate() {
