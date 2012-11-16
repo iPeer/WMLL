@@ -18,7 +18,7 @@ public class WMLLCompatibility extends atl {
 		int a = d.g.aW();
 		if (WMLL.i.useForge)
 			try {
-				return ForgeHooks.getTotalArmorValue(WMLL.i.entityPlayer()); // 12W40 & 1.4PRE ERROR
+				return ForgeHooks.getTotalArmorValue(d.g); // 12W40 & 1.4PRE ERROR
 			}
 		catch (IllegalAccessError e) { return a; }
 		catch (NoClassDefFoundError e) { return a; }

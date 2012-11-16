@@ -20,6 +20,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.server.MinecraftServer;
+
 import org.lwjgl.input.Keyboard;
 
 import reifnsk.minimap.ReiMinimap;
@@ -28,7 +30,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 36"; // Test 771
+		return "Stable 36 - FORGE CRASH FIX"; // Test 771
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.4";
@@ -299,6 +301,8 @@ public class WMLL {
 					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 13, 0xffffff);
 					a = "WS: "+getWindowSize().a()+"x"+getWindowSize().b();
 					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 14, 0xffffff);
+					a = "MPP: "+(mc.h instanceof iq)+" "+mc.h.toString();
+					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 15, 0xffffff);
 				}
 				WMLLCheckKeys();
 				if (!Enabled)
@@ -626,8 +630,14 @@ public class WMLL {
 				return null;
 			}
 		}
+		
+		private ahq getWorldInfo() {
+			return getWorld().K();
+		}
 
 		public String getWorldName() {
+			if (!isMultiplayer())
+				return "localServer";
 			try {
 				Object obj = thePlayer();
 				Field f = obj.getClass().getDeclaredField("a"); // sendQueue
@@ -651,8 +661,6 @@ public class WMLL {
 				if (server == null || server.equals(""))
 					server = s.split("/")[1].split(":")[0];
 				String port = s.split(":")[1];
-				if (!isMultiplayer())
-					return "localServer";
 				return server+":"+port;	
 			}
 			catch (Exception e) {
