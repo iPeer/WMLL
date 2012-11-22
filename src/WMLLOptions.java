@@ -197,7 +197,7 @@ public class WMLLOptions extends aue {
 		if (hasErrored) {
 			boolean rei = (getClass().getClassLoader().getResource("mod_ReiMinimap.class") != null);
 			int y = 0;
-			a(l, "Uh oh, looks like something went wrong when trying to initialize this wondow.", this.g / 2, h / 4, 0xffffff);
+			a(l, "Uh oh, looks like something went wrong when trying to initialize this window.", this.g / 2, h / 4, 0xffffff);
 			if (rei) {
 				a(l, "Seeing as you have Rei's Minimap installed, you probably installed it after WMLL.", this.g / 2, h / 4 + (y+=12), 0xffffff);
 				a(l, "In order for WMLL to work correctly, you will need to install", this.g / 2, h / 4 + (y+=12), 0xffffff);

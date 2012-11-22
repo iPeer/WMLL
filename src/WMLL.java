@@ -29,11 +29,12 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 777";
+		return "Test 778";
 	}
 	public static final String getMinecraftVersion() {
-		return "1.4.4";
+		return "1.4.5";
 	}
+	public static final String[] autoDisable = {".*\\.oc\\.tc"};
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
 	public static final WMLLUpdateCheck wmllUpdateCheck = new WMLLUpdateCheck();
@@ -71,7 +72,8 @@ public class WMLL {
 
 	private WMLLRenderer wmllRenderer;
 	private WMLLF3 wmllF3;
-	private boolean Rei, ReiUseMl, RadarBro;
+	private boolean Rei, ReiUseMl, RadarBro, AlienRadar;
+	private Object alienRadar;
 	public boolean satBar;
 	private boolean ranInit = false;
 	private boolean firstRun = true;
@@ -84,7 +86,10 @@ public class WMLL {
 	private String lastWorld = "";
 	private boolean worldSeedSet = false;
 
+	public String[] updateInfo = {};
+
 	protected WMLLCompatibility wmllCompatibility;
+	public boolean useML = false;
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+wmllVersion());
@@ -111,7 +116,6 @@ public class WMLL {
 		catch (Exception e) { shitBricks(1, e); }
 		catch (Error e) { shitBricks(1, e); }
 		compatDisabled = (getClass().getClassLoader().getResource("WMLLCompatibility.class") == null);
-		//debug("[WMLL] Settings file: "+settingsFile);
 		if (compatDisabled)
 			debug("[WMLL] Couldn't create compatibility object (class missing).");
 		loadOptions();
@@ -122,8 +126,18 @@ public class WMLL {
 				Rei = true;
 				ReiUseMl = ReiMinimap.instance.useModloader;
 			}
-			catch(VerifyError e) { // 12W40 & 1.4PRE ERROR
+			catch(VerifyError e) {
 				shitBricks(2, e);
+			}
+		}
+		if (getClass().getClassLoader().getResource("MotionTracker.class") != null) {
+			try {
+				AlienRadar = true;
+				alienRadar = new MotionTracker();
+			}
+			catch (VerifyError e) {
+				shitBricks(3, e);
+				AlienRadar = false;
 			}
 		}
 		if (getClass().getClassLoader().getResource("RadarBro.class") != null) {
@@ -149,9 +163,6 @@ public class WMLL {
 			}
 		}
 		debug("[WMLL] WMLL is"+(debugClassPresent ? "" : " not")+" running in debug mode");
-		//		debug("[WMLL] Rei's Minimap: "+Rei+" ("+ReiUseMl+")");
-		//		debug("[WMLL] RadarBro: "+RadarBro);
-		//		debug("[WMLL] Forge: "+useForge);
 		if (Rei)
 			debug("[WMLL] WMLL is running in Rei's Minimap Compatibility mode");
 		if (useForge)
@@ -160,6 +171,8 @@ public class WMLL {
 			debug("[WMLL] WMLL is running in RadarBro Compatibility mode");
 		if (satBar)
 			debug("[WMLL] WMLL is running in Saturation Bar Compatibility mode");
+		if (AlienRadar)
+			debug("[WMLL] WMLL is running in Alien Radar Compatibility mode");
 		debug("[WMLL] Debug Data:");
 		try { debug("\t* "+wmllCompatibility.toString()); }
 		catch (Exception e) { debug("\t* null"); }
@@ -172,6 +185,7 @@ public class WMLL {
 
 	public void updategui(Minecraft h) {
 		updategui(h, h.v);
+		System.err.println("Tick");
 	}
 
 	public void updategui(Minecraft h, atk atk) {
@@ -188,6 +202,8 @@ public class WMLL {
 			lastWorld = getWorldName();
 			entityPlayer().c("/seed");
 			debug("[WMLL] World name differs, re-acquiring seed...");
+			if (!isEnabled())
+				entityPlayer().a("[\2472WMLL\247f] \247cWMLL has been disabled on this "+(isMultiplayer() ? "server" : "world")+".");
 		}
 		if (!worldSeedSet) {
 			try {
@@ -226,6 +242,8 @@ public class WMLL {
 		}
 		if (Rei && !ReiUseMl)
 			ReiMinimap.instance.onTickInGame(h);
+		if (AlienRadar && alienRadar != null)
+			((MotionTracker)alienRadar).onTickInGame(mc);
 		if (!ranInit) {
 			this.mc = h;
 			wmllRenderer = new WMLLRenderer(mc, this);
@@ -240,7 +258,7 @@ public class WMLL {
 			if (mcDebugOpen() && wmllOverrideF3)
 				toggleF3Override();
 			else if (mcDebugOpen() && !wmllOverrideF3)
-				drawStringUsingPixels("WMLL "+wmllVersion(), 2, 52, 0xffffff);
+				drawStringUsingPixels("WMLL "+wmllVersion(), 2, 52, 0xfffffe);
 			else
 				wmllF3.draw();
 		}
@@ -263,7 +281,7 @@ public class WMLL {
 			catch (NoSuchMethodError n) { }
 			catch (NoClassDefFoundError n1) { }
 			catch (NoSuchFieldError n2) { }
-			Enabled = Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true")) && !Boolean.parseBoolean(options.getProperty("AllOutputsOff", "false"));
+			Enabled = isEnabled();
 			if (WMLLDebugActive()) {
 				mc.I.c("WMLL Debug");
 				int x = getPlayerCoordinates()[0];
@@ -302,8 +320,6 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 13, 0xffffff);
 				a = "WS: "+getWindowSize().a()+"x"+getWindowSize().b();
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 14, 0xffffff);
-				a = "MPP: "+(mc.h instanceof iq)+" "+mc.h.toString();
-				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 15, 0xffffff);
 			}
 			WMLLCheckKeys();
 			if (!Enabled)
@@ -412,8 +428,6 @@ public class WMLL {
 							drawString("\247c"+labels[8], 2, 3, 0xffffff); // Blaze
 							drawString("\247c"+labels[5], 2, 4, 0xffffff); // Slimes
 						}
-
-
 
 
 					}
@@ -536,13 +550,13 @@ public class WMLL {
 		Pattern seed = Pattern.compile("%seed%", Pattern.CASE_INSENSITIVE);
 		Pattern localTime = Pattern.compile("%localtime%", Pattern.CASE_INSENSITIVE);
 		Pattern localTime12h = Pattern.compile("%12hlocaltime%", Pattern.CASE_INSENSITIVE);
-		String lightLevel = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
+		String lightLevel = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247r";
 		a = getSavedBlockLight(x, y, z);
-		String blockLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
+		String blockLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247r";
 		a = getRawLightLevel(x, y, z);
-		String rawLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
+		String rawLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247r";
 		a = getSkyLight(1.0f);
-		String skyLight = (a > 7 ? "\247c" : "")+Integer.toString(a)+"\247"+Integer.toHexString(TextColour);
+		String skyLight = (a > 7 ? "\247c" : "")+Integer.toString(a)+"\247r";
 		Matcher m = SkyLight.matcher(s);
 		s = m.replaceAll(skyLight);
 		m = BlockLight.matcher(s);
@@ -894,13 +908,14 @@ public class WMLL {
 	}
 
 	public void drawDebug(String t, int x, int y, int c) {
-		if (WMLLI > 5)
+		if (WMLLI > 5 && WMLLI < 11)
 			y++;
 		drawString(t, x, y, c);
 	}
 
 	public void drawStringUsingPixels(String t, int x, int y, int c) {
-		t = (c == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
+		if (c == 0xffffff)
+			c = TextColour;
 		getFontRenderer().a(t, x, y, c);
 	}
 
@@ -921,7 +936,8 @@ public class WMLL {
 		int l = 0;
 		for (String a : lines) {
 			String a1 = re.matcher(a).replaceAll("");
-			a = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+a;
+			if (k == 0xffffff)
+				k = TextColour;
 			if (outputLocation == 1) // Top right
 				getFontRenderer().a(a, w - (getFontRenderer().a(a1) + (i - 1)), textpos+(j*10+(10*l++)), k);
 			else if (outputLocation == 2) // Bottom left
@@ -1245,6 +1261,11 @@ public class WMLL {
 			printStackTrace(e);
 			Rei = ReiUseMl = false;
 			break;
+		case 3:
+			System.err.println("[WMLL] Error creating Alien Radare Compatibility.");
+			AlienRadar = false;
+			printStackTrace(e);
+			break;
 		}
 	}
 
@@ -1252,6 +1273,19 @@ public class WMLL {
 		debug("[WMLL] Exception: "+e.toString());
 		for (int x = 0; x < e.getStackTrace().length; x++)
 			debug("\t* "+e.getStackTrace()[x]);
+	}
+
+	public boolean isEnabled() {
+		//boolean a = isAutoDisabledServer();
+		return /*!a && */Boolean.parseBoolean(options.getProperty("World-"+getWorldName(), "true")) && !Boolean.parseBoolean(options.getProperty("AllOutputsOff", "false"));
+	}
+
+	@SuppressWarnings("unused")
+	private boolean isAutoDisabledServer() {
+		for (String b : autoDisable)
+			if (getWorldName().matches(b))
+				return true;
+		return false;
 	}
 
 }

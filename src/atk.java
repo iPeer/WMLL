@@ -314,7 +314,7 @@ public class atk extends atl
         {
             d.I.a("debug");
             GL11.glPushMatrix();
-            atj1.a((new StringBuilder()).append("Minecraft 1.4.4 (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
+            atj1.a((new StringBuilder()).append("Minecraft 1.4.5 (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
             atj1.a(d.m(), 2, 12, 0xffffff);
             atj1.a(d.n(), 2, 22, 0xffffff);
             atj1.a(d.p(), 2, 32, 0xffffff);
