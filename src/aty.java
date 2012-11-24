@@ -45,7 +45,7 @@ public class aty extends aue
         switch(ast1.f)
         {
 		case 8:
-        	f.a(new WMLLOptions(this));
+        	f.a(new WMLLOptionsMenu(this));
         	break;
         case 9001:
         	f.a(new aty());

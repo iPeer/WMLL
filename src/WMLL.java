@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 779";
+		return "Test 780";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.5";
@@ -54,7 +54,6 @@ public class WMLL {
 	public static boolean militaryclock;
 	public long worldSeed = 0L;
 	public boolean autoSeed = true;
-	public boolean useForge;
 	public Minecraft mc;
 
 	public boolean wmllOverrideF3;
@@ -72,25 +71,27 @@ public class WMLL {
 
 	private WMLLRenderer wmllRenderer;
 	private WMLLF3 wmllF3;
-	private boolean Rei, ReiUseMl, RadarBro, AlienRadar, ZansMinimap;
+	public boolean Rei, ReiUseMl, RadarBro, AlienRadar, ZansMinimap, ReiEnabled, AlienEnabled, ZansEnabled, forgeDetected, forgeEnabled, useForge;
 	private Object alienRadar;
 	private Object zansMinimap;
 	public boolean satBar;
 	private boolean ranInit = false;
 	private boolean firstRun = true;
-	private final String[] sleepstrings = {"Kuurth for 1000!", "Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
+	private final String[] sleepstrings = {"Almost makes you wish for a nuclear winter!", "1 byte of posts!", "Kuurth for 1000!", "Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
 	private boolean sleepingStringSet = false;
 	private String lightString = "Light level: 9001";
 	private long lastF4Press = 0;
 	private boolean wmllF3Output = false;
 	private atj fontRenderer;
-	private String lastWorld = "";
-	private boolean worldSeedSet = false;
+	public String lastWorld = "";
+	private boolean worldSeedSet = true;
+	public boolean warnedAboutConflicts = false;
 
 	public String[] updateInfo = {};
 
 	protected WMLLCompatibility wmllCompatibility;
 	public boolean useML = false;
+	private atk guiIngame;
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+wmllVersion());
@@ -121,7 +122,7 @@ public class WMLL {
 			debug("[WMLL] Couldn't create compatibility object (class missing).");
 		loadOptions();
 		this.autoSeed = Boolean.parseBoolean(options.getProperty("autoAquireSeed", "true"));
-		useForge = (getClass().getClassLoader().getResource("net/minecraftforge/common/ForgeHooks.class") != null);
+		useForge = forgeDetected = (getClass().getClassLoader().getResource("net/minecraftforge/common/ForgeHooks.class") != null);
 		if (getClass().getClassLoader().getResource("mod_ReiMinimap.class") != null) {
 			try {
 				Rei = true;
@@ -184,6 +185,7 @@ public class WMLL {
 			debug("[WMLL] WMLL is running in Saturation Bar Compatibility mode");
 		if (AlienRadar)
 			debug("[WMLL] WMLL is running in Alien Radar Compatibility mode");
+		debug("[WMLL] Updater: "+autoUpdateCheck);
 		debug("[WMLL] Debug Data:");
 		try { debug("\t* "+wmllCompatibility.toString()); }
 		catch (Exception e) { debug("\t* null"); }
@@ -196,9 +198,8 @@ public class WMLL {
 
 	public void updategui(Minecraft h) {
 		updategui(h, h.v);
-		System.err.println("Tick");
 	}
-
+	
 	public void updategui(Minecraft h, atk atk) {
 		h.I.a("WMLL");
 		if (getWorld() != null && !wmllUpdateCheck.running && autoUpdateCheck) {
@@ -211,54 +212,71 @@ public class WMLL {
 		if (getWorld() != null && !getWorldName().equals(lastWorld) && !isMultiplayer() && autoSeed) {
 			worldSeedSet = false;
 			lastWorld = getWorldName();
-			entityPlayer().c("/seed");
+			if (!options.containsKey("Seed:"+getWorldName().toLowerCase()))
+				entityPlayer().c("/seed");
 			debug("[WMLL] World name differs, re-acquiring seed...");
+			boolean[] b = {Rei && ReiEnabled, ZansMinimap && ZansEnabled, AlienRadar && AlienEnabled};
+			if (atLeast2True(b) && !warnedAboutConflicts) {
+				ReiEnabled = ZansEnabled = AlienEnabled = false;
+				sendChatMessage("[\2472WMLL\247f] \247cWMLL has detected that you have multiple minimap mods installed and enabled. To prevent crashes");
+				sendChatMessage("[\2472WMLL\247f] \247cWMLL has disabled them all temporarily. Please go into WMLL's config and press \"Compatibility Settings\" and enable the one you wish to use.");
+				//sendChatMessage("[\2472WMLL\247f] \247cand enable the one you wish to use.");
+			}
 			if (!isEnabled())
 				entityPlayer().a("[\2472WMLL\247f] \247cWMLL has been disabled on this "+(isMultiplayer() ? "server" : "world")+".");
 		}
 		if (!worldSeedSet) {
 			try {
-				Object obj = atk.b();
-				Field f = obj.getClass().getDeclaredField(getField("chatLines"));
-				f.setAccessible(true);
-				obj = f.get(obj);
-				@SuppressWarnings("unchecked")
-				List<String> a = (List<String>)obj;
-				@SuppressWarnings("rawtypes")
-				Iterator c = a.iterator();
-				int e = 0;
-				while (c.hasNext()) {
-					e++;
-					arm d = (arm)c.next();
-					String b = d.a(); //d.a();
-					if (b.startsWith("Seed: ")) {
-						//aow.b().a();
-						if (!isMultiplayer())
-							a.remove(e - 1);
-						long worldSeed = Long.parseLong(b.split("Seed: ")[1]);
-						worldSeedSet = true;
-						debug("[WMLL] Seed set to "+worldSeed);
-						this.worldSeed = worldSeed;
-						break;
-					}
+				if (options.getProperty("Seed:"+getWorldName().toLowerCase()) != null) {
+					worldSeedSet = true;
+					this.worldSeed = Long.valueOf(options.getProperty("Seed:"+getWorldName().toLowerCase()));
+					debug("[WMLL] Seed set to "+this.worldSeed+" (from file)");
+				}
+				else {
+					Object obj = atk.b();
+					Field f = obj.getClass().getDeclaredField(getField("chatLines"));
+					f.setAccessible(true);
+					obj = f.get(obj);
+					@SuppressWarnings("unchecked")
+					List<String> a = (List<String>)obj;
+					@SuppressWarnings("rawtypes")
+					Iterator c = a.iterator();
+					int e = 0;
+					while (c.hasNext()) {
+						e++;
+						arm d = (arm)c.next();
+						String b = d.a(); //d.a();
+						if (b.startsWith("Seed: ")) {
+							//aow.b().a();
+							if (!isMultiplayer())
+								a.remove(e - 1);
+							long worldSeed = Long.parseLong(b.split("Seed: ")[1]);
+							worldSeedSet = true;
+							this.worldSeed = worldSeed;
+							debug("[WMLL] Seed set to "+worldSeed);
+							break;
+						}
 
+					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			//skip;
 		}
 		if (firstRun && getWorld() != null) {
 			firstRun = false;
 			wmllRenderer.firstRun = true;
 		}
-		if (Rei && !ReiUseMl)
+		if (Rei && !ReiUseMl && ReiEnabled)
 			ReiMinimap.instance.onTickInGame(h);
-		if (AlienRadar && alienRadar != null)
+		if (AlienRadar && AlienEnabled && alienRadar != null && getWorld() != null)
 			((MotionTracker)alienRadar).onTickInGame(mc);
-		if (ZansMinimap && zansMinimap != null)
+		if (ZansMinimap && ZansEnabled && zansMinimap != null && getWorld() != null)
 			((ZanMinimap)zansMinimap).onTickInGame(mc);
 		if (!ranInit) {
 			this.mc = h;
+			this.guiIngame = atk;
 			wmllRenderer = new WMLLRenderer(mc, this);
 			wmllF3 = new WMLLF3(mc, this);
 			ranInit = true;
@@ -345,9 +363,9 @@ public class WMLL {
 					lightString = "Happy birthday, iPeer!";
 				else if (getCalendarDate().equals("243")) // Roxy's birthday (<3)
 					lightString = "Happy birthday, Roxy!";
-				else if (getCalendarDate().equals("202")) // WMLL's birthday
+				else if (getCalendarDate().equals("202")) // WMLL's "birthday"
 					lightString = "Happy birthday, WMLL!";
-				else if (getCalendarDate().equals("84")) // Easy Sunday
+				else if (getCalendarDate().equals("84")) // Easter Sunday
 					lightString = "Happy Easter!";
 				else if (getCalendarDate().equals("2512")) // Christmas Day
 					lightString = "Why are you playing Minecraft on Christmas Day?";
@@ -357,7 +375,7 @@ public class WMLL {
 					lightString = "Happy Halloween! WoooOOOoooOOoooO!";
 				else if (getCalendarDate().equals("31")) // Millie <3 RIP, honey.
 					lightString = "Millie <3";
-				else if (getCalendarDate().equals("23")) {// Roxy and I's anniversary
+				else if (getCalendarDate().equals("32")) {// Roxy and I's anniversary
 					String a = getCalendarDate(2);
 					int now = Integer.parseInt(a.substring(a.length() - 4));
 					int years = now-2007;
@@ -539,6 +557,7 @@ public class WMLL {
 		double x1 = getPlayerCoordinatesAsDouble()[0];
 		double y1 = getPlayerCoordinatesAsDouble()[1];
 		double z1 = getPlayerCoordinatesAsDouble()[2];
+		double yfeet = getPlayerCoordinatesAsDouble()[3];
 		int a = getLightLevel(x, y, z);
 		Pattern SkyLight = Pattern.compile("%skylight%", Pattern.CASE_INSENSITIVE);
 		Pattern BlockLight = Pattern.compile("%blocklight%", Pattern.CASE_INSENSITIVE);
@@ -552,6 +571,7 @@ public class WMLL {
 		Pattern heading = Pattern.compile("%heading%", Pattern.CASE_INSENSITIVE);
 		Pattern fx = Pattern.compile("%fx%", Pattern.CASE_INSENSITIVE);
 		Pattern fy = Pattern.compile("%fy%", Pattern.CASE_INSENSITIVE);
+		Pattern feety = Pattern.compile("%feety%", Pattern.CASE_INSENSITIVE);
 		Pattern fz = Pattern.compile("%fz%", Pattern.CASE_INSENSITIVE);
 		Pattern cx = Pattern.compile("%cx%", Pattern.CASE_INSENSITIVE);
 		Pattern cy = Pattern.compile("%cy%", Pattern.CASE_INSENSITIVE);
@@ -621,6 +641,8 @@ public class WMLL {
 		Pattern coordsY = Pattern.compile("%y%", Pattern.CASE_INSENSITIVE);
 		m = coordsY.matcher(s);
 		s = m.replaceAll(n.format(y1));
+		m = feety.matcher(s);
+		s = m.replaceAll(n.format(yfeet));
 		Pattern coordsZ = Pattern.compile("%z%", Pattern.CASE_INSENSITIVE);
 		m = coordsZ.matcher(s);
 		s = m.replaceAll(n.format(z1));
@@ -890,7 +912,7 @@ public class WMLL {
 	}
 
 	public double[] getPlayerCoordinatesAsDouble() {
-		double[] a = {thePlayer().t, thePlayer().u, thePlayer().v, ke.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3};
+		double[] a = {thePlayer().t, thePlayer().u, thePlayer().v, thePlayer().D.b, ke.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3};
 		return a;
 	}
 
@@ -983,6 +1005,10 @@ public class WMLL {
 			options.setProperty("classicOutput", Boolean.toString(classicOutput));
 			options.setProperty("autoUpdateCheck", Boolean.toString(autoUpdateCheck));
 			options.setProperty("SaturationBar", Boolean.toString(satBar));
+			options.setProperty("Compat-Rei", Boolean.toString(ReiEnabled));
+			options.setProperty("Compat-Zans", Boolean.toString(ZansEnabled));
+			options.setProperty("Compat-Alien", Boolean.toString(AlienEnabled));
+			options.setProperty("Compat-Forge", Boolean.toString(forgeEnabled));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
 			//			if (!outputOptions.isEmpty())
 			//				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
@@ -1017,7 +1043,7 @@ public class WMLL {
 			//				debugActive = Boolean.parseBoolean(options.getProperty("WMLLD", "false"));
 			WMLLI = Integer.parseInt(options.getProperty("WMLLI", "0"));
 			useImages = Boolean.parseBoolean(options.getProperty("useImages", "false"));
-			TextColour = Integer.parseInt(options.getProperty("TextColour", "15"));
+			TextColour = Integer.parseInt(options.getProperty("TextColour", "-1"));
 			F4Key = Integer.parseInt(options.getProperty("F4", "62"));
 			clockSetting = Integer.parseInt(options.getProperty("clockSetting", "2"));
 			outputLocation = Integer.parseInt(options.getProperty("OutputLocation", "0"));
@@ -1025,8 +1051,12 @@ public class WMLL {
 			F3Type = Integer.parseInt(options.getProperty("F3Type", "0"));
 			showSeedWithCoords = Boolean.parseBoolean(options.getProperty("showSeedWithCoords", "true"));
 			classicOutput = Boolean.parseBoolean(options.getProperty("classicOutput", "false"));
-			autoUpdateCheck= Boolean.parseBoolean(options.getProperty("autoUpdateCheck", "true"));
+			autoUpdateCheck = Boolean.parseBoolean(options.getProperty("autoUpdateCheck", "true"));
 			satBar = Boolean.parseBoolean(options.getProperty("SaturationBar", "false"));
+			ReiEnabled = Boolean.valueOf(options.getProperty("Compat-Rei", "true"));
+			AlienEnabled = Boolean.valueOf(options.getProperty("Compat-Alien", "true"));
+			ZansEnabled = Boolean.valueOf(options.getProperty("Compat-Zans", "true"));
+			forgeEnabled = Boolean.valueOf(options.getProperty("Compat-Forge", "true"));
 			debug("[WMLL] Loaded options.");
 			//debug(options.toString()+"\n"+outputOptions.toString());
 			if (firstRun || updatedFormat)
@@ -1275,12 +1305,12 @@ public class WMLL {
 			Rei = ReiUseMl = false;
 			break;
 		case 3:
-			System.err.println("[WMLL] Error creating Alien Radare Compatibility.");
+			System.err.println("[WMLL] Error creating Alien Radar Compatibility.");
 			AlienRadar = false;
 			printStackTrace(e);
 			break;
 		case 4:
-			System.err.println("[WMLL] Error creating Alien Radar Compatibility.");
+			System.err.println("[WMLL] Error creating Zan's Minimap Compatibility.");
 			ZansMinimap = false;
 			printStackTrace(e);
 			break;
@@ -1304,6 +1334,17 @@ public class WMLL {
 			if (getWorldName().matches(b))
 				return true;
 		return false;
+	}
+	
+	public boolean atLeast2True(boolean[] b) {
+		int x = 0;
+		for (int i = 0; i < b.length; i++)
+			if (b[i])
+				x++;
+		return x > 1;
+	}
+	public void deleteSettingsFile() {
+		settingsFile.delete();
 	}
 
 }

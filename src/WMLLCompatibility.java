@@ -16,7 +16,7 @@ public class WMLLCompatibility extends atl {
 
 	public static int forgeA(Minecraft d) {
 		int a = d.g.aW();
-		if (WMLL.i.useForge)
+		if (WMLL.i.forgeEnabled)
 			try {
 				return ForgeHooks.getTotalArmorValue(d.g); // 12W40 & 1.4PRE ERROR
 			}

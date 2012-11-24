@@ -28,10 +28,10 @@ public class WMLLUpdateCheck extends Thread implements Runnable {
 				stop1();
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
-	
+
 	private void checkForUpdates() {
 		try {
 			WMLL.lastUpdateCheck = System.currentTimeMillis();
@@ -45,10 +45,16 @@ public class WMLLUpdateCheck extends Thread implements Runnable {
 				String newver = version[2];
 				String mcVersion = version[1];
 				System.out.println("[WMLL] Version: "+modver+", "+newver);
-				if (!newver.equals(modver) && !WMLL.hasUpdateBeenAnnounced(newver)) {
+				if (!newver.equals(modver)) {
 					WMLL wmll = WMLL.i;
-					wmll.displayUpdateString(newver, mcVersion);
-					wmll.setUpdateAsAnnounced(newver);
+					if (!WMLL.hasUpdateBeenAnnounced(newver)) {
+						wmll.displayUpdateString(newver, mcVersion);
+						wmll.setUpdateAsAnnounced(newver);
+					}
+					String[] a = new String[2];
+					a[0] = newver;
+					a[1] = mcVersion;
+					wmll.updateInfo = a;
 					in.close();
 					break;
 				}
