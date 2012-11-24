@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 778";
+		return "Test 779";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.5";
@@ -72,8 +72,9 @@ public class WMLL {
 
 	private WMLLRenderer wmllRenderer;
 	private WMLLF3 wmllF3;
-	private boolean Rei, ReiUseMl, RadarBro, AlienRadar;
+	private boolean Rei, ReiUseMl, RadarBro, AlienRadar, ZansMinimap;
 	private Object alienRadar;
+	private Object zansMinimap;
 	public boolean satBar;
 	private boolean ranInit = false;
 	private boolean firstRun = true;
@@ -138,6 +139,16 @@ public class WMLL {
 			catch (VerifyError e) {
 				shitBricks(3, e);
 				AlienRadar = false;
+			}
+		}
+		if (getClass().getClassLoader().getResource("ZanMinimap.class") != null) {
+			try {
+				ZansMinimap = true;
+				zansMinimap = new ZanMinimap();
+			}
+			catch (VerifyError e) {
+				shitBricks(4, e);
+				ZansMinimap = false;
 			}
 		}
 		if (getClass().getClassLoader().getResource("RadarBro.class") != null) {
@@ -244,6 +255,8 @@ public class WMLL {
 			ReiMinimap.instance.onTickInGame(h);
 		if (AlienRadar && alienRadar != null)
 			((MotionTracker)alienRadar).onTickInGame(mc);
+		if (ZansMinimap && zansMinimap != null)
+			((ZanMinimap)zansMinimap).onTickInGame(mc);
 		if (!ranInit) {
 			this.mc = h;
 			wmllRenderer = new WMLLRenderer(mc, this);
@@ -1264,6 +1277,11 @@ public class WMLL {
 		case 3:
 			System.err.println("[WMLL] Error creating Alien Radare Compatibility.");
 			AlienRadar = false;
+			printStackTrace(e);
+			break;
+		case 4:
+			System.err.println("[WMLL] Error creating Alien Radar Compatibility.");
+			ZansMinimap = false;
 			printStackTrace(e);
 			break;
 		}

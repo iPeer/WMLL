@@ -52,7 +52,7 @@ public class WMLLOptions extends aue {
 			i.add(new ast(3, g / 2 - 100, h / 4 + 130 + offset, "More options..."));
 			i.add(new ast(4, g / 2 - 100, h / 4 + 85 + offset, "Reset settings to defaults"));
 			i.add(new ast(9, g / 2 - 100, h / 4 + 65 + offset, "Auto acquire seed: "+(wmll.autoSeed ? "Yes" : "No")));
-			//i.add(new ast(4, g / 2 - 100, h / 4 + 130 + offset, "\247"+Integer.toHexString(TextColour)+"Text Colour"));
+			i.add(new ast(4, g / 2 - 100, h / 4 + 130 + offset, "\247"+Integer.toHexString(WMLL.TextColour)+"Text Colour"));
 			String enabledString = "Enabled on "+(wmll.isMultiplayer() ? wmll.getWorldName().split(":")[0] : wmll.getWorldName())+": "+(wmll.Enabled ? "Yes" : "No");
 			i.add(new ast(8, g / 2 - 100, h / 4 + 45 + offset, enabledString));
 			if (wmll.debugClassPresent)
