@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 780";
+		return "Test 781";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.5";
@@ -1090,7 +1090,7 @@ public class WMLL {
 		if (Keyboard.isKeyDown(F4Key) && System.currentTimeMillis() - lastF4Press > 150) {
 			lastF4Press = System.currentTimeMillis();
 			if (Keyboard.isKeyDown(29) && mc.r == null)
-				mc.a(new WMLLOptions(this));
+				mc.a(new WMLLOptionsMenu(this));
 			else
 				if (mc.r == null) {
 					//&& !(mc.s instanceof acr/*GuiChat*/) && !(mc.s instanceof ars/*Sign Editing*/) && !(mc.s instanceof hw/*Book Editing*/)) {
