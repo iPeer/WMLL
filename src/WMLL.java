@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 782";
+		return "Test 783";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.5";
@@ -63,6 +63,7 @@ public class WMLL {
 	public boolean classicOutput = false;
 	public boolean autoUpdateCheck = true;
 	public boolean compatDisabled = false;
+	public boolean showUnderGUIs = true;
 
 	private static final int propertiesVersion = 3;
 	public static File settingsFile, outputOptionsFile;
@@ -90,8 +91,6 @@ public class WMLL {
 	public String[] updateInfo = {};
 
 	protected WMLLCompatibility wmllCompatibility;
-	public boolean useML = false;
-	private atk guiIngame;
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+wmllVersion());
@@ -276,7 +275,6 @@ public class WMLL {
 			((ZanMinimap)zansMinimap).onTickInGame(mc);
 		if (!ranInit) {
 			this.mc = h;
-			this.guiIngame = atk;
 			wmllRenderer = new WMLLRenderer(mc, this);
 			wmllF3 = new WMLLF3(mc, this);
 			ranInit = true;
@@ -353,7 +351,7 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 14, 0xffffff);
 			}
 			WMLLCheckKeys();
-			if (!Enabled)
+			if (!Enabled || !shouldShow())
 				return;
 			// 0 = x, 1 = y, 2 = z, 3 = f
 			int[] playerPos = getPlayerCoordinates();
@@ -1009,6 +1007,7 @@ public class WMLL {
 			options.setProperty("Compat-Zans", Boolean.toString(ZansEnabled));
 			options.setProperty("Compat-Alien", Boolean.toString(AlienEnabled));
 			options.setProperty("Compat-Forge", Boolean.toString(forgeEnabled));
+			options.setProperty("showUnderGUIs", Boolean.toString(showUnderGUIs));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
 			//			if (!outputOptions.isEmpty())
 			//				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
@@ -1057,6 +1056,7 @@ public class WMLL {
 			AlienEnabled = Boolean.valueOf(options.getProperty("Compat-Alien", "true"));
 			ZansEnabled = Boolean.valueOf(options.getProperty("Compat-Zans", "true"));
 			forgeEnabled = Boolean.valueOf(options.getProperty("Compat-Forge", "true"));
+			showUnderGUIs = Boolean.valueOf(options.getProperty("showUnderGUIs", "true"));
 			debug("[WMLL] Loaded options.");
 			//debug(options.toString()+"\n"+outputOptions.toString());
 			if (firstRun || updatedFormat)
@@ -1343,8 +1343,16 @@ public class WMLL {
 				x++;
 		return x > 1;
 	}
+	
 	public void deleteSettingsFile() {
 		settingsFile.delete();
+	}
+	
+	public boolean shouldShow() {
+		if (showUnderGUIs)
+			return true;
+		else
+			return mc.r == null;
 	}
 
 }
