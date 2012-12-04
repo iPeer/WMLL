@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 784";
+		return "Test 785";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.5";
@@ -1201,7 +1201,7 @@ public class WMLL {
 		Boolean sk = canBlockSeeTheSky(x, y, z);
 		Boolean c = canSlimesSpawnHere(x, z);
 		Boolean v = blockBlackList.contains(b);
-		String s = "\247cInvalid indicator!";
+		String s = "\247cInvalid indicator! Valid types are: \247omobs, animals, slimes, crops, trees \247r\247cor\247o mushrooms\247r\247c.";
 		String bi = getBiome();
 		if (i.equals("mobs")) {
 			if (d == 0) {
@@ -1288,7 +1288,7 @@ public class WMLL {
 			else
 				s = "\247aMushrooms";
 		}
-		return s+(debugActive ? ", "+l+", "+v+", "+sk : "")+"\247"+Integer.toHexString(TextColour);
+		return s+(debugActive ? ", "+l+", "+v+", "+sk : "");
 	}
 
 	public void toggleSatBar() {
