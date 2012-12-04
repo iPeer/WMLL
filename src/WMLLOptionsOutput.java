@@ -21,6 +21,7 @@ public class WMLLOptionsOutput extends aue {
 	private ast showButton;
 	private ArrayList<atg> editboxes = new ArrayList<atg>();
 	private Desktop desktop;
+	private int[] colours;
 
 	public WMLLOptionsOutput(WMLL wmll, aue aue) {
 		this.wmll = wmll;
@@ -50,6 +51,16 @@ public class WMLLOptionsOutput extends aue {
 		B = new atg(l, g / 2 + 30, h / 4 + 70, 30, 10);
 		B.f(3);
 		B.a(WMLL.options.getProperty("RGB-B", "255"));
+		if (R.b().equals(""))
+			R.a("0");
+		if (G.b().equals(""))
+			G.a("0");
+		if (B.b().equals(""))
+			B.a("0");
+		colours = new int[3];
+		colours[0] = Integer.valueOf((R.b().equals("") ? "0" : R.b()));
+		colours[1] = Integer.valueOf((G.b().equals("") ? "0" : G.b()));
+		colours[2] = Integer.valueOf((B.b().equals("") ? "0" : B.b()));
 		seedBox = new atg(l, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), h / 4 + 105, wmll.getWindowSize().a() - 20, 15);
 		seedBox.f(500);
 		seedBox.a(Long.toString(wmll.getWorldSeed()));
@@ -79,7 +90,13 @@ public class WMLLOptionsOutput extends aue {
 			WMLL.options.put("RGB-R", R.b());
 			WMLL.options.put("RGB-G", G.b());
 			WMLL.options.put("RGB-B", B.b());
+			WMLL.TextColour = new Color(colours[0], colours[1], colours[2]).getRGB();
 			WMLL.options.put("lightString", lightLevelBox.b());
+			if (!seedBox.b().equals(wmll.getWorldSeed())) {
+				wmll.worldSeedSet = true;
+				wmll.worldSeed = Long.valueOf(seedBox.b());
+				WMLL.options.put("Seed:"+wmll.getWorldName(), seedBox.b());
+			}				
 			f.a(parent);
 			return;
 		case 1:
@@ -132,7 +149,10 @@ public class WMLLOptionsOutput extends aue {
 				G.a(c, i);
 			if (B.l())
 				B.a(c, i);
-			int[] colours = {Integer.valueOf((R.b().equals("") ? "0" : R.b())), Integer.valueOf((G.b().equals("") ? "0" : G.b())), Integer.valueOf((B.b().equals("") ? "0" : B.b()))};
+			//colours = new int[3];
+			colours[0] = Integer.valueOf((R.b().equals("") ? "0" : R.b()));
+			colours[1] = Integer.valueOf((G.b().equals("") ? "0" : G.b()));
+			colours[2] = Integer.valueOf((B.b().equals("") ? "0" : B.b()));
 			if (colours[0] > 255)
 				colours[0] = 255;
 			if (colours[0] < 0)
@@ -145,7 +165,6 @@ public class WMLLOptionsOutput extends aue {
 				colours[2] = 255;
 			if (colours[2] < 0)
 				colours[2] = 0;
-			WMLL.TextColour = new Color(colours[0], colours[1], colours[2]).getRGB();
 		}
 		else
 			super.a(c, i);
@@ -158,6 +177,10 @@ public class WMLLOptionsOutput extends aue {
 		a(l, "R: ", g / 2 - 63, h / 4 + 71, 0xffffff);
 		a(l, "G: ", g / 2 - 18, h / 4 + 71, 0xffffff);
 		a(l, "B: ", g / 2 + 27, h / 4 + 71, 0xffffff);
+		int r = colours[0];
+		int g1 = colours[1];
+		int b = colours[2];
+		a(l, "Colour preview", g / 2, h / 4 + 85, new Color(r, g1, b).getRGB());
 		a(l, "Seed", g / 2 - ((wmll.getWindowSize().a() - wmll.getFontRenderer().a("Seed") - 20) / 2), h / 4 + 92, 0xffffff);
 		for (atg a : editboxes)
 			a.f();

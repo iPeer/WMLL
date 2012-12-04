@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 783";
+		return "Test 784";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.5";
@@ -85,12 +85,13 @@ public class WMLL {
 	private boolean wmllF3Output = false;
 	private atj fontRenderer;
 	public String lastWorld = "";
-	private boolean worldSeedSet = true;
+	public boolean worldSeedSet = false;
 	public boolean warnedAboutConflicts = false;
 
 	public String[] updateInfo = {};
 
 	protected WMLLCompatibility wmllCompatibility;
+	public boolean showWorldName = true;
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+wmllVersion());
@@ -1008,6 +1009,7 @@ public class WMLL {
 			options.setProperty("Compat-Alien", Boolean.toString(AlienEnabled));
 			options.setProperty("Compat-Forge", Boolean.toString(forgeEnabled));
 			options.setProperty("showUnderGUIs", Boolean.toString(showUnderGUIs));
+			options.setProperty("showWorldName", Boolean.toString(showWorldName));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
 			//			if (!outputOptions.isEmpty())
 			//				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
@@ -1057,6 +1059,7 @@ public class WMLL {
 			ZansEnabled = Boolean.valueOf(options.getProperty("Compat-Zans", "true"));
 			forgeEnabled = Boolean.valueOf(options.getProperty("Compat-Forge", "true"));
 			showUnderGUIs = Boolean.valueOf(options.getProperty("showUnderGUIs", "true"));
+			showWorldName = Boolean.valueOf(options.getProperty("showWorldName", "true"));
 			debug("[WMLL] Loaded options.");
 			//debug(options.toString()+"\n"+outputOptions.toString());
 			if (firstRun || updatedFormat)

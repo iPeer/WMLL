@@ -111,7 +111,8 @@ public class WMLLOptionsMenu extends aue {
 		z_();
 		a(l, "What's My Light Level", g / 2, h / 4 - 20, 0xffffff);
 		a(l, WMLL.wmllVersion()+" for "+WMLL.getMinecraftVersion(), g / 2, h / 4 - 10, 0x888888);
-		a(l, wmll.getWorldName(), g / 2, h / 4, 0x888888);
+		if (wmll.showWorldName)
+			a(l, wmll.getWorldName(), g / 2, h / 4, 0x888888);
 		if (wmll.updateInfo.length > 0) {
 			a(l, "\247c"+wmll.updateInfo[0]+"\247a is available for Minecraft \247c"+wmll.updateInfo[1], g / 2, h / 4 + 10, 0x00ff00);
 		}
