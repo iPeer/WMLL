@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 785";
+		return "Stable 38"; //Test 786
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.5";
@@ -342,7 +342,7 @@ public class WMLL {
 				String a = getCalendarDate()+"/"+getCalendarDate(2);
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 9, 0xffffff);
 				drawDebug(Boolean.toString(isSeedSet()), (getWindowSize().a() - (getFontRenderer().a(Boolean.toString(isSeedSet())) + 1)), 10, 0xffffff);
-				a = getChunkProvider().toString();
+				a = "CP: "+getChunkProvider().toString();
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 12, 0xffffff);
 				a = Minecraft.a("minecraft").getAbsolutePath();
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 11, 0xffffff);
@@ -1288,6 +1288,28 @@ public class WMLL {
 			else
 				s = "\247aMushrooms";
 		}
+		else if (i.equals("wither") && debugClassPresent) { // Disabled for end-users, not working.
+			//TODO
+			if (d > -1)
+				s = "\247cWither Skeletons";
+			else {
+				try {
+					aaq cp = (aaq)getChunkProvider();
+					aeo structureGen = (aeo)cp.c;
+					boolean a = structureGen.a(x >> 4, z >> 4);
+					//boolean a = canStructureSpawnHere(netherStructure.b, x, z);
+					//					s = (a ? "\247a" : "\247c")+"Wither Skeletons";
+					s = "\247c"+a+", "+x+", "+(y - 1)+", "+z+" | "+getWorldSeed();
+				}
+				catch (NullPointerException e) {
+					s = "\247cWither Skeletons (NPE)";
+					//e.printStackTrace();
+				}
+				catch (Exception e) {
+					s = "\247cWither Skeletons (GE)";
+				}
+			}
+		}
 		return s+(debugActive ? ", "+l+", "+v+", "+sk : "");
 	}
 
@@ -1356,6 +1378,19 @@ public class WMLL {
 			return true;
 		else
 			return mc.r == null;
+	}
+	
+	public boolean canStructureSpawnHere(int x, int z) {
+		return canStructureSpawnHere(new Random(), x, z);
+	}
+	
+	public boolean canStructureSpawnHere(Random a, int x, int z) {
+		//Random a = r;
+		int cx = x >> 4;
+		int cz = z >> 4;
+		a.setSeed((long)(cx ^ cz << 4) ^ getWorldSeed());
+		a.nextInt();
+		return a.nextInt(3) != 0 ? false : (x != (cx << 4) + 4 + a.nextInt(8) ? false : z == (cz << 4) + 4 + a.nextInt(8));
 	}
 
 }
