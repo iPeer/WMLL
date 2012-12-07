@@ -1,24 +1,24 @@
 
-public class WMLLError extends aue {
+public class WMLLError extends aum {
 
-	private aue erroredGui;
+	private aum erroredGui;
 	private Throwable e;
 
-	public WMLLError(aue aue, Throwable e) {
-		this.erroredGui = aue;
+	public WMLLError(aum aum, Throwable e) {
+		this.erroredGui = aum;
 		this.e = e;
 	}
 
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		i.clear();
-		i.add(new ast(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
+		i.add(new aut(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
 	}
 
-	public void a(ast b) {
+	public void a(aut b) {
 		switch (b.f) {
 		case 0:
-			f.a((aue)null);
+			f.a((aum)null);
 			return;
 		}
 	}

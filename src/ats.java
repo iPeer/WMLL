@@ -8,20 +8,20 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
-public class atk extends atl
+public class ats extends att
 {
 
-    private static final bbt b = new bbt();
+    private static final bcd b = new bcd();
     private final Random c = new Random();
     private final Minecraft d;
-    private final asu e;
+    private final atc e;
     private int f;
     private String g;
     private int h;
     private boolean i;
     public float a;
 
-    public atk(Minecraft minecraft)
+    public ats(Minecraft minecraft)
     {
         f = 0;
         g = "";
@@ -29,15 +29,15 @@ public class atk extends atl
         i = false;
         a = 1.0F;
         d = minecraft;
-        e = new asu(minecraft);
+        e = new atc(minecraft);
     }
 
     public void a(float f1, boolean flag, int j, int k)
     {
-        auf auf1 = new auf(d.y, d.c, d.d);
-        int l = auf1.a();
-        int i1 = auf1.b();
-        atj atj1 = d.p;
+        aun aun1 = new aun(d.y, d.c, d.d);
+        int l = aun1.a();
+        int i1 = aun1.b();
+        atr atr1 = d.p;
         d.t.c();
         GL11.glEnable(3042);
         if(Minecraft.t())
@@ -47,12 +47,12 @@ public class atk extends atl
         {
             GL11.glBlendFunc(770, 771);
         }
-        um um1 = d.g.bI.f(3);
-        if(d.y.T == 0 && um1 != null && um1.c == amj.bd.cm)
+        us us1 = d.g.bI.f(3);
+        if(d.y.V == 0 && us1 != null && us1.c == amq.bd.cm)
         {
             a(l, i1);
         }
-        if(!d.g.a(ll.k))
+        if(!d.g.a(lm.k))
         {
             float f2 = d.g.cj + (d.g.j - d.g.cj) * f1;
             if(f2 > 0.0F)
@@ -64,10 +64,10 @@ public class atk extends atl
         {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glBindTexture(3553, d.o.b("/gui/gui.png"));
-            qw qw1 = d.g.bI;
+            qx qx1 = d.g.bI;
             this.j = -90F;
             b(l / 2 - 91, i1 - 22, 0, 0, 182, 22);
-            b((l / 2 - 91 - 1) + qw1.c * 20, i1 - 22 - 1, 0, 22, 24, 22);
+            b((l / 2 - 91 - 1) + qx1.c * 20, i1 - 22 - 1, 0, 22, 24, 22);
             GL11.glBindTexture(3553, d.o.b("/gui/icons.png"));
             GL11.glEnable(3042);
             GL11.glBlendFunc(775, 769);
@@ -82,9 +82,9 @@ public class atk extends atl
             int i3 = d.g.aR;
             c.setSeed(f * 0x4c627);
             boolean flag3 = false;
-            ro ro1 = d.g.cd();
-            int j5 = ro1.a();
-            int l5 = ro1.b();
+            rq rq1 = d.g.cd();
+            int j5 = rq1.a();
+            int l5 = rq1.b();
             d.I.a("bossHealth");
             d();
             d.I.b();
@@ -107,9 +107,9 @@ public class atk extends atl
                 }
                 int k8 = i1 - 39;
                 int k9 = k8 - 10;
-                int j10 = WMLLCompatibility.forgeA(d);
+                int j10 = d.g.aW();
                 int i11 = -1;
-                if(d.g.a(ll.l))
+                if(d.g.a(lm.l))
                 {
                     i11 = f % 25;
                 }
@@ -133,11 +133,11 @@ public class atk extends atl
                         }
                     }
                     int k12 = 16;
-                    if(d.g.a(ll.u))
+                    if(d.g.a(lm.u))
                     {
                         k12 += 36;
                     } else
-                    if(d.g.a(ll.v))
+                    if(d.g.a(lm.v))
                     {
                         k12 += 72;
                     }
@@ -189,7 +189,7 @@ public class atk extends atl
                     int l12 = k8;
                     int k13 = 16;
                     byte byte2 = 0;
-                    if(d.g.a(ll.s))
+                    if(d.g.a(lm.s))
                     {
                         k13 += 36;
                         byte2 = 13;
@@ -226,11 +226,11 @@ public class atk extends atl
                 }
 
                 d.I.c("air");
-                if(d.g.a(agb.h))
+                if(d.g.a(agi.h))
                 {
                     int i12 = d.g.al();
-                    int i13 = ke.f(((double)(i12 - 2) * 10D) / 300D);
-                    int l13 = ke.f(((double)i12 * 10D) / 300D) - i13;
+                    int i13 = kf.f(((double)(i12 - 2) * 10D) / 300D);
+                    int l13 = kf.f(((double)i12 * 10D) / 300D) - i13;
                     for(int j14 = 0; j14 < i13 + l13; j14++)
                     {
                         if(j14 < i13)
@@ -248,7 +248,7 @@ public class atk extends atl
             GL11.glDisable(3042);
             d.I.a("actionBar");
             GL11.glEnable(32826);
-            aro.c();
+            arw.c();
             for(int k6 = 0; k6 < 9; k6++)
             {
                 int j7 = (l / 2 - 90) + k6 * 20 + 2;
@@ -256,7 +256,7 @@ public class atk extends atl
                 a(k6, j7, i8, f1);
             }
 
-            aro.a();
+            arw.a();
             GL11.glDisable(32826);
             d.I.b();
         }
@@ -283,13 +283,13 @@ public class atk extends atl
             boolean flag2 = false;
             int j2 = flag2 ? 0xffffff : 0x80ff20;
             String s1 = (new StringBuilder()).append("").append(d.g.cd).toString();
-            int i4 = (l - atj1.a(s1)) / 2;
+            int i4 = (l - atr1.a(s1)) / 2;
             int k4 = i1 - 31 - 4;
-            atj1.b(s1, i4 + 1, k4, 0);
-            atj1.b(s1, i4 - 1, k4, 0);
-            atj1.b(s1, i4, k4 + 1, 0);
-            atj1.b(s1, i4, k4 - 1, 0);
-            atj1.b(s1, i4, k4, j2);
+            atr1.b(s1, i4 + 1, k4, 0);
+            atr1.b(s1, i4 - 1, k4, 0);
+            atr1.b(s1, i4, k4 + 1, 0);
+            atr1.b(s1, i4, k4 - 1, 0);
+            atr1.b(s1, i4, k4, j2);
             d.I.b();
         }
         if(d.q())
@@ -302,51 +302,51 @@ public class atk extends atl
             } else
             {
                 s = String.format(bm.a("demo.remainingTime"), new Object[] {
-                    km.a((int)(0x1d6b4L - d.e.F()))
+                    kn.a((int)(0x1d6b4L - d.e.F()))
                 });
             }
-            int k2 = atj1.a(s);
-            atj1.a(s, l - k2 - 10, 5, 0xffffff);
+            int k2 = atr1.a(s);
+            atr1.a(s, l - k2 - 10, 5, 0xffffff);
             d.I.b();
         }
-        WMLL.i.updategui(d, this);
-        if(d.y.U)
+		WMLL.i.updategui(d, this);
+        if(d.y.W)
         {
             d.I.a("debug");
             GL11.glPushMatrix();
-            atj1.a((new StringBuilder()).append("Minecraft 1.4.5 (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
-            atj1.a(d.m(), 2, 12, 0xffffff);
-            atj1.a(d.n(), 2, 22, 0xffffff);
-            atj1.a(d.p(), 2, 32, 0xffffff);
-            atj1.a(d.o(), 2, 42, 0xffffff);
+            atr1.a((new StringBuilder()).append("Minecraft 12w49a (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
+            atr1.a(d.m(), 2, 12, 0xffffff);
+            atr1.a(d.n(), 2, 22, 0xffffff);
+            atr1.a(d.p(), 2, 32, 0xffffff);
+            atr1.a(d.o(), 2, 42, 0xffffff);
             long l1 = Runtime.getRuntime().maxMemory();
             long l3 = Runtime.getRuntime().totalMemory();
             long l4 = Runtime.getRuntime().freeMemory();
             long l6 = l3 - l4;
             String s2 = (new StringBuilder()).append("Used memory: ").append((l6 * 100L) / l1).append("% (").append(l6 / 1024L / 1024L).append("MB) of ").append(l1 / 1024L / 1024L).append("MB").toString();
-            b(atj1, s2, l - atj1.a(s2) - 2, 2, 0xe0e0e0);
+            b(atr1, s2, l - atr1.a(s2) - 2, 2, 0xe0e0e0);
             s2 = (new StringBuilder()).append("Allocated memory: ").append((l3 * 100L) / l1).append("% (").append(l3 / 1024L / 1024L).append("MB)").toString();
-            b(atj1, s2, l - atj1.a(s2) - 2, 12, 0xe0e0e0);
-            int l8 = ke.c(d.g.t);
-            int l9 = ke.c(d.g.u);
-            int k10 = ke.c(d.g.v);
-            b(atj1, String.format("x: %.5f (%d) // c: %d (%d)", new Object[] {
+            b(atr1, s2, l - atr1.a(s2) - 2, 12, 0xe0e0e0);
+            int l8 = kf.c(d.g.t);
+            int l9 = kf.c(d.g.u);
+            int k10 = kf.c(d.g.v);
+            b(atr1, String.format("x: %.5f (%d) // c: %d (%d)", new Object[] {
                 Double.valueOf(d.g.t), Integer.valueOf(l8), Integer.valueOf(l8 >> 4), Integer.valueOf(l8 & 0xf)
             }), 2, 64, 0xe0e0e0);
-            b(atj1, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {
+            b(atr1, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {
                 Double.valueOf(d.g.D.b), Double.valueOf(d.g.u)
             }), 2, 72, 0xe0e0e0);
-            b(atj1, String.format("z: %.5f (%d) // c: %d (%d)", new Object[] {
+            b(atr1, String.format("z: %.5f (%d) // c: %d (%d)", new Object[] {
                 Double.valueOf(d.g.v), Integer.valueOf(k10), Integer.valueOf(k10 >> 4), Integer.valueOf(k10 & 0xf)
             }), 2, 80, 0xe0e0e0);
-            int j11 = ke.c((double)((d.g.z * 4F) / 360F) + 0.5D) & 3;
-            b(atj1, (new StringBuilder()).append("f: ").append(j11).append(" (").append(q.c[j11]).append(") / ").append(ke.g(d.g.z)).toString(), 2, 88, 0xe0e0e0);
+            int j11 = kf.c((double)((d.g.z * 4F) / 360F) + 0.5D) & 3;
+            b(atr1, (new StringBuilder()).append("f: ").append(j11).append(" (").append(q.c[j11]).append(") / ").append(kf.g(d.g.z)).toString(), 2, 88, 0xe0e0e0);
             if(d.e != null && d.e.f(l8, l9, k10))
             {
-                zs zs1 = d.e.d(l8, k10);
-                b(atj1, (new StringBuilder()).append("lc: ").append(zs1.h() + 15).append(" b: ").append(zs1.a(l8 & 0xf, k10 & 0xf, d.e.t()).y).append(" bl: ").append(zs1.a(yh.b, l8 & 0xf, l9, k10 & 0xf)).append(" sl: ").append(zs1.a(yh.a, l8 & 0xf, l9, k10 & 0xf)).append(" rl: ").append(zs1.c(l8 & 0xf, l9, k10 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
+                zz zz1 = d.e.d(l8, k10);
+                b(atr1, (new StringBuilder()).append("lc: ").append(zz1.h() + 15).append(" b: ").append(zz1.a(l8 & 0xf, k10 & 0xf, d.e.t()).y).append(" bl: ").append(zz1.a(yo.b, l8 & 0xf, l9, k10 & 0xf)).append(" sl: ").append(zz1.a(yo.a, l8 & 0xf, l9, k10 & 0xf)).append(" rl: ").append(zz1.c(l8 & 0xf, l9, k10 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
             }
-            b(atj1, String.format("ws: %.3f, fs: %.3f, g: %b, fl: %d", new Object[] {
+            b(atr1, String.format("ws: %.3f, fs: %.3f, g: %b, fl: %d", new Object[] {
                 Float.valueOf(d.g.cc.b()), Float.valueOf(d.g.cc.a()), Boolean.valueOf(d.g.E), Integer.valueOf(d.e.f(l8, k10))
             }), 2, 104, 0xe0e0e0);
             GL11.glPopMatrix();
@@ -372,7 +372,7 @@ public class atk extends atl
                 {
                     j3 = Color.HSBtoRGB(f4 / 50F, 0.7F, 0.6F) & 0xffffff;
                 }
-                atj1.b(g, -atj1.a(g) / 2, -4, j3 + (l2 << 24));
+                atr1.b(g, -atr1.a(g) / 2, -4, j3 + (l2 << 24));
                 GL11.glDisable(3042);
                 GL11.glPopMatrix();
             }
@@ -387,12 +387,12 @@ public class atk extends atl
         e.a(f);
         d.I.b();
         GL11.glPopMatrix();
-        if(d.y.M.e && (!d.A() || d.g.a.c.size() > 1))
+        if(d.y.O.e && (!d.A() || d.g.a.c.size() > 1))
         {
             d.I.a("playerList");
-            axz axz1 = d.g.a;
-            java.util.List list = axz1.c;
-            int k3 = axz1.d;
+            ayh ayh1 = d.g.a;
+            java.util.List list = ayh1.c;
+            int k3 = ayh1.d;
             int j4 = k3;
             int i5 = 1;
             for(; j4 > 20; j4 = ((k3 + i5) - 1) / i5)
@@ -419,28 +419,28 @@ public class atk extends atl
                 {
                     continue;
                 }
-                ayl ayl1 = (ayl)list.get(k7);
-                atj1.a(ayl1.a, j8, i9, 0xffffff);
+                ayt ayt1 = (ayt)list.get(k7);
+                atr1.a(ayt1.a, j8, i9, 0xffffff);
                 d.o.b(d.o.b("/gui/icons.png"));
                 int l10 = 0;
                 byte byte1 = 0;
-                if(ayl1.b < 0)
+                if(ayt1.b < 0)
                 {
                     byte1 = 5;
                 } else
-                if(ayl1.b < 150)
+                if(ayt1.b < 150)
                 {
                     byte1 = 0;
                 } else
-                if(ayl1.b < 300)
+                if(ayt1.b < 300)
                 {
                     byte1 = 1;
                 } else
-                if(ayl1.b < 600)
+                if(ayt1.b < 600)
                 {
                     byte1 = 2;
                 } else
-                if(ayl1.b < 1000)
+                if(ayt1.b < 1000)
                 {
                     byte1 = 3;
                 } else
@@ -460,17 +460,17 @@ public class atk extends atl
 
     private void d()
     {
-        if(azx.c == null || azx.b <= 0)
+        if(bah.c == null || bah.b <= 0)
         {
             return;
         }
-        azx.b--;
-        atj atj1 = d.p;
-        auf auf1 = new auf(d.y, d.c, d.d);
-        int j = auf1.a();
+        bah.b--;
+        atr atr1 = d.p;
+        aun aun1 = new aun(d.y, d.c, d.d);
+        int j = aun1.a();
         char c1 = '\266';
         int k = j / 2 - c1 / 2;
-        int l = (int)(azx.a * (float)(c1 + 1));
+        int l = (int)(bah.a * (float)(c1 + 1));
         byte byte0 = 12;
         b(k, byte0, 0, 74, c1, 5);
         b(k, byte0, 0, 74, c1, 5);
@@ -478,8 +478,8 @@ public class atk extends atl
         {
             b(k, byte0, 0, 79, l, 5);
         }
-        String s = azx.c;
-        atj1.a(s, j / 2 - atj1.a(s) / 2, byte0 - 10, 0xffffff);
+        String s = bah.c;
+        atr1.a(s, j / 2 - atr1.a(s) / 2, byte0 - 10, 0xffffff);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glBindTexture(3553, d.o.b("/gui/icons.png"));
     }
@@ -492,13 +492,13 @@ public class atk extends atl
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(3008);
         GL11.glBindTexture(3553, d.o.b("%blur%/misc/pumpkinblur.png"));
-        bao bao1 = bao.a;
-        bao1.b();
-        bao1.a(0.0D, k, -90D, 0.0D, 1.0D);
-        bao1.a(j, k, -90D, 1.0D, 1.0D);
-        bao1.a(j, 0.0D, -90D, 1.0D, 0.0D);
-        bao1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        bao1.a();
+        bay bay1 = bay.a;
+        bay1.b();
+        bay1.a(0.0D, k, -90D, 0.0D, 1.0D);
+        bay1.a(j, k, -90D, 1.0D, 1.0D);
+        bay1.a(j, 0.0D, -90D, 1.0D, 0.0D);
+        bay1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        bay1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -522,13 +522,13 @@ public class atk extends atl
         GL11.glBlendFunc(0, 769);
         GL11.glColor4f(a, a, a, 1.0F);
         GL11.glBindTexture(3553, d.o.b("%blur%/misc/vignette.png"));
-        bao bao1 = bao.a;
-        bao1.b();
-        bao1.a(0.0D, k, -90D, 0.0D, 1.0D);
-        bao1.a(j, k, -90D, 1.0D, 1.0D);
-        bao1.a(j, 0.0D, -90D, 1.0D, 0.0D);
-        bao1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        bao1.a();
+        bay bay1 = bay.a;
+        bay1.b();
+        bay1.a(0.0D, k, -90D, 0.0D, 1.0D);
+        bay1.a(j, k, -90D, 1.0D, 1.0D);
+        bay1.a(j, 0.0D, -90D, 1.0D, 0.0D);
+        bay1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        bay1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -549,17 +549,17 @@ public class atk extends atl
         GL11.glBlendFunc(770, 771);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
         GL11.glBindTexture(3553, d.o.b("/terrain.png"));
-        float f2 = (float)(amj.bh.cl % 16) / 16F;
-        float f3 = (float)(amj.bh.cl / 16) / 16F;
-        float f4 = (float)(amj.bh.cl % 16 + 1) / 16F;
-        float f5 = (float)(amj.bh.cl / 16 + 1) / 16F;
-        bao bao1 = bao.a;
-        bao1.b();
-        bao1.a(0.0D, k, -90D, f2, f5);
-        bao1.a(j, k, -90D, f4, f5);
-        bao1.a(j, 0.0D, -90D, f4, f3);
-        bao1.a(0.0D, 0.0D, -90D, f2, f3);
-        bao1.a();
+        float f2 = (float)(amq.bh.cl % 16) / 16F;
+        float f3 = (float)(amq.bh.cl / 16) / 16F;
+        float f4 = (float)(amq.bh.cl % 16 + 1) / 16F;
+        float f5 = (float)(amq.bh.cl / 16 + 1) / 16F;
+        bay bay1 = bay.a;
+        bay1.b();
+        bay1.a(0.0D, k, -90D, f2, f5);
+        bay1.a(j, k, -90D, f4, f5);
+        bay1.a(j, 0.0D, -90D, f4, f3);
+        bay1.a(0.0D, 0.0D, -90D, f2, f3);
+        bay1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -568,12 +568,12 @@ public class atk extends atl
 
     private void a(int j, int k, int l, float f1)
     {
-        um um1 = d.g.bI.a[j];
-        if(um1 == null)
+        us us1 = d.g.bI.a[j];
+        if(us1 == null)
         {
             return;
         }
-        float f2 = (float)um1.b - f1;
+        float f2 = (float)us1.b - f1;
         if(f2 > 0.0F)
         {
             GL11.glPushMatrix();
@@ -582,12 +582,12 @@ public class atk extends atl
             GL11.glScalef(1.0F / f3, (f3 + 1.0F) / 2.0F, 1.0F);
             GL11.glTranslatef(-(k + 8), -(l + 12), 0.0F);
         }
-        b.b(d.p, d.o, um1, k, l);
+        b.b(d.p, d.o, us1, k, l);
         if(f2 > 0.0F)
         {
             GL11.glPopMatrix();
         }
-        b.c(d.p, d.o, um1, k, l);
+        b.c(d.p, d.o, us1, k, l);
     }
 
     public void a()
@@ -606,7 +606,7 @@ public class atk extends atl
         i = true;
     }
 
-    public asu b()
+    public atc b()
     {
         return e;
     }

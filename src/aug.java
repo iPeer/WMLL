@@ -6,13 +6,13 @@
 import java.util.List;
 import net.minecraft.client.Minecraft;
 
-public class aty extends aue
+public class aug extends aum
 {
 
     private int a;
     private int b;
 
-    public aty()
+    public aug()
     {
         a = 0;
         b = 0;
@@ -23,62 +23,62 @@ public class aty extends aue
         a = 0;
         i.clear();
         byte byte0 = -16;
-        i.add(new ast(1, g / 2 - 100, h / 4 + 120 + byte0, bm.a("menu.returnToMenu")));
+        i.add(new atb(1, g / 2 - 100, h / 4 + 120 + byte0, bm.a("menu.returnToMenu")));
         if(!f.A())
         {
-            ((ast)i.get(0)).e = bm.a("menu.disconnect");
+            ((atb)i.get(0)).e = bm.a("menu.disconnect");
         }
-        i.add(new ast(4, g / 2 - 100, h / 4 + 24 + byte0, bm.a("menu.returnToGame")));
-        i.add(new ast(0, g / 2 - 100, h / 4 + 96 + byte0, 98, 20, bm.a("menu.options")));
-        ast ast1;
-        i.add(ast1 = new ast(7, g / 2 + 2, h / 4 + 96 + byte0, 98, 20, bm.a("menu.shareToLan")));
-        i.add(new ast(5, g / 2 - 100, h / 4 + 48 + byte0, 98, 20, bm.a("gui.achievements")));
-        i.add(new ast(6, g / 2 + 2, h / 4 + 48 + byte0, 98, 20, bm.a("gui.stats")));
-		i.add(new ast(8, g / 2 - 100, h / 4 + 144 + byte0, "WMLL Options..."));
+        i.add(new atb(4, g / 2 - 100, h / 4 + 24 + byte0, bm.a("menu.returnToGame")));
+        i.add(new atb(0, g / 2 - 100, h / 4 + 96 + byte0, 98, 20, bm.a("menu.options")));
+        atb atb1;
+        i.add(atb1 = new atb(7, g / 2 + 2, h / 4 + 96 + byte0, 98, 20, bm.a("menu.shareToLan")));
+        i.add(new atb(5, g / 2 - 100, h / 4 + 48 + byte0, 98, 20, bm.a("gui.achievements")));
+        i.add(new atb(6, g / 2 + 2, h / 4 + 48 + byte0, 98, 20, bm.a("gui.stats")));
+		i.add(new atb(8, g / 2 - 100, h / 4 + 144 + byte0, "WMLL Options..."));
 		if (WMLL.i.debugClassPresent)
-			i.add(new ast(9001, g - 52, h - 22, 50, 20, "Reload"));
-        ast1.g = f.B() && !f.C().al();
+			i.add(new atb(9001, g - 52, h - 22, 50, 20, "Reload"));
+        atb1.g = f.B() && !f.C().al();
     }
 
-    protected void a(ast ast1)
+    protected void a(atb atb1)
     {
-        switch(ast1.f)
+        switch(atb1.f)
         {
 		case 8:
         	f.a(new WMLLOptionsMenu(this));
         	break;
         case 9001:
-        	f.a(new aty());
+        	f.a(new aug());
         	break;
         	
         case 0: // '\0'
-            f.a(new atw(this, f.y));
+            f.a(new aue(this, f.y));
             break;
 
         case 1: // '\001'
-            ast1.g = false;
-            f.E.a(jq.j, 1);
+            atb1.g = false;
+            f.E.a(jr.j, 1);
             f.e.C();
-            f.a((ayh)null);
-            f.a(new bem());
+            f.a((ayp)null);
+            f.a(new bex());
             break;
 
         case 4: // '\004'
-            f.a((aye)null);
+            f.a((aum)null);
             f.h();
             f.A.f();
             break;
 
         case 5: // '\005'
-            f.a(new auq(f.E));
+            f.a(new auy(f.E));
             break;
 
         case 6: // '\006'
-            f.a(new aur(this, f.E));
+            f.a(new auz(this, f.E));
             break;
 
         case 7: // '\007'
-            f.a(new auj(this));
+            f.a(new aur(this));
             break;
         }
     }

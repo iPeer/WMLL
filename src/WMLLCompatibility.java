@@ -10,7 +10,7 @@ import net.minecraftforge.common.ForgeHooks;
 import org.lwjgl.opengl.GL11;
 
 
-public class WMLLCompatibility extends atl {
+public class WMLLCompatibility extends att {
 	
 	private int i;
 
@@ -23,6 +23,8 @@ public class WMLLCompatibility extends atl {
 		catch (IllegalAccessError e) { return a; }
 		catch (NoClassDefFoundError e) { return a; }
 		catch (NoSuchFieldError e) { return a; }
+		catch (Error e) { return a; }
+		catch (Exception e) { return a; }
 		else
 			return a;
 	}
