@@ -126,6 +126,7 @@ public class WMLLOptionsOutput extends aum {
 			b.e = "Images: "+(!a ? "ON" : "OFF");
 			WMLL.useImages = !a;
 			showButton.g = wmll.classicOutput || WMLL.useImages;
+			return;
 		case -1:
 			try {
 				this.desktop.browse(new URI("http://www.minecraftforum.net/topic/170739-#parameters"));
