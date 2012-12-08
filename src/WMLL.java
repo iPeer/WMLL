@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 788";
+		return "Test 789";
 	}
 	public static final String getMinecraftVersion() {
 		return "Snapshot 12w49a";
@@ -649,7 +649,7 @@ public class WMLL {
 		m = indicators.matcher(s);
 		while (m.find()) {
 			String ind = m.group().replaceAll("%ind:|%", "").toLowerCase();
-			s = s.replaceAll("%ind:"+ind+"%", getIdenString(ind));
+			s = s.replaceAll("%ind:"+ind+"%", getIdenString(ind)+"\247r");
 		}
 		m = localTime.matcher(s);
 		s = m.replaceAll(getLocalTime(0));
