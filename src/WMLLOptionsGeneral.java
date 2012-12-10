@@ -18,7 +18,7 @@ public class WMLLOptionsGeneral extends aue {
 		i.clear();
 		if (wmll.debugClassPresent)
 			i.add(new ast(9001, g - 20, 0, 20, 20, "R"));
-		String enabledString = "Enabled on "+wmll.getWorldName()+": "+(WMLL.Enabled ? "Yes" : "No");
+		String enabledString = "Enabled on "+(!wmll.showWorldName ? (wmll.isMultiplayer() ? "this server" : "this world") : wmll.getWorldName())+": "+(WMLL.Enabled ? "Yes" : "No");
 		i.add(new ast(0, g / 2 - 150, h / 4, 300, 20, enabledString));
 		i.add(bindingButton = new ast(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
 		i.add(new ast(2, g / 2 - 190, h - 25, 380, 20, "Done"));
@@ -62,6 +62,7 @@ public class WMLLOptionsGeneral extends aue {
 			c = wmll.showWorldName;
 			b.e = "Show world name/server IP on main menu: "+(c ? "OFF" : "ON");
 			wmll.showWorldName = !c;
+			f.a(new WMLLOptionsGeneral(this.wmll, this.parent));
 			return;
 		}
 	}
