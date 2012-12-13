@@ -10,7 +10,7 @@ import net.minecraftforge.common.ForgeHooks;
 import org.lwjgl.opengl.GL11;
 
 
-public class WMLLCompatibility extends att {
+public class WMLLCompatibility extends ats {
 	
 	private int i;
 

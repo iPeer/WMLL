@@ -4,10 +4,10 @@ import java.net.URI;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsMenu extends aum {
+public class WMLLOptionsMenu extends aul {
 
 	private WMLL wmll;
-	private aum parent;
+	private aul parent;
 	private static final String threadURL = "http://www.minecraftforum.net/topic/170739-";
 	private Desktop desktop;
 
@@ -17,12 +17,12 @@ public class WMLLOptionsMenu extends aum {
 		this.wmll = wmll;
 	}
 
-	public WMLLOptionsMenu(WMLL wmll, aum aum) {
+	public WMLLOptionsMenu(WMLL wmll, aul aum) {
 		this.wmll = wmll;
 		this.parent = aum;
 	}
 
-	public WMLLOptionsMenu(aum aum) {
+	public WMLLOptionsMenu(aul aum) {
 		this.parent = aum;
 		this.wmll = WMLL.i;
 	}
@@ -72,7 +72,7 @@ public class WMLLOptionsMenu extends aum {
 			if (parent != null)
 				f.a(parent);
 			else
-				f.a((aum)null);
+				f.a((aul)null);
 			wmll.saveOptions();
 			return;
 		case -1:
@@ -108,7 +108,7 @@ public class WMLLOptionsMenu extends aum {
 	}
 
 	public void a(int i, int j, float f) {
-		z_();
+		e();
 		a(l, "What's My Light Level", g / 2, h / 4 - 20, 0xffffff);
 		a(l, WMLL.wmllVersion()+" for "+WMLL.getMinecraftVersion(), g / 2, h / 4 - 10, 0x888888);
 		if (wmll.showWorldName)

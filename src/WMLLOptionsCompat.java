@@ -1,13 +1,13 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsCompat extends aum {
+public class WMLLOptionsCompat extends aul {
 
 	private WMLL wmll;
-	private aum parent;
+	private aul parent;
 	private atb rei, zans, alien, forge;
 
-	public WMLLOptionsCompat(WMLL wmll, aum aum) {
+	public WMLLOptionsCompat(WMLL wmll, aul aum) {
 		this.wmll = wmll;
 		this.parent = aum;
 	}
@@ -73,7 +73,7 @@ public class WMLLOptionsCompat extends aum {
 	}
 
 	public void a(int i, int j, float f) {
-		z_();
+		e();
 
 		a(l, "This menu allows you to change how WMLL handles it's compatibility with", g / 2, h / 4 - 40, 0xffffff);
 		a(l, "other conflicting mods you may have installed. If the mod's button is greyed out,", g / 2, h / 4 - 28, 0xffffff);

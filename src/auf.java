@@ -6,13 +6,13 @@
 import java.util.List;
 import net.minecraft.client.Minecraft;
 
-public class aug extends aum
+public class auf extends aul
 {
 
     private int a;
     private int b;
 
-    public aug()
+    public auf()
     {
         a = 0;
         b = 0;
@@ -48,37 +48,37 @@ public class aug extends aum
         	f.a(new WMLLOptionsMenu(this));
         	break;
         case 9001:
-        	f.a(new aug());
+        	f.a(new auf());
         	break;
         	
         case 0: // '\0'
-            f.a(new aue(this, f.y));
+            f.a(new aud(this, f.y));
             break;
 
         case 1: // '\001'
             atb1.g = false;
-            f.E.a(jr.j, 1);
+            f.E.a(jq.j, 1);
             f.e.C();
             f.a((ayp)null);
-            f.a(new bex());
+            f.a(new bey());
             break;
 
         case 4: // '\004'
-            f.a((aum)null);
+            f.a((aul)null);
             f.h();
             f.A.f();
             break;
 
         case 5: // '\005'
-            f.a(new auy(f.E));
+            f.a(new aux(f.E));
             break;
 
         case 6: // '\006'
-            f.a(new auz(this, f.E));
+            f.a(new auy(this, f.E));
             break;
 
         case 7: // '\007'
-            f.a(new aur(this));
+            f.a(new auq(this));
             break;
         }
     }
@@ -91,7 +91,7 @@ public class aug extends aum
 
     public void a(int i, int j, float f)
     {
-        z_();
+        e();
         a(l, "Game menu", g / 2, 40, 0xffffff);
         super.a(i, j, f);
     }

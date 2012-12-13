@@ -1,11 +1,11 @@
 
-public class WMLLOptionsMisc extends aum {
+public class WMLLOptionsMisc extends aul {
 
 	private WMLL wmll;
-	private aum parent;
+	private aul parent;
 	private int resetClicks = 0;
 	
-	public WMLLOptionsMisc(WMLL wmll, aum aum) {
+	public WMLLOptionsMisc(WMLL wmll, aul aum) {
 		this.wmll = wmll;
 		this.parent = aum;
 	}
@@ -48,7 +48,7 @@ public class WMLLOptionsMisc extends aum {
 	}
 	
 	public void a(int i, int j, float f) {
-		z_();
+		e();
 		if (resetClicks == 1)
 			a(l, "\247cClick again to confirm.", g / 2, h / 4 + 75, 0xffffff);
 		super.a(i, j, f);

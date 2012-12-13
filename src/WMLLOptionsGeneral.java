@@ -1,14 +1,14 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsGeneral extends aum {
+public class WMLLOptionsGeneral extends aul {
 
 	private WMLL wmll;
-	private aum parent;
+	private aul parent;
 	private boolean isBinding, hasErrored;
 	private atb bindingButton;
 
-	public WMLLOptionsGeneral(WMLL wmll, aum aum) {
+	public WMLLOptionsGeneral(WMLL wmll, aul aum) {
 		this.wmll = wmll;
 		this.parent = aum;
 	}
@@ -46,7 +46,7 @@ public class WMLLOptionsGeneral extends aum {
 			if (parent != null)
 				f.a(parent);
 			else
-				f.a((aum)null);
+				f.a((aul)null);
 			return;
 		case 3:
 			boolean c = wmll.autoSeed;
@@ -80,7 +80,7 @@ public class WMLLOptionsGeneral extends aum {
 	}
 
 	public void a(int i, int j, float f) {
-		z_();
+		e();
 		super.a(i, j, f);
 	}
 

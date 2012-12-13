@@ -29,10 +29,10 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Snapshot 1";
+		return "Snapshot 2";
 	}
 	public static final String getMinecraftVersion() {
-		return "Snapshot 12w49a";
+		return "Snapshot 12w50a";
 	}
 	public static final String[] autoDisable = {".*\\.oc\\.tc"};
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
@@ -83,7 +83,7 @@ public class WMLL {
 	private String lightString = "Light level: 9001";
 	private long lastF4Press = 0;
 	private boolean wmllF3Output = false;
-	private atr fontRenderer;
+	private atq fontRenderer;
 	public String lastWorld = "";
 	public boolean worldSeedSet = false;
 	public boolean warnedAboutConflicts = false;
@@ -200,7 +200,7 @@ public class WMLL {
 		updategui(h, h.v);
 	}
 	
-	public void updategui(Minecraft h, ats ats) {
+	public void updategui(Minecraft h, atr guiIngame) {
 		h.I.a("WMLL");
 		if (getWorld() != null && !wmllUpdateCheck.running && autoUpdateCheck) {
 			wmllUpdateCheck.start();
@@ -233,7 +233,7 @@ public class WMLL {
 					debug("[WMLL] Seed set to "+this.worldSeed+" (from file)");
 				}
 				else {
-					Object obj = ats.b();
+					Object obj = guiIngame.b();
 					Field f = obj.getClass().getDeclaredField(getField("chatLines"));
 					f.setAccessible(true);
 					obj = f.get(obj);
@@ -413,11 +413,11 @@ public class WMLL {
 						out++;
 					//				if (getDimension() == 1)
 					//					out--;
-					me player = thePlayer();
+					md player = thePlayer();
 					double x = player.t;
 					double y = player.u;
 					double z = player.v;
-					double f = kf.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
+					double f = ke.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
 					NumberFormat d = new DecimalFormat("#0.00");
 					String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection((int)f)+")";
 					drawString(coords, 2, out, 0xffffff);
@@ -680,7 +680,7 @@ public class WMLL {
 		}
 	}
 
-	public bdy sspServer() {
+	public bdz sspServer() {
 		return mc.C();
 	}
 
@@ -719,16 +719,16 @@ public class WMLL {
 	//		return worldInstance().m()+", "+worldInstance().n();
 	//	}
 
-	public atr getFontRenderer() {
+	public atq getFontRenderer() {
 		return this.fontRenderer;
 	}
 
-	public aun getWindowSize() {
-		return new aun(mc.y, mc.c, mc.d);
+	public aum getWindowSize() {
+		return new aum(mc.y, mc.c, mc.d);
 	}
 
 	private boolean mcDebugOpen() {
-		return getGameSettings().U;
+		return getGameSettings().X;
 	}
 
 	private ast getGameSettings() {
@@ -817,7 +817,7 @@ public class WMLL {
 		return mc.g;
 	}
 
-	public me thePlayer() {
+	public md thePlayer() {
 		return mc.h;
 	}
 
@@ -838,7 +838,7 @@ public class WMLL {
 	}
 
 	public ahx worldInfo() {
-		return getWorld().z;
+		return getWorld().y;
 	}
 
 	protected Minecraft getMCInstance() {
@@ -864,7 +864,7 @@ public class WMLL {
 	}
 
 	private aaq getWorldProvider() {
-		return getWorld().v;
+		return getWorld().u;
 	}
 
 	private zw getChunkProvider() {
@@ -906,12 +906,12 @@ public class WMLL {
 	}
 
 	public int[] getPlayerCoordinates() {
-		int[] a = {kf.c(thePlayer().t), kf.c(thePlayer().u - 1), kf.c(thePlayer().v), kf.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().t, (int)thePlayer().u, (int)thePlayer().v};
+		int[] a = {ke.c(thePlayer().t), ke.c(thePlayer().u - 1), ke.c(thePlayer().v), ke.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3, (int)thePlayer().t, (int)thePlayer().u, (int)thePlayer().v};
 		return a;
 	}
 
 	public double[] getPlayerCoordinatesAsDouble() {
-		double[] a = {thePlayer().t, thePlayer().u, thePlayer().v, thePlayer().D.b, kf.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3};
+		double[] a = {thePlayer().t, thePlayer().u, thePlayer().v, thePlayer().D.b, ke.c((double)((thePlayer().z * 4F) / 360F) + 0.5D) & 3};
 		return a;
 	}
 
@@ -1116,7 +1116,7 @@ public class WMLL {
 
 	private void toggleF3Override() {
 		wmllF3Output = !wmllF3Output;
-		getGameSettings().U = false;
+		getGameSettings().X = false;
 	}
 
 	public int getFPSThreshold() {
