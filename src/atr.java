@@ -345,7 +345,7 @@ public class atr extends ats
         {
             d.I.a("debug");
             GL11.glPushMatrix();
-            atq1.a((new StringBuilder()).append("Minecraft 12w50a (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
+            atq1.a((new StringBuilder()).append("Minecraft 12w50b (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
             atq1.a(d.m(), 2, 12, 0xffffff);
             atq1.a(d.n(), 2, 22, 0xffffff);
             atq1.a(d.p(), 2, 32, 0xffffff);
@@ -635,7 +635,7 @@ public class atr extends ats
             {
                 k = 0;
             } else
-            if(l != ur1)
+            if(l == null || ur1.c != l.c || !ur.a(ur1, l) || !ur1.f() && ur1.j() != l.j())
             {
                 k = 40;
             } else
