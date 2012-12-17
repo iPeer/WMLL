@@ -4,10 +4,10 @@ import java.net.URI;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsMenu extends aue {
+public class WMLLOptionsMenu extends aul {
 
 	private WMLL wmll;
-	private aue parent;
+	private aul parent;
 	private static final String threadURL = "http://www.minecraftforum.net/topic/170739-";
 	private Desktop desktop;
 
@@ -17,13 +17,13 @@ public class WMLLOptionsMenu extends aue {
 		this.wmll = wmll;
 	}
 
-	public WMLLOptionsMenu(WMLL wmll, aue aue) {
+	public WMLLOptionsMenu(WMLL wmll, aul aum) {
 		this.wmll = wmll;
-		this.parent = aue;
+		this.parent = aum;
 	}
 
-	public WMLLOptionsMenu(aue aue) {
-		this.parent = aue;
+	public WMLLOptionsMenu(aul aum) {
+		this.parent = aum;
 		this.wmll = WMLL.i;
 	}
 
@@ -32,21 +32,21 @@ public class WMLLOptionsMenu extends aue {
 		i.clear();
 		try {
 			if (wmll.isEnabled()) {
-				i.add(new ast(0, g / 2 - 200, h - 95, "General Settings"));
-				i.add(new ast(1, g / 2 + 2, h - 95, "Output Settings"));
-				i.add(new ast(2, g / 2 - 200, h - 70, "Miscellaneous Settings"));
-				i.add(new ast(3, g / 2 + 2, h - 70, "Compatibility Settings"));
-				ast updateButton;
-				i.add(updateButton = new ast(-1, g / 2 - 100, h / 4 + 23, "View forum thread"));
+				i.add(new atb(0, g / 2 - 200, h - 95, "General Settings"));
+				i.add(new atb(1, g / 2 + 2, h - 95, "Output Settings"));
+				i.add(new atb(2, g / 2 - 200, h - 70, "Miscellaneous Settings"));
+				i.add(new atb(3, g / 2 + 2, h - 70, "Compatibility Settings"));
+				atb updateButton;
+				i.add(updateButton = new atb(-1, g / 2 - 100, h / 4 + 23, "View forum thread"));
 				updateButton.h = wmll.updateInfo.length > 0 && Desktop.isDesktopSupported() && (this.desktop = Desktop.getDesktop()).isSupported(Desktop.Action.BROWSE);
 			}
 			else {
-				i.add(new ast(999, g / 2 - 50, h - 110, 100, 20, "Enable it!"));
+				i.add(new atb(999, g / 2 - 50, h - 110, 100, 20, "Enable it!"));
 			}
-			i.add(new ast(4, g / 2 - 190, h - 30, 380, 20, (wmll.isEnabled() ? "Done" : "Cancel")));
+			i.add(new atb(4, g / 2 - 190, h - 30, 380, 20, (wmll.isEnabled() ? "Done" : "Cancel")));
 			if (wmll.debugClassPresent) {
-				i.add(new ast(9000, g - 40, 0, 20, 20, (WMLL.debugActive ? "\247l" : "")+"D"));
-				i.add(new ast(9001, g - 20, 0, 20, 20, "R"));
+				i.add(new atb(9000, g - 40, 0, 20, 20, (WMLL.debugActive ? "\247l" : "")+"D"));
+				i.add(new atb(9001, g - 20, 0, 20, 20, "R"));
 			}
 		}
 		catch (Exception e) {
@@ -54,7 +54,7 @@ public class WMLLOptionsMenu extends aue {
 		}
 	}
 
-	protected void a(ast b) {
+	protected void a(atb b) {
 		switch (b.f) {
 		case 0:
 			f.a(new WMLLOptionsGeneral(this.wmll, this));
@@ -72,7 +72,7 @@ public class WMLLOptionsMenu extends aue {
 			if (parent != null)
 				f.a(parent);
 			else
-				f.a((aue)null);
+				f.a((aul)null);
 			wmll.saveOptions();
 			return;
 		case -1:
@@ -108,7 +108,7 @@ public class WMLLOptionsMenu extends aue {
 	}
 
 	public void a(int i, int j, float f) {
-		z_();
+		e();
 		a(l, "What's My Light Level", g / 2, h / 4 - 20, 0xffffff);
 		a(l, WMLL.wmllVersion()+" for "+WMLL.getMinecraftVersion(), g / 2, h / 4 - 10, 0x888888);
 		if (wmll.showWorldName)

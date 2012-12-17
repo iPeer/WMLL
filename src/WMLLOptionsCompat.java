@@ -1,31 +1,31 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsCompat extends aue {
+public class WMLLOptionsCompat extends aul {
 
 	private WMLL wmll;
-	private aue parent;
-	private ast rei, zans, alien, forge;
+	private aul parent;
+	private atb rei, zans, alien, forge;
 
-	public WMLLOptionsCompat(WMLL wmll, aue aue) {
+	public WMLLOptionsCompat(WMLL wmll, aul aum) {
 		this.wmll = wmll;
-		this.parent = aue;
+		this.parent = aum;
 	}
 
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		i.clear();
 		if (wmll.debugClassPresent)
-			i.add(new ast(9001, g - 20, 0, 20, 20, "R"));
-		i.add(new ast(0, g / 2 - 190, h - 30, 380, 20, "Done"));
-		i.add(rei = new ast(1, g / 2 - 145, h / 4 + 25, 140, 20, "Rei's Minimap: "+(wmll.ReiEnabled && !wmll.ReiUseMl ? "ON" : "OFF")));
-		i.add(zans = new ast(2, g / 2 + 2, h / 4 + 25, 140, 20, "Zan's Minimap: "+(wmll.ZansEnabled && wmll.ZansMinimap ? "ON" : "OFF")));
-		i.add(alien = new ast(3, g / 2 - 70, h / 4 + 50, 140, 20, "Alien Motion Detector: "+(wmll.AlienEnabled && wmll.AlienRadar ? "ON" : "OFF")));
+			i.add(new atb(9001, g - 20, 0, 20, 20, "R"));
+		i.add(new atb(0, g / 2 - 190, h - 30, 380, 20, "Done"));
+		i.add(rei = new atb(1, g / 2 - 145, h / 4 + 25, 140, 20, "Rei's Minimap: "+(wmll.ReiEnabled && !wmll.ReiUseMl ? "ON" : "OFF")));
+		i.add(zans = new atb(2, g / 2 + 2, h / 4 + 25, 140, 20, "Zan's Minimap: "+(wmll.ZansEnabled && wmll.ZansMinimap ? "ON" : "OFF")));
+		i.add(alien = new atb(3, g / 2 - 70, h / 4 + 50, 140, 20, "Alien Motion Detector: "+(wmll.AlienEnabled && wmll.AlienRadar ? "ON" : "OFF")));
 		rei.g = wmll.Rei && !wmll.ReiUseMl;
 		zans.g = wmll.ZansMinimap;
 		alien.g = wmll.AlienRadar;
 
-		i.add(forge = new ast(4, g / 2 - 70, h / 4 + 100, 140, 20, "Enable Forge Hooks: "+(wmll.forgeEnabled ? "ON" : "OFF")));
+		i.add(forge = new atb(4, g / 2 - 70, h / 4 + 100, 140, 20, "Enable Forge Hooks: "+(wmll.forgeEnabled ? "ON" : "OFF")));
 		forge.g = wmll.forgeDetected;
 	}
 
@@ -34,7 +34,7 @@ public class WMLLOptionsCompat extends aue {
 			f.a(parent);
 	}
 
-	protected void a(ast b) {
+	protected void a(atb b) {
 		switch (b.f) {
 		case 9001:
 			f.a(new WMLLOptionsCompat(this.wmll, this.parent));
@@ -73,7 +73,7 @@ public class WMLLOptionsCompat extends aue {
 	}
 
 	public void a(int i, int j, float f) {
-		z_();
+		e();
 
 		a(l, "This menu allows you to change how WMLL handles it's compatibility with", g / 2, h / 4 - 40, 0xffffff);
 		a(l, "other conflicting mods you may have installed. If the mod's button is greyed out,", g / 2, h / 4 - 28, 0xffffff);
