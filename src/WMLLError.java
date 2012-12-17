@@ -1,30 +1,30 @@
 
-public class WMLLError extends aue {
+public class WMLLError extends aul {
 
-	private aue erroredGui;
+	private aul erroredGui;
 	private Throwable e;
 
-	public WMLLError(aue aue, Throwable e) {
-		this.erroredGui = aue;
+	public WMLLError(aul aum, Throwable e) {
+		this.erroredGui = aum;
 		this.e = e;
 	}
 
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		i.clear();
-		i.add(new ast(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
+		i.add(new atb(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
 	}
 
-	public void a(ast b) {
+	public void a(atb b) {
 		switch (b.f) {
 		case 0:
-			f.a((aue)null);
+			f.a((aul)null);
 			return;
 		}
 	}
 
 	public void a(int i, int j, float f) {
-		z_();
+		e();
 		String[] a = this.e.getClass().toString().split("\\.");
 		a(l, "Oh dear! It looks like something went wrong while WMLL was trying to open", g / 2, 20, 0xffffff);
 		a(l, "one of its GUIs because an exception called \247o"+a[a.length - 1]+"\247r occurred.", g / 2, 32, 0xffffff);
