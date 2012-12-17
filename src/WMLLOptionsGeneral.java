@@ -17,7 +17,7 @@ public class WMLLOptionsGeneral extends aul {
 	public void A_() {
 		i.clear();
 		if (wmll.debugClassPresent)
-		i.add(new atb(9001, g - 20, 0, 20, 20, "R"));
+			i.add(new atb(9001, g - 20, 0, 20, 20, "R"));
 		String enabledString = "Enabled on "+wmll.getWorldName()+": "+(WMLL.Enabled ? "Yes" : "No");
 		i.add(new atb(0, g / 2 - 150, h / 4, 300, 20, enabledString));
 		i.add(bindingButton = new atb(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
