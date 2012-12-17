@@ -17,17 +17,7 @@ public class WMLLOptionsGeneral extends aul {
 	public void A_() {
 		i.clear();
 		if (wmll.debugClassPresent)
-<<<<<<< HEAD
-			i.add(new ast(9001, g - 20, 0, 20, 20, "R"));
-		String enabledString = "Enabled on "+(!wmll.showWorldName ? (wmll.isMultiplayer() ? "this server" : "this world") : wmll.getWorldName())+": "+(WMLL.Enabled ? "Yes" : "No");
-		i.add(new ast(0, g / 2 - 150, h / 4, 300, 20, enabledString));
-		i.add(bindingButton = new ast(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
-		i.add(new ast(2, g / 2 - 190, h - 25, 380, 20, "Done"));
-		i.add(new ast(3, g / 2 - 50, h / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
-		i.add(new ast(4, g / 2 - 150, h / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
-		i.add(new ast(5, g / 2 - 150, h / 4 + 50, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
-=======
-			i.add(new atb(9001, g - 20, 0, 20, 20, "R"));
+		i.add(new atb(9001, g - 20, 0, 20, 20, "R"));
 		String enabledString = "Enabled on "+wmll.getWorldName()+": "+(WMLL.Enabled ? "Yes" : "No");
 		i.add(new atb(0, g / 2 - 150, h / 4, 300, 20, enabledString));
 		i.add(bindingButton = new atb(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
@@ -35,7 +25,6 @@ public class WMLLOptionsGeneral extends aul {
 		i.add(new atb(3, g / 2 - 50, h / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
 		i.add(new atb(4, g / 2 - 150, h / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
 		i.add(new atb(5, g / 2 - 150, h / 4 + 50, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
->>>>>>> snapshots
 	}
 
 	protected void a(atb b) {
