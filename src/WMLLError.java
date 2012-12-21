@@ -1,11 +1,9 @@
 
 public class WMLLError extends aul {
 
-	private aul erroredGui;
 	private Throwable e;
 
 	public WMLLError(aul aum, Throwable e) {
-		this.erroredGui = aum;
 		this.e = e;
 	}
 

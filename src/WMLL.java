@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 39";
+		return "Test 790";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.6";
@@ -562,6 +562,7 @@ public class WMLL {
 		Pattern BlockLight = Pattern.compile("%blocklight%", Pattern.CASE_INSENSITIVE);
 		Pattern RawLight = Pattern.compile("%rawlight%", Pattern.CASE_INSENSITIVE);
 		Pattern Light = Pattern.compile("%LightLevel%", Pattern.CASE_INSENSITIVE);
+		Pattern sunLight = Pattern.compile("%sunlight%", Pattern.CASE_INSENSITIVE);
 		Pattern Biome = Pattern.compile("%Biome%", Pattern.CASE_INSENSITIVE);
 		Pattern FPS = Pattern.compile("%fps%", Pattern.CASE_INSENSITIVE);
 		Pattern FPS_noCU = Pattern.compile("%fps2%", Pattern.CASE_INSENSITIVE);
@@ -587,8 +588,8 @@ public class WMLL {
 		String blockLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247r";
 		a = getRawLightLevel(x, y, z);
 		String rawLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247r";
-		a = getSkyLight(1.0f);
-		String skyLight = (a > 7 ? "\247c" : "")+Integer.toString(a)+"\247r";
+		a = getSunLight(x, y, z);
+		String skyLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247r";
 		Matcher m = SkyLight.matcher(s);
 		s = m.replaceAll(skyLight);
 		m = BlockLight.matcher(s);
@@ -655,6 +656,8 @@ public class WMLL {
 		s = m.replaceAll(getLocalTime(0));
 		m = localTime12h.matcher(s);
 		s = m.replaceAll(getLocalTime(1));
+		m = sunLight.matcher(s);
+		s = m.replaceAll(Integer.toString(getSunLight(x, y, z)));
 		return s;
 	}
 
@@ -742,18 +745,22 @@ public class WMLL {
 	public int getSavedBlockLight(int x, int y, int z) {
 		if (y < 0 || y > 255) 
 			return 0;
-		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).a(yo.b, playerPos[0] & 0xf, playerPos[1], playerPos[2] & 0xf);
+		return getChunk(x, z).a(yo.b, x & 0xf, y, z & 0xf);
 	}
 
 	public int getRawLightLevel(int x, int y, int z) {
 		if (y < 0 || y > 255) 
 			return 0;
-		int[] playerPos = {x, y, z};
-		return getChunk(playerPos[0], playerPos[2]).c(x & 0xf, y, z & 0xf, 0);
+		return getChunk(x, z).c(x & 0xf, y, z & 0xf, 0);
+	}
+	
+	public int getSunLight(int x, int y, int z) {
+		if (y < 0 || y > 255)
+			return 0;
+		return getChunk(x, z).a(yo.a, x & 0xf, y, z & 0xf);
 	}
 
-	public int getBlockLight (int i, int j, int k) {
+	public int getBlockLight(int i, int j, int k) {
 		if (j < 0 || j > 255)
 			return 0;
 		return getChunk(i, k).a(yo.a, i & 0xf, j, k & 0xf);
