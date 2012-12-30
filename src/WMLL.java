@@ -29,10 +29,10 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 790";
+		return "Test 791";
 	}
 	public static final String getMinecraftVersion() {
-		return "1.4.6";
+		return "1.4.7";
 	}
 	public static final String[] autoDisable = {".*\\.oc\\.tc"};
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
@@ -87,6 +87,7 @@ public class WMLL {
 	public String lastWorld = "";
 	public boolean worldSeedSet = false;
 	public boolean warnedAboutConflicts = false;
+	public String reiError = "Not found", zanError = "Not found", alienError = "Not found", forgeError = "Not found";
 
 	public String[] updateInfo = {};
 
@@ -107,7 +108,7 @@ public class WMLL {
 		Rei = ReiUseMl = RadarBro = false;
 		this.debugClassPresent = (getClass().getClassLoader().getResource("ipeer_wmll_debug") != null);
 		debugActive = this.debugClassPresent;
-		settingsFile = Minecraft.a("minecraft/mods/WMLL");
+		settingsFile = new File("../mods/WMLL");
 		if (!settingsFile.exists())
 			settingsFile.mkdirs();
 		settingsFile = new File(settingsFile, "WMLL.properties");
@@ -122,7 +123,10 @@ public class WMLL {
 			debug("[WMLL] Couldn't create compatibility object (class missing).");
 		loadOptions();
 		this.autoSeed = Boolean.parseBoolean(options.getProperty("autoAquireSeed", "true"));
-		useForge = forgeDetected = (getClass().getClassLoader().getResource("net/minecraftforge/common/ForgeHooks.class") != null);
+		if (getClass().getClassLoader().getResource("net/minecraftforge/common/ForgeHooks.class") != null) {
+			useForge = forgeDetected = true;
+			forgeError = "";
+		}
 		if (getClass().getClassLoader().getResource("mod_ReiMinimap.class") != null) {
 			try {
 				Rei = true;
@@ -146,6 +150,7 @@ public class WMLL {
 			try {
 				ZansMinimap = true;
 				zansMinimap = new ZanMinimap();
+				zanError = "";
 			}
 			catch (VerifyError e) {
 				shitBricks(4, e);
@@ -190,7 +195,9 @@ public class WMLL {
 		try { debug("\t* "+wmllCompatibility.toString()); }
 		catch (Exception e) { debug("\t* null"); }
 		debug("\t* "+this.toString());
-		debug("\t* "+settingsFile.getAbsolutePath());
+		try {
+			debug("\t* "+settingsFile.getCanonicalPath());
+		} catch (IOException e) { }
 		for (String a : fieldNames.keySet())
 			debug("\t* "+a+": "+fieldNames.get(a));
 		debug("[WMLL] WMLL "+wmllVersion()+" initialized.");
@@ -1335,16 +1342,19 @@ public class WMLL {
 			System.err.println("[WMLL] Error creating Rei's Minimap Compatibility.");
 			printStackTrace(e);
 			Rei = ReiUseMl = false;
+			reiError = e.toString();
 			break;
 		case 3:
 			System.err.println("[WMLL] Error creating Alien Radar Compatibility.");
 			AlienRadar = false;
 			printStackTrace(e);
+			alienError = e.toString();
 			break;
 		case 4:
 			System.err.println("[WMLL] Error creating Zan's Minimap Compatibility.");
 			ZansMinimap = false;
 			printStackTrace(e);
+			zanError = e.toString();
 			break;
 		}
 	}

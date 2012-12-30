@@ -345,7 +345,7 @@ public class atr extends ats
         {
             d.I.a("debug");
             GL11.glPushMatrix();
-            atq1.a((new StringBuilder()).append("Minecraft 1.4.6 (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
+            atq1.a((new StringBuilder()).append("Minecraft 1.4.7 (").append(d.K).append(")").toString(), 2, 2, 0xffffff);
             atq1.a(d.m(), 2, 12, 0xffffff);
             atq1.a(d.n(), 2, 22, 0xffffff);
             atq1.a(d.p(), 2, 32, 0xffffff);

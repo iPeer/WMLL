@@ -74,10 +74,7 @@ public class WMLLOptionsGeneral extends aul {
 			bindingButton.e = "Cycle Key: "+Keyboard.getKeyName(i);
 		}
 		else if (i == Keyboard.KEY_ESCAPE && parent != null)
-			if (hasErrored)
-				f.a(parent = null);
-			else
-				f.a(parent);
+			f.a(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? null : parent);
 	}
 
 	public void a(int i, int j, float f) {

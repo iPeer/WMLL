@@ -140,7 +140,7 @@ public class WMLLOptionsOutput extends aul {
 
 	protected void a(char c, int i) {
 		if (Keyboard.KEY_ESCAPE == i)
-			f.a(parent);
+			f.a(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? null : parent);
 		else if (lightLevelBox.l())
 			lightLevelBox.a(c, i);
 		else if (seedBox.l())

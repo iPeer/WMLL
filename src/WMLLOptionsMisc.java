@@ -1,3 +1,5 @@
+import org.lwjgl.input.Keyboard;
+
 
 public class WMLLOptionsMisc extends aul {
 
@@ -45,6 +47,11 @@ public class WMLLOptionsMisc extends aul {
 			}
 			return;
 		}
+	}
+	
+	protected void a(char c, int i) {
+		if (i == Keyboard.KEY_ESCAPE)
+			f.a(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? null : parent);
 	}
 	
 	public void a(int i, int j, float f) {
