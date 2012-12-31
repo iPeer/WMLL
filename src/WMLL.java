@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 791";
+		return "Test 792";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.7";
@@ -108,7 +108,7 @@ public class WMLL {
 		Rei = ReiUseMl = RadarBro = false;
 		this.debugClassPresent = (getClass().getClassLoader().getResource("ipeer_wmll_debug") != null);
 		debugActive = this.debugClassPresent;
-		settingsFile = new File("../mods/WMLL");
+		settingsFile = new File("./mods/WMLL");
 		if (!settingsFile.exists())
 			settingsFile.mkdirs();
 		settingsFile = new File(settingsFile, "WMLL.properties");
