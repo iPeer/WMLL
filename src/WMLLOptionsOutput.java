@@ -36,7 +36,7 @@ public class WMLLOptionsOutput extends auy {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void A_() {
+	public void y_() {
 		Keyboard.enableRepeatEvents(true);
 		i.clear();
 		lightLevelBox = new aua(l, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), 35, wmll.getWindowSize().a() - 20, 15);

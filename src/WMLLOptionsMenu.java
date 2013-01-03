@@ -28,7 +28,7 @@ public class WMLLOptionsMenu extends auy {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void A_() {
+	public void y_() {
 		i.clear();
 		try {
 			if (wmll.isEnabled()) {

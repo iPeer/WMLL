@@ -14,7 +14,7 @@ public class WMLLOptionsGeneral extends auy {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void A_() {
+	public void y_() {
 		i.clear();
 		if (wmll.debugClassPresent)
 			i.add(new ato(9001, g - 20, 0, 20, 20, "R"));

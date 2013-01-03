@@ -8,7 +8,7 @@ public class WMLLError extends auy {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void A_() {
+	public void y_() {
 		i.clear();
 		i.add(new ato(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
 	}
