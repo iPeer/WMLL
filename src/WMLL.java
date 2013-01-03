@@ -29,10 +29,10 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 792";
+		return "Snapshot 4"; //T792
 	}
 	public static final String getMinecraftVersion() {
-		return "1.4.7";
+		return "13w01a";
 	}
 	public static final String[] autoDisable = {".*\\.oc\\.tc"};
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
@@ -83,7 +83,7 @@ public class WMLL {
 	private String lightString = "Light level: 9001";
 	private long lastF4Press = 0;
 	private boolean wmllF3Output = false;
-	private atq fontRenderer;
+	private aud fontRenderer;
 	public String lastWorld = "";
 	public boolean worldSeedSet = false;
 	public boolean warnedAboutConflicts = false;
@@ -142,6 +142,10 @@ public class WMLL {
 				alienRadar = new MotionTracker();
 			}
 			catch (VerifyError e) {
+				shitBricks(3, e);
+				AlienRadar = false;
+			}
+			catch (NoClassDefFoundError e) { // 13w01a 
 				shitBricks(3, e);
 				AlienRadar = false;
 			}
@@ -207,7 +211,7 @@ public class WMLL {
 		updategui(h, h.v);
 	}
 	
-	public void updategui(Minecraft h, atr guiIngame) {
+	public void updategui(Minecraft h, aue aue) {
 		h.I.a("WMLL");
 		if (getWorld() != null && !wmllUpdateCheck.running && autoUpdateCheck) {
 			wmllUpdateCheck.start();
@@ -240,7 +244,7 @@ public class WMLL {
 					debug("[WMLL] Seed set to "+this.worldSeed+" (from file)");
 				}
 				else {
-					Object obj = guiIngame.b();
+					Object obj = aue.b();
 					Field f = obj.getClass().getDeclaredField(getField("chatLines"));
 					f.setAccessible(true);
 					obj = f.get(obj);
@@ -251,7 +255,7 @@ public class WMLL {
 					int e = 0;
 					while (c.hasNext()) {
 						e++;
-						aru d = (aru)c.next();
+						ash d = (ash)c.next();
 						String b = d.a(); //d.a();
 						if (b.startsWith("Seed: ")) {
 							//aow.b().a();
@@ -681,7 +685,7 @@ public class WMLL {
 		return calendar.getTime().toString().split(" ")[3];
 	}
 
-	private ayp getWorld() {
+	private azd getWorld() {
 		try {
 			return mc.e;
 		}
@@ -690,7 +694,7 @@ public class WMLL {
 		}
 	}
 
-	public bdz sspServer() {
+	public ben sspServer() {
 		return mc.C();
 	}
 
@@ -729,19 +733,19 @@ public class WMLL {
 	//		return worldInstance().m()+", "+worldInstance().n();
 	//	}
 
-	public atq getFontRenderer() {
+	public aud getFontRenderer() {
 		return this.fontRenderer;
 	}
 
-	public aum getWindowSize() {
-		return new aum(mc.y, mc.c, mc.d);
+	public auz getWindowSize() {
+		return new auz(mc.y, mc.c, mc.d);
 	}
 
 	private boolean mcDebugOpen() {
 		return getGameSettings().X;
 	}
 
-	private ast getGameSettings() {
+	private atg getGameSettings() {
 		return mc.y;
 	}
 
@@ -820,14 +824,14 @@ public class WMLL {
 	}
 
 	private boolean canBlockSeeTheSky(int x, int y, int z) {
-		return getWorld().k(x, y, z);
+		return getWorld().l(x, y, z);
 	}
 
 	public void sendChatMessage(String t) {
 		entityPlayer().a(t);
 	}
 
-	public ays entityPlayer() {
+	public azg entityPlayer() {
 		return mc.g;
 	}
 
@@ -835,7 +839,7 @@ public class WMLL {
 		return mc.h;
 	}
 
-	public ata playerEntity() {
+	public atn playerEntity() {
 		return mc.j;
 	}
 
@@ -843,7 +847,7 @@ public class WMLL {
 		return playerEntity().b;
 	}
 
-	public ayo getPlayerController() {
+	public azc getPlayerController() {
 		return mc.b;
 	}
 
@@ -851,8 +855,8 @@ public class WMLL {
 		return !getPlayerController().b();
 	}
 
-	public ahx worldInfo() {
-		return getWorld().y;
+	public ahy worldInfo() {
+		return getWorld().x;
 	}
 
 	protected Minecraft getMCInstance() {
@@ -878,7 +882,7 @@ public class WMLL {
 	}
 
 	private aaq getWorldProvider() {
-		return getWorld().u;
+		return getWorld().t;
 	}
 
 	private zw getChunkProvider() {
