@@ -1,29 +1,29 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsMisc extends auy {
+public class WMLLOptionsMisc extends avm {
 
 	private WMLL wmll;
-	private auy parent;
+	private avm parent;
 	private int resetClicks = 0;
 	
-	public WMLLOptionsMisc(WMLL wmll, auy aum) {
+	public WMLLOptionsMisc(WMLL wmll, avm aum) {
 		this.wmll = wmll;
 		this.parent = aum;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void y_() {
+	public void z_() {
 		i.clear();
 		if (wmll.debugClassPresent)
-			i.add(new ato(9001, g - 20, 0, 20, 20, "R"));
-		i.add(new ato(0, g / 2 - 190, h - 30, 380, 20, "Done"));
-		i.add(new ato(1, g / 2 - 100, h / 4 + 25, 200, 20, "Reload Settings from file"));
-		i.add(new ato(2, g / 2 - 100, h / 4 + 50, 200, 20, "Reset Settings to defaults"));
-		i.add(new ato(3, g / 2 - 100, h / 4, 200, 20, "Automatically check for updates: "+(wmll.autoUpdateCheck ? "ON" : "OFF")));
+			i.add(new auc(9001, g - 20, 0, 20, 20, "R"));
+		i.add(new auc(0, g / 2 - 190, h - 30, 380, 20, "Done"));
+		i.add(new auc(1, g / 2 - 100, h / 4 + 25, 200, 20, "Reload Settings from file"));
+		i.add(new auc(2, g / 2 - 100, h / 4 + 50, 200, 20, "Reset Settings to defaults"));
+		i.add(new auc(3, g / 2 - 100, h / 4, 200, 20, "Automatically check for updates: "+(wmll.autoUpdateCheck ? "ON" : "OFF")));
 	}
 	
-	public void a(ato b) {
+	public void a(auc b) {
 		switch (b.f) {
 		case 9001:
 			f.a(new WMLLOptionsMisc(this.wmll, this.parent));

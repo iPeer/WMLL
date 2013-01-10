@@ -18,7 +18,7 @@ public class WMLLCompatibility extends auf {
 		int a = d.g.aW();
 		if (WMLL.i.forgeEnabled)
 			try {
-				return ForgeHooks.getTotalArmorValue(d.g); // 12W40 & 1.4PRE ERROR
+				return ForgeHooks.getTotalArmorValue(d.d); // 12W40 & 1.4PRE ERROR
 			}
 		catch (IllegalAccessError e) { return a; }
 		catch (NoClassDefFoundError e) { return a; }

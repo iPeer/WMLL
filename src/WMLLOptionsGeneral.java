@@ -1,33 +1,33 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsGeneral extends auy {
+public class WMLLOptionsGeneral extends avm {
 
 	private WMLL wmll;
-	private auy parent;
+	private avm parent;
 	private boolean isBinding, hasErrored;
-	private ato bindingButton;
+	private auc bindingButton;
 
-	public WMLLOptionsGeneral(WMLL wmll, auy aum) {
+	public WMLLOptionsGeneral(WMLL wmll, avm aum) {
 		this.wmll = wmll;
 		this.parent = aum;
 	}
 
 	@SuppressWarnings("unchecked")
-	public void y_() {
+	public void z_() {
 		i.clear();
 		if (wmll.debugClassPresent)
-			i.add(new ato(9001, g - 20, 0, 20, 20, "R"));
+			i.add(new auc(9001, g - 20, 0, 20, 20, "R"));
 		String enabledString = "Enabled on "+wmll.getWorldName()+": "+(WMLL.Enabled ? "Yes" : "No");
-		i.add(new ato(0, g / 2 - 150, h / 4, 300, 20, enabledString));
-		i.add(bindingButton = new ato(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
-		i.add(new ato(2, g / 2 - 190, h - 25, 380, 20, "Done"));
-		i.add(new ato(3, g / 2 - 50, h / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
-		i.add(new ato(4, g / 2 - 150, h / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
-		i.add(new ato(5, g / 2 - 150, h / 4 + 50, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
+		i.add(new auc(0, g / 2 - 150, h / 4, 300, 20, enabledString));
+		i.add(bindingButton = new auc(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
+		i.add(new auc(2, g / 2 - 190, h - 25, 380, 20, "Done"));
+		i.add(new auc(3, g / 2 - 50, h / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
+		i.add(new auc(4, g / 2 - 150, h / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
+		i.add(new auc(5, g / 2 - 150, h / 4 + 50, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
 	}
 
-	protected void a(ato b) {
+	protected void a(auc b) {
 		switch (b.f) {
 		case 9001:
 			f.a(new WMLLOptionsGeneral(this.wmll, this.parent));
@@ -46,7 +46,7 @@ public class WMLLOptionsGeneral extends auy {
 			if (parent != null)
 				f.a(parent);
 			else
-				f.a((auy)null);
+				f.a((avm)null);
 			return;
 		case 3:
 			boolean c = wmll.autoSeed;

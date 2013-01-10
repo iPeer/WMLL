@@ -4,10 +4,10 @@ import java.net.URI;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsMenu extends auy {
+public class WMLLOptionsMenu extends avm {
 
 	private WMLL wmll;
-	private auy parent;
+	private avm parent;
 	private static final String threadURL = "http://www.minecraftforum.net/topic/170739-";
 	private Desktop desktop;
 
@@ -17,36 +17,36 @@ public class WMLLOptionsMenu extends auy {
 		this.wmll = wmll;
 	}
 
-	public WMLLOptionsMenu(WMLL wmll, auy aum) {
+	public WMLLOptionsMenu(WMLL wmll, avm aum) {
 		this.wmll = wmll;
 		this.parent = aum;
 	}
 
-	public WMLLOptionsMenu(auy aum) {
+	public WMLLOptionsMenu(avm aum) {
 		this.parent = aum;
 		this.wmll = WMLL.i;
 	}
 
 	@SuppressWarnings("unchecked")
-	public void y_() {
+	public void z_() {
 		i.clear();
 		try {
 			if (wmll.isEnabled()) {
-				i.add(new ato(0, g / 2 - 200, h - 95, "General Settings"));
-				i.add(new ato(1, g / 2 + 2, h - 95, "Output Settings"));
-				i.add(new ato(2, g / 2 - 200, h - 70, "Miscellaneous Settings"));
-				i.add(new ato(3, g / 2 + 2, h - 70, "Compatibility Settings"));
-				ato updateButton;
-				i.add(updateButton = new ato(-1, g / 2 - 100, h / 4 + 23, "View forum thread"));
+				i.add(new auc(0, g / 2 - 200, h - 95, "General Settings"));
+				i.add(new auc(1, g / 2 + 2, h - 95, "Output Settings"));
+				i.add(new auc(2, g / 2 - 200, h - 70, "Miscellaneous Settings"));
+				i.add(new auc(3, g / 2 + 2, h - 70, "Compatibility Settings"));
+				auc updateButton;
+				i.add(updateButton = new auc(-1, g / 2 - 100, h / 4 + 23, "View forum thread"));
 				updateButton.h = wmll.updateInfo.length > 0 && Desktop.isDesktopSupported() && (this.desktop = Desktop.getDesktop()).isSupported(Desktop.Action.BROWSE);
 			}
 			else {
-				i.add(new ato(999, g / 2 - 50, h - 110, 100, 20, "Enable it!"));
+				i.add(new auc(999, g / 2 - 50, h - 110, 100, 20, "Enable it!"));
 			}
-			i.add(new ato(4, g / 2 - 190, h - 30, 380, 20, (wmll.isEnabled() ? "Done" : "Cancel")));
+			i.add(new auc(4, g / 2 - 190, h - 30, 380, 20, (wmll.isEnabled() ? "Done" : "Cancel")));
 			if (wmll.debugClassPresent) {
-				i.add(new ato(9000, g - 40, 0, 20, 20, (WMLL.debugActive ? "\247l" : "")+"D"));
-				i.add(new ato(9001, g - 20, 0, 20, 20, "R"));
+				i.add(new auc(9000, g - 40, 0, 20, 20, (WMLL.debugActive ? "\247l" : "")+"D"));
+				i.add(new auc(9001, g - 20, 0, 20, 20, "R"));
 			}
 		}
 		catch (Exception e) {
@@ -54,7 +54,7 @@ public class WMLLOptionsMenu extends auy {
 		}
 	}
 
-	protected void a(ato b) {
+	protected void a(auc b) {
 		switch (b.f) {
 		case 0:
 			f.a(new WMLLOptionsGeneral(this.wmll, this));
@@ -72,7 +72,7 @@ public class WMLLOptionsMenu extends auy {
 			if (parent != null)
 				f.a(parent);
 			else
-				f.a((auy)null);
+				f.a((avm)null);
 			wmll.saveOptions();
 			return;
 		case -1:

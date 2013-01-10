@@ -6,26 +6,26 @@ import java.util.ArrayList;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsOutput extends auy {
+public class WMLLOptionsOutput extends avm {
 
-	private static final String[] outputs = {"Just Light", "Light & Indicators", "Light, FPS & Chunk Updates", "Light & Compass",
-		"Light, Indicators & Compass", "Light, FPS & Coordinates", "Just Indicators", "Just FPS & Chunk Updates", "Just Compass",
-		"Just Indicators and Compass", "Just FPS & Coordinates", "Nothing"};
+	private static final String[] outputs = {"Just Light", "Light & Indicaucrs", "Light, FPS & Chunk Updates", "Light & Compass",
+		"Light, Indicaucrs & Compass", "Light, FPS & Coordinates", "Just Indicaucrs", "Just FPS & Chunk Updates", "Just Compass",
+		"Just Indicaucrs and Compass", "Just FPS & Coordinates", "Nothing"};
 
 	private static final String[] locations = {"Top Left", "Top Right", "Bottom Left", "Bottom Right"};
 
 
 	private WMLL wmll;
-	private auy parent;
+	private avm parent;
 
-	public aua lightLevelBox;
-	private aua R, G, B, seedBox;
-	private ato showButton;
-	private ArrayList<aua> editboxes = new ArrayList<aua>();
+	public auo lightLevelBox;
+	private auo R, G, B, seedBox;
+	private auc showButton;
+	private ArrayList<auo> editboxes = new ArrayList<auo>();
 	private Desktop desktop;
 	private int[] colours;
 
-	public WMLLOptionsOutput(WMLL wmll, auy aum) {
+	public WMLLOptionsOutput(WMLL wmll, avm aum) {
 		this.wmll = wmll;
 		this.parent = aum;
 	}
@@ -36,21 +36,21 @@ public class WMLLOptionsOutput extends auy {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void y_() {
+	public void z_() {
 		Keyboard.enableRepeatEvents(true);
 		i.clear();
-		lightLevelBox = new aua(l, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), 35, wmll.getWindowSize().a() - 20, 15);
+		lightLevelBox = new auo(l, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), 35, wmll.getWindowSize().a() - 20, 15);
 		lightLevelBox.f(500);
 		lightLevelBox.a(WMLL.options.getProperty("lightString", "Light level: %LightLevel%"));
 		lightLevelBox.b(true);
-		i.add(showButton = new ato(1, g / 2 - 75, h / 4 + 5, 275, 20, "Show: "+outputs[WMLL.WMLLI]));
-		R = new aua(l, g / 2 - 60, h / 4 + 70, 30, 10);
+		i.add(showButton = new auc(1, g / 2 - 75, h / 4 + 5, 275, 20, "Show: "+outputs[WMLL.WMLLI]));
+		R = new auo(l, g / 2 - 60, h / 4 + 70, 30, 10);
 		R.f(3);
 		R.a(WMLL.options.getProperty("RGB-R", "255"));
-		G = new aua(l, g / 2 - 15, h / 4 + 70, 30, 10);
+		G = new auo(l, g / 2 - 15, h / 4 + 70, 30, 10);
 		G.f(3);
 		G.a(WMLL.options.getProperty("RGB-G", "255"));
-		B = new aua(l, g / 2 + 30, h / 4 + 70, 30, 10);
+		B = new auo(l, g / 2 + 30, h / 4 + 70, 30, 10);
 		B.f(3);
 		B.a(WMLL.options.getProperty("RGB-B", "255"));
 		if (R.b().equals(""))
@@ -63,7 +63,7 @@ public class WMLLOptionsOutput extends auy {
 		colours[0] = Integer.valueOf((R.b().equals("") ? "0" : R.b()));
 		colours[1] = Integer.valueOf((G.b().equals("") ? "0" : G.b()));
 		colours[2] = Integer.valueOf((B.b().equals("") ? "0" : B.b()));
-		seedBox = new aua(l, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), h / 4 + 105, wmll.getWindowSize().a() - 20, 15);
+		seedBox = new auo(l, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), h / 4 + 105, wmll.getWindowSize().a() - 20, 15);
 		seedBox.f(500);
 		seedBox.a(Long.toString(wmll.getWorldSeed()));
 		editboxes.add(seedBox);
@@ -72,18 +72,18 @@ public class WMLLOptionsOutput extends auy {
 		editboxes.add(G);
 		editboxes.add(B);
 		showButton.g = wmll.classicOutput || WMLL.useImages;
-		i.add(new ato(2, g / 2 - 200, h / 4 + 5, 120, 20, "Location: "+locations[WMLL.outputLocation]));
-		i.add(new ato(3, g / 2 - 200, h / 4 + 30, 120, 20, "Output type: "+(wmll.classicOutput ? "Classic" : "Custom")));
-		i.add(new ato(4, g / 2 - 75, h / 4 + 30, 120, 20, "Images: "+(WMLL.useImages ? "ON" : "OFF")));
-		i.add(new ato(0, g / 2 - 190, h - 30, 380, 20, "Done"));
-		ato paramButton;
-		i.add(paramButton = new ato(-1, wmll.getWindowSize().a() - 108, 19, 100, 14, "Parameter help"));
+		i.add(new auc(2, g / 2 - 200, h / 4 + 5, 120, 20, "Location: "+locations[WMLL.outputLocation]));
+		i.add(new auc(3, g / 2 - 200, h / 4 + 30, 120, 20, "Output type: "+(wmll.classicOutput ? "Classic" : "Custom")));
+		i.add(new auc(4, g / 2 - 75, h / 4 + 30, 120, 20, "Images: "+(WMLL.useImages ? "ON" : "OFF")));
+		i.add(new auc(0, g / 2 - 190, h - 30, 380, 20, "Done"));
+		auc paramButton;
+		i.add(paramButton = new auc(-1, wmll.getWindowSize().a() - 108, 19, 100, 14, "Parameter help"));
 		paramButton.h = Desktop.isDesktopSupported() && (this.desktop = Desktop.getDesktop()).isSupported(Desktop.Action.BROWSE);
 		if (wmll.debugClassPresent)
-			i.add(new ato(9001, g - 20, 0, 20, 20, "R"));
+			i.add(new auc(9001, g - 20, 0, 20, 20, "R"));
 	}
 
-	protected void a(ato b) {
+	protected void a(auc b) {
 		switch (b.f) {
 		case 9001:
 			f.a(new WMLLOptionsOutput(this.wmll, this.parent));
@@ -185,7 +185,7 @@ public class WMLLOptionsOutput extends auy {
 		int b = colours[2];
 		a(l, "Colour preview", g / 2, h / 4 + 85, new Color(r, g1, b).getRGB());
 		a(l, "Seed", g / 2 - ((wmll.getWindowSize().a() - wmll.getFontRenderer().a("Seed") - 20) / 2), h / 4 + 92, 0xffffff);
-		for (aua a : editboxes)
+		for (auo a : editboxes)
 			a.f();
 		super.a(i, j, f);
 	}

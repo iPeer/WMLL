@@ -1,22 +1,22 @@
 
-public class WMLLError extends auy {
+public class WMLLError extends avm {
 
 	private Throwable e;
 
-	public WMLLError(auy aum, Throwable e) {
+	public WMLLError(avm aum, Throwable e) {
 		this.e = e;
 	}
 
 	@SuppressWarnings("unchecked")
-	public void y_() {
+	public void z_() {
 		i.clear();
-		i.add(new ato(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
+		i.add(new auc(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
 	}
 
-	public void a(ato b) {
+	public void a(auc b) {
 		switch (b.f) {
 		case 0:
-			f.a((auy)null);
+			f.a((avm)null);
 			return;
 		}
 	}
