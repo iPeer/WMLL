@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 40"; // 792
+		return "Test 793"; // 792
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.7";
@@ -590,6 +590,8 @@ public class WMLL {
 		Pattern seed = Pattern.compile("%seed%", Pattern.CASE_INSENSITIVE);
 		Pattern localTime = Pattern.compile("%localtime%", Pattern.CASE_INSENSITIVE);
 		Pattern localTime12h = Pattern.compile("%12hlocaltime%", Pattern.CASE_INSENSITIVE);
+		Pattern entities = Pattern.compile("%entities%", Pattern.CASE_INSENSITIVE);
+		Pattern entities2 = Pattern.compile("%fullentities%", Pattern.CASE_INSENSITIVE);
 		String lightLevel = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247r";
 		a = getSavedBlockLight(x, y, z);
 		String blockLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247r";
@@ -665,6 +667,10 @@ public class WMLL {
 		s = m.replaceAll(getLocalTime(1));
 		m = sunLight.matcher(s);
 		s = m.replaceAll(Integer.toString(getSunLight(x, y, z)));
+		m = entities.matcher(s);
+		s = m.replaceAll(mc.n().split(" ")[1].split("/")[0]);
+		m = entities2.matcher(s);
+		s = m.replaceAll(mc.n().split(" ")[1].replaceAll("\\.", ""));
 		return s;
 	}
 
