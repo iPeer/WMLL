@@ -29,13 +29,13 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 793"; // 792
+		return "Test 794"; // 793
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.7";
 	}
 	public static final String[] autoDisable = {".*\\.oc\\.tc"};
-	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 44, 20, 130);
+	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 20, 44, 50, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
 	public static final WMLLUpdateCheck wmllUpdateCheck = new WMLLUpdateCheck();
 	public static WMLL i = new WMLL();
@@ -216,10 +216,10 @@ public class WMLL {
 			System.out.println("[WMLL] FATAL: World == NULL! -- Stopping update thread.");
 			wmllUpdateCheck.stop1();
 		}
-		if (getWorld() != null && !getWorldName().equals(lastWorld) && !isMultiplayer() && autoSeed) {
+		if (getWorld() != null && !getWorldName().equals(lastWorld) && autoSeed) {
 			worldSeedSet = false;
 			lastWorld = getWorldName();
-			if (!options.containsKey("Seed:"+getWorldName().toLowerCase()))
+			if (!options.containsKey("Seed:"+getWorldName().toLowerCase()) && !isMultiplayer())
 				entityPlayer().c("/seed");
 			debug("[WMLL] World name differs, re-acquiring seed...");
 			boolean[] b = {Rei && ReiEnabled, ZansMinimap && ZansEnabled, AlienRadar && AlienEnabled};
