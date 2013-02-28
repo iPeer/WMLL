@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 794"; // 793
+		return "Test 795"; // 793
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.7";
@@ -78,7 +78,7 @@ public class WMLL {
 	public boolean satBar;
 	private boolean ranInit = false;
 	private boolean firstRun = true;
-	private final String[] sleepstrings = {"Almost makes you wish for a nuclear winter!", "1 byte of posts!", "Kuurth for 1000!", "Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
+	private final String[] sleepstrings = {"What's My Arrow Level?", "Almost makes you wish for a nuclear winter!", "1 byte of posts!", "Kuurth for 1000!", "Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
 	private boolean sleepingStringSet = false;
 	private String lightString = "Light level: 9001";
 	private long lastF4Press = 0;
@@ -671,9 +671,94 @@ public class WMLL {
 		s = m.replaceAll(mc.n().split(" ")[1].split("/")[0]);
 		m = entities2.matcher(s);
 		s = m.replaceAll(mc.n().split(" ")[1].replaceAll("\\.", ""));
+		Pattern debug = Pattern.compile("%debug:([\\p{Alnum}\\p{Punct}&&[^\\\\ ]]+)%", Pattern.CASE_INSENSITIVE);
+		m = debug.matcher(s);
+		while (m.find()) {
+			String dval = m.group().replaceAll("%debug:|%", "").toLowerCase();
+			s = s.replaceAll("%debug:"+dval+"%", debugValue(dval)+"\247r");
+		}
 		return s;
 	}
+	
+	public ur getHeldItemStack() {
+		return getPlayerInventory().g();
+	}
+	
+	public ur getHeldItem() {
+		return getHeldItemStack();
+	}
+	
+	public int getHeldItemID() {
+		try {
+			return getHeldItemStack().c;
+		}
+		catch (NullPointerException e) { return -1; }
+	}
+	
+	public qw getPlayerInventory() {
+		return entityPlayer().bJ;
+	}
+	
+	public Class<?> enchantmentHelper() {
+		return xe.class;
+	}
+	
+	public boolean itemHasEnchant(int enchantID) {
+		return itemHasEnchant(enchantID, getHeldItemStack());
+	}
+	
+	public boolean itemHasEnchant(int enchantID, ur itemStack) {
+		return xe.a(51, itemStack) > 0;
+	}
+	
+	public String getInternalItemNameForSlot(int slot) {
+		ur items[] = getPlayerInventory().a;
+		return items[slot].a();
+	}
+	
+	public boolean isSlotEmpty(int slot) {
+		return getPlayerInventory().a[slot] == null;
+	}
 
+	private String debugValue(String v) {
+		if (v.equals("arrows")) {
+			if (getHeldItemID() != 261)
+				return "Not holding a bow.";
+			ur items[] = getPlayerInventory().a;
+			if (items == null)
+				return "items == null";
+			int arrows = 0;
+			String arr = "Arrows: ";
+			if (itemHasEnchant(51, getHeldItem()) || isCreative())
+				return arr+"Unlimited";
+			for (int x1 = 0; x1 < items.length; x1++) {
+				if (!isSlotEmpty(x1) && getInternalItemNameForSlot(x1).equals("item.arrow"))
+					arrows += items[x1].a;
+			}
+			return arr+arrows;
+		}
+		else if (v.equals("helditem")) {
+			try {
+				ur itemstack = getHeldItemStack();
+				if (itemstack == null)
+					return "Nothing";
+				// Item internal name: a()
+				// Item name: r()
+				// Stack quantity: a
+				// Item ID: c
+				// Item durability: k()
+				// Item used durability: j()
+				// Item data: i()
+				// Has been used: h()
+				// Is Enchanted or Named: o()
+				return itemstack.r()+"/"+itemstack.a()+", "+itemstack.a+", "+itemstack.c+", "+itemstack.k()+", "+(itemstack.k() - itemstack.j())+", "+itemstack.i()+", "+itemstack.o()+", "+xc.y.z;
+				//return a;
+			}
+			catch (Exception e) { return e.toString(); }
+		}
+			
+		return "Invalid";
+	}
 
 	private String getLocalTime(int mode) {
 		calendar.setTime(new Date(System.currentTimeMillis()));
