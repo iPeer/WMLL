@@ -29,7 +29,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 795"; // 793
+		return "Test 796";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.4.7";
@@ -680,17 +680,13 @@ public class WMLL {
 		return s;
 	}
 	
-	public ur getHeldItemStack() {
-		return getPlayerInventory().g();
-	}
-	
 	public ur getHeldItem() {
-		return getHeldItemStack();
+		return getPlayerInventory().g();
 	}
 	
 	public int getHeldItemID() {
 		try {
-			return getHeldItemStack().c;
+			return getHeldItem().c;
 		}
 		catch (NullPointerException e) { return -1; }
 	}
@@ -699,12 +695,12 @@ public class WMLL {
 		return entityPlayer().bJ;
 	}
 	
-	public Class<?> enchantmentHelper() {
-		return xe.class;
+	public boolean itemHasEnchant(int enchantID) {
+		return itemHasEnchant(enchantID, getHeldItem());
 	}
 	
-	public boolean itemHasEnchant(int enchantID) {
-		return itemHasEnchant(enchantID, getHeldItemStack());
+	public ur[] getPlayerArmour() {
+		return entityPlayer().ae();
 	}
 	
 	public boolean itemHasEnchant(int enchantID, ur itemStack) {
@@ -712,8 +708,7 @@ public class WMLL {
 	}
 	
 	public String getInternalItemNameForSlot(int slot) {
-		ur items[] = getPlayerInventory().a;
-		return items[slot].a();
+		return getPlayerInventory().a[slot].a();
 	}
 	
 	public boolean isSlotEmpty(int slot) {
@@ -725,8 +720,6 @@ public class WMLL {
 			if (getHeldItemID() != 261)
 				return "Not holding a bow.";
 			ur items[] = getPlayerInventory().a;
-			if (items == null)
-				return "items == null";
 			int arrows = 0;
 			String arr = "Arrows: ";
 			if (itemHasEnchant(51, getHeldItem()) || isCreative())
@@ -737,10 +730,21 @@ public class WMLL {
 			}
 			return arr+arrows;
 		}
+		else if (v.equals("armour")) {
+			ur[] armour = getPlayerArmour();
+			String o = "";
+			for (int i = armour.length-1; i > -1; i--) {
+				if (armour[i] != null)
+					o = o+(o.length() > 0 ? ", " : "")+armour[i].r();
+			}
+			if (o.equals(""))
+				return "no armour.";
+			return o;
+		}
 		else if (v.equals("helditem")) {
 			try {
-				ur itemstack = getHeldItemStack();
-				if (itemstack == null)
+				ur itemStack = getHeldItem();
+				if (itemStack == null)
 					return "Nothing";
 				// Item internal name: a()
 				// Item name: r()
@@ -751,7 +755,16 @@ public class WMLL {
 				// Item data: i()
 				// Has been used: h()
 				// Is Enchanted or Named: o()
-				return itemstack.r()+"/"+itemstack.a()+", "+itemstack.a+", "+itemstack.c+", "+itemstack.k()+", "+(itemstack.k() - itemstack.j())+", "+itemstack.i()+", "+itemstack.o()+", "+xc.y.z;
+				String itemName = itemStack.r();
+				int itemMaxDur = itemStack.k();
+				int itemCurrDur = (itemMaxDur - itemStack.j());
+				int itemData = itemStack.i();
+				int itemID = itemStack.c;
+				boolean hasData = itemStack.g();
+				if (itemMaxDur > 0) {
+					return itemName+": "+new DecimalFormat("##").format(((double)itemCurrDur/itemMaxDur)*100.00)+"% durability, "+itemCurrDur+" uses.";
+				}
+				return itemName +" ("+itemID+(hasData ? ":"+itemData : "")+")";
 				//return a;
 			}
 			catch (Exception e) { return e.toString(); }
