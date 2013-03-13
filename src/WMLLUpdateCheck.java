@@ -20,16 +20,14 @@ public class WMLLUpdateCheck extends Thread implements Runnable {
 
 	@Override
 	public void run() {
-		while (running) {
-			checkForUpdates();			
-			try {
-				Thread.sleep(3600000); // Sleep for one hour.
-			} catch (InterruptedException e) {
-				stop1();
-				e.printStackTrace();
-			}
+			checkForUpdates();	
+//			try {
+//				Thread.sleep(3600000); // Sleep for one hour.
+//			} catch (InterruptedException e) {
+//				stop1();
+//				e.printStackTrace();
+//			}
 
-		}
 	}
 
 	private void checkForUpdates() {
