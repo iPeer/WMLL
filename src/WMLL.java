@@ -30,10 +30,10 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 797";
+		return "Stable 41"; //797
 	}
 	public static final String getMinecraftVersion() {
-		return "1.5pre";
+		return "1.5";
 	}
 	public static final String[] autoDisable = {".*\\.oc\\.tc"};
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 20, 44, 50, 130);
