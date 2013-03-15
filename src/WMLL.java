@@ -30,7 +30,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 798";
+		return "Stable 42"; // 789
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5";
