@@ -30,7 +30,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 41"; //797
+		return "Stable 42"; // 789
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5";
@@ -78,7 +78,7 @@ public class WMLL {
 	private Object zansMinimap;
 	public boolean satBar;
 	private boolean ranInit = false;
-	private boolean firstRun = true;
+	public boolean firstRun = true;
 	private final String[] sleepstrings = {"What's My Arrow Level?", "Almost makes you wish for a nuclear winter!", "1 byte of posts!", "Kuurth for 1000!", "Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
 	private boolean sleepingStringSet = false;
 	private String lightString = "Light level: 9001";
@@ -236,7 +236,7 @@ public class WMLL {
 			if (!isEnabled())
 				entityPlayer().a("[\2472WMLL\247f] \247cWMLL has been disabled on this "+(isMultiplayer() ? "server" : "world")+".");
 		}
-		if (!worldSeedSet) {
+		if (!worldSeedSet && getWorld() != null) {
 			try {
 				if (options.getProperty("Seed:"+getWorldName().toLowerCase()) != null) {
 					worldSeedSet = true;
@@ -338,7 +338,7 @@ public class WMLL {
 				int blockID = getBlockID(getPlayerCoordinates()[0], getPlayerCoordinates()[1] - 1, getPlayerCoordinates()[2]);
 				drawDebug(Integer.toString(blockID), (getWindowSize().a() - (getFontRenderer().a(Integer.toString(blockID)) + 1)), 4, 0xffffff);
 				try {
-					drawDebug(mc.r.toString(), (getWindowSize().a() - (getFontRenderer().a(mc.r.toString()) + 1)), 5, 0xffffff);
+					drawDebug(mc.s.toString(), (getWindowSize().a() - (getFontRenderer().a(mc.s.toString()) + 1)), 5, 0xffffff);
 				}
 				catch (NullPointerException e) {
 					drawDebug("null", (getWindowSize().a() - (getFontRenderer().a("null") + 1)), 5, 0xffffff);
@@ -1217,10 +1217,10 @@ public class WMLL {
 	private void WMLLCheckKeys() {
 		if (Keyboard.isKeyDown(F4Key) && System.currentTimeMillis() - lastF4Press > 150) {
 			lastF4Press = System.currentTimeMillis();
-			if (Keyboard.isKeyDown(29) && mc.r == null)
+			if (Keyboard.isKeyDown(29) && mc.s == null)
 				mc.a(new WMLLOptionsMenu(this));
 			else
-				if (mc.r == null) {
+				if (mc.s == null) {
 					//&& !(mc.s instanceof acr/*GuiChat*/) && !(mc.s instanceof ars/*Sign Editing*/) && !(mc.s instanceof hw/*Book Editing*/)) {
 					if (useImages || classicOutput) {
 						if (Keyboard.isKeyDown(42)) {
@@ -1505,7 +1505,7 @@ public class WMLL {
 		if (showUnderGUIs)
 			return true;
 		else
-			return mc.r == null;
+			return mc.s == null;
 	}
 	
 	public boolean canStructureSpawnHere(int x, int z) {

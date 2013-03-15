@@ -36,7 +36,7 @@ public class WMLLRenderer extends awr {
 		}
 		if (firstRun) {
 			String a = "";
-			if (mc.r == null)
+			if (mc.s == null)
 				notifyTick1--;
 			if (notifyTick1 >= 500)
 				a = "To cycle WMLL's outputs, press \247c"+Keyboard.getKeyName(WMLL.F4Key)+"\247e.";
