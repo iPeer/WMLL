@@ -30,7 +30,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 790"; // 789
+		return "Test 791"; // 789
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5";
@@ -997,7 +997,7 @@ public class WMLL {
 	}
 
 	public long getWorldTime() {
-		return getWorld().G();
+		return getWorld().H();
 	}
 
 	private String getFormattedWorldTime(int i) {
