@@ -30,7 +30,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 42"; // 789
+		return "Test 790"; // 789
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5";
@@ -366,7 +366,7 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 14, 0xffffff);
 			}
 			WMLLCheckKeys();
-			if (!Enabled || !shouldShow())
+			if (!Enabled || !shouldShow() || (WMLLI == 11 && classicOutput))
 				return;
 			// 0 = x, 1 = y, 2 = z, 3 = f
 			int[] playerPos = getPlayerCoordinates();
@@ -1079,7 +1079,8 @@ public class WMLL {
 	}
 
 	public void drawString(String t, int i, int j, int k) {
-		int textpos = (WMLLI > 5 && classicOutput ? -8 : 2);
+		//int textpos = (WMLLI > 5 && classicOutput ? -8 : 2);
+		int textpos = 2;
 		//t = (k == 0xffffff ? "\247"+Integer.toHexString(TextColour) : "")+t;
 		Pattern re = Pattern.compile("\247[0-9a-f,l-o,r]");
 		int w = getWindowSize().a();
@@ -1215,7 +1216,7 @@ public class WMLL {
 	}
 
 	private void WMLLCheckKeys() {
-		if (Keyboard.isKeyDown(F4Key) && System.currentTimeMillis() - lastF4Press > 150) {
+		if (Keyboard.isKeyDown(F4Key) && System.currentTimeMillis() - lastF4Press > 250) {
 			lastF4Press = System.currentTimeMillis();
 			if (Keyboard.isKeyDown(29) && mc.s == null)
 				mc.a(new WMLLOptionsMenu(this));
