@@ -94,7 +94,7 @@ public class WMLLOptionsOutput extends axl {
 			WMLL.options.put("RGB-B", B.b());
 			WMLL.TextColour = new Color(colours[0], colours[1], colours[2]).getRGB();
 			WMLL.options.put("lightString", lightLevelBox.b());
-			if (!seedBox.b().equals(wmll.getWorldSeed())) {
+			if (!seedBox.b().equals(wmll.getWorldSeed()) && seedBox.b() != "0") {
 				wmll.worldSeedSet = true;
 				wmll.worldSeed = Long.valueOf(seedBox.b());
 				WMLL.options.put("Seed:"+wmll.getWorldName(), seedBox.b());

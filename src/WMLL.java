@@ -30,7 +30,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 791"; // 789
+		return "Test 802";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5";
@@ -99,7 +99,7 @@ public class WMLL {
 		debug("[WMLL] Initializing WMLL "+wmllVersion());
 		fieldNames.put("sendQueue", "i");
 		fieldNames.put("netManager", "g");
-		fieldNames.put("remoteSocketAddress", "j");
+		fieldNames.put("remoteSocketAddress", "k");
 		fieldNames.put("SPremoteSocketAddress", "a");
 		fieldNames.put("genNetherBridge", "c");
 		fieldNames.put("SpawnListEntry", "a");
@@ -225,7 +225,8 @@ public class WMLL {
 			lastWorld = getWorldName();
 //			if (!options.containsKey("Seed:"+getWorldName().toLowerCase()) && !isMultiplayer())
 //				entityPlayer().d("/seed");
-			debug("[WMLL] World name differs, re-acquiring seed...");
+			if (!isMultiplayer())
+				debug("[WMLL] World name differs, re-acquiring seed...");
 			boolean[] b = {Rei && ReiEnabled, ZansMinimap && ZansEnabled, AlienRadar && AlienEnabled};
 			if (atLeast2True(b) && !warnedAboutConflicts) {
 				ReiEnabled = ZansEnabled = AlienEnabled = false;
@@ -236,7 +237,7 @@ public class WMLL {
 			if (!isEnabled())
 				entityPlayer().a("[\2472WMLL\247f] \247cWMLL has been disabled on this "+(isMultiplayer() ? "server" : "world")+".");
 		}
-		if (!worldSeedSet && getWorld() != null) {
+		if (!worldSeedSet && getWorld() != null && !isMultiplayer()) {
 			try {
 				if (options.getProperty("Seed:"+getWorldName().toLowerCase()) != null) {
 					worldSeedSet = true;
@@ -424,6 +425,8 @@ public class WMLL {
 					else if (WMLLI == 10 || WMLLI == 5) 
 						out = 1;
 					if ((isSeedSet()) || isMultiplayer())
+						out++;
+					if ((isMultiplayer() && (getDimension() == -1 || getDimension() == 1)))
 						out++;
 					//				if (getDimension() == 1)
 					//					out--;
@@ -817,11 +820,7 @@ public class WMLL {
 			f1.setAccessible(true);
 			obj = f1.get(obj);
 			Field f2;
-			if (!isMultiplayer())
-				f2 = obj.getClass().getDeclaredField(getField("SPremoteSocketAddress")); // remoteSocketAddress
-
-			else
-				f2 = obj.getClass().getDeclaredField(getField("remoteSocketAddress"));
+			f2 = obj.getClass().getDeclaredField(getField("remoteSocketAddress")); 
 			f2.setAccessible(true);
 			SocketAddress a = (SocketAddress)f2.get(obj);
 			String s = a.toString();
