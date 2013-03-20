@@ -30,7 +30,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 803";
+		return "Test 804";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5.1pre";
@@ -436,7 +436,7 @@ public class WMLL {
 					double z = player.v;
 					double f = kx.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
 					NumberFormat d = new DecimalFormat("#0.00");
-					String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection((int)f)+")";
+					String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection()+")";
 					drawString(coords, 2, out, 0xffffff);
 					if (WMLLI != 5 && WMLLI != 10) {
 						boolean showSeed = (!isMultiplayer() || isSeedSet()/* || getWorldName().equals("localServer")*/) && showSeedWithCoords;
@@ -1191,6 +1191,10 @@ public class WMLL {
 				saveOptions();
 		}
 		catch (Exception e) { debug("[WMLL] Unable to load options: "+e.getMessage()); }
+	}
+	
+	public String getPlayerDirection() {
+		return getPlayerDirection(getPlayerCoordinates()[3]);
 	}
 
 	public String getPlayerDirection(int f) {
