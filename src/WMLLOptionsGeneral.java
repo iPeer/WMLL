@@ -1,14 +1,14 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsGeneral extends axl {
+public class WMLLOptionsGeneral extends axr {
 
 	private WMLL wmll;
-	private axl parent;
+	private axr parent;
 	private boolean isBinding, hasErrored;
-	private awa bindingButton;
+	private awg bindingButton;
 
-	public WMLLOptionsGeneral(WMLL wmll, axl aum) {
+	public WMLLOptionsGeneral(WMLL wmll, axr aum) {
 		this.wmll = wmll;
 		this.parent = aum;
 	}
@@ -17,17 +17,17 @@ public class WMLLOptionsGeneral extends axl {
 	public void A_() {
 		i.clear();
 		if (wmll.debugClassPresent)
-			i.add(new awa(9001, g - 20, 0, 20, 20, "R"));
+			i.add(new awg(9001, g - 20, 0, 20, 20, "R"));
 		String enabledString = "Enabled on "+wmll.getWorldName()+": "+(WMLL.Enabled ? "Yes" : "No");
-		i.add(new awa(0, g / 2 - 150, h / 4, 300, 20, enabledString));
-		i.add(bindingButton = new awa(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
-		i.add(new awa(2, g / 2 - 190, h - 25, 380, 20, "Done"));
-		i.add(new awa(3, g / 2 - 50, h / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
-		i.add(new awa(4, g / 2 - 150, h / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
-		i.add(new awa(5, g / 2 - 150, h / 4 + 50, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
+		i.add(new awg(0, g / 2 - 150, h / 4, 300, 20, enabledString));
+		i.add(bindingButton = new awg(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
+		i.add(new awg(2, g / 2 - 190, h - 25, 380, 20, "Done"));
+		i.add(new awg(3, g / 2 - 50, h / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
+		i.add(new awg(4, g / 2 - 150, h / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
+		i.add(new awg(5, g / 2 - 150, h / 4 + 50, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
 	}
 
-	protected void a(awa b) {
+	protected void a(awg b) {
 		switch (b.f) {
 		case 9001:
 			f.a(new WMLLOptionsGeneral(this.wmll, this.parent));

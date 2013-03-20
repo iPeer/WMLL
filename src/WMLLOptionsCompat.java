@@ -1,18 +1,18 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsCompat extends axl {
+public class WMLLOptionsCompat extends axr {
 
 	private WMLL wmll;
-	private axl parent;
-	private awa rei, zans, alien, forge;
+	private axr parent;
+	private awg rei, zans, alien, forge;
 	private int page = 1;
 
-	public WMLLOptionsCompat(WMLL wmll, axl aum) {
+	public WMLLOptionsCompat(WMLL wmll, axr aum) {
 		this(wmll, aum, 1);
 	}
 
-	public WMLLOptionsCompat(WMLL wmll, axl aum, int page) {
+	public WMLLOptionsCompat(WMLL wmll, axr aum, int page) {
 		this.wmll = wmll;
 		this.parent = aum;
 		this.page = page;
@@ -22,18 +22,18 @@ public class WMLLOptionsCompat extends axl {
 	public void A_() {
 		i.clear();
 		if (wmll.debugClassPresent)
-			i.add(new awa(9001, g - 20, 0, 20, 20, "R"));
-		i.add(new awa(0, g / 2 - 190, h - 30, (this.page == 1 ? 295 : 380), 20, "Done"));
+			i.add(new awg(9001, g - 20, 0, 20, 20, "R"));
+		i.add(new awg(0, g / 2 - 190, h - 30, (this.page == 1 ? 295 : 380), 20, "Done"));
 		if (this.page == 1) {
-			i.add(new awa(5, g / 2 + 105, h - 30, 85, 20, "Mod Statuses"));
-			i.add(rei = new awa(1, g / 2 - 145, h / 4 + 45, 140, 20, "Rei's Minimap: "+(wmll.ReiEnabled && !wmll.ReiUseMl ? "ON" : "OFF")));
-			i.add(zans = new awa(2, g / 2 + 2, h / 4 + 45, 140, 20, "Zan's Minimap: "+(wmll.ZansEnabled && wmll.ZansMinimap ? "ON" : "OFF")));
-			i.add(alien = new awa(3, g / 2 - 70, h / 4 + 70, 140, 20, "Alien Motion Detector: "+(wmll.AlienEnabled && wmll.AlienRadar ? "ON" : "OFF")));
+			i.add(new awg(5, g / 2 + 105, h - 30, 85, 20, "Mod Statuses"));
+			i.add(rei = new awg(1, g / 2 - 145, h / 4 + 45, 140, 20, "Rei's Minimap: "+(wmll.ReiEnabled && !wmll.ReiUseMl ? "ON" : "OFF")));
+			i.add(zans = new awg(2, g / 2 + 2, h / 4 + 45, 140, 20, "Zan's Minimap: "+(wmll.ZansEnabled && wmll.ZansMinimap ? "ON" : "OFF")));
+			i.add(alien = new awg(3, g / 2 - 70, h / 4 + 70, 140, 20, "Alien Motion Detector: "+(wmll.AlienEnabled && wmll.AlienRadar ? "ON" : "OFF")));
 			rei.g = wmll.Rei && !wmll.ReiUseMl;
 			zans.g = wmll.ZansMinimap;
 			alien.g = wmll.AlienRadar;
 
-			i.add(forge = new awa(4, g / 2 - 70, h / 4 + 120, 140, 20, "Enable Forge Hooks: "+(wmll.forgeEnabled ? "ON" : "OFF")));
+			i.add(forge = new awg(4, g / 2 - 70, h / 4 + 120, 140, 20, "Enable Forge Hooks: "+(wmll.forgeEnabled ? "ON" : "OFF")));
 			forge.g = wmll.forgeDetected;
 		}
 	}
@@ -43,7 +43,7 @@ public class WMLLOptionsCompat extends axl {
 			f.a(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? null : parent);
 	}
 
-	protected void a(awa b) {
+	protected void a(awg b) {
 		switch (b.f) {
 		case 9001:
 			f.a(new WMLLOptionsCompat(this.wmll, this.parent, this.page));
