@@ -65,7 +65,7 @@ public class WMLLOptionsOutput extends axr {
 		colours[2] = Integer.valueOf((B.b().equals("") ? "0" : B.b()));
 		seedBox = new aws(l, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), h / 4 + 105, wmll.getWindowSize().a() - 20, 15);
 		seedBox.f(500);
-		seedBox.a(Long.toString(wmll.getWorldSeed()));
+		seedBox.a(wmll.getWorldSeed() != 0 ? Long.toString(wmll.getWorldSeed()) : "");
 		editboxes.add(seedBox);
 		editboxes.add(lightLevelBox);
 		editboxes.add(R);
@@ -94,7 +94,7 @@ public class WMLLOptionsOutput extends axr {
 			WMLL.options.put("RGB-B", B.b());
 			WMLL.TextColour = new Color(colours[0], colours[1], colours[2]).getRGB();
 			WMLL.options.put("lightString", lightLevelBox.b());
-			if (!seedBox.b().equals(wmll.getWorldSeed()) && seedBox.b() != "0") {
+			if (!wmll.autoSeed && !seedBox.b().equals(wmll.getWorldSeed()) && seedBox.b() != "") {
 				wmll.worldSeedSet = true;
 				wmll.worldSeed = Long.valueOf(seedBox.b());
 				WMLL.options.put("Seed:"+wmll.getWorldName(), seedBox.b());

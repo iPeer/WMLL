@@ -30,10 +30,10 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 804";
+		return "Stable 44"; //803
 	}
 	public static final String getMinecraftVersion() {
-		return "1.5.1pre";
+		return "1.5.1";
 	}
 	public static final String[] autoDisable = {".*\\.oc\\.tc"};
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 20, 44, 50, 130);
@@ -242,12 +242,10 @@ public class WMLL {
 				if (options.getProperty("Seed:"+getWorldName().toLowerCase()) != null) {
 					worldSeedSet = true;
 					this.worldSeed = Long.valueOf(options.getProperty("Seed:"+getWorldName().toLowerCase()));
-					debug("[WMLL] Seed set to "+this.worldSeed+" (from file)");
 				}
 				else {
 					worldSeedSet = true;
 					this.worldSeed = ((aab)MinecraftServer.D().a(0)).F();
-					debug("[WMLL] Seed set to "+this.worldSeed);
 					/*Object obj = awq.b();
 					Field f = obj.getClass().getDeclaredField(getField("chatLines"));
 					f.setAccessible(true);
@@ -275,6 +273,7 @@ public class WMLL {
 
 					}*/
 				}
+				debug("[WMLL] Seed set to "+this.worldSeed);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -428,15 +427,9 @@ public class WMLL {
 						out++;
 					if ((isMultiplayer() && (getDimension() == -1 || getDimension() == 1)))
 						out++;
-					//				if (getDimension() == 1)
-					//					out--;
-					ng player = thePlayer();
-					double x = player.t;
-					double y = player.u;
-					double z = player.v;
-					double f = kx.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
+					double[] coordinates = getPlayerCoordinatesAsDouble();
 					NumberFormat d = new DecimalFormat("#0.00");
-					String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+getPlayerDirection()+")";
+					String coords = "("+d.format(coordinates[0])+", "+d.format(coordinates[1])+", "+d.format(coordinates[2])+", "+getPlayerDirection()+")";
 					drawString(coords, 2, out, 0xffffff);
 					if (WMLLI != 5 && WMLLI != 10) {
 						boolean showSeed = (!isMultiplayer() || isSeedSet()/* || getWorldName().equals("localServer")*/) && showSeedWithCoords;
@@ -813,7 +806,7 @@ public class WMLL {
 			return sspServer().K();
 		try {
 			Object obj = thePlayer();
-			Field f = obj.getClass().getDeclaredField("a"); // sendQueue
+			Field f = obj.getClass().getDeclaredField(getField("sendQueue")); // sendQueue
 			f.setAccessible(true);
 			obj = f.get(obj);
 			Field f1 = obj.getClass().getDeclaredField(getField("netManager")); // netManager

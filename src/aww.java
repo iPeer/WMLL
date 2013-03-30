@@ -111,7 +111,7 @@ public class aww extends awx
                 }
                 int k9 = k1 - 39;
                 int k10 = k9 - 10;
-                int k11 = d.g.aZ();
+                int k11 = WMLLCompatibility.forgeA(d);
                 int i12 = -1;
                 if(d.g.a(mk.l))
                 {
