@@ -10,12 +10,12 @@ import net.minecraftforge.common.ForgeHooks;
 import org.lwjgl.opengl.GL11;
 
 
-public class WMLLCompatibility extends awr {
+public class WMLLCompatibility extends awx {
 	
 	private int i;
 
 	public static int forgeA(Minecraft d) {
-		int a = d.g.aW();
+		int a = d.g.aZ();
 		if (WMLL.i.forgeEnabled)
 			try {
 				return ForgeHooks.getTotalArmorValue(d.g); // 12W40 & 1.4PRE ERROR

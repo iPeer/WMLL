@@ -10,22 +10,22 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
-public class awq extends awr
+public class aww extends awx
 {
 
-    private static final bhc b = new bhc();
+    private static final bhj b = new bhj();
     private final Random c = new Random();
     private final Minecraft d;
-    private final awb e;
+    private final awh e;
     private int f;
     private String g;
     private int h;
     private boolean i;
     public float ipeer_a_rename;
     private int k;
-    private wg l;
+    private wm l;
 
-    public awq(Minecraft minecraft)
+    public aww(Minecraft minecraft)
     {
         f = 0;
         g = "";
@@ -33,15 +33,15 @@ public class awq extends awr
         i = false;
         ipeer_a_rename = 1.0F;
         d = minecraft;
-        e = new awb(minecraft);
+        e = new awh(minecraft);
     }
 
     public void a(float f1, boolean flag, int j, int i1)
     {
-        axm axm1 = new axm(d.z, d.c, d.d);
-        int j1 = axm1.a();
-        int k1 = axm1.b();
-        awp awp1 = d.q;
+        axs axs1 = new axs(d.z, d.c, d.d);
+        int j1 = axs1.a();
+        int k1 = axs1.b();
+        awv awv1 = d.q;
         d.u.c();
         GL11.glEnable(3042);
         if(Minecraft.t())
@@ -51,8 +51,8 @@ public class awq extends awr
         {
             GL11.glBlendFunc(770, 771);
         }
-        wg wg1 = d.g.bK.f(3);
-        if(d.z.aa == 0 && wg1 != null && wg1.c == aou.be.cz)
+        wm wm1 = d.g.bK.f(3);
+        if(d.z.aa == 0 && wm1 != null && wm1.c == apa.be.cz)
         {
             a(j1, k1);
         }
@@ -68,10 +68,10 @@ public class awq extends awr
         {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             d.p.b("/gui/gui.png");
-            si si1 = d.g.bK;
+            so so1 = d.g.bK;
             this.j = -90F;
             b(j1 / 2 - 91, k1 - 22, 0, 0, 182, 22);
-            b((j1 / 2 - 91 - 1) + si1.c * 20, k1 - 22 - 1, 0, 22, 24, 22);
+            b((j1 / 2 - 91 - 1) + so1.c * 20, k1 - 22 - 1, 0, 22, 24, 22);
             d.p.b("/gui/icons.png");
             GL11.glEnable(3042);
             GL11.glBlendFunc(775, 769);
@@ -86,9 +86,9 @@ public class awq extends awr
             int l3 = d.g.aT;
             c.setSeed(f * 0x4c627);
             boolean flag3 = false;
-            tc tc1 = d.g.cl();
-            int j6 = tc1.a();
-            int l6 = tc1.b();
+            ti ti1 = d.g.cl();
+            int j6 = ti1.a();
+            int l6 = ti1.b();
             d.J.a("bossHealth");
             d();
             d.J.b();
@@ -111,7 +111,7 @@ public class awq extends awr
                 }
                 int k9 = k1 - 39;
                 int k10 = k9 - 10;
-                int k11 = d.g.aZ();
+                int k11 = WMLLCompatibility.forgeA(d);
                 int i12 = -1;
                 if(d.g.a(mk.l))
                 {
@@ -230,7 +230,7 @@ public class awq extends awr
                 }
 
                 d.J.c("air");
-                if(d.g.a(ahz.h))
+                if(d.g.a(aif.h))
                 {
                     int i13 = d.g.ak();
                     int i14 = kx.f(((double)(i13 - 2) * 10D) / 300D);
@@ -252,7 +252,7 @@ public class awq extends awr
             GL11.glDisable(3042);
             d.J.a("actionBar");
             GL11.glEnable(32826);
-            auv.c();
+            avb.c();
             for(int k7 = 0; k7 < 9; k7++)
             {
                 int k8 = (j1 / 2 - 90) + k7 * 20 + 2;
@@ -260,7 +260,7 @@ public class awq extends awr
                 a(k7, k8, i9, f1);
             }
 
-            auv.a();
+            avb.a();
             GL11.glDisable(32826);
             d.J.b();
         }
@@ -287,13 +287,13 @@ public class awq extends awr
             boolean flag2 = false;
             int k2 = flag2 ? 0xffffff : 0x80ff20;
             String s2 = (new StringBuilder()).append("").append(d.g.cf).toString();
-            int k4 = (j1 - awp1.a(s2)) / 2;
+            int k4 = (j1 - awv1.a(s2)) / 2;
             int k5 = k1 - 31 - 4;
-            awp1.b(s2, k4 + 1, k5, 0);
-            awp1.b(s2, k4 - 1, k5, 0);
-            awp1.b(s2, k4, k5 + 1, 0);
-            awp1.b(s2, k4, k5 - 1, 0);
-            awp1.b(s2, k4, k5, k2);
+            awv1.b(s2, k4 + 1, k5, 0);
+            awv1.b(s2, k4 - 1, k5, 0);
+            awv1.b(s2, k4, k5 + 1, 0);
+            awv1.b(s2, k4, k5 - 1, 0);
+            awv1.b(s2, k4, k5, k2);
             d.J.b();
         }
         if(d.z.D)
@@ -302,7 +302,7 @@ public class awq extends awr
             if(k > 0 && l != null)
             {
                 String s = l.s();
-                int i3 = (j1 - awp1.a(s)) / 2;
+                int i3 = (j1 - awv1.a(s)) / 2;
                 int i4 = k1 - 59;
                 if(!d.b.b())
                 {
@@ -318,7 +318,7 @@ public class awq extends awr
                     GL11.glPushMatrix();
                     GL11.glEnable(3042);
                     GL11.glBlendFunc(770, 771);
-                    awp1.a(s, i3, i4, 0xffffff + (i5 << 24));
+                    awv1.a(s, i3, i4, 0xffffff + (i5 << 24));
                     GL11.glDisable(3042);
                     GL11.glPopMatrix();
                 }
@@ -338,48 +338,48 @@ public class awq extends awr
                     lf.a((int)(0x1d6b4L - d.e.G()))
                 });
             }
-            int j3 = awp1.a(s1);
-            awp1.a(s1, j1 - j3 - 10, 5, 0xffffff);
+            int j3 = awv1.a(s1);
+            awv1.a(s1, j1 - j3 - 10, 5, 0xffffff);
             d.J.b();
         }
-		WMLL.i.updategui(d, this);
+        WMLL.i.updategui(d, this);
         if(d.z.ab)
         {
             d.J.a("debug");
             GL11.glPushMatrix();
-            awp1.a((new StringBuilder()).append("Minecraft 1.5 (").append(d.L).append(")").toString(), 2, 2, 0xffffff);
-            awp1.a(d.m(), 2, 12, 0xffffff);
-            awp1.a(d.n(), 2, 22, 0xffffff);
-            awp1.a(d.p(), 2, 32, 0xffffff);
-            awp1.a(d.o(), 2, 42, 0xffffff);
+            awv1.a((new StringBuilder()).append("Minecraft 1.5.1 (").append(d.L).append(")").toString(), 2, 2, 0xffffff);
+            awv1.a(d.m(), 2, 12, 0xffffff);
+            awv1.a(d.n(), 2, 22, 0xffffff);
+            awv1.a(d.p(), 2, 32, 0xffffff);
+            awv1.a(d.o(), 2, 42, 0xffffff);
             long l2 = Runtime.getRuntime().maxMemory();
             long l4 = Runtime.getRuntime().totalMemory();
             long l5 = Runtime.getRuntime().freeMemory();
             long l7 = l4 - l5;
             String s3 = (new StringBuilder()).append("Used memory: ").append((l7 * 100L) / l2).append("% (").append(l7 / 1024L / 1024L).append("MB) of ").append(l2 / 1024L / 1024L).append("MB").toString();
-            b(awp1, s3, j1 - awp1.a(s3) - 2, 2, 0xe0e0e0);
+            b(awv1, s3, j1 - awv1.a(s3) - 2, 2, 0xe0e0e0);
             s3 = (new StringBuilder()).append("Allocated memory: ").append((l4 * 100L) / l2).append("% (").append(l4 / 1024L / 1024L).append("MB)").toString();
-            b(awp1, s3, j1 - awp1.a(s3) - 2, 12, 0xe0e0e0);
+            b(awv1, s3, j1 - awv1.a(s3) - 2, 12, 0xe0e0e0);
             int l9 = kx.c(d.g.u);
             int l10 = kx.c(d.g.v);
             int l11 = kx.c(d.g.w);
-            b(awp1, String.format("x: %.5f (%d) // c: %d (%d)", new Object[] {
+            b(awv1, String.format("x: %.5f (%d) // c: %d (%d)", new Object[] {
                 Double.valueOf(d.g.u), Integer.valueOf(l9), Integer.valueOf(l9 >> 4), Integer.valueOf(l9 & 0xf)
             }), 2, 64, 0xe0e0e0);
-            b(awp1, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {
+            b(awv1, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {
                 Double.valueOf(d.g.E.b), Double.valueOf(d.g.v)
             }), 2, 72, 0xe0e0e0);
-            b(awp1, String.format("z: %.5f (%d) // c: %d (%d)", new Object[] {
+            b(awv1, String.format("z: %.5f (%d) // c: %d (%d)", new Object[] {
                 Double.valueOf(d.g.w), Integer.valueOf(l11), Integer.valueOf(l11 >> 4), Integer.valueOf(l11 & 0xf)
             }), 2, 80, 0xe0e0e0);
             int j12 = kx.c((double)((d.g.A * 4F) / 360F) + 0.5D) & 3;
-            b(awp1, (new StringBuilder()).append("f: ").append(j12).append(" (").append(r.c[j12]).append(") / ").append(kx.g(d.g.A)).toString(), 2, 88, 0xe0e0e0);
+            b(awv1, (new StringBuilder()).append("f: ").append(j12).append(" (").append(r.c[j12]).append(") / ").append(kx.g(d.g.A)).toString(), 2, 88, 0xe0e0e0);
             if(d.e != null && d.e.f(l9, l10, l11))
             {
-                abq abq1 = d.e.d(l9, l11);
-                b(awp1, (new StringBuilder()).append("lc: ").append(abq1.h() + 15).append(" b: ").append(abq1.a(l9 & 0xf, l11 & 0xf, d.e.t()).y).append(" bl: ").append(abq1.a(aag.b, l9 & 0xf, l10, l11 & 0xf)).append(" sl: ").append(abq1.a(aag.a, l9 & 0xf, l10, l11 & 0xf)).append(" rl: ").append(abq1.c(l9 & 0xf, l10, l11 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
+                abw abw1 = d.e.d(l9, l11);
+                b(awv1, (new StringBuilder()).append("lc: ").append(abw1.h() + 15).append(" b: ").append(abw1.a(l9 & 0xf, l11 & 0xf, d.e.t()).y).append(" bl: ").append(abw1.a(aam.b, l9 & 0xf, l10, l11 & 0xf)).append(" sl: ").append(abw1.a(aam.a, l9 & 0xf, l10, l11 & 0xf)).append(" rl: ").append(abw1.c(l9 & 0xf, l10, l11 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
             }
-            b(awp1, String.format("ws: %.3f, fs: %.3f, g: %b, fl: %d", new Object[] {
+            b(awv1, String.format("ws: %.3f, fs: %.3f, g: %b, fl: %d", new Object[] {
                 Float.valueOf(d.g.ce.b()), Float.valueOf(d.g.ce.a()), Boolean.valueOf(d.g.F), Integer.valueOf(d.e.f(l9, l11))
             }), 2, 104, 0xe0e0e0);
             GL11.glPopMatrix();
@@ -405,16 +405,16 @@ public class awq extends awr
                 {
                     j4 = Color.HSBtoRGB(f4 / 50F, 0.7F, 0.6F) & 0xffffff;
                 }
-                awp1.b(g, -awp1.a(g) / 2, -4, j4 + (k3 << 24));
+                awv1.b(g, -awv1.a(g) / 2, -4, j4 + (k3 << 24));
                 GL11.glDisable(3042);
                 GL11.glPopMatrix();
             }
             d.J.b();
         }
-        aqy aqy1 = d.e.V().a(1);
-        if(aqy1 != null)
+        are are1 = d.e.V().a(1);
+        if(are1 != null)
         {
-            a(aqy1, k1, j1, awp1);
+            a(are1, k1, j1, awv1);
         }
         GL11.glEnable(3042);
         GL11.glBlendFunc(770, 771);
@@ -425,13 +425,13 @@ public class awq extends awr
         e.a(f);
         d.J.b();
         GL11.glPopMatrix();
-        aqy1 = d.e.V().a(0);
-        if(d.z.T.e && (!d.B() || d.g.a.c.size() > 1 || aqy1 != null))
+        are1 = d.e.V().a(0);
+        if(d.z.T.e && (!d.B() || d.g.a.c.size() > 1 || are1 != null))
         {
             d.J.a("playerList");
-            bde bde1 = d.g.a;
-            java.util.List list = bde1.c;
-            int j5 = bde1.d;
+            bdl bdl1 = d.g.a;
+            java.util.List list = bdl1.c;
+            int j5 = bdl1.d;
             int i6 = j5;
             int k6 = 1;
             for(; i6 > 20; i6 = ((j5 + k6) - 1) / k6)
@@ -458,42 +458,42 @@ public class awq extends awr
                 {
                     continue;
                 }
-                bdq bdq1 = (bdq)list.get(j9);
-                aqz aqz1 = d.e.V().i(bdq1.a);
-                String s4 = aqz.a(aqz1, bdq1.a);
-                awp1.a(s4, i10, i11, 0xffffff);
-                if(aqy1 != null)
+                bdx bdx1 = (bdx)list.get(j9);
+                arf arf1 = d.e.V().i(bdx1.a);
+                String s4 = arf.a(arf1, bdx1.a);
+                awv1.a(s4, i10, i11, 0xffffff);
+                if(are1 != null)
                 {
-                    int j14 = i10 + awp1.a(s4) + 5;
+                    int j14 = i10 + awv1.a(s4) + 5;
                     int k15 = (i10 + i7) - 12 - 5;
                     if(k15 - j14 > 5)
                     {
-                        ara ara1 = aqy1.a().a(bdq1.a, aqy1);
-                        String s5 = (new StringBuilder()).append(a.o).append("").append(ara1.c()).toString();
-                        awp1.a(s5, k15 - awp1.a(s5), i11, 0xffffff);
+                        arg arg1 = are1.a().a(bdx1.a, are1);
+                        String s5 = (new StringBuilder()).append(a.o).append("").append(arg1.c()).toString();
+                        awv1.a(s5, k15 - awv1.a(s5), i11, 0xffffff);
                     }
                 }
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                 d.p.b("/gui/icons.png");
                 int k14 = 0;
                 byte byte1 = 0;
-                if(bdq1.b < 0)
+                if(bdx1.b < 0)
                 {
                     byte1 = 5;
                 } else
-                if(bdq1.b < 150)
+                if(bdx1.b < 150)
                 {
                     byte1 = 0;
                 } else
-                if(bdq1.b < 300)
+                if(bdx1.b < 300)
                 {
                     byte1 = 1;
                 } else
-                if(bdq1.b < 600)
+                if(bdx1.b < 600)
                 {
                     byte1 = 2;
                 } else
-                if(bdq1.b < 1000)
+                if(bdx1.b < 1000)
                 {
                     byte1 = 3;
                 } else
@@ -511,24 +511,24 @@ public class awq extends awr
         GL11.glEnable(3008);
     }
 
-    private void a(aqy aqy1, int j, int i1, awp awp1)
+    private void a(are are1, int j, int i1, awv awv1)
     {
-        ard ard1 = aqy1.a();
-        Collection collection = ard1.i(aqy1);
+        arj arj1 = are1.a();
+        Collection collection = arj1.i(are1);
         if(collection.size() > 15)
         {
             return;
         }
-        int j1 = 0;
+        int j1 = awv1.a(are1.d());
         for(Iterator iterator = collection.iterator(); iterator.hasNext();)
         {
-            ara ara1 = (ara)iterator.next();
-            aqz aqz1 = ard1.i(ara1.e());
-            String s = (new StringBuilder()).append(aqz.a(aqz1, ara1.e())).append(": ").append(a.m).append(ara1.c()).toString();
-            j1 = Math.max(j1, awp1.a(s));
+            arg arg1 = (arg)iterator.next();
+            arf arf1 = arj1.i(arg1.e());
+            String s = (new StringBuilder()).append(arf.a(arf1, arg1.e())).append(": ").append(a.m).append(arg1.c()).toString();
+            j1 = Math.max(j1, awv1.a(s));
         }
 
-        int k1 = collection.size() * awp1.a;
+        int k1 = collection.size() * awv1.a;
         int l1 = j / 2 + k1 / 3;
         byte byte0 = 3;
         int i2 = i1 - j1 - byte0;
@@ -540,40 +540,40 @@ public class awq extends awr
             {
                 break;
             }
-            ara ara2 = (ara)iterator1.next();
+            arg arg2 = (arg)iterator1.next();
             j2++;
-            aqz aqz2 = ard1.i(ara2.e());
-            String s1 = aqz.a(aqz2, ara2.e());
-            String s2 = (new StringBuilder()).append(a.m).append("").append(ara2.c()).toString();
+            arf arf2 = arj1.i(arg2.e());
+            String s1 = arf.a(arf2, arg2.e());
+            String s2 = (new StringBuilder()).append(a.m).append("").append(arg2.c()).toString();
             int k2 = i2;
-            int l2 = l1 - j2 * awp1.a;
+            int l2 = l1 - j2 * awv1.a;
             int i3 = (i1 - byte0) + 2;
-            a(k2 - 2, l2, i3, l2 + awp1.a, 0x50000000);
-            awp1.b(s1, k2, l2, 0x20ffffff);
-            awp1.b(s2, i3 - awp1.a(s2), l2, 0x20ffffff);
+            a(k2 - 2, l2, i3, l2 + awv1.a, 0x50000000);
+            awv1.b(s1, k2, l2, 0x20ffffff);
+            awv1.b(s2, i3 - awv1.a(s2), l2, 0x20ffffff);
             if(j2 == collection.size())
             {
-                String s3 = aqy1.d();
-                a(k2 - 2, l2 - awp1.a - 1, i3, l2 - 1, 0x60000000);
+                String s3 = are1.d();
+                a(k2 - 2, l2 - awv1.a - 1, i3, l2 - 1, 0x60000000);
                 a(k2 - 2, l2 - 1, i3, l2, 0x50000000);
-                awp1.b(s3, (k2 + j1 / 2) - awp1.a(s3) / 2, l2 - awp1.a, 0x20ffffff);
+                awv1.b(s3, (k2 + j1 / 2) - awv1.a(s3) / 2, l2 - awv1.a, 0x20ffffff);
             }
         } while(true);
     }
 
     private void d()
     {
-        if(bff.c == null || bff.b <= 0)
+        if(bfm.c == null || bfm.b <= 0)
         {
             return;
         }
-        bff.b--;
-        awp awp1 = d.q;
-        axm axm1 = new axm(d.z, d.c, d.d);
-        int j = axm1.a();
+        bfm.b--;
+        awv awv1 = d.q;
+        axs axs1 = new axs(d.z, d.c, d.d);
+        int j = axs1.a();
         char c1 = '\266';
         int i1 = j / 2 - c1 / 2;
-        int j1 = (int)(bff.a * (float)(c1 + 1));
+        int j1 = (int)(bfm.a * (float)(c1 + 1));
         byte byte0 = 12;
         b(i1, byte0, 0, 74, c1, 5);
         b(i1, byte0, 0, 74, c1, 5);
@@ -581,8 +581,8 @@ public class awq extends awr
         {
             b(i1, byte0, 0, 79, j1, 5);
         }
-        String s = bff.c;
-        awp1.a(s, j / 2 - awp1.a(s) / 2, byte0 - 10, 0xffffff);
+        String s = bfm.c;
+        awv1.a(s, j / 2 - awv1.a(s) / 2, byte0 - 10, 0xffffff);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         d.p.b("/gui/icons.png");
     }
@@ -595,13 +595,13 @@ public class awq extends awr
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(3008);
         d.p.b("%blur%/misc/pumpkinblur.png");
-        bfx bfx1 = bfx.a;
-        bfx1.b();
-        bfx1.a(0.0D, i1, -90D, 0.0D, 1.0D);
-        bfx1.a(j, i1, -90D, 1.0D, 1.0D);
-        bfx1.a(j, 0.0D, -90D, 1.0D, 0.0D);
-        bfx1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        bfx1.a();
+        bge bge1 = bge.a;
+        bge1.b();
+        bge1.a(0.0D, i1, -90D, 0.0D, 1.0D);
+        bge1.a(j, i1, -90D, 1.0D, 1.0D);
+        bge1.a(j, 0.0D, -90D, 1.0D, 0.0D);
+        bge1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        bge1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -625,13 +625,13 @@ public class awq extends awr
         GL11.glBlendFunc(0, 769);
         GL11.glColor4f(ipeer_a_rename, ipeer_a_rename, ipeer_a_rename, 1.0F);
         d.p.b("%blur%/misc/vignette.png");
-        bfx bfx1 = bfx.a;
-        bfx1.b();
-        bfx1.a(0.0D, i1, -90D, 0.0D, 1.0D);
-        bfx1.a(j, i1, -90D, 1.0D, 1.0D);
-        bfx1.a(j, 0.0D, -90D, 1.0D, 0.0D);
-        bfx1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        bfx1.a();
+        bge bge1 = bge.a;
+        bge1.b();
+        bge1.a(0.0D, i1, -90D, 0.0D, 1.0D);
+        bge1.a(j, i1, -90D, 1.0D, 1.0D);
+        bge1.a(j, 0.0D, -90D, 1.0D, 0.0D);
+        bge1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        bge1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -652,18 +652,18 @@ public class awq extends awr
         GL11.glBlendFunc(770, 771);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
         d.p.b("/terrain.png");
-        lx lx1 = aou.bi.m(1);
+        lx lx1 = apa.bi.m(1);
         float f2 = lx1.e();
         float f3 = lx1.g();
         float f4 = lx1.f();
         float f5 = lx1.h();
-        bfx bfx1 = bfx.a;
-        bfx1.b();
-        bfx1.a(0.0D, i1, -90D, f2, f5);
-        bfx1.a(j, i1, -90D, f4, f5);
-        bfx1.a(j, 0.0D, -90D, f4, f3);
-        bfx1.a(0.0D, 0.0D, -90D, f2, f3);
-        bfx1.a();
+        bge bge1 = bge.a;
+        bge1.b();
+        bge1.a(0.0D, i1, -90D, f2, f5);
+        bge1.a(j, i1, -90D, f4, f5);
+        bge1.a(j, 0.0D, -90D, f4, f3);
+        bge1.a(0.0D, 0.0D, -90D, f2, f3);
+        bge1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -672,12 +672,12 @@ public class awq extends awr
 
     private void a(int j, int i1, int j1, float f1)
     {
-        wg wg1 = d.g.bK.a[j];
-        if(wg1 == null)
+        wm wm1 = d.g.bK.a[j];
+        if(wm1 == null)
         {
             return;
         }
-        float f2 = (float)wg1.b - f1;
+        float f2 = (float)wm1.b - f1;
         if(f2 > 0.0F)
         {
             GL11.glPushMatrix();
@@ -686,12 +686,12 @@ public class awq extends awr
             GL11.glScalef(1.0F / f3, (f3 + 1.0F) / 2.0F, 1.0F);
             GL11.glTranslatef(-(i1 + 8), -(j1 + 12), 0.0F);
         }
-        b.b(d.q, d.p, wg1, i1, j1);
+        b.b(d.q, d.p, wm1, i1, j1);
         if(f2 > 0.0F)
         {
             GL11.glPopMatrix();
         }
-        b.c(d.q, d.p, wg1, i1, j1);
+        b.c(d.q, d.p, wm1, i1, j1);
     }
 
     public void a()
@@ -703,12 +703,12 @@ public class awq extends awr
         f++;
         if(d.g != null)
         {
-            wg wg1 = d.g.bK.h();
-            if(wg1 == null)
+            wm wm1 = d.g.bK.h();
+            if(wm1 == null)
             {
                 k = 0;
             } else
-            if(l == null || wg1.c != l.c || !wg.a(wg1, l) || !wg1.g() && wg1.k() != l.k())
+            if(l == null || wm1.c != l.c || !wm.a(wm1, l) || !wm1.g() && wm1.k() != l.k())
             {
                 k = 40;
             } else
@@ -716,7 +716,7 @@ public class awq extends awr
             {
                 k--;
             }
-            l = wg1;
+            l = wm1;
         }
     }
 
@@ -727,7 +727,7 @@ public class awq extends awr
         i = true;
     }
 
-    public awb b()
+    public awh b()
     {
         return e;
     }

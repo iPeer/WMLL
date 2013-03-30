@@ -4,10 +4,10 @@ import java.net.URI;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsMenu extends axl {
+public class WMLLOptionsMenu extends axr {
 
 	private WMLL wmll;
-	private axl parent;
+	private axr parent;
 	private static final String threadURL = "http://www.minecraftforum.net/topic/170739-";
 	private Desktop desktop;
 
@@ -17,12 +17,12 @@ public class WMLLOptionsMenu extends axl {
 		this.wmll = wmll;
 	}
 
-	public WMLLOptionsMenu(WMLL wmll, axl aum) {
+	public WMLLOptionsMenu(WMLL wmll, axr aum) {
 		this.wmll = wmll;
 		this.parent = aum;
 	}
 
-	public WMLLOptionsMenu(axl aum) {
+	public WMLLOptionsMenu(axr aum) {
 		this.parent = aum;
 		this.wmll = WMLL.i;
 	}
@@ -32,21 +32,21 @@ public class WMLLOptionsMenu extends axl {
 		i.clear();
 		try {
 			if (wmll.isEnabled()) {
-				i.add(new awa(0, g / 2 - 200, h - 95, "General Settings"));
-				i.add(new awa(1, g / 2 + 2, h - 95, "Output Settings"));
-				i.add(new awa(2, g / 2 - 200, h - 70, "Miscellaneous Settings"));
-				i.add(new awa(3, g / 2 + 2, h - 70, "Compatibility Settings"));
-				awa updateButton;
-				i.add(updateButton = new awa(-1, g / 2 - 100, h / 4 + 23, "View forum thread"));
+				i.add(new awg(0, g / 2 - 200, h - 95, "General Settings"));
+				i.add(new awg(1, g / 2 + 2, h - 95, "Output Settings"));
+				i.add(new awg(2, g / 2 - 200, h - 70, "Miscellaneous Settings"));
+				i.add(new awg(3, g / 2 + 2, h - 70, "Compatibility Settings"));
+				awg updateButton;
+				i.add(updateButton = new awg(-1, g / 2 - 100, h / 4 + 23, "View forum thread"));
 				updateButton.h = wmll.updateInfo.length > 0 && Desktop.isDesktopSupported() && (this.desktop = Desktop.getDesktop()).isSupported(Desktop.Action.BROWSE);
 			}
 			else {
-				i.add(new awa(999, g / 2 - 50, h - 110, 100, 20, "Enable it!"));
+				i.add(new awg(999, g / 2 - 50, h - 110, 100, 20, "Enable it!"));
 			}
-			i.add(new awa(4, g / 2 - 190, h - 30, 380, 20, (wmll.isEnabled() ? "Done" : "Cancel")));
+			i.add(new awg(4, g / 2 - 190, h - 30, 380, 20, (wmll.isEnabled() ? "Done" : "Cancel")));
 			if (wmll.debugClassPresent) {
-				i.add(new awa(9000, g - 40, 0, 20, 20, (WMLL.debugActive ? "\247l" : "")+"D"));
-				i.add(new awa(9001, g - 20, 0, 20, 20, "R"));
+				i.add(new awg(9000, g - 40, 0, 20, 20, (WMLL.debugActive ? "\247l" : "")+"D"));
+				i.add(new awg(9001, g - 20, 0, 20, 20, "R"));
 			}
 		}
 		catch (Exception e) {
@@ -54,7 +54,7 @@ public class WMLLOptionsMenu extends axl {
 		}
 	}
 
-	protected void a(awa b) {
+	protected void a(awg b) {
 		switch (b.f) {
 		case 0:
 			f.a(new WMLLOptionsGeneral(this.wmll, this));
@@ -72,7 +72,7 @@ public class WMLLOptionsMenu extends axl {
 			if (parent != null)
 				f.a(parent);
 			else
-				f.a((axl)null);
+				f.a((axr)null);
 			wmll.saveOptions();
 			return;
 		case -1:

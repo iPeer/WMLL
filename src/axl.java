@@ -6,13 +6,13 @@
 import java.util.List;
 import net.minecraft.client.Minecraft;
 
-public class axf extends axl
+public class axl extends axr
 {
 
     private int a;
     private int b;
 
-    public axf()
+    public axl()
     {
         a = 0;
         b = 0;
@@ -23,62 +23,62 @@ public class axf extends axl
         a = 0;
         i.clear();
         byte byte0 = -16;
-        i.add(new awa(1, g / 2 - 100, h / 4 + 120 + byte0, bo.a("menu.returnToMenu")));
+        i.add(new awg(1, g / 2 - 100, h / 4 + 120 + byte0, bo.a("menu.returnToMenu")));
         if(!f.B())
         {
-            ((awa)i.get(0)).e = bo.a("menu.disconnect");
+            ((awg)i.get(0)).e = bo.a("menu.disconnect");
         }
-        i.add(new awa(4, g / 2 - 100, h / 4 + 24 + byte0, bo.a("menu.returnToGame")));
-        i.add(new awa(0, g / 2 - 100, h / 4 + 96 + byte0, 98, 20, bo.a("menu.options")));
-        awa awa1;
-        i.add(awa1 = new awa(7, g / 2 + 2, h / 4 + 96 + byte0, 98, 20, bo.a("menu.shareToLan")));
-        i.add(new awa(5, g / 2 - 100, h / 4 + 48 + byte0, 98, 20, bo.a("gui.achievements")));
-        i.add(new awa(6, g / 2 + 2, h / 4 + 48 + byte0, 98, 20, bo.a("gui.stats")));
-		i.add(new awa(8, g / 2 - 100, h / 4 + 144 + byte0, "WMLL Options..."));
+        i.add(new awg(4, g / 2 - 100, h / 4 + 24 + byte0, bo.a("menu.returnToGame")));
+        i.add(new awg(0, g / 2 - 100, h / 4 + 96 + byte0, 98, 20, bo.a("menu.options")));
+        awg awg1;
+        i.add(awg1 = new awg(7, g / 2 + 2, h / 4 + 96 + byte0, 98, 20, bo.a("menu.shareToLan")));
+        i.add(new awg(5, g / 2 - 100, h / 4 + 48 + byte0, 98, 20, bo.a("gui.achievements")));
+        i.add(new awg(6, g / 2 + 2, h / 4 + 48 + byte0, 98, 20, bo.a("gui.stats")));
+				i.add(new awg(8, g / 2 - 100, h / 4 + 144 + byte0, "WMLL Options..."));
 		if (WMLL.i.debugClassPresent)
-			i.add(new awa(9001, g - 52, h - 22, 50, 20, "Reload"));
-		awa1.g = f.C() && !f.D().am();
+			i.add(new awg(9001, g - 52, h - 22, 50, 20, "Reload"));
+        awg1.g = f.C() && !f.D().am();
     }
 
-    protected void a(awa awa1)
+    protected void a(awg awg1)
     {
-        switch(awa1.f)
+        switch(awg1.f)
         {
 		case 8:
         	f.a(new WMLLOptionsMenu(this));
         	break;
         case 9001:
-        	f.a(new axf());
+        	f.a(new axl());
         	break;
         	
         case 0: // '\0'
-            f.a(new axd(this, f.z));
+            f.a(new axj(this, f.z));
             break;
 
         case 1: // '\001'
-            awa1.g = false;
+            awg1.g = false;
             f.F.a(kf.j, 1);
             f.e.D();
-            f.a((bdm)null);
-            f.a(new bjz());
+            f.a((bdt)null);
+            f.a(new bkg());
             break;
 
         case 4: // '\004'
-            f.a((axl)null);
+            f.a((axr)null);
             f.h();
             f.B.f();
             break;
 
         case 5: // '\005'
-            f.a(new axx(f.F));
+            f.a(new ayd(f.F));
             break;
 
         case 6: // '\006'
-            f.a(new axy(this, f.F));
+            f.a(new aye(this, f.F));
             break;
 
         case 7: // '\007'
-            f.a(new axq(this));
+            f.a(new axw(this));
             break;
         }
     }

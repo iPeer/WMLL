@@ -1,19 +1,19 @@
 
-public class WMLLError extends axl {
+public class WMLLError extends axr {
 
 	private Throwable e;
 
-	public WMLLError(axl aum, Throwable e) {
+	public WMLLError(axr aum, Throwable e) {
 		this.e = e;
 	}
 
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		i.clear();
-		i.add(new awa(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
+		i.add(new awg(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
 	}
 
-	public void a(awa b) {
+	public void a(awg b) {
 		switch (b.f) {
 		case 0:
 			f.a((axl)null);
