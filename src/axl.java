@@ -34,7 +34,7 @@ public class axl extends axr
         i.add(awg1 = new awg(7, g / 2 + 2, h / 4 + 96 + byte0, 98, 20, bo.a("menu.shareToLan")));
         i.add(new awg(5, g / 2 - 100, h / 4 + 48 + byte0, 98, 20, bo.a("gui.achievements")));
         i.add(new awg(6, g / 2 + 2, h / 4 + 48 + byte0, 98, 20, bo.a("gui.stats")));
-				i.add(new awg(8, g / 2 - 100, h / 4 + 144 + byte0, "WMLL Options..."));
+		i.add(new awg(8, g / 2 - 100, h / 4 + 144 + byte0, "WMLL Options..."));
 		if (WMLL.i.debugClassPresent)
 			i.add(new awg(9001, g - 52, h - 22, 50, 20, "Reload"));
         awg1.g = f.C() && !f.D().am();

@@ -11,7 +11,7 @@ public class WMLLOptionsMenu extends axr {
 	private static final String threadURL = "http://www.minecraftforum.net/topic/170739-";
 	private Desktop desktop;
 
-	public WMLLOptionsMenu() { }
+	public WMLLOptionsMenu() {	}
 
 	public WMLLOptionsMenu(WMLL wmll) { 
 		this.wmll = wmll;
@@ -24,6 +24,11 @@ public class WMLLOptionsMenu extends axr {
 
 	public WMLLOptionsMenu(axr aum) {
 		this.parent = aum;
+		if (!WMLL.i.realInit) { 
+			WMLL.i.debug("[WMLL] WMLL was not correctly initialised! Attempting to initialize it now.");
+			wmll.i = new WMLL();
+			wmll.i.updategui(aum.f);
+		}
 		this.wmll = WMLL.i;
 	}
 

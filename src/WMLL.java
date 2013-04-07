@@ -30,7 +30,7 @@ import reifnsk.minimap.ReiMinimap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 44"; //803
+		return "Test 805"; //805
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5.1";
@@ -79,7 +79,7 @@ public class WMLL {
 	public boolean satBar;
 	private boolean ranInit = false;
 	public boolean firstRun = true;
-	private final String[] sleepstrings = {"What's My Arrow Level?", "Almost makes you wish for a nuclear winter!", "1 byte of posts!", "Kuurth for 1000!", "Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
+	private final String[] sleepstrings = {"/r/WMLL!", "Now on Reddit!", "What's My Arrow Level?", "Almost makes you wish for a nuclear winter!", "1 byte of posts!", "Kuurth for 1000!", "Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
 	private boolean sleepingStringSet = false;
 	private String lightString = "Light level: 9001";
 	private long lastF4Press = 0;
@@ -94,6 +94,8 @@ public class WMLL {
 
 	protected WMLLCompatibility wmllCompatibility;
 	public boolean showWorldName = true;
+
+	public boolean realInit = false;
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+wmllVersion());
@@ -211,7 +213,7 @@ public class WMLL {
 	public void updategui(Minecraft h) {
 		updategui(h, h.w);
 	}
-	
+
 	public void updategui(Minecraft h, aww w) {
 		if (getWorld() != null && !wmllUpdateCheck.running && autoUpdateCheck) {
 			wmllUpdateCheck.start();
@@ -223,8 +225,8 @@ public class WMLL {
 		if (getWorld() != null && !getWorldName().equals(lastWorld) && autoSeed) {
 			worldSeedSet = false;
 			lastWorld = getWorldName();
-//			if (!options.containsKey("Seed:"+getWorldName().toLowerCase()) && !isMultiplayer())
-//				entityPlayer().d("/seed");
+			//			if (!options.containsKey("Seed:"+getWorldName().toLowerCase()) && !isMultiplayer())
+			//				entityPlayer().d("/seed");
 			if (!isMultiplayer())
 				debug("[WMLL] World name differs, re-acquiring seed...");
 			boolean[] b = {Rei && ReiEnabled, ZansMinimap && ZansEnabled, AlienRadar && AlienEnabled};
@@ -291,6 +293,7 @@ public class WMLL {
 			((ZanMinimap)zansMinimap).onTickInGame(mc);
 		if (!ranInit) {
 			this.mc = h;
+			realInit = true;
 			wmllRenderer = new WMLLRenderer(mc, this);
 			wmllF3 = new WMLLF3(mc, this);
 			ranInit = true;
@@ -364,6 +367,12 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 13, 0xffffff);
 				a = "WS: "+getWindowSize().a()+"x"+getWindowSize().b();
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 14, 0xffffff);
+				a = getPlayerName();
+				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 15, 0xffffff);
+			}
+			else if (!WMLLDebugActive() && debugClassPresent) {
+				String a = "WMLL "+wmllVersion()+" (DEBUG MODE)";
+				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 0, 0xffffff);
 			}
 			WMLLCheckKeys();
 			if (!Enabled || !shouldShow() || (WMLLI == 11 && classicOutput))
@@ -679,32 +688,110 @@ public class WMLL {
 			String dval = m.group().replaceAll("%debug:|%", "").toLowerCase();
 			s = s.replaceAll("%debug:"+dval+"%", debugValue(dval)+"\247r");
 		}
+		Pattern count = Pattern.compile("%count:([\\p{Alnum}\\p{Punct}&&[^\\\\ ]]+)%", Pattern.CASE_INSENSITIVE);
+		m = count.matcher(s);
+		while (m.find()) {
+			String bdata = m.group().replaceAll("%count:|%", "").toLowerCase();
+			s = s.replaceAll("%count:"+bdata+"%", formatCount(bdata)+"\247r");
+		}
 		return s;
 	}
+
+	public String formatCount(String name) {
+		wm[] inventory = getPlayerInventory().a;
+		if (name.startsWith("slot")) {
+			int slot = Integer.valueOf(name.replaceAll("slot", ""));
+			wm item = inventory[slot];
+			String itemName = "";
+			if ((itemName = getItemName(item)).equals(""))
+				return "Nothing in slot "+slot;
+			return itemName+": "+getNumItemsInSlot(slot);
+		}
+		int id = -1;
+		try {
+			id = Integer.valueOf(name);
+		}
+		catch (NumberFormatException e) { }
+		for (wm item : inventory) {
+			if (item != null && (id > -1 && getItemId(item) == id) || getInternalNameForItem(item).equals(name) || getItemName(item, true).contains(name)) {
+				return getItemName(item)+": "+getItemQuantity(getInternalItemName(item));
+			}
+		}
+		return "";
+	}
 	
+	public int getItemQuantity(String internalName) {
+		wm[] inventory = getPlayerInventory().a;
+		int count = 0;
+		for (int x = 0; x < inventory.length; x++)
+			if (getInternalItemName(inventory[x]).equals(internalName))
+				count += getNumItemsInSlot(x);
+		return count;
+	}
+	
+	public int getNumItemsInSlot(int slot) {
+		try {
+			return getPlayerInventory().a[slot].a;
+		}
+		catch (NullPointerException e) {
+				return 0;
+		}
+	}
+	
+	public String getItemName(wm item) {
+		return getItemName(item, false);
+	}
+	
+	public String getItemName(wm item, boolean lower) {
+		try {
+			if (lower)
+				return item.s().toLowerCase();
+			else
+				return item.s();
+		}
+		catch (NullPointerException e) { 
+			return ""; 
+		}
+	}
+	
+	public int getItemId(wm item) {
+		return item.c;
+	}
+	
+	public String getInternalItemName(wm item) {
+		return getInternalNameForItem(item);
+	}
+
+	public String getInternalNameForItem(wm item) {
+		try {
+			return item.a();
+		} 
+		catch (NullPointerException e) { return ""; }
+	}
+
 	public wm getHeldItem() {
 		return getPlayerInventory().h();
 	}
-	
+
 	public int getHeldItemID() {
 		try {
 			return getHeldItem().c;
 		}
 		catch (NullPointerException e) { return -1; }
 	}
-	
+
 	public so getPlayerInventory() {
 		return entityPlayer().bK;
 	}
-	
+
 	public boolean itemHasEnchant(int enchantID) {
 		return itemHasEnchant(enchantID, getHeldItem());
 	}
-	
+
 	public wm[] getPlayerArmour() {
 		return entityPlayer().ad();
 	}
-	
+
 	public boolean itemHasEnchant(int enchantID, wm wg) {
 		return zb.a(51, wg) > 0;
 	}
@@ -712,7 +799,7 @@ public class WMLL {
 	public String getInternalItemNameForSlot(int slot) {
 		return getPlayerInventory().a[slot].a();
 	}
-	
+
 	public boolean isSlotEmpty(int slot) {
 		return getPlayerInventory().a[slot] == null;
 	}
@@ -772,7 +859,7 @@ public class WMLL {
 			}
 			catch (Exception e) { return e.toString(); }
 		}
-			
+
 		return "Invalid";
 	}
 
@@ -863,7 +950,7 @@ public class WMLL {
 			return 0;
 		return getChunk(x, z).c(x & 0xf, y, z & 0xf, 0);
 	}
-	
+
 	public int getSunLight(int x, int y, int z) {
 		if (y < 0 || y > 255)
 			return 0;
@@ -943,7 +1030,7 @@ public class WMLL {
 	}
 
 	public String getPlayerName() {
-		return playerEntity().b();
+		return entityPlayer().am();
 	}
 
 	public bds getPlayerController() {
@@ -1185,7 +1272,7 @@ public class WMLL {
 		}
 		catch (Exception e) { debug("[WMLL] Unable to load options: "+e.getMessage()); }
 	}
-	
+
 	public String getPlayerDirection() {
 		return getPlayerDirection(getPlayerCoordinates()[3]);
 	}
@@ -1410,28 +1497,28 @@ public class WMLL {
 			else
 				s = "\247aMushrooms";
 		}
-//		else if (i.equals("wither") && debugClassPresent) { // Disabled for end-users, not working.
-//			//TODO
-//			if (d > -1)
-//				s = "\247cWither Skeletons";
-//			else {
-//				try {
-//					aaz cp = (aaz)getChunkProvider();
-//					yc structureGen = (yc)cp.c;
-//					boolean a = structureGen.a(x >> 4, z >> 4);
-//					//boolean a = canStructureSpawnHere(netherStructure.b, x, z);
-//					//					s = (a ? "\247a" : "\247c")+"Wither Skeletons";
-//					s = "\247c"+a+", "+x+", "+(y - 1)+", "+z+" | "+getWorldSeed();
-//				}
-//				catch (NullPointerException e) {
-//					s = "\247cWither Skeletons (NPE)";
-//					//e.printStackTrace();
-//				}
-//				catch (Exception e) {
-//					s = "\247cWither Skeletons (GE)";
-//				}
-//			}
-//		}
+		//		else if (i.equals("wither") && debugClassPresent) { // Disabled for end-users, not working.
+		//			//TODO
+		//			if (d > -1)
+		//				s = "\247cWither Skeletons";
+		//			else {
+		//				try {
+		//					aaz cp = (aaz)getChunkProvider();
+		//					yc structureGen = (yc)cp.c;
+		//					boolean a = structureGen.a(x >> 4, z >> 4);
+		//					//boolean a = canStructureSpawnHere(netherStructure.b, x, z);
+		//					//					s = (a ? "\247a" : "\247c")+"Wither Skeletons";
+		//					s = "\247c"+a+", "+x+", "+(y - 1)+", "+z+" | "+getWorldSeed();
+		//				}
+		//				catch (NullPointerException e) {
+		//					s = "\247cWither Skeletons (NPE)";
+		//					//e.printStackTrace();
+		//				}
+		//				catch (Exception e) {
+		//					s = "\247cWither Skeletons (GE)";
+		//				}
+		//			}
+		//		}
 		return s+(debugActive ? ", "+l+", "+v+", "+sk : "");
 	}
 
@@ -1485,7 +1572,7 @@ public class WMLL {
 				return true;
 		return false;
 	}
-	
+
 	public boolean atLeast2True(boolean[] b) {
 		int x = 0;
 		for (int i = 0; i < b.length; i++)
@@ -1493,29 +1580,29 @@ public class WMLL {
 				x++;
 		return x > 1;
 	}
-	
+
 	public void deleteSettingsFile() {
 		settingsFile.delete();
 	}
-	
+
 	public boolean shouldShow() {
 		if (showUnderGUIs)
 			return true;
 		else
 			return mc.s == null;
 	}
-	
+
 	public boolean canStructureSpawnHere(int x, int z) {
 		return canStructureSpawnHere(new Random(), x, z);
 	}
-	
+
 	public boolean canStructureSpawnHere(Random a, int x, int z) {
 		//Random a = r;
 		int cx = x >> 4;
 		int cz = z >> 4;
-		a.setSeed((long)(cx ^ cz << 4) ^ getWorldSeed());
-		a.nextInt();
-		return a.nextInt(3) != 0 ? false : (x != (cx << 4) + 4 + a.nextInt(8) ? false : z == (cz << 4) + 4 + a.nextInt(8));
+							a.setSeed((long)(cx ^ cz << 4) ^ getWorldSeed());
+							a.nextInt();
+							return a.nextInt(3) != 0 ? false : (x != (cx << 4) + 4 + a.nextInt(8) ? false : z == (cz << 4) + 4 + a.nextInt(8));
 	}
 
 }

@@ -21,7 +21,7 @@ public class aww extends awx
     private String g;
     private int h;
     private boolean i;
-    public float ipeer_a_rename;
+    public float ipeer_a_rename; // Mojang's compiler/obfuscator sucks, it really shouldn't allow classes and vars that are referenced in the same file to share names.
     private int k;
     private wm l;
 
