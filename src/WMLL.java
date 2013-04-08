@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -26,11 +25,13 @@ import org.lwjgl.input.Keyboard;
 
 import reifnsk.minimap.ReiMinimap;
 
+import com.thevoxelbox.voxelmap.VoxelMap;
+
 
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 805"; //805
+		return "Test 806"; //805
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5.1";
@@ -149,10 +150,10 @@ public class WMLL {
 				AlienRadar = false;
 			}
 		}
-		if (getClass().getClassLoader().getResource("ZanMinimap.class") != null) {
+		if (getClass().getClassLoader().getResource("com/thevoxelbox/voxelmap/VoxelMap.class") != null) {
 			try {
 				ZansMinimap = true;
-				zansMinimap = new ZanMinimap();
+				zansMinimap = new VoxelMap();
 				zanError = "";
 			}
 			catch (VerifyError e) {
@@ -197,6 +198,8 @@ public class WMLL {
 			debug("[WMLL] WMLL is running in Saturation Bar Compatibility mode");
 		if (AlienRadar)
 			debug("[WMLL] WMLL is running in Alien Radar Compatibility mode");
+		if (ZansMinimap)
+			debug("[WMLL] WMLL is running in VoxelMap Compatibility mode.");
 		debug("[WMLL] Updater: "+autoUpdateCheck);
 		debug("[WMLL] Debug Data:");
 		try { debug("\t* "+wmllCompatibility.toString()); }
@@ -290,7 +293,7 @@ public class WMLL {
 		if (AlienRadar && AlienEnabled && alienRadar != null && getWorld() != null)
 			((MotionTracker)alienRadar).onTickInGame(mc);
 		if (ZansMinimap && ZansEnabled && zansMinimap != null && getWorld() != null)
-			((ZanMinimap)zansMinimap).onTickInGame(mc);
+			((VoxelMap)zansMinimap).onTickInGame(mc);
 		if (!ranInit) {
 			this.mc = h;
 			realInit = true;
