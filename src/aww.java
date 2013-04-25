@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 public class aww extends awx
 {
 
-    private static final bhj b = new bhj();
+    private static final bhi b = new bhi();
     private final Random c = new Random();
     private final Minecraft d;
     private final awh e;
@@ -21,7 +21,7 @@ public class aww extends awx
     private String g;
     private int h;
     private boolean i;
-    public float ipeer_a_rename; // Mojang's compiler/obfuscator sucks, it really shouldn't allow classes and vars that are referenced in the same file to share names.
+    public float ipeer_a_rename;
     private int k;
     private wm l;
 
@@ -86,7 +86,7 @@ public class aww extends awx
             int l3 = d.g.aT;
             c.setSeed(f * 0x4c627);
             boolean flag3 = false;
-            ti ti1 = d.g.cl();
+            ti ti1 = d.g.cn();
             int j6 = ti1.a();
             int l6 = ti1.b();
             d.J.a("bossHealth");
@@ -97,7 +97,7 @@ public class aww extends awx
                 int j7 = j1 / 2 - 91;
                 int j8 = j1 / 2 + 91;
                 d.J.a("expBar");
-                int l8 = d.g.ck();
+                int l8 = d.g.cm();
                 if(l8 > 0)
                 {
                     char c1 = '\266';
@@ -111,7 +111,7 @@ public class aww extends awx
                 }
                 int k9 = k1 - 39;
                 int k10 = k9 - 10;
-                int k11 = WMLLCompatibility.forgeA(d);
+                int k11 = d.g.aZ();
                 int i12 = -1;
                 if(d.g.a(mk.l))
                 {
@@ -161,7 +161,7 @@ public class aww extends awx
                         j16 -= 2;
                     }
                     byte byte3 = 0;
-                    if(d.e.L().t())
+                    if(d.e.N().t())
                     {
                         byte3 = 5;
                     }
@@ -198,7 +198,7 @@ public class aww extends awx
                         i15 += 36;
                         byte2 = 13;
                     }
-                    if(d.g.cl().e() <= 0.0F && f % (j6 * 3 + 1) == 0)
+                    if(d.g.cn().e() <= 0.0F && f % (j6 * 3 + 1) == 0)
                     {
                         l13 += c.nextInt(3) - 1;
                     }
@@ -264,12 +264,12 @@ public class aww extends awx
             GL11.glDisable(32826);
             d.J.b();
         }
-        if(d.g.ch() > 0)
+        if(d.g.cj() > 0)
         {
             d.J.a("sleep");
             GL11.glDisable(2929);
             GL11.glDisable(3008);
-            int l1 = d.g.ch();
+            int l1 = d.g.cj();
             float f3 = (float)l1 / 100F;
             if(f3 > 1.0F)
             {
@@ -329,13 +329,13 @@ public class aww extends awx
         {
             d.J.a("demo");
             String s1 = "";
-            if(d.e.G() >= 0x1d6b4L)
+            if(d.e.I() >= 0x1d6b4L)
             {
                 s1 = bo.a("demo.demoExpired");
             } else
             {
                 s1 = String.format(bo.a("demo.remainingTime"), new Object[] {
-                    lf.a((int)(0x1d6b4L - d.e.G()))
+                    lf.a((int)(0x1d6b4L - d.e.I()))
                 });
             }
             int j3 = awv1.a(s1);
@@ -347,7 +347,7 @@ public class aww extends awx
         {
             d.J.a("debug");
             GL11.glPushMatrix();
-            awv1.a((new StringBuilder()).append("Minecraft 1.5.1 (").append(d.L).append(")").toString(), 2, 2, 0xffffff);
+            awv1.a((new StringBuilder()).append("Minecraft 1.5.2 (").append(d.L).append(")").toString(), 2, 2, 0xffffff);
             awv1.a(d.m(), 2, 12, 0xffffff);
             awv1.a(d.n(), 2, 22, 0xffffff);
             awv1.a(d.p(), 2, 32, 0xffffff);
@@ -377,7 +377,7 @@ public class aww extends awx
             if(d.e != null && d.e.f(l9, l10, l11))
             {
                 abw abw1 = d.e.d(l9, l11);
-                b(awv1, (new StringBuilder()).append("lc: ").append(abw1.h() + 15).append(" b: ").append(abw1.a(l9 & 0xf, l11 & 0xf, d.e.t()).y).append(" bl: ").append(abw1.a(aam.b, l9 & 0xf, l10, l11 & 0xf)).append(" sl: ").append(abw1.a(aam.a, l9 & 0xf, l10, l11 & 0xf)).append(" rl: ").append(abw1.c(l9 & 0xf, l10, l11 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
+                b(awv1, (new StringBuilder()).append("lc: ").append(abw1.h() + 15).append(" b: ").append(abw1.a(l9 & 0xf, l11 & 0xf, d.e.v()).y).append(" bl: ").append(abw1.a(aam.b, l9 & 0xf, l10, l11 & 0xf)).append(" sl: ").append(abw1.a(aam.a, l9 & 0xf, l10, l11 & 0xf)).append(" rl: ").append(abw1.c(l9 & 0xf, l10, l11 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
             }
             b(awv1, String.format("ws: %.3f, fs: %.3f, g: %b, fl: %d", new Object[] {
                 Float.valueOf(d.g.ce.b()), Float.valueOf(d.g.ce.a()), Boolean.valueOf(d.g.F), Integer.valueOf(d.e.f(l9, l11))
@@ -411,7 +411,7 @@ public class aww extends awx
             }
             d.J.b();
         }
-        are are1 = d.e.V().a(1);
+        are are1 = d.e.X().a(1);
         if(are1 != null)
         {
             a(are1, k1, j1, awv1);
@@ -425,13 +425,13 @@ public class aww extends awx
         e.a(f);
         d.J.b();
         GL11.glPopMatrix();
-        are1 = d.e.V().a(0);
+        are1 = d.e.X().a(0);
         if(d.z.T.e && (!d.B() || d.g.a.c.size() > 1 || are1 != null))
         {
             d.J.a("playerList");
-            bdl bdl1 = d.g.a;
-            java.util.List list = bdl1.c;
-            int j5 = bdl1.d;
+            bdk bdk1 = d.g.a;
+            java.util.List list = bdk1.c;
+            int j5 = bdk1.d;
             int i6 = j5;
             int k6 = 1;
             for(; i6 > 20; i6 = ((j5 + k6) - 1) / k6)
@@ -458,9 +458,9 @@ public class aww extends awx
                 {
                     continue;
                 }
-                bdx bdx1 = (bdx)list.get(j9);
-                arf arf1 = d.e.V().i(bdx1.a);
-                String s4 = arf.a(arf1, bdx1.a);
+                bdw bdw1 = (bdw)list.get(j9);
+                arf arf1 = d.e.X().i(bdw1.a);
+                String s4 = arf.a(arf1, bdw1.a);
                 awv1.a(s4, i10, i11, 0xffffff);
                 if(are1 != null)
                 {
@@ -468,7 +468,7 @@ public class aww extends awx
                     int k15 = (i10 + i7) - 12 - 5;
                     if(k15 - j14 > 5)
                     {
-                        arg arg1 = are1.a().a(bdx1.a, are1);
+                        arg arg1 = are1.a().a(bdw1.a, are1);
                         String s5 = (new StringBuilder()).append(a.o).append("").append(arg1.c()).toString();
                         awv1.a(s5, k15 - awv1.a(s5), i11, 0xffffff);
                     }
@@ -477,23 +477,23 @@ public class aww extends awx
                 d.p.b("/gui/icons.png");
                 int k14 = 0;
                 byte byte1 = 0;
-                if(bdx1.b < 0)
+                if(bdw1.b < 0)
                 {
                     byte1 = 5;
                 } else
-                if(bdx1.b < 150)
+                if(bdw1.b < 150)
                 {
                     byte1 = 0;
                 } else
-                if(bdx1.b < 300)
+                if(bdw1.b < 300)
                 {
                     byte1 = 1;
                 } else
-                if(bdx1.b < 600)
+                if(bdw1.b < 600)
                 {
                     byte1 = 2;
                 } else
-                if(bdx1.b < 1000)
+                if(bdw1.b < 1000)
                 {
                     byte1 = 3;
                 } else
@@ -563,17 +563,17 @@ public class aww extends awx
 
     private void d()
     {
-        if(bfm.c == null || bfm.b <= 0)
+        if(bfl.c == null || bfl.b <= 0)
         {
             return;
         }
-        bfm.b--;
+        bfl.b--;
         awv awv1 = d.q;
         axs axs1 = new axs(d.z, d.c, d.d);
         int j = axs1.a();
         char c1 = '\266';
         int i1 = j / 2 - c1 / 2;
-        int j1 = (int)(bfm.a * (float)(c1 + 1));
+        int j1 = (int)(bfl.a * (float)(c1 + 1));
         byte byte0 = 12;
         b(i1, byte0, 0, 74, c1, 5);
         b(i1, byte0, 0, 74, c1, 5);
@@ -581,7 +581,7 @@ public class aww extends awx
         {
             b(i1, byte0, 0, 79, j1, 5);
         }
-        String s = bfm.c;
+        String s = bfl.c;
         awv1.a(s, j / 2 - awv1.a(s) / 2, byte0 - 10, 0xffffff);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         d.p.b("/gui/icons.png");
@@ -595,13 +595,13 @@ public class aww extends awx
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(3008);
         d.p.b("%blur%/misc/pumpkinblur.png");
-        bge bge1 = bge.a;
-        bge1.b();
-        bge1.a(0.0D, i1, -90D, 0.0D, 1.0D);
-        bge1.a(j, i1, -90D, 1.0D, 1.0D);
-        bge1.a(j, 0.0D, -90D, 1.0D, 0.0D);
-        bge1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        bge1.a();
+        bgd bgd1 = bgd.a;
+        bgd1.b();
+        bgd1.a(0.0D, i1, -90D, 0.0D, 1.0D);
+        bgd1.a(j, i1, -90D, 1.0D, 1.0D);
+        bgd1.a(j, 0.0D, -90D, 1.0D, 0.0D);
+        bgd1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        bgd1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -625,13 +625,13 @@ public class aww extends awx
         GL11.glBlendFunc(0, 769);
         GL11.glColor4f(ipeer_a_rename, ipeer_a_rename, ipeer_a_rename, 1.0F);
         d.p.b("%blur%/misc/vignette.png");
-        bge bge1 = bge.a;
-        bge1.b();
-        bge1.a(0.0D, i1, -90D, 0.0D, 1.0D);
-        bge1.a(j, i1, -90D, 1.0D, 1.0D);
-        bge1.a(j, 0.0D, -90D, 1.0D, 0.0D);
-        bge1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        bge1.a();
+        bgd bgd1 = bgd.a;
+        bgd1.b();
+        bgd1.a(0.0D, i1, -90D, 0.0D, 1.0D);
+        bgd1.a(j, i1, -90D, 1.0D, 1.0D);
+        bgd1.a(j, 0.0D, -90D, 1.0D, 0.0D);
+        bgd1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        bgd1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -657,13 +657,13 @@ public class aww extends awx
         float f3 = lx1.g();
         float f4 = lx1.f();
         float f5 = lx1.h();
-        bge bge1 = bge.a;
-        bge1.b();
-        bge1.a(0.0D, i1, -90D, f2, f5);
-        bge1.a(j, i1, -90D, f4, f5);
-        bge1.a(j, 0.0D, -90D, f4, f3);
-        bge1.a(0.0D, 0.0D, -90D, f2, f3);
-        bge1.a();
+        bgd bgd1 = bgd.a;
+        bgd1.b();
+        bgd1.a(0.0D, i1, -90D, f2, f5);
+        bgd1.a(j, i1, -90D, f4, f5);
+        bgd1.a(j, 0.0D, -90D, f4, f3);
+        bgd1.a(0.0D, 0.0D, -90D, f2, f3);
+        bgd1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);

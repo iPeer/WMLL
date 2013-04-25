@@ -31,10 +31,10 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 806"; //805
+		return "Test 807"; //807
 	}
 	public static final String getMinecraftVersion() {
-		return "1.5.1";
+		return "1.5.2";
 	}
 	public static final String[] autoDisable = {".*\\.oc\\.tc"};
 	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 20, 44, 50, 130);
@@ -80,7 +80,8 @@ public class WMLL {
 	public boolean satBar;
 	private boolean ranInit = false;
 	public boolean firstRun = true;
-	private final String[] sleepstrings = {"/r/WMLL!", "Now on Reddit!", "What's My Arrow Level?", "Almost makes you wish for a nuclear winter!", "1 byte of posts!", "Kuurth for 1000!", "Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
+	private final String[] sleepstrings = {"iPeer <3 Boston", "/r/WMLL!", "Now on Reddit!", "What's My Arrow Level?", "Almost makes you wish for a nuclear winter!", "1 byte of posts!", "Kuurth for 1000!", "Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
+	private final String[] easters = {"204", "54", "273", "164", "14", "214", "124", "44"};
 	private boolean sleepingStringSet = false;
 	private String lightString = "Light level: 9001";
 	private long lastF4Press = 0;
@@ -111,7 +112,7 @@ public class WMLL {
 		fieldNames.put("chatLines", "c");
 		Rei = ReiUseMl = RadarBro = false;
 		this.debugClassPresent = (getClass().getClassLoader().getResource("ipeer_wmll_debug") != null);
-		debugActive = this.debugClassPresent;
+		//debugActive = this.debugClassPresent;
 		settingsFile = new File("./mods/WMLL");
 		if (!settingsFile.exists())
 			settingsFile.mkdirs();
@@ -250,7 +251,7 @@ public class WMLL {
 				}
 				else {
 					worldSeedSet = true;
-					this.worldSeed = ((aab)MinecraftServer.D().a(0)).F();
+					this.worldSeed = ((aab)MinecraftServer.D().a(0)).H();
 					/*Object obj = awq.b();
 					Field f = obj.getClass().getDeclaredField(getField("chatLines"));
 					f.setAccessible(true);
@@ -372,6 +373,8 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 14, 0xffffff);
 				a = getPlayerName();
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 15, 0xffffff);
+				a = getLocalTime(0)+" / "+getLocalTime(1);
+				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 16, 0xffffff);
 			}
 			else if (!WMLLDebugActive() && debugClassPresent) {
 				String a = "WMLL "+wmllVersion()+" (DEBUG MODE)";
@@ -390,7 +393,7 @@ public class WMLL {
 					lightString = "Happy birthday, Roxy!";
 				else if (getCalendarDate().equals("202")) // WMLL's "birthday"
 					lightString = "Happy birthday, WMLL!";
-				else if (getCalendarDate().equals("84")) // Easter Sunday
+				else if (getCalendarDate().equals(easters[getYear() - 2014])) // Easter Sunday
 					lightString = "Happy Easter!";
 				else if (getCalendarDate().equals("2512")) // Christmas Day
 					lightString = "Why are you playing Minecraft on Christmas Day?";
@@ -400,11 +403,11 @@ public class WMLL {
 					lightString = "Happy Halloween! WoooOOOoooOOoooO!";
 				else if (getCalendarDate().equals("31")) // Millie <3 RIP, honey.
 					lightString = "Millie <3";
-				else if (getCalendarDate().equals("32")) {// Roxy and I's anniversary
+				else if (getCalendarDate().equals("32")) { // Roxy and I's anniversary
 					String a = getCalendarDate(2);
-					int now = Integer.parseInt(a.substring(a.length() - 4));
+					int now = getYear();
 					int years = now-2007;
-					lightString = years+" years today!";
+					lightString = years+" years today! <3 Roxy!";
 				}
 				else if (!sleepingStringSet) {
 					lightString = sleepstrings[new Random().nextInt(sleepstrings.length)].replaceAll("PLAYERNAME", getPlayerName());
@@ -435,9 +438,7 @@ public class WMLL {
 						out = 0;
 					else if (WMLLI == 10 || WMLLI == 5) 
 						out = 1;
-					if ((isSeedSet()) || isMultiplayer())
-						out++;
-					if ((isMultiplayer() && (getDimension() == -1 || getDimension() == 1)))
+					if ((isSeedSet()) || isMultiplayer() || (isMultiplayer() && (getDimension() == -1 || getDimension() == 1)))
 						out++;
 					double[] coordinates = getPlayerCoordinatesAsDouble();
 					NumberFormat d = new DecimalFormat("#0.00");
@@ -697,6 +698,14 @@ public class WMLL {
 			String bdata = m.group().replaceAll("%count:|%", "").toLowerCase();
 			s = s.replaceAll("%count:"+bdata+"%", formatCount(bdata)+"\247r");
 		}
+		
+		Pattern formats = Pattern.compile("&([0123456789abcdefklmnor])", Pattern.CASE_INSENSITIVE);
+		m = formats.matcher(s);
+		while (m.find()) {
+			String c = m.group().replaceAll("&", "").toLowerCase();
+			s = s.replaceAll("&"+c, "\247"+c);
+		}
+		
 		return s;
 	}
 
@@ -869,16 +878,19 @@ public class WMLL {
 	private String getLocalTime(int mode) {
 		calendar.setTime(new Date(System.currentTimeMillis()));
 		String time = calendar.getTime().toString().split(" ")[3];
+		boolean PM = false;
 		if (mode == 1) {
 			int a = Integer.valueOf(time.split(":")[0]);
-			if (a > 12)
+			if (a > 12) {
 				a -= 12;
-			return a+":"+time.split(":")[1]+":"+time.split(":")[2]+" "+(a + 12 > 11 ? "PM" : "AM");
+				PM = true;
+			}
+			return a+":"+time.split(":")[1]+":"+time.split(":")[2]+" "+(PM ? "PM" : "AM");
 		}
 		return calendar.getTime().toString().split(" ")[3];
 	}
 
-	private bdt getWorld() {
+	private bds getWorld() {
 		try {
 			return mc.e;
 		}
@@ -887,7 +899,7 @@ public class WMLL {
 		}
 	}
 
-	public bjh sspServer() {
+	public bjg sspServer() {
 		return mc.D();
 	}
 
@@ -995,7 +1007,7 @@ public class WMLL {
 	}
 
 	private aba getBiomeGenBase() {
-		return getWorld().t();
+		return getWorld().v();
 	}
 
 	private boolean playerIsStandingOnBlock(int id) {
@@ -1020,7 +1032,7 @@ public class WMLL {
 		entityPlayer().a(t);
 	}
 
-	public bdw entityPlayer() {
+	public bdv entityPlayer() {
 		return mc.g;
 	}
 
@@ -1028,7 +1040,7 @@ public class WMLL {
 		return mc.h;
 	}
 
-	public bev playerEntity() {
+	public beu playerEntity() {
 		return mc.j;
 	}
 
@@ -1036,7 +1048,7 @@ public class WMLL {
 		return entityPlayer().am();
 	}
 
-	public bds getPlayerController() {
+	public bdr getPlayerController() {
 		return mc.b;
 	}
 
@@ -1355,6 +1367,11 @@ public class WMLL {
 		return getCalendarDate(1);
 	}
 
+	public int getYear() {
+		String a = getCalendarDate(2);
+		return Integer.parseInt(a.substring(a.length() - 4));
+	}
+	
 	public String getCalendarDate(int type) {
 		if (calendar.getTime() != new Date())
 			calendar.setTime(new Date());
