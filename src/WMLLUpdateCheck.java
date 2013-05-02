@@ -33,7 +33,7 @@ public class WMLLUpdateCheck extends Thread implements Runnable {
 	private void checkForUpdates() {
 		try {
 			WMLL.lastUpdateCheck = System.currentTimeMillis();
-			URL updateURL = new URL("http://dl.dropbox.com/u/21719562/Minecraft/Mods/WMLL/ver.txt");
+			URL updateURL = new URL("https://dl.dropboxusercontent.com/u/21719562/Minecraft/Mods/WMLL/ver.txt");
 			InputStream in = updateURL.openStream();
 			Scanner scanner = new Scanner(in);
 			while (scanner.hasNextLine()) {

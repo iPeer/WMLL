@@ -11,7 +11,7 @@ public class WMLLOptionsMenu extends axr {
 	private static final String threadURL = "http://www.minecraftforum.net/topic/170739-";
 	private Desktop desktop;
 
-	public WMLLOptionsMenu() { }
+	public WMLLOptionsMenu() {	}
 
 	public WMLLOptionsMenu(WMLL wmll) { 
 		this.wmll = wmll;
@@ -24,55 +24,60 @@ public class WMLLOptionsMenu extends axr {
 
 	public WMLLOptionsMenu(axr aum) {
 		this.parent = aum;
+		if (!WMLL.i.realInit) { 
+			WMLL.i.debug("[WMLL] WMLL was not correctly initialised! Attempting to initialize it now.");
+			wmll.i = new WMLL();
+			wmll.i.updategui(aum.g);
+		}
 		this.wmll = WMLL.i;
 	}
 
 	@SuppressWarnings("unchecked")
 	public void A_() {
-		i.clear();
+		k.clear();
 		try {
 			if (wmll.isEnabled()) {
-				i.add(new awg(0, g / 2 - 200, h - 95, "General Settings"));
-				i.add(new awg(1, g / 2 + 2, h - 95, "Output Settings"));
-				i.add(new awg(2, g / 2 - 200, h - 70, "Miscellaneous Settings"));
-				i.add(new awg(3, g / 2 + 2, h - 70, "Compatibility Settings"));
+				k.add(new awg(0, h / 2 - 200, i - 95, "General Settings"));
+				k.add(new awg(1, h / 2 + 2, i - 95, "Output Settings"));
+				k.add(new awg(2, h / 2 - 200, i - 70, "Miscellaneous Settings"));
+				k.add(new awg(3, h / 2 + 2, i - 70, "Compatibility Settings"));
 				awg updateButton;
-				i.add(updateButton = new awg(-1, g / 2 - 100, h / 4 + 23, "View forum thread"));
+				k.add(updateButton = new awg(-1, h / 2 - 100, i / 4 + 23, "View forum thread"));
 				updateButton.h = wmll.updateInfo.length > 0 && Desktop.isDesktopSupported() && (this.desktop = Desktop.getDesktop()).isSupported(Desktop.Action.BROWSE);
 			}
 			else {
-				i.add(new awg(999, g / 2 - 50, h - 110, 100, 20, "Enable it!"));
+				k.add(new awg(999, h / 2 - 50, i - 110, 100, 20, "Enable it!"));
 			}
-			i.add(new awg(4, g / 2 - 190, h - 30, 380, 20, (wmll.isEnabled() ? "Done" : "Cancel")));
+			k.add(new awg(4, h / 2 - 190, i - 30, 380, 20, (wmll.isEnabled() ? "Done" : "Cancel")));
 			if (wmll.debugClassPresent) {
-				i.add(new awg(9000, g - 40, 0, 20, 20, (WMLL.debugActive ? "\247l" : "")+"D"));
-				i.add(new awg(9001, g - 20, 0, 20, 20, "R"));
+				k.add(new awg(9000, h - 40, 0, 20, 20, (WMLL.debugActive ? "\247l" : "")+"D"));
+				k.add(new awg(9001, h - 20, 0, 20, 20, "R"));
 			}
 		}
 		catch (Exception e) {
-			f.a(new WMLLError(this, e));
+			g.a(new WMLLError(this, e));
 		}
 	}
 
 	protected void a(awg b) {
 		switch (b.f) {
 		case 0:
-			f.a(new WMLLOptionsGeneral(this.wmll, this));
+			g.a(new WMLLOptionsGeneral(this.wmll, this));
 			return;
 		case 1:
-			f.a(new WMLLOptionsOutput(this.wmll, this));
+			g.a(new WMLLOptionsOutput(this.wmll, this));
 			return;
 		case 2:
-			f.a (new WMLLOptionsMisc(this.wmll, this));
+			g.a (new WMLLOptionsMisc(this.wmll, this));
 			return;
 		case 3:
-			f.a(new WMLLOptionsCompat(this.wmll, this));
+			g.a(new WMLLOptionsCompat(this.wmll, this));
 			return;
 		case 4:
 			if (parent != null)
-				f.a(parent);
+				g.a(parent);
 			else
-				f.a((axr)null);
+				g.a((axr)null);
 			wmll.saveOptions();
 			return;
 		case -1:
@@ -83,9 +88,9 @@ public class WMLLOptionsMenu extends axr {
 			return;
 		case 9001:
 			if (this.parent != null)
-				f.a(new WMLLOptionsMenu(this.wmll, this.parent));
+				g.a(new WMLLOptionsMenu(this.wmll, this.parent));
 			else
-				f.a(new WMLLOptionsMenu(this.wmll));
+				g.a(new WMLLOptionsMenu(this.wmll));
 			return;
 		case 9000:
 			boolean a = !WMLL.debugActive;
@@ -94,7 +99,7 @@ public class WMLLOptionsMenu extends axr {
 			return;
 		case 999:
 			WMLL.options.put("World-"+wmll.getWorldName(), "true");
-			f.a(new WMLLOptionsMenu(this.wmll, this.parent));
+			g.a(new WMLLOptionsMenu(this.wmll, this.parent));
 			return;
 		}
 	}
@@ -102,22 +107,22 @@ public class WMLLOptionsMenu extends axr {
 	protected void a(char c, int i) {
 		if (i == Keyboard.KEY_ESCAPE) {
 			wmll.saveOptions();
-			f.a(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? null : parent);
+			g.a(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? null : parent);
 		}
 
 	}
 
 	public void a(int i, int j, float f) {
 		e();
-		a(l, "What's My Light Level", g / 2, h / 4 - 20, 0xffffff);
-		a(l, WMLL.wmllVersion()+" for "+WMLL.getMinecraftVersion(), g / 2, h / 4 - 10, 0x888888);
+		a(m, "What's My Light Level", h / 2, this.i / 4 - 20, 0xffffff);
+		a(m, WMLL.wmllVersion()+" for "+WMLL.getMinecraftVersion(), h / 2, this.i / 4 - 10, 0x888888);
 		if (wmll.showWorldName)
-			a(l, wmll.getWorldName(), g / 2, h / 4, 0x888888);
+			a(m, wmll.getWorldName(), h / 2, this.i / 4, 0x888888);
 		if (wmll.updateInfo.length > 0) {
-			a(l, "\247c"+wmll.updateInfo[0]+"\247a is available for Minecraft \247c"+wmll.updateInfo[1], g / 2, h / 4 + 10, 0x00ff00);
+			a(m, "\247c"+wmll.updateInfo[0]+"\247a is available for Minecraft \247c"+wmll.updateInfo[1], h / 2, this.i / 4 + 10, 0x00ff00);
 		}
 		if (!wmll.isEnabled())
-			a(l, "WMLL is currently disabled on the "+(wmll.isMultiplayer() ? "server" : "world")+".", g / 2, h / 4 + 60, 0xffffff);
+			a(m, "WMLL is currently disabled on the "+(wmll.isMultiplayer() ? "server" : "world")+".", h / 2, this.i / 4 + 60, 0xffffff);
 		super.a(i, j, f);
 	}
 

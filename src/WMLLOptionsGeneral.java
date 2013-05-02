@@ -15,22 +15,22 @@ public class WMLLOptionsGeneral extends axr {
 
 	@SuppressWarnings("unchecked")
 	public void A_() {
-		i.clear();
+		k.clear();
 		if (wmll.debugClassPresent)
-			i.add(new awg(9001, g - 20, 0, 20, 20, "R"));
+			k.add(new awg(9001, h - 20, 0, 20, 20, "R"));
 		String enabledString = "Enabled on "+wmll.getWorldName()+": "+(WMLL.Enabled ? "Yes" : "No");
-		i.add(new awg(0, g / 2 - 150, h / 4, 300, 20, enabledString));
-		i.add(bindingButton = new awg(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
-		i.add(new awg(2, g / 2 - 190, h - 25, 380, 20, "Done"));
-		i.add(new awg(3, g / 2 - 50, h / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
-		i.add(new awg(4, g / 2 - 150, h / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
-		i.add(new awg(5, g / 2 - 150, h / 4 + 50, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
+		k.add(new awg(0, h / 2 - 150, i / 4, 300, 20, enabledString));
+		k.add(bindingButton = new awg(1, h / 2 - 150, i / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
+		k.add(new awg(2, h / 2 - 190, i - 25, 380, 20, "Done"));
+		k.add(new awg(3, h / 2 - 50, i / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
+		k.add(new awg(4, h / 2 - 150, i / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
+		k.add(new awg(5, h / 2 - 150, i / 4 + 50, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
 	}
 
 	protected void a(awg b) {
 		switch (b.f) {
 		case 9001:
-			f.a(new WMLLOptionsGeneral(this.wmll, this.parent));
+			g.a(new WMLLOptionsGeneral(this.wmll, this.parent));
 			return;
 		case 0:
 			boolean a = WMLL.Enabled;
@@ -44,9 +44,9 @@ public class WMLLOptionsGeneral extends axr {
 			return;
 		case 2:
 			if (parent != null)
-				f.a(parent);
+				g.a(parent);
 			else
-				f.a((axl)null);
+				g.a((axl)null);
 			return;
 		case 3:
 			boolean c = wmll.autoSeed;
@@ -62,7 +62,7 @@ public class WMLLOptionsGeneral extends axr {
 			c = wmll.showWorldName;
 			b.e = "Show world name/server IP on main menu: "+(c ? "OFF" : "ON");
 			wmll.showWorldName = !c;
-			f.a(new WMLLOptionsGeneral(this.wmll, this.parent));
+			g.a(new WMLLOptionsGeneral(this.wmll, this.parent));
 			return;
 		}
 	}
@@ -74,7 +74,7 @@ public class WMLLOptionsGeneral extends axr {
 			bindingButton.e = "Cycle Key: "+Keyboard.getKeyName(i);
 		}
 		else if (i == Keyboard.KEY_ESCAPE && parent != null)
-			f.a(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? null : parent);
+			g.a(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? null : parent);
 	}
 
 	public void a(int i, int j, float f) {

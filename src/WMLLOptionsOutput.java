@@ -38,19 +38,19 @@ public class WMLLOptionsOutput extends axr {
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		Keyboard.enableRepeatEvents(true);
-		i.clear();
-		lightLevelBox = new aws(l, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), 35, wmll.getWindowSize().a() - 20, 15);
+		k.clear();
+		lightLevelBox = new aws(m, h / 2 - ((wmll.getWindowSize().a() - 20) / 2), 35, wmll.getWindowSize().a() - 20, 15);
 		lightLevelBox.f(500);
 		lightLevelBox.a(WMLL.options.getProperty("lightString", "Light level: %LightLevel%"));
 		lightLevelBox.b(true);
-		i.add(showButton = new awg(1, g / 2 - 75, h / 4 + 5, 275, 20, "Show: "+outputs[WMLL.WMLLI]));
-		R = new aws(l, g / 2 - 60, h / 4 + 70, 30, 10);
+		k.add(showButton = new awg(1, h / 2 - 75, h / 4 + 5, 275, 20, "Show: "+outputs[WMLL.WMLLI]));
+		R = new aws(m, h / 2 - 60, h / 4 + 70, 30, 10);
 		R.f(3);
 		R.a(WMLL.options.getProperty("RGB-R", "255"));
-		G = new aws(l, g / 2 - 15, h / 4 + 70, 30, 10);
+		G = new aws(m, h / 2 - 15, h / 4 + 70, 30, 10);
 		G.f(3);
 		G.a(WMLL.options.getProperty("RGB-G", "255"));
-		B = new aws(l, g / 2 + 30, h / 4 + 70, 30, 10);
+		B = new aws(m, h / 2 + 30, h / 4 + 70, 30, 10);
 		B.f(3);
 		B.a(WMLL.options.getProperty("RGB-B", "255"));
 		if (R.b().equals(""))
@@ -63,7 +63,7 @@ public class WMLLOptionsOutput extends axr {
 		colours[0] = Integer.valueOf((R.b().equals("") ? "0" : R.b()));
 		colours[1] = Integer.valueOf((G.b().equals("") ? "0" : G.b()));
 		colours[2] = Integer.valueOf((B.b().equals("") ? "0" : B.b()));
-		seedBox = new aws(l, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), h / 4 + 105, wmll.getWindowSize().a() - 20, 15);
+		seedBox = new aws(m, h / 2 - ((wmll.getWindowSize().a() - 20) / 2), h / 4 + 105, wmll.getWindowSize().a() - 20, 15);
 		seedBox.f(500);
 		seedBox.a(wmll.getWorldSeed() != 0 ? Long.toString(wmll.getWorldSeed()) : "");
 		editboxes.add(seedBox);
@@ -72,21 +72,21 @@ public class WMLLOptionsOutput extends axr {
 		editboxes.add(G);
 		editboxes.add(B);
 		showButton.g = wmll.classicOutput || WMLL.useImages;
-		i.add(new awg(2, g / 2 - 200, h / 4 + 5, 120, 20, "Location: "+locations[WMLL.outputLocation]));
-		i.add(new awg(3, g / 2 - 200, h / 4 + 30, 120, 20, "Output type: "+(wmll.classicOutput ? "Classic" : "Custom")));
-		i.add(new awg(4, g / 2 - 75, h / 4 + 30, 120, 20, "Images: "+(WMLL.useImages ? "ON" : "OFF")));
-		i.add(new awg(0, g / 2 - 190, h - 30, 380, 20, "Done"));
+		k.add(new awg(2, h / 2 - 200, h / 4 + 5, 120, 20, "Location: "+locations[WMLL.outputLocation]));
+		k.add(new awg(3, h / 2 - 200, h / 4 + 30, 120, 20, "Output type: "+(wmll.classicOutput ? "Classic" : "Custom")));
+		k.add(new awg(4, h / 2 - 75, h / 4 + 30, 120, 20, "Images: "+(WMLL.useImages ? "ON" : "OFF")));
+		k.add(new awg(0, h / 2 - 190, h - 30, 380, 20, "Done"));
 		awg paramButton;
-		i.add(paramButton = new awg(-1, wmll.getWindowSize().a() - 108, 19, 100, 14, "Parameter help"));
+		k.add(paramButton = new awg(-1, wmll.getWindowSize().a() - 108, 19, 100, 14, "Parameter help"));
 		paramButton.h = Desktop.isDesktopSupported() && (this.desktop = Desktop.getDesktop()).isSupported(Desktop.Action.BROWSE);
 		if (wmll.debugClassPresent)
-			i.add(new awg(9001, g - 20, 0, 20, 20, "R"));
+			k.add(new awg(9001, h - 20, 0, 20, 20, "R"));
 	}
 
 	protected void a(awg b) {
 		switch (b.f) {
 		case 9001:
-			f.a(new WMLLOptionsOutput(this.wmll, this.parent));
+			g.a(new WMLLOptionsOutput(this.wmll, this.parent));
 			return;
 		case 0:
 			WMLL.options.put("RGB-R", R.b());
@@ -99,7 +99,7 @@ public class WMLLOptionsOutput extends axr {
 				wmll.worldSeed = Long.valueOf(seedBox.b());
 				WMLL.options.put("Seed:"+wmll.getWorldName(), seedBox.b());
 			}				
-			f.a(parent);
+			g.a(parent);
 			return;
 		case 1:
 			int c = WMLL.WMLLI;
@@ -140,7 +140,7 @@ public class WMLLOptionsOutput extends axr {
 
 	protected void a(char c, int i) {
 		if (Keyboard.KEY_ESCAPE == i)
-			f.a(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? null : parent);
+			g.a(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? null : parent);
 		else if (lightLevelBox.l())
 			lightLevelBox.a(c, i);
 		else if (seedBox.l())
@@ -173,18 +173,18 @@ public class WMLLOptionsOutput extends axr {
 			super.a(c, i);
 	}
 
-	public void a(int i, int j, float f) {
+	public void a(int i, int j, float f) { // [152pre] [iPeer] These using the width variable as height is weird.
 		e();
-		a(l, "Output format", g / 2 - ((wmll.getWindowSize().a() - wmll.getFontRenderer().a("Output format") - 20) / 2), 22, 0xffffff);
-		a(l, "Text Colour", g / 2, h / 4 + 55, 0xffffff);
-		a(l, "R: ", g / 2 - 63, h / 4 + 71, 0xffffff);
-		a(l, "G: ", g / 2 - 18, h / 4 + 71, 0xffffff);
-		a(l, "B: ", g / 2 + 27, h / 4 + 71, 0xffffff);
+		a(m, "Output format", h / 2 - ((wmll.getWindowSize().a() - wmll.getFontRenderer().a("Output format") - 20) / 2), 22, 0xffffff);
+		a(m, "Text Colour", h / 2, h / 4 + 55, 0xffffff);
+		a(m, "R: ", h / 2 - 63, h / 4 + 71, 0xffffff);
+		a(m, "G: ", h / 2 - 18, h / 4 + 71, 0xffffff);
+		a(m, "B: ", h / 2 + 27, h / 4 + 71, 0xffffff);
 		int r = colours[0];
 		int g1 = colours[1];
 		int b = colours[2];
-		a(l, "Colour preview", g / 2, h / 4 + 85, new Color(r, g1, b).getRGB());
-		a(l, "Seed", g / 2 - ((wmll.getWindowSize().a() - wmll.getFontRenderer().a("Seed") - 20) / 2), h / 4 + 92, 0xffffff);
+		a(m, "Colour preview", h / 2, h / 4 + 85, new Color(r, g1, b).getRGB());
+		a(m, "Seed", h / 2 - ((wmll.getWindowSize().a() - wmll.getFontRenderer().a("Seed") - 20) / 2), h / 4 + 92, 0xffffff);
 		for (aws a : editboxes)
 			a.f();
 		super.a(i, j, f);
