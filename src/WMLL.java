@@ -31,7 +31,7 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 807"; //807
+		return "Stable 45"; //807
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5.2";
