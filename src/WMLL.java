@@ -31,7 +31,10 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 45"; //807
+		return "Stable 46"; //807
+	}
+	public static final String versionName() {
+		return "I fixed \247oeverything\247r edition";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5.2";
@@ -251,7 +254,7 @@ public class WMLL {
 				}
 				else {
 					worldSeedSet = true;
-					this.worldSeed = ((aab)MinecraftServer.D().a(0)).H();
+					this.worldSeed = ((aab)MinecraftServer.D().a(0)).G();
 					/*Object obj = awq.b();
 					Field f = obj.getClass().getDeclaredField(getField("chatLines"));
 					f.setAccessible(true);
@@ -1007,7 +1010,7 @@ public class WMLL {
 	}
 
 	private aba getBiomeGenBase() {
-		return getWorld().v();
+		return getWorld().u();
 	}
 
 	private boolean playerIsStandingOnBlock(int id) {
