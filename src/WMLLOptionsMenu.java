@@ -115,7 +115,7 @@ public class WMLLOptionsMenu extends axr {
 	public void a(int i, int j, float f) {
 		e();
 		a(m, "What's My Light Level", h / 2, this.i / 4 - 20, 0xffffff);
-		a(m, WMLL.wmllVersion()+" for "+WMLL.getMinecraftVersion(), h / 2, this.i / 4 - 10, 0x888888);
+		a(m, WMLL.wmllVersion()+(!WMLL.versionName().equals("") ? " (\""+WMLL.versionName()+"\")" : "")+" for "+WMLL.getMinecraftVersion(), h / 2, this.i / 4 - 10, 0x888888);
 		if (wmll.showWorldName)
 			a(m, wmll.getWorldName(), h / 2, this.i / 4, 0x888888);
 		if (wmll.updateInfo.length > 0) {

@@ -161,7 +161,7 @@ public class aww extends awx
                         j16 -= 2;
                     }
                     byte byte3 = 0;
-                    if(d.e.N().t())
+                    if(d.e.M().t())
                     {
                         byte3 = 5;
                     }
@@ -329,13 +329,13 @@ public class aww extends awx
         {
             d.J.a("demo");
             String s1 = "";
-            if(d.e.I() >= 0x1d6b4L)
+            if(d.e.H() >= 0x1d6b4L)
             {
                 s1 = bo.a("demo.demoExpired");
             } else
             {
                 s1 = String.format(bo.a("demo.remainingTime"), new Object[] {
-                    lf.a((int)(0x1d6b4L - d.e.I()))
+                    lf.a((int)(0x1d6b4L - d.e.H()))
                 });
             }
             int j3 = awv1.a(s1);
@@ -377,7 +377,7 @@ public class aww extends awx
             if(d.e != null && d.e.f(l9, l10, l11))
             {
                 abw abw1 = d.e.d(l9, l11);
-                b(awv1, (new StringBuilder()).append("lc: ").append(abw1.h() + 15).append(" b: ").append(abw1.a(l9 & 0xf, l11 & 0xf, d.e.v()).y).append(" bl: ").append(abw1.a(aam.b, l9 & 0xf, l10, l11 & 0xf)).append(" sl: ").append(abw1.a(aam.a, l9 & 0xf, l10, l11 & 0xf)).append(" rl: ").append(abw1.c(l9 & 0xf, l10, l11 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
+                b(awv1, (new StringBuilder()).append("lc: ").append(abw1.h() + 15).append(" b: ").append(abw1.a(l9 & 0xf, l11 & 0xf, d.e.u()).y).append(" bl: ").append(abw1.a(aam.b, l9 & 0xf, l10, l11 & 0xf)).append(" sl: ").append(abw1.a(aam.a, l9 & 0xf, l10, l11 & 0xf)).append(" rl: ").append(abw1.c(l9 & 0xf, l10, l11 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
             }
             b(awv1, String.format("ws: %.3f, fs: %.3f, g: %b, fl: %d", new Object[] {
                 Float.valueOf(d.g.ce.b()), Float.valueOf(d.g.ce.a()), Boolean.valueOf(d.g.F), Integer.valueOf(d.e.f(l9, l11))
@@ -411,7 +411,7 @@ public class aww extends awx
             }
             d.J.b();
         }
-        are are1 = d.e.X().a(1);
+        are are1 = d.e.W().a(1);
         if(are1 != null)
         {
             a(are1, k1, j1, awv1);
@@ -425,7 +425,7 @@ public class aww extends awx
         e.a(f);
         d.J.b();
         GL11.glPopMatrix();
-        are1 = d.e.X().a(0);
+        are1 = d.e.W().a(0);
         if(d.z.T.e && (!d.B() || d.g.a.c.size() > 1 || are1 != null))
         {
             d.J.a("playerList");
@@ -459,7 +459,7 @@ public class aww extends awx
                     continue;
                 }
                 bdw bdw1 = (bdw)list.get(j9);
-                arf arf1 = d.e.X().i(bdw1.a);
+                arf arf1 = d.e.W().i(bdw1.a);
                 String s4 = arf.a(arf1, bdw1.a);
                 awv1.a(s4, i10, i11, 0xffffff);
                 if(are1 != null)

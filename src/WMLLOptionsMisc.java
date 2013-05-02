@@ -17,10 +17,10 @@ public class WMLLOptionsMisc extends axr {
 		k.clear();
 		if (wmll.debugClassPresent)
 			k.add(new awg(9001, h - 20, 0, 20, 20, "R"));
-		k.add(new awg(0, h / 2 - 190, h - 30, 380, 20, "Done"));
-		k.add(new awg(1, h / 2 - 100, h / 4 + 25, 200, 20, "Reload Settings from file"));
-		k.add(new awg(2, h / 2 - 100, h / 4 + 50, 200, 20, "Reset Settings to defaults"));
-		k.add(new awg(3, h / 2 - 100, h / 4, 200, 20, "Automatically check for updates: "+(wmll.autoUpdateCheck ? "ON" : "OFF")));
+		k.add(new awg(0, h / 2 - 190, i - 30, 380, 20, "Done"));
+		k.add(new awg(1, h / 2 - 100, i / 4 + 25, 200, 20, "Reload Settings from file"));
+		k.add(new awg(2, h / 2 - 100, i / 4 + 50, 200, 20, "Reset Settings to defaults"));
+		k.add(new awg(3, h / 2 - 100, i / 4, 200, 20, "Automatically check for updates: "+(wmll.autoUpdateCheck ? "ON" : "OFF")));
 	}
 	
 	public void a(awg b) {
