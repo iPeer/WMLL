@@ -31,10 +31,10 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 46"; //807
+		return "Stable 47"; //807
 	}
 	public static final String versionName() {
-		return "I fixed \247oeverything\247r edition";
+		return "\247oClass constructors suck\247r";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5.2";
@@ -157,7 +157,7 @@ public class WMLL {
 		if (getClass().getClassLoader().getResource("com/thevoxelbox/voxelmap/VoxelMap.class") != null) {
 			try {
 				ZansMinimap = true;
-				zansMinimap = new VoxelMap();
+				zansMinimap = new VoxelMap(true, true);
 				zanError = "";
 			}
 			catch (VerifyError e) {
