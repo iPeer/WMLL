@@ -31,10 +31,10 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 48"; //807
+		return "Stable 49"; //807
 	}
 	public static final String versionName() {
-		return "";
+		return "The annual crash-a-thon";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5.2";
@@ -194,7 +194,7 @@ public class WMLL {
 		debug("[WMLL] WMLL is"+(debugClassPresent ? "" : " not")+" running in debug mode");
 		if (Rei)
 			debug("[WMLL] WMLL is running in Rei's Minimap Compatibility mode");
-		if (useForge)
+		if (forgeDetected)
 			debug("[WMLL] WMLL is running in Forge Compatibility mode");
 		if (RadarBro)
 			debug("[WMLL] WMLL is running in RadarBro Compatibility mode");
@@ -296,12 +296,6 @@ public class WMLL {
 			firstRun = false;
 			wmllRenderer.firstRun = true;
 		}
-		if (Rei && !ReiUseMl && ReiEnabled)
-			ReiMinimap.instance.onTickInGame(renderPartialTicks, mc);
-		if (AlienRadar && AlienEnabled && alienRadar != null && getWorld() != null)
-			((MotionTracker)alienRadar).onTickInGame(mc);
-		if (ZansMinimap && ZansEnabled && zansMinimap != null && getWorld() != null)
-			((VoxelMap)zansMinimap).onTickInGame(mc);
 		if (!ranInit) {
 			this.mc = h;
 			realInit = true;
@@ -313,6 +307,12 @@ public class WMLL {
 				entityPlayer().a("Test");
 			//(new Thread(wmllUpdateCheck)).start();
 		}
+		if (Rei && !ReiUseMl && ReiEnabled)
+			ReiMinimap.instance.onTickInGame(renderPartialTicks, mc);
+		if (AlienRadar && AlienEnabled && alienRadar != null && getWorld() != null)
+			((MotionTracker)alienRadar).onTickInGame(mc);
+		if (ZansMinimap && ZansEnabled && zansMinimap != null && getWorld() != null)
+			((VoxelMap)zansMinimap).onTickInGame(mc);
 		if (mcDebugOpen() || wmllF3Output) {
 			if (mcDebugOpen() && wmllOverrideF3)
 				toggleF3Override();
