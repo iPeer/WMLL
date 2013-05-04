@@ -25,9 +25,7 @@ public class WMLLOptionsMenu extends axr {
 	public WMLLOptionsMenu(axr aum) {
 		this.parent = aum;
 		if (!WMLL.i.realInit) { 
-			WMLL.i.debug("[WMLL] WMLL was not correctly initialised! Attempting to initialize it now.");
-			wmll.i = new WMLL();
-			wmll.i.updategui(aum.g);
+			System.err.println("[WMLL] [FATAL] WMLL was not initialized!");
 		}
 		this.wmll = WMLL.i;
 	}
@@ -123,6 +121,8 @@ public class WMLLOptionsMenu extends axr {
 		}
 		if (!wmll.isEnabled())
 			a(m, "WMLL is currently disabled on the "+(wmll.isMultiplayer() ? "server" : "world")+".", h / 2, this.i / 4 + 60, 0xffffff);
+		if (!WMLL.i.realInit)
+			a(m, "WMLL was not initialized poroperly. This can happen if you load it along-side mods that also modify", h / 2, this.i / 4 + 60, 0xffffff);
 		super.a(i, j, f);
 	}
 

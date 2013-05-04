@@ -31,10 +31,10 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 47"; //807
+		return "Stable 48"; //807
 	}
 	public static final String versionName() {
-		return "\247oClass constructors suck\247r";
+		return "";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5.2";
@@ -217,11 +217,15 @@ public class WMLL {
 		debug("[WMLL] WMLL "+wmllVersion()+" initialized.");
 	}
 
-	public void updategui(Minecraft h) {
+	public void updategui(Minecraft h) throws WMLLException {
 		updategui(h, h.w);
 	}
+	
+	public void updategui(Minecraft h, aww w) throws WMLLException {
+		throw new WMLLException("Deprecated Initialisation Method! Use updategui(mc, float, guiingame) instead.");
+	}
 
-	public void updategui(Minecraft h, aww w) {
+	public void updategui(Minecraft h, float renderPartialTicks, aww w) {
 		if (getWorld() != null && !wmllUpdateCheck.running && autoUpdateCheck) {
 			wmllUpdateCheck.start();
 		}
@@ -293,7 +297,7 @@ public class WMLL {
 			wmllRenderer.firstRun = true;
 		}
 		if (Rei && !ReiUseMl && ReiEnabled)
-			ReiMinimap.instance.onTickInGame(h);
+			ReiMinimap.instance.onTickInGame(renderPartialTicks, mc);
 		if (AlienRadar && AlienEnabled && alienRadar != null && getWorld() != null)
 			((MotionTracker)alienRadar).onTickInGame(mc);
 		if (ZansMinimap && ZansEnabled && zansMinimap != null && getWorld() != null)

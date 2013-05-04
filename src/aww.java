@@ -111,7 +111,7 @@ public class aww extends awx
                 }
                 int k9 = k1 - 39;
                 int k10 = k9 - 10;
-                int k11 = d.g.aZ();
+                int k11 = WMLLCompatibility.forgeA(d, d.g.aZ());
                 int i12 = -1;
                 if(d.g.a(mk.l))
                 {
@@ -342,7 +342,7 @@ public class aww extends awx
             awv1.a(s1, j1 - j3 - 10, 5, 0xffffff);
             d.J.b();
         }
-        WMLL.i.updategui(d, this);
+        WMLL.i.updategui(d, f1, this);
         if(d.z.ab)
         {
             d.J.a("debug");
