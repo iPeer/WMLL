@@ -14,19 +14,18 @@ public class WMLLCompatibility extends awx {
 	
 	private int i;
 
-	public static int forgeA(Minecraft d) {
-		int a = d.g.aZ();
+	public static int forgeA(Minecraft d, int j) {
 		if (WMLL.i.forgeEnabled)
 			try {
 				return ForgeHooks.getTotalArmorValue(d.g); // 12W40 & 1.4PRE ERROR
 			}
-		catch (IllegalAccessError e) { return a; }
-		catch (NoClassDefFoundError e) { return a; }
-		catch (NoSuchFieldError e) { return a; }
-		catch (Error e) { return a; }
-		catch (Exception e) { return a; }
+		catch (IllegalAccessError e) { return j; }
+		catch (NoClassDefFoundError e) { return j; }
+		catch (NoSuchFieldError e) { return j; }
+		catch (Error e) { return j; }
+		catch (Exception e) { return j; }
 		else
-			return a;
+			return j;
 	}
 	
 	public void RadarBroRun(Minecraft i, WMLL w) {
