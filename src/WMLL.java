@@ -31,10 +31,10 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 49"; //807
+		return "Stable 50"; //807
 	}
 	public static final String versionName() {
-		return "The annual crash-a-thon";
+		return "At least it wasn't another mod this time";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5.2";
@@ -400,7 +400,7 @@ public class WMLL {
 					lightString = "Happy birthday, Roxy!";
 				else if (getCalendarDate().equals("202")) // WMLL's "birthday"
 					lightString = "Happy birthday, WMLL!";
-				else if (getCalendarDate().equals(easters[getYear() - 2014])) // Easter Sunday
+				else if (getCalendarDate().equals(easters[(getYear() > 2014 ? getYear() - 2014 : 0)])) // Easter Sunday
 					lightString = "Happy Easter!";
 				else if (getCalendarDate().equals("2512")) // Christmas Day
 					lightString = "Why are you playing Minecraft on Christmas Day?";
