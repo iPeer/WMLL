@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.common.ForgeVersion;
 
 import org.lwjgl.input.Keyboard;
 
@@ -31,10 +32,10 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 50"; //807
+		return "Test 808"; //807
 	}
 	public static final String versionName() {
-		return "At least it wasn't another mod this time";
+		return "Now with 100% more Forge!";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5.2";
@@ -101,6 +102,7 @@ public class WMLL {
 	public boolean showWorldName = true;
 
 	public boolean realInit = false;
+	public boolean useML = false;
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+wmllVersion());
@@ -224,6 +226,10 @@ public class WMLL {
 	public void updategui(Minecraft h, aww w) throws WMLLException {
 		throw new WMLLException("Deprecated Initialisation Method! Use updategui(mc, float, guiingame) instead.");
 	}
+	
+	public void updategui(Minecraft mc2, float f) {
+		updategui(mc2, f, mc2.w);
+	}
 
 	public void updategui(Minecraft h, float renderPartialTicks, aww w) {
 		if (getWorld() != null && !wmllUpdateCheck.running && autoUpdateCheck) {
@@ -307,6 +313,8 @@ public class WMLL {
 				entityPlayer().a("Test");
 			//(new Thread(wmllUpdateCheck)).start();
 		}
+		if (useML && getWorld() == null)
+			return;
 		if (Rei && !ReiUseMl && ReiEnabled)
 			ReiMinimap.instance.onTickInGame(renderPartialTicks, mc);
 		if (AlienRadar && AlienEnabled && alienRadar != null && getWorld() != null)
@@ -383,9 +391,18 @@ public class WMLL {
 				a = getLocalTime(0)+" / "+getLocalTime(1);
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 16, 0xffffff);
 			}
-			else if (!WMLLDebugActive() && debugClassPresent) {
+			else if (!WMLLDebugActive() && debugClassPresent && shouldShow()) {
 				String a = "WMLL "+wmllVersion()+" (DEBUG MODE)";
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 0, 0xffffff);
+				if (forgeDetected) {
+					a = "Forge: "+ForgeVersion.getVersion();
+					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 1, 0xffffff);
+				}
+				if (Rei) {
+					a = "Rei's Minimap: "+ReiMinimap.MOD_VERSION;
+					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 2, 0xffffff);
+				}
+					
 			}
 			WMLLCheckKeys();
 			if (!Enabled || !shouldShow() || (WMLLI == 11 && classicOutput))
@@ -958,6 +975,8 @@ public class WMLL {
 	}
 
 	public boolean isMultiplayer() {
+		if (useML)
+			return !ModLoader.getMinecraftInstance().B();
 		return !mc.B();
 	}
 
@@ -1613,10 +1632,10 @@ public class WMLL {
 	}
 
 	public boolean shouldShow() {
-		if (showUnderGUIs)
+		if (showUnderGUIs && !useML)
 			return true;
 		else
-			return mc.s == null;
+			return (useML && (mc.s == null));
 	}
 
 	public boolean canStructureSpawnHere(int x, int z) {

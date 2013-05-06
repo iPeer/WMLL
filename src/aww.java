@@ -342,7 +342,8 @@ public class aww extends awx
             awv1.a(s1, j1 - j3 - 10, 5, 0xffffff);
             d.J.b();
         }
-        WMLL.i.updategui(d, f1, this);
+        if (!WMLL.i.useML)
+        	WMLL.i.updategui(d, f1, this);
         if(d.z.ab)
         {
             d.J.a("debug");
