@@ -32,9 +32,6 @@ public class WMLLOptionsCompat extends axr {
 			rei.g = wmll.Rei && !wmll.ReiUseMl;
 			zans.g = wmll.ZansMinimap;
 			alien.g = wmll.AlienRadar;
-
-			k.add(forge = new awg(4, h / 2 - 70, i / 4 + 120, 140, 20, "Enable Forge Hooks: "+(wmll.forgeEnabled ? "ON" : "OFF")));
-			forge.g = wmll.forgeDetected;
 		}
 	}
 
@@ -75,11 +72,6 @@ public class WMLLOptionsCompat extends axr {
 				wmll.ReiEnabled = wmll.ZansEnabled = false;
 			updateButtons();
 			return;
-		case 4:
-			a = wmll.forgeEnabled;
-			b.e = "Enable Forge Hooks: "+(!a ? "ON" : "OFF");
-			wmll.forgeEnabled = !a;
-			return;
 		case 5:
 			g.a(new WMLLOptionsCompat(this.wmll, this.parent, 2));
 			return;
@@ -96,8 +88,6 @@ public class WMLLOptionsCompat extends axr {
 			a(m, "to see what went wrong.", h / 2, this.i / 4 + 8, 0xffffff);
 			
 			a(m, "Minimaps", h / 2, this.i / 4 + 32, 0xbbbbbb);
-
-			a(m, "Other", h / 2, this.i / 4 + 105, 0xbbbbbb);
 		}
 		else {
 			a(m, "This menu allows you to see what mods are loaded, and if they're not", h / 2, this.i / 4 - 40, 0xffffff);
@@ -105,7 +95,7 @@ public class WMLLOptionsCompat extends axr {
 			a(m, "Rei's Minimap: "+(wmll.reiError.equals("") ? "\247aOK" : "\247c"+(wmll.reiError.contains(":") ? wmll.reiError.split(":")[0] : wmll.reiError)), h / 2, this.i / 4, 0xffffff);
 			a(m, "Zan's Minimap: "+(wmll.zanError.equals("") ? "\247aOK" : "\247c"+(wmll.zanError.contains(":") ? wmll.zanError.split(":")[0] : wmll.zanError)), h / 2, this.i / 4 + 12, 0xffffff);
 			a(m, "Alien MT: "+(wmll.alienError.equals("") ? "\247aOK" : "\247c"+(wmll.alienError.contains(":") ? wmll.alienError.split(":")[0] : wmll.alienError)), h / 2, this.i / 4 + 24, 0xffffff);
-			a(m, "Forge: "+(wmll.forgeError.equals("") ? "\247aOK" : "\247c"+(wmll.forgeError.contains(":") ? wmll.forgeError.split(":")[0] : wmll.forgeError)), h / 2, this.i / 4 + 36, 0xffffff);
+			a(m, "Forge: "+(wmll.forgeError.equals("") || wmll.useML ? "\247aOK" : "\247c"+(wmll.forgeError.contains(":") ? wmll.forgeError.split(":")[0] : wmll.forgeError)), h / 2, this.i / 4 + 36, 0xffffff);
 		}
 		super.a(i, j, f);
 	}

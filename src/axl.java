@@ -34,17 +34,20 @@ public class axl extends axr
         k.add(awg1 = new awg(7, h / 2 + 2, i / 4 + 96 + byte0, 98, 20, bo.a("menu.shareToLan")));
         k.add(new awg(5, h / 2 - 100, i / 4 + 48 + byte0, 98, 20, bo.a("gui.achievements")));
         k.add(new awg(6, h / 2 + 2, i / 4 + 48 + byte0, 98, 20, bo.a("gui.stats")));
-		k.add(new awg(8, h / 2 - 100, i / 4 + 144 + byte0, "WMLL Options..."));
-		if (WMLL.i.debugClassPresent)
-			k.add(new awg(9001, h - 52, i - 22, 50, 20, "Reload"));
-		awg1.g = g.C() && !g.D().am();
+        if (!WMLL.i.useML) { 
+        	k.add(new awg(9000, h / 2 - 100, i / 4 + 144 + byte0, "WMLL Options..."));
+			if (WMLL.i.debugClassPresent)
+				k.add(new awg(9001, h - 52, i - 22, 50, 20, "Reload"));
+        }
+        awg1.g = g.C() && !g.D().am();
     }
 
     protected void a(awg awg1)
     {
         switch(awg1.f)
-        {
-		case 8:
+        {     
+        
+		case 9000:
         	g.a(new WMLLOptionsMenu(this));
         	break;
         case 9001:

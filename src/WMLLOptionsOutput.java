@@ -75,6 +75,7 @@ public class WMLLOptionsOutput extends axr {
 		k.add(new awg(2, h / 2 - 200, i / 4 + 5, 120, 20, "Location: "+locations[WMLL.outputLocation]));
 		k.add(new awg(3, h / 2 - 200, i / 4 + 30, 120, 20, "Output type: "+(wmll.classicOutput ? "Classic" : "Custom")));
 		k.add(new awg(4, h / 2 - 75, i / 4 + 30, 120, 20, "Images: "+(WMLL.useImages ? "ON" : "OFF")));
+		k.add(new awg(5, h / 2 + 50, i / 4 + 30, 150, 20, "Colour Low Light Levels: "+(WMLL.colourLowLight ? "ON" : "OFF")));
 		k.add(new awg(0, h / 2 - 190, i - 30, 380, 20, "Done"));
 		awg paramButton;
 		k.add(paramButton = new awg(-1, wmll.getWindowSize().a() - 108, 19, 100, 14, "Parameter help"));
@@ -128,6 +129,11 @@ public class WMLLOptionsOutput extends axr {
 			b.e = "Images: "+(!a ? "ON" : "OFF");
 			WMLL.useImages = !a;
 			showButton.g = wmll.classicOutput || WMLL.useImages;
+			return;
+		case 5:
+			a = WMLL.colourLowLight;
+			b.e = "Colour Low Light Levels: "+(!a ? "ON" : "OFF");
+			WMLL.colourLowLight = !a;
 			return;
 		case -1:
 			try {
