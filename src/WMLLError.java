@@ -62,8 +62,8 @@ public class WMLLError extends axr {
 			a(m, "If that \247ldoes\247r work, remember to always install WMLL \247oAFTER\247r the mod(s) listed above.", h / 2, y+=12, 0xffffff);
 		}
 		else {
-			a(m, "You don't appear to have any mods installed that are known to cause this issue.", h / 2, 56, 0xffffff);
-			a(m, "Please report this as a bug ASAP!", h / 2, 68, 0xffffff);
+			a(m, "You don't appear to have any mods installed that are known to cause this issue.", h / 2, 68, 0xffffff);
+			a(m, "Please report this as a bug ASAP!", h / 2, 90, 0xffffff);
 		}
 		super.a(i, j, f);
 	}

@@ -20,8 +20,10 @@ import java.util.regex.Pattern;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.common.ForgeVersion;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
 
 import reifnsk.minimap.ReiMinimap;
 
@@ -31,16 +33,16 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 50"; //807
+		return "Stable 51"; //810
 	}
 	public static final String versionName() {
-		return "At least it wasn't another mod this time";
+		return "";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.5.2";
 	}
 	public static final String[] autoDisable = {".*\\.oc\\.tc"};
-	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 20, 44, 50, 130);
+	public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 20, 31, 32, 39, 40, 44, 50, 130);
 	public static final Map<String, String> fieldNames = new HashMap<String, String>();
 	public static final WMLLUpdateCheck wmllUpdateCheck = new WMLLUpdateCheck();
 	public static WMLL i = new WMLL();
@@ -73,6 +75,7 @@ public class WMLL {
 	private static final int propertiesVersion = 3;
 	public static File settingsFile, outputOptionsFile;
 	public static long lastUpdateCheck = 0;
+	public static boolean colourLowLight = true;
 	private static final Calendar calendar = Calendar.getInstance();
 
 	private WMLLRenderer wmllRenderer;
@@ -101,6 +104,9 @@ public class WMLL {
 	public boolean showWorldName = true;
 
 	public boolean realInit = false;
+	public boolean useML = false;
+	private float renderPartialTicks = 0.0f;
+	private boolean renderArmourDisplay = false;
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+wmllVersion());
@@ -139,6 +145,7 @@ public class WMLL {
 			try {
 				Rei = true;
 				ReiUseMl = ReiMinimap.instance.useModloader;
+				reiError = "";
 			}
 			catch(VerifyError e) {
 				shitBricks(2, e);
@@ -148,6 +155,7 @@ public class WMLL {
 			try {
 				AlienRadar = true;
 				alienRadar = new MotionTracker();
+				alienError = "";
 			}
 			catch (VerifyError e) {
 				shitBricks(3, e);
@@ -171,10 +179,6 @@ public class WMLL {
 		}
 		if (getClass().getClassLoader().getResource("RadarBro.class") != null) {
 			RadarBro = true;
-		}
-		if (debugClassPresent) {
-			RadarBro = false;
-			useForge = false;
 		}
 		if (outputOptionsFile.exists()) {
 			debug("[WMLL] WMLLOutput.properties exists, merging with WMLL.properties");
@@ -224,8 +228,13 @@ public class WMLL {
 	public void updategui(Minecraft h, aww w) throws WMLLException {
 		throw new WMLLException("Deprecated Initialisation Method! Use updategui(mc, float, guiingame) instead.");
 	}
+	
+	public void updategui(Minecraft mc2, float f) {
+		updategui(mc2, f, mc2.w);
+	}
 
 	public void updategui(Minecraft h, float renderPartialTicks, aww w) {
+		this.renderPartialTicks = renderPartialTicks;
 		if (getWorld() != null && !wmllUpdateCheck.running && autoUpdateCheck) {
 			wmllUpdateCheck.start();
 		}
@@ -307,6 +316,8 @@ public class WMLL {
 				entityPlayer().a("Test");
 			//(new Thread(wmllUpdateCheck)).start();
 		}
+		if (useML && getWorld() == null)
+			return;
 		if (Rei && !ReiUseMl && ReiEnabled)
 			ReiMinimap.instance.onTickInGame(renderPartialTicks, mc);
 		if (AlienRadar && AlienEnabled && alienRadar != null && getWorld() != null)
@@ -383,13 +394,40 @@ public class WMLL {
 				a = getLocalTime(0)+" / "+getLocalTime(1);
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 16, 0xffffff);
 			}
-			else if (!WMLLDebugActive() && debugClassPresent) {
+			else if (!WMLLDebugActive() && debugClassPresent && shouldShow()) {
 				String a = "WMLL "+wmllVersion()+" (DEBUG MODE)";
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 0, 0xffffff);
+				if (forgeDetected) {
+					a = "Forge: "+ForgeVersion.getVersion();
+					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 1, 0xffffff);
+				}
+				if (Rei) {
+					a = "Rei's Minimap: "+ReiMinimap.MOD_VERSION;
+					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 2, 0xffffff);
+				}
+				if (ZansMinimap) {
+					a = "VoxelMap: "+((VoxelMap)zansMinimap).zmodver; 
+					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 3, 0xffffff);
+				}
+					
 			}
 			WMLLCheckKeys();
+			if (mc.s instanceof axl && !(mc.s instanceof WMLL_InGameMenu) && useML)
+				mc.a(new WMLL_InGameMenu());
 			if (!Enabled || !shouldShow() || (WMLLI == 11 && classicOutput))
 				return;
+			if (renderArmourDisplay && !isCreative()) {
+				int gameHeight = getWindowSize().b();
+				int gameWidth = getWindowSize().a();
+				int armourX = (gameWidth / 2 - 93) + 0 * 16;
+				for (int x = getPlayerArmour().length - 1; x >= 0; x--) {
+					if (getPlayerArmour()[x] != null) {
+						renderItemOnScreen(getPlayerArmour()[x], armourX, gameHeight - 65);
+						armourX += 15;
+					}
+				}
+				
+			}
 			// 0 = x, 1 = y, 2 = z, 3 = f
 			int[] playerPos = getPlayerCoordinates();
 			int light = getLightLevel(playerPos[0], playerPos[1], playerPos[2]);
@@ -614,13 +652,13 @@ public class WMLL {
 		Pattern localTime12h = Pattern.compile("%12hlocaltime%", Pattern.CASE_INSENSITIVE);
 		Pattern entities = Pattern.compile("%entities%", Pattern.CASE_INSENSITIVE);
 		Pattern entities2 = Pattern.compile("%fullentities%", Pattern.CASE_INSENSITIVE);
-		String lightLevel = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247r";
+		String lightLevel = (a < 8 && colourLowLight ? "\247c" : "")+Integer.toString(a)+"\247r";
 		a = getSavedBlockLight(x, y, z);
-		String blockLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247r";
+		String blockLight = (a < 8 && colourLowLight ? "\247c" : "")+Integer.toString(a)+"\247r";
 		a = getRawLightLevel(x, y, z);
-		String rawLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247r";
+		String rawLight = (a < 8 && colourLowLight ? "\247c" : "")+Integer.toString(a)+"\247r";
 		a = getSunLight(x, y, z);
-		String skyLight = (a < 8 ? "\247c" : "")+Integer.toString(a)+"\247r";
+		String skyLight = (a < 8 && colourLowLight ? "\247c" : "")+Integer.toString(a)+"\247r";
 		Matcher m = SkyLight.matcher(s);
 		s = m.replaceAll(skyLight);
 		m = BlockLight.matcher(s);
@@ -746,6 +784,15 @@ public class WMLL {
 			if (getInternalItemName(inventory[x]).equals(internalName))
 				count += getNumItemsInSlot(x);
 		return count;
+	}
+	
+	public wm getItemInSlot(int slot) {
+		try {
+			return getPlayerInventory().a[slot];
+		}
+		catch (NullPointerException e) {
+				return null;
+		}
 	}
 	
 	public int getNumItemsInSlot(int slot) {
@@ -958,6 +1005,8 @@ public class WMLL {
 	}
 
 	public boolean isMultiplayer() {
+		if (useML)
+			return !ModLoader.getMinecraftInstance().B();
 		return !mc.B();
 	}
 
@@ -1098,7 +1147,7 @@ public class WMLL {
 	}
 
 	public long getWorldTime() {
-		return getWorld().H();
+		return getWorld().I();
 	}
 
 	private String getFormattedWorldTime(int i) {
@@ -1237,6 +1286,8 @@ public class WMLL {
 			options.setProperty("Compat-Forge", Boolean.toString(forgeEnabled));
 			options.setProperty("showUnderGUIs", Boolean.toString(showUnderGUIs));
 			options.setProperty("showWorldName", Boolean.toString(showWorldName));
+			options.setProperty("renderArmourDisplay", Boolean.toString(renderArmourDisplay));
+			options.setProperty("colourLowLight", Boolean.toString(colourLowLight));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
 			//			if (!outputOptions.isEmpty())
 			//				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
@@ -1287,6 +1338,8 @@ public class WMLL {
 			forgeEnabled = Boolean.valueOf(options.getProperty("Compat-Forge", "true"));
 			showUnderGUIs = Boolean.valueOf(options.getProperty("showUnderGUIs", "true"));
 			showWorldName = Boolean.valueOf(options.getProperty("showWorldName", "true"));
+			renderArmourDisplay = Boolean.valueOf(options.getProperty("renderArmourDisplay", "false"));
+			colourLowLight = Boolean.valueOf(options.getProperty("colourLowLight", "true"));
 			debug("[WMLL] Loaded options.");
 			//debug(options.toString()+"\n"+outputOptions.toString());
 			if (firstRun || updatedFormat)
@@ -1436,7 +1489,7 @@ public class WMLL {
 		int d = getDimension();
 		Boolean sk = canBlockSeeTheSky(x, y, z);
 		Boolean c = canSlimesSpawnHere(x, z);
-		Boolean v = blockBlackList.contains(b);
+		Boolean v = blockBlackList.contains(b) || apa.w[b]; // getBlock
 		String s = "\247cInvalid indicator! Valid types are: \247omobs, animals, slimes, crops, trees \247r\247cor\247o mushrooms\247r\247c.";
 		String bi = getBiome();
 		if (i.equals("mobs")) {
@@ -1477,11 +1530,11 @@ public class WMLL {
 		}
 		else if (i.equals("slimes")) {
 			if (d == 0)
-				if ((c && y + 1 > 40) || (l > 7 && bi.startsWith("Swamp")))
+				if ((c && y + 1 > 40) || (l > 7 && bi.startsWith("Swamp")) && !v)
 					s = "\247eSlimes";
 				else if (c && y + 1 < 41 && v)
 					s = "\247cSlimes";
-				else if ((c && y + 1 < 41) || (l < 8 && bi.startsWith("Swamp")))
+				else if ((c && y + 1 < 41) || (l < 8 && bi.startsWith("Swamp")) && !v)
 					s = "\247aSlimes";
 				else
 					s = "\247cSlimes";
@@ -1613,10 +1666,38 @@ public class WMLL {
 	}
 
 	public boolean shouldShow() {
-		if (showUnderGUIs)
+		if (showUnderGUIs && !useML)
 			return true;
 		else
-			return mc.s == null;
+			return (useML && (mc.s == null));
+	}
+	
+	public void renderItemOnScreen(wm item, int x, int y) {
+        GL11.glEnable(32826);
+        avb.c();
+         // I hate having to directly copy Minecraft's code.
+        bhi b = new bhi();
+        if(item == null)
+        {
+            return;
+        }
+        float f2 = (float)item.b - this.renderPartialTicks;
+        if(f2 > 0.0F)
+        {
+            GL11.glPushMatrix();
+            float f3 = 1.0F + f2 / 5F;
+            GL11.glTranslatef(x + 8, y + 12, 0.0F);
+            GL11.glScalef(1.0F / f3, (f3 + 1.0F) / 2.0F, 1.0F);
+            GL11.glTranslatef(-(x + 8), -(y + 12), 0.0F);
+        }
+        b.b(mc.q, mc.p, item, x, y);
+        if(f2 > 0.0F)
+        {
+            GL11.glPopMatrix();
+        }
+        b.c(mc.q, mc.p, item, x, y);
+        avb.a();
+        GL11.glDisable(32826);
 	}
 
 	public boolean canStructureSpawnHere(int x, int z) {
