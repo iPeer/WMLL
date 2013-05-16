@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.SocketAddress;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -33,7 +32,7 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 52"; //810
+		return "Test 811"; //810
 	}
 	public static final String versionName() {
 		return "";
@@ -961,26 +960,16 @@ public class WMLL {
 		if (!isMultiplayer())
 			return sspServer().K();
 		try {
-			Object obj = thePlayer();
-			Field f = obj.getClass().getDeclaredField(getField("sendQueue")); // sendQueue
-			f.setAccessible(true);
-			obj = f.get(obj);
-			Field f1 = obj.getClass().getDeclaredField(getField("netManager")); // netManager
-			f1.setAccessible(true);
-			obj = f1.get(obj);
-			Field f2;
-			f2 = obj.getClass().getDeclaredField(getField("remoteSocketAddress")); 
-			f2.setAccessible(true);
-			SocketAddress a = (SocketAddress)f2.get(obj);
-			String s = a.toString();
-			String server = s.split("/")[0].split(":")[0];
-			if (server == null || server.equals(""))
-				server = s.split("/")[1].split(":")[0];
-			String port = s.split(":")[1];
-			return server+":"+port;	
+			SocketAddress serverIP = entityPlayer().a.f().c();
+				String serverAddress = serverIP.toString().split("/")[0];
+				String serverPort = serverIP.toString().split(":")[1];
+				if (serverAddress.length() == 0)
+					return serverIP.toString().substring(1);
+				return serverAddress+":"+serverPort;
+
 		}
 		catch (Exception e) {
-			return "Unknown - "+e.getMessage();
+			return "Unknown - "+e.toString();
 		}
 	}
 
