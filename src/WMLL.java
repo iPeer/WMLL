@@ -32,7 +32,7 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 811"; //810
+		return "Stable 53"; //811
 	}
 	public static final String versionName() {
 		return "";
