@@ -5,8 +5,8 @@ public class WMLLOptionsGeneral extends axr {
 
 	private WMLL wmll;
 	private axr parent;
-	private boolean isBinding, hasErrored;
-	private awg bindingButton;
+	private boolean isBinding;
+	private awg bindingButton, autohideForce;
 
 	public WMLLOptionsGeneral(WMLL wmll, axr aum) {
 		this.wmll = wmll;
@@ -24,7 +24,9 @@ public class WMLLOptionsGeneral extends axr {
 		k.add(new awg(2, h / 2 - 190, i - 25, 380, 20, "Done"));
 		k.add(new awg(3, h / 2 - 50, i / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
 		k.add(new awg(4, h / 2 - 150, i / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
-		k.add(new awg(5, h / 2 - 150, i / 4 + 50, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
+		k.add(autohideForce = new awg(6, h / 2 - 150, i / 4 + 50, 300, 20, "Always obey autohide setting: "+(wmll.forceAutohideObey ? "ON" : "OFF")));
+		k.add(new awg(5, h / 2 - 150, i / 4 + 75, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
+		autohideForce.g = wmll.useML;
 	}
 
 	protected void a(awg b) {
@@ -63,6 +65,11 @@ public class WMLLOptionsGeneral extends axr {
 			b.e = "Show world name/server IP on main menu: "+(c ? "OFF" : "ON");
 			wmll.showWorldName = !c;
 			g.a(new WMLLOptionsGeneral(this.wmll, this.parent));
+			return;
+		case 6:
+			c = wmll.forceAutohideObey;
+			b.e = "Always obey autohide setting: "+(c ? "OFF" : "ON");
+			wmll.forceAutohideObey = !c;
 			return;
 		}
 	}

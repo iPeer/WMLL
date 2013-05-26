@@ -32,7 +32,7 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 53"; //811
+		return "Test 812"; //811
 	}
 	public static final String versionName() {
 		return "";
@@ -106,6 +106,7 @@ public class WMLL {
 	public boolean useML = false;
 	private float renderPartialTicks = 0.0f;
 	private boolean renderArmourDisplay = false;
+	public boolean forceAutohideObey = false;
 
 	public WMLL() {
 		debug("[WMLL] Initializing WMLL "+wmllVersion());
@@ -164,7 +165,7 @@ public class WMLL {
 		if (getClass().getClassLoader().getResource("com/thevoxelbox/voxelmap/VoxelMap.class") != null) {
 			try {
 				ZansMinimap = true;
-				zansMinimap = new VoxelMap(true, true);
+				zansMinimap = new VoxelMap(true); // Dear VoxelMap creators: STOP CHANGING THIS CRAP.
 				zanError = "";
 			}
 			catch (VerifyError e) {
@@ -1277,6 +1278,7 @@ public class WMLL {
 			options.setProperty("showWorldName", Boolean.toString(showWorldName));
 			options.setProperty("renderArmourDisplay", Boolean.toString(renderArmourDisplay));
 			options.setProperty("colourLowLight", Boolean.toString(colourLowLight));
+			options.setProperty("forceAutohideObey", Boolean.toString(forceAutohideObey));
 			options.store(new FileOutputStream(settingsFile), "WMLL Config File - Do not edit unless you know what you're doing!");
 			//			if (!outputOptions.isEmpty())
 			//				outputOptions.store(new FileOutputStream(outputOptionsFile), "WMLL's Output Options File - only edit if you know waht you're doing!");
@@ -1329,6 +1331,7 @@ public class WMLL {
 			showWorldName = Boolean.valueOf(options.getProperty("showWorldName", "true"));
 			renderArmourDisplay = Boolean.valueOf(options.getProperty("renderArmourDisplay", "false"));
 			colourLowLight = Boolean.valueOf(options.getProperty("colourLowLight", "true"));
+			forceAutohideObey = Boolean.valueOf(options.getProperty("forceAutohideObey", "false"));
 			debug("[WMLL] Loaded options.");
 			//debug(options.toString()+"\n"+outputOptions.toString());
 			if (firstRun || updatedFormat)
@@ -1655,7 +1658,7 @@ public class WMLL {
 	}
 
 	public boolean shouldShow() {
-		if (showUnderGUIs && !useML)
+		if (showUnderGUIs && (!useML || useML && forceAutohideObey))
 			return true;
 		else
 			return (useML && (mc.s == null));
