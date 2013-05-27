@@ -32,7 +32,7 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 812"; //811
+		return "Stable 54"; //812
 	}
 	public static final String versionName() {
 		return "";
@@ -137,7 +137,7 @@ public class WMLL {
 			debug("[WMLL] Couldn't create compatibility object (class missing).");
 		loadOptions();
 		this.autoSeed = Boolean.parseBoolean(options.getProperty("autoAquireSeed", "true"));
-		if (getClass().getClassLoader().getResource("net/minecraftforge/common/ForgeHooks.class") != null) {
+		if (getClass().getClassLoader().getResource("net/minecraftforge/common/ForgeHooks.class") != null || useML) {
 			useForge = forgeDetected = true;
 			forgeError = "";
 		}
@@ -449,7 +449,6 @@ public class WMLL {
 				else if (getCalendarDate().equals("31")) // Millie <3 RIP, honey.
 					lightString = "Millie <3";
 				else if (getCalendarDate().equals("32")) { // Roxy and I's anniversary
-					String a = getCalendarDate(2);
 					int now = getYear();
 					int years = now-2007;
 					lightString = years+" years today! <3 Roxy!";
@@ -1453,6 +1452,7 @@ public class WMLL {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private String getField(String n) {
 		return fieldNames.get(n);
 	}

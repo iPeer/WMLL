@@ -5,7 +5,7 @@ public class WMLLOptionsCompat extends axr {
 
 	private WMLL wmll;
 	private axr parent;
-	private awg rei, zans, alien, forge;
+	private awg rei, zans, alien;
 	private int page = 1;
 
 	public WMLLOptionsCompat(WMLL wmll, axr aum) {
