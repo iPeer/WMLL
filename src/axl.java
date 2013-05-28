@@ -61,7 +61,7 @@ public class axl extends axr
         case 1: // '\001'
             awg1.g = false;
             g.F.a(kf.j, 1);
-			g.e.F();
+			g.e.E();
             g.a((bds)null);
             g.a(new bkf());
             break;

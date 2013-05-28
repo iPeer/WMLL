@@ -4,8 +4,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class mod_WMLL extends BaseMod {
 	
-	public mod_WMLL () {
-	}
+	public mod_WMLL() { }
 	
 	@Override
 	public String getVersion() {

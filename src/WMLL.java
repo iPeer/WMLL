@@ -32,7 +32,7 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 54"; //812
+		return "Stable 55"; //813
 	}
 	public static final String versionName() {
 		return "";
@@ -108,7 +108,7 @@ public class WMLL {
 	private boolean renderArmourDisplay = false;
 	public boolean forceAutohideObey = false;
 
-	public WMLL() {
+	public WMLL() { 
 		debug("[WMLL] Initializing WMLL "+wmllVersion());
 		fieldNames.put("sendQueue", "i");
 		fieldNames.put("netManager", "g");
@@ -224,11 +224,11 @@ public class WMLL {
 	public void updategui(Minecraft h) throws WMLLException {
 		updategui(h, h.w);
 	}
-	
+
 	public void updategui(Minecraft h, aww w) throws WMLLException {
 		throw new WMLLException("Deprecated Initialisation Method! Use updategui(mc, float, guiingame) instead.");
 	}
-	
+
 	public void updategui(Minecraft mc2, float f) {
 		updategui(mc2, f, mc2.w);
 	}
@@ -318,12 +318,14 @@ public class WMLL {
 		}
 		if (useML && getWorld() == null)
 			return;
-		if (Rei && !ReiUseMl && ReiEnabled)
-			ReiMinimap.instance.onTickInGame(renderPartialTicks, mc);
-		if (AlienRadar && AlienEnabled && alienRadar != null && getWorld() != null)
-			((MotionTracker)alienRadar).onTickInGame(mc);
-		if (ZansMinimap && ZansEnabled && zansMinimap != null && getWorld() != null)
-			((VoxelMap)zansMinimap).onTickInGame(mc);
+		if (!useML && h != null) {
+			if (Rei && !ReiUseMl && ReiEnabled)
+				ReiMinimap.instance.onTickInGame(renderPartialTicks, h);
+			if (AlienRadar && AlienEnabled && alienRadar != null && getWorld() != null)
+				((MotionTracker)alienRadar).onTickInGame(h);
+			if (ZansMinimap && ZansEnabled && zansMinimap != null && getWorld() != null)
+				((VoxelMap)zansMinimap).onTickInGame(h);
+		}
 		if (mcDebugOpen() || wmllF3Output) {
 			if (mcDebugOpen() && wmllOverrideF3)
 				toggleF3Override();
@@ -409,7 +411,7 @@ public class WMLL {
 					a = "VoxelMap: "+((VoxelMap)zansMinimap).zmodver; 
 					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 3, 0xffffff);
 				}
-					
+
 			}
 			WMLLCheckKeys();
 			if (mc.s instanceof axl && !(mc.s instanceof WMLL_InGameMenu) && useML)
@@ -426,7 +428,7 @@ public class WMLL {
 						armourX += 15;
 					}
 				}
-				
+
 			}
 			// 0 = x, 1 = y, 2 = z, 3 = f
 			int[] playerPos = getPlayerCoordinates();
@@ -742,14 +744,14 @@ public class WMLL {
 			String bdata = m.group().replaceAll("%count:|%", "").toLowerCase();
 			s = s.replaceAll("%count:"+bdata+"%", formatCount(bdata)+"\247r");
 		}
-		
+
 		Pattern formats = Pattern.compile("&([0123456789abcdefklmnor])", Pattern.CASE_INSENSITIVE);
 		m = formats.matcher(s);
 		while (m.find()) {
 			String c = m.group().replaceAll("&", "").toLowerCase();
 			s = s.replaceAll("&"+c, "\247"+c);
 		}
-		
+
 		return s;
 	}
 
@@ -775,7 +777,7 @@ public class WMLL {
 		}
 		return "";
 	}
-	
+
 	public int getItemQuantity(String internalName) {
 		wm[] inventory = getPlayerInventory().a;
 		int count = 0;
@@ -784,29 +786,29 @@ public class WMLL {
 				count += getNumItemsInSlot(x);
 		return count;
 	}
-	
+
 	public wm getItemInSlot(int slot) {
 		try {
 			return getPlayerInventory().a[slot];
 		}
 		catch (NullPointerException e) {
-				return null;
+			return null;
 		}
 	}
-	
+
 	public int getNumItemsInSlot(int slot) {
 		try {
 			return getPlayerInventory().a[slot].a;
 		}
 		catch (NullPointerException e) {
-				return 0;
+			return 0;
 		}
 	}
-	
+
 	public String getItemName(wm item) {
 		return getItemName(item, false);
 	}
-	
+
 	public String getItemName(wm item, boolean lower) {
 		try {
 			if (lower)
@@ -818,11 +820,11 @@ public class WMLL {
 			return ""; 
 		}
 	}
-	
+
 	public int getItemId(wm item) {
 		return item.c;
 	}
-	
+
 	public String getInternalItemName(wm item) {
 		return getInternalNameForItem(item);
 	}
@@ -860,7 +862,7 @@ public class WMLL {
 	public boolean itemHasEnchant(int enchantID, wm wg) {
 		return zb.a(51, wg) > 0;
 	}
-	
+
 	public String getInternalItemNameForSlot(int slot) {
 		return getPlayerInventory().a[slot].a();
 	}
@@ -961,11 +963,11 @@ public class WMLL {
 			return sspServer().K();
 		try {
 			SocketAddress serverIP = entityPlayer().a.f().c();
-				String serverAddress = serverIP.toString().split("/")[0];
-				String serverPort = serverIP.toString().split(":")[1];
-				if (serverAddress.length() == 0)
-					return serverIP.toString().substring(1);
-				return serverAddress+":"+serverPort;
+			String serverAddress = serverIP.toString().split("/")[0];
+			String serverPort = serverIP.toString().split(":")[1];
+			if (serverAddress.length() == 0)
+				return serverIP.toString().substring(1);
+			return serverAddress+":"+serverPort;
 
 		}
 		catch (Exception e) {
@@ -1422,7 +1424,7 @@ public class WMLL {
 		String a = getCalendarDate(2);
 		return Integer.parseInt(a.substring(a.length() - 4));
 	}
-	
+
 	public String getCalendarDate(int type) {
 		if (calendar.getTime() != new Date())
 			calendar.setTime(new Date());
@@ -1663,33 +1665,33 @@ public class WMLL {
 		else
 			return (useML && (mc.s == null));
 	}
-	
+
 	public void renderItemOnScreen(wm item, int x, int y) {
-        GL11.glEnable(32826);
-        avb.c();
-         // I hate having to directly copy Minecraft's code.
-        bhi b = new bhi();
-        if(item == null)
-        {
-            return;
-        }
-        float f2 = (float)item.b - this.renderPartialTicks;
-        if(f2 > 0.0F)
-        {
-            GL11.glPushMatrix();
-            float f3 = 1.0F + f2 / 5F;
-            GL11.glTranslatef(x + 8, y + 12, 0.0F);
-            GL11.glScalef(1.0F / f3, (f3 + 1.0F) / 2.0F, 1.0F);
-            GL11.glTranslatef(-(x + 8), -(y + 12), 0.0F);
-        }
-        b.b(mc.q, mc.p, item, x, y);
-        if(f2 > 0.0F)
-        {
-            GL11.glPopMatrix();
-        }
-        b.c(mc.q, mc.p, item, x, y);
-        avb.a();
-        GL11.glDisable(32826);
+		GL11.glEnable(32826);
+		avb.c();
+		// I hate having to directly copy Minecraft's code.
+		bhi b = new bhi();
+		if(item == null)
+		{
+			return;
+		}
+		float f2 = (float)item.b - this.renderPartialTicks;
+		if(f2 > 0.0F)
+		{
+			GL11.glPushMatrix();
+			float f3 = 1.0F + f2 / 5F;
+			GL11.glTranslatef(x + 8, y + 12, 0.0F);
+			GL11.glScalef(1.0F / f3, (f3 + 1.0F) / 2.0F, 1.0F);
+			GL11.glTranslatef(-(x + 8), -(y + 12), 0.0F);
+		}
+		b.b(mc.q, mc.p, item, x, y);
+		if(f2 > 0.0F)
+		{
+			GL11.glPopMatrix();
+		}
+		b.c(mc.q, mc.p, item, x, y);
+		avb.a();
+		GL11.glDisable(32826);
 	}
 
 	public boolean canStructureSpawnHere(int x, int z) {
@@ -1699,10 +1701,10 @@ public class WMLL {
 	public boolean canStructureSpawnHere(Random a, int x, int z) {
 		//Random a = r;
 		int cx = x >> 4;
-		int cz = z >> 4;
-							a.setSeed((long)(cx ^ cz << 4) ^ getWorldSeed());
-							a.nextInt();
-							return a.nextInt(3) != 0 ? false : (x != (cx << 4) + 4 + a.nextInt(8) ? false : z == (cz << 4) + 4 + a.nextInt(8));
+						int cz = z >> 4;
+			a.setSeed((long)(cx ^ cz << 4) ^ getWorldSeed());
+			a.nextInt();
+			return a.nextInt(3) != 0 ? false : (x != (cx << 4) + 4 + a.nextInt(8) ? false : z == (cz << 4) + 4 + a.nextInt(8));
 	}
 
 }
