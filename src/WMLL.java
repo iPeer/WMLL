@@ -32,7 +32,7 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 55"; //813
+		return "Test 813"; //813
 	}
 	public static final String versionName() {
 		return "";
@@ -395,6 +395,8 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 15, 0xffffff);
 				a = getLocalTime(0)+" / "+getLocalTime(1);
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 16, 0xffffff);
+				a = (mc.s != null ? mc.s.toString() : "null");
+				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 17, 0xffffff);
 			}
 			else if (!WMLLDebugActive() && debugClassPresent && shouldShow()) {
 				String a = "WMLL "+wmllVersion()+" (DEBUG MODE)";
@@ -414,7 +416,8 @@ public class WMLL {
 
 			}
 			WMLLCheckKeys();
-			if (mc.s instanceof axl && !(mc.s instanceof WMLL_InGameMenu) && useML)
+			//if (mc.s instanceof axl && !(mc.s instanceof WMLL_InGameMenu)/* && !(mc.s instanceof EllianGuiOptionScreen)*/ && useML)
+			if ((getGUIClassName().equals("axl") /* Vanilla */ || getGUIClassName().equals("net.minecraft.client.gui.GuiIngameMenu") /* Forge */) && useML)
 				mc.a(new WMLL_InGameMenu());
 			if (!Enabled || !shouldShow() || (WMLLI == 11 && classicOutput))
 				return;
@@ -945,6 +948,14 @@ public class WMLL {
 		return calendar.getTime().toString().split(" ")[3];
 	}
 
+	private axr getGUI() {
+		return mc.s;
+	}
+	
+	private String getGUIClassName() {
+		return (mc.s != null ? mc.s.toString().split("@")[0] : "null");
+	}
+	
 	private bds getWorld() {
 		try {
 			return mc.e;
@@ -1372,7 +1383,7 @@ public class WMLL {
 			if (Keyboard.isKeyDown(29) && mc.s == null)
 				mc.a(new WMLLOptionsMenu(this));
 			else
-				if (mc.s == null) {
+				if (getGUI() == null) {
 					//&& !(mc.s instanceof acr/*GuiChat*/) && !(mc.s instanceof ars/*Sign Editing*/) && !(mc.s instanceof hw/*Book Editing*/)) {
 					if (useImages || classicOutput) {
 						if (Keyboard.isKeyDown(42)) {
