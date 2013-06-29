@@ -6,14 +6,14 @@ import net.minecraft.client.Minecraft;
 
 public class WMLLF3 {
 	
-	protected Minecraft mc;
+	protected atm mc;
 	protected WMLL wmll;
 	boolean showSeed;
 	
 	private String MINECRAFT_VERSION = "";
 
-	public WMLLF3(Minecraft mc, WMLL wmll) {
-		this.mc = mc;
+	public WMLLF3(atm h, WMLL wmll) {
+		this.mc = h;
 		this.wmll = wmll;
 		MINECRAFT_VERSION = WMLL.getMinecraftVersion();
 	}
@@ -51,20 +51,20 @@ public class WMLLF3 {
 		
 		// Particles, entities, etc.
 		
-		wmll.drawStringUsingPixels(mc.m(), 2, 32, 0xffffff);
-		wmll.drawStringUsingPixels(mc.n()/*.replaceAll("E:", "Entities:")*/, 2, 42, 0xffffff);
-		wmll.drawStringUsingPixels(mc.p()/*.replaceAll("P:", "Particles:")*/, 2, 52, 0xffffff);
-		wmll.drawStringUsingPixels(mc.o(), 2, 62, 0xffffff);
+		wmll.drawStringUsingPixels(mc.l(), 2, 32, 0xffffff);
+		wmll.drawStringUsingPixels(mc.m()/*.replaceAll("E:", "Entities:")*/, 2, 42, 0xffffff);
+		wmll.drawStringUsingPixels(mc.o()/*.replaceAll("P:", "Particles:")*/, 2, 52, 0xffffff);
+		wmll.drawStringUsingPixels(mc.n(), 2, 62, 0xffffff);
 		
 		// WMLL Version
 		wmll.drawStringUsingPixels("WMLL "+WMLL.wmllVersion(), 2, 72, 0xffffff);
 		
 		// Coordinates
-		ng player = wmll.thePlayer();
+		ob player = wmll.thePlayer();
 		double x = player.t;
 		double y = player.u;
 		double z = player.v;
-		double f = kx.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
+		double f = lo.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
 		String roundingFormat = "#0";
 		DecimalFormat d = new DecimalFormat(roundingFormat);
 		String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+wmll.getPlayerDirection(Integer.parseInt(d.format(f)))+")";

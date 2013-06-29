@@ -1,5 +1,5 @@
 
-public class WMLL_InGameMenu extends axl {
+public class WMLL_InGameMenu extends avo {
 	
 	public WMLL_InGameMenu() {
 		super();
@@ -8,21 +8,21 @@ public class WMLL_InGameMenu extends axl {
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		super.A_();
-		k.add(new awg(9000, h / 2 - 100, i / 4 + 144 + -16, "WMLL Options..."));
+		i.add(new auj(9000, g / 2 - 100, h / 4 + 144 + -16, "WMLL Options..."));
 		if (WMLL.i.debugClassPresent)
-			k.add(new awg(9001, h - 52, i - 22, 50, 20, "Reload"));
+			i.add(new auj(9001, g - 52, h - 22, 50, 20, "Reload"));
 		
 	}
 	
 	@Override
-    protected void a(awg awg1)
+    protected void a(auj awg1)
     {
-		switch (awg1.f) {
+		switch (awg1.g) {
 		case 9000:
-        	g.a(new WMLLOptionsMenu(this));
+        	f.a(new WMLLOptionsMenu(this));
         	break;
         case 9001:
-        	g.a(new axl());
+        	f.a(new avo());
         	break;
 		}
 		super.a(awg1);

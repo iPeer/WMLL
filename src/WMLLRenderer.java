@@ -2,29 +2,28 @@
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import net.minecraft.client.Minecraft;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public class WMLLRenderer extends awx {
+public class WMLLRenderer extends ava {
 
+	public static final bjb tex = new bjb("/ipeer/wmll/imagesheet.png");
 	public String updateVersion = "0";
 	public String updateMCVersion = "1.0";
 	private int StringY = 30, notifyTick = 200, StringY1 = 50, notifyTick1 = 800;
-	public Minecraft mc;
+	public atm mc;
 	private WMLL wmll;
 	public boolean notifyUpdate;
 	public boolean firstRun;
 
-	public WMLLRenderer(Minecraft m, WMLL w) {
-		this.mc = m;
+	public WMLLRenderer(atm mc2, WMLL w) {
+		this.mc = mc2;
 		this.wmll = w;
 	}
 
 	public void tick() {
 		if (notifyUpdate) {
-			if (mc.r == null)
+			if (mc.s == null)
 				notifyTick--;
 			if (notifyTick < 10)
 				StringY--;
@@ -61,7 +60,6 @@ public class WMLLRenderer extends awx {
 	}
 
 	public void renderLightImage(int i) {
-		mc.p.b("/ipeer/wmll/imagesheet.png");
 		GL11.glColor3f(1, 1, 1);
 		//(x, y, imageposx, imageposy, imagew, imageh);
 		int pos = WMLL.outputLocation;
@@ -91,7 +89,6 @@ public class WMLLRenderer extends awx {
 	}
 
 	public void renderIndicatorImages(int i, int j, int k, boolean s, boolean c) {
-		mc.p.b("/ipeer/wmll/imagesheet.png");
 		GL11.glColor3f(1, 1, 1);
 		//(x, y, imageposx, imageposy, imagew, imageh);
 		// Hostile mobs
@@ -155,6 +152,7 @@ public class WMLLRenderer extends awx {
 	}
 
 	private void drawImage(int x, int y, int imageposx, int imageposy, int imagewidth, int imageheight) {
+		mc.J().a(tex);
 		int pos = WMLL.outputLocation;
 		int width = wmll.getWindowSize().a();
 		int height = wmll.getWindowSize().b();
