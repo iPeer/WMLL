@@ -5,18 +5,18 @@ import java.util.regex.Pattern;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public class WMLLRenderer extends ava {
+public class WMLLRenderer extends avv {
 
-	public static final bjb tex = new bjb("/ipeer/wmll/imagesheet.png");
+	public static bjd tex = new bjd("ipeer/wmll/imagesheet.png");
 	public String updateVersion = "0";
 	public String updateMCVersion = "1.0";
 	private int StringY = 30, notifyTick = 200, StringY1 = 50, notifyTick1 = 800;
-	public atm mc;
+	public atn mc;
 	private WMLL wmll;
 	public boolean notifyUpdate;
 	public boolean firstRun;
 
-	public WMLLRenderer(atm mc2, WMLL w) {
+	public WMLLRenderer(atn mc2, WMLL w) {
 		this.mc = mc2;
 		this.wmll = w;
 	}
@@ -152,26 +152,34 @@ public class WMLLRenderer extends ava {
 	}
 
 	private void drawImage(int x, int y, int imageposx, int imageposy, int imagewidth, int imageheight) {
-		mc.J().a(tex);
-		int pos = WMLL.outputLocation;
-		int width = wmll.getWindowSize().a();
-		int height = wmll.getWindowSize().b();
-		if (WMLL.WMLLI > 3)
-			y-=12;
-		if (pos == 1) {
-			// drawtext.a(t, size.a() - (drawtext.a(t) + (i - 2)), textpos+(j*10), k);
-			b(width - (imagewidth + x), y, imageposx, imageposy, imagewidth, imageheight);
-			return;
+		try {
+			mc.J().a(tex);
+			int pos = WMLL.outputLocation;
+			int width = wmll.getWindowSize().a();
+			int height = wmll.getWindowSize().b();
+			if (WMLL.WMLLI > 3)
+				y-=12;
+			if (pos == 1) {
+				// drawtext.a(t, size.a() - (drawtext.a(t) + (i - 2)), textpos+(j*10), k);
+				b(width - (imagewidth + x), y, imageposx, imageposy, imagewidth, imageheight);
+				return;
+			}
+			else if (pos == 2) {
+				b(x, height - (imageheight + y), imageposx, imageposy, imagewidth, imageheight);
+				return;
+			}
+			else if (pos == 3) {
+				b(width - (imagewidth + x), height - (imageheight + y), imageposx, imageposy, imagewidth, imageheight);
+				return;
+			}
+			b(x, y, imageposx, imageposy, imagewidth, imageheight);
 		}
-		else if (pos == 2) {
-			b(x, height - (imageheight + y), imageposx, imageposy, imagewidth, imageheight);
-			return;
+		catch (Exception e) {
+			wmll.sendChatMessage("[WMLL] [ERROR] WMLL was not able to render an image for some reason, so you have been switched to the text-only output for now.");
+			wmll.sendChatMessage("[WMLL] If this error persists, you can check your console for some debug output that iPeer might find useful.");
+			wmll.printStackTrace(null, e);
+			WMLL.useImages = false;
 		}
-		else if (pos == 3) {
-			b(width - (imagewidth + x), height - (imageheight + y), imageposx, imageposy, imagewidth, imageheight);
-			return;
-		}
-		b(x, y, imageposx, imageposy, imagewidth, imageheight);
 	}
 
 

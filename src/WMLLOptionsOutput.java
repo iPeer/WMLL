@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsOutput extends avu {
+public class WMLLOptionsOutput extends avv {
 
 	private static final String[] outputs = {"Just Light", "Light & Indicators", "Light, FPS & Chunk Updates", "Light & Compass",
 		"Light, Indicators & Compass", "Light, FPS & Coordinates", "Just Indicators", "Just FPS & Chunk Updates", "Just Compass",
@@ -16,16 +16,16 @@ public class WMLLOptionsOutput extends avu {
 
 
 	private WMLL wmll;
-	private avu parent;
+	private avv parent;
 
-	public auv lightLevelBox;
-	private auv R, G, B, seedBox;
-	private auj showButton;
-	private ArrayList<auv> editboxes = new ArrayList<auv>();
+	public auw lightLevelBox;
+	private auw R, G, B, seedBox;
+	private auk showButton;
+	private ArrayList<auw> editboxes = new ArrayList<auw>();
 	private Desktop desktop;
 	private int[] colours;
 
-	public WMLLOptionsOutput(WMLL wmll, avu aum) {
+	public WMLLOptionsOutput(WMLL wmll, avv aum) {
 		this.wmll = wmll;
 		this.parent = aum;
 	}
@@ -39,18 +39,18 @@ public class WMLLOptionsOutput extends avu {
 	public void A_() {
 		Keyboard.enableRepeatEvents(true);
 		i.clear();
-		lightLevelBox = new auv(o, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), 35, wmll.getWindowSize().a() - 20, 15);
+		lightLevelBox = new auw(o, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), 35, wmll.getWindowSize().a() - 20, 15);
 		lightLevelBox.f(500);
 		lightLevelBox.a(WMLL.options.getProperty("lightString", "Light level: %LightLevel%"));
 		lightLevelBox.b(true);
-		i.add(showButton = new auj(1, g / 2 - 75, h / 4 + 5, 275, 20, "Show: "+outputs[WMLL.WMLLI]));
-		R = new auv(o, g / 2 - 60, h / 4 + 70, 30, 10);
+		i.add(showButton = new auk(1, g / 2 - 75, h / 4 + 5, 275, 20, "Show: "+outputs[WMLL.WMLLI]));
+		R = new auw(o, g / 2 - 60, h / 4 + 70, 30, 10);
 		R.f(3);
 		R.a(WMLL.options.getProperty("RGB-R", "255"));
-		G = new auv(o, g / 2 - 15, h / 4 + 70, 30, 10);
+		G = new auw(o, g / 2 - 15, h / 4 + 70, 30, 10);
 		G.f(3);
 		G.a(WMLL.options.getProperty("RGB-G", "255"));
-		B = new auv(o, g / 2 + 30, h / 4 + 70, 30, 10);
+		B = new auw(o, g / 2 + 30, h / 4 + 70, 30, 10);
 		B.f(3);
 		B.a(WMLL.options.getProperty("RGB-B", "255"));
 		if (R.b().equals(""))
@@ -63,7 +63,7 @@ public class WMLLOptionsOutput extends avu {
 		colours[0] = Integer.valueOf((R.b().equals("") ? "0" : R.b()));
 		colours[1] = Integer.valueOf((G.b().equals("") ? "0" : G.b()));
 		colours[2] = Integer.valueOf((B.b().equals("") ? "0" : B.b()));
-		seedBox = new auv(o, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), h / 4 + 105, wmll.getWindowSize().a() - 20, 15);
+		seedBox = new auw(o, g / 2 - ((wmll.getWindowSize().a() - 20) / 2), h / 4 + 105, wmll.getWindowSize().a() - 20, 15);
 		seedBox.f(500);
 		seedBox.a(wmll.getWorldSeed() != 0 ? Long.toString(wmll.getWorldSeed()) : "");
 		editboxes.add(seedBox);
@@ -72,19 +72,19 @@ public class WMLLOptionsOutput extends avu {
 		editboxes.add(G);
 		editboxes.add(B);
 		showButton.h = wmll.classicOutput || WMLL.useImages;
-		i.add(new auj(2, g / 2 - 200, h / 4 + 5, 120, 20, "Location: "+locations[WMLL.outputLocation]));
-		i.add(new auj(3, g / 2 - 200, h / 4 + 30, 120, 20, "Output type: "+(wmll.classicOutput ? "Classic" : "Custom")));
-		i.add(new auj(4, g / 2 - 75, h / 4 + 30, 120, 20, "Images: "+(WMLL.useImages ? "ON" : "OFF")));
-		i.add(new auj(5, g / 2 + 50, h / 4 + 30, 150, 20, "Colour Low Light Levels: "+(WMLL.colourLowLight ? "ON" : "OFF")));
-		i.add(new auj(0, g / 2 - 190, h - 30, 380, 20, "Done"));
-		auj paramButton;
-		i.add(paramButton = new auj(-1, wmll.getWindowSize().a() - 108, 19, 100, 14, "Parameter help"));
+		i.add(new auk(2, g / 2 - 200, h / 4 + 5, 120, 20, "Location: "+locations[WMLL.outputLocation]));
+		i.add(new auk(3, g / 2 - 200, h / 4 + 30, 120, 20, "Output type: "+(wmll.classicOutput ? "Classic" : "Custom")));
+		i.add(new auk(4, g / 2 - 75, h / 4 + 30, 120, 20, "Images: "+(WMLL.useImages ? "ON" : "OFF")));
+		i.add(new auk(5, g / 2 + 50, h / 4 + 30, 150, 20, "Colour Low Light Levels: "+(WMLL.colourLowLight ? "ON" : "OFF")));
+		i.add(new auk(0, g / 2 - 190, h - 30, 380, 20, "Done"));
+		auk paramButton;
+		i.add(paramButton = new auk(-1, wmll.getWindowSize().a() - 108, 19, 100, 14, "Parameter help"));
 		paramButton.h = Desktop.isDesktopSupported() && (this.desktop = Desktop.getDesktop()).isSupported(Desktop.Action.BROWSE);
 		if (wmll.debugClassPresent)
-			i.add(new auj(9001, g - 20, 0, 20, 20, "R"));
+			i.add(new auk(9001, g - 20, 0, 20, 20, "R"));
 	}
 
-	protected void a(auj b) {
+	protected void a(auk b) {
 		switch (b.g) {
 		case 9001:
 			f.a(new WMLLOptionsOutput(this.wmll, this.parent));
@@ -191,7 +191,7 @@ public class WMLLOptionsOutput extends avu {
 		int b = checkColour(colours[2]);
 		a(o, "Colour preview", h / 2, h / 4 + 85, new Color(r, g1, b).getRGB());
 		a(o, "Seed", g / 2 - ((wmll.getWindowSize().a() - wmll.getFontRenderer().a("Seed") - 20) / 2), h / 4 + 92, 0xffffff);
-		for (auv a : editboxes)
+		for (auw a : editboxes)
 			a.f();
 		super.a(i, j, f);
 	}

@@ -1,35 +1,22 @@
 
-public class WMLLError extends avu {
+public class WMLLError extends avv {
 
 	private Throwable e;
 
-	public WMLLError(avu aum, Throwable e) {
+	public WMLLError(avv aum, Throwable e) {
 		this.e = e;
 
-		System.err.println("\n ---- Please show everything below this to iPeer ---- \n");
-		if (WMLL.i.Rei)
-			System.err.println("[!] Rei's Minimap is installed.");
-		if (WMLL.i.ZansMinimap) 
-			System.err.println("[!] Zan's Minimap is installed.");
-		if (WMLL.i.AlienRadar)
-			System.err.println("[!] AMDR is installed.");
-		if (WMLL.i.forgeDetected)
-			System.err.println("[!] Forge is installed.");
-		System.err.println("\nCP: "+System.getProperty("java.class.path")+"\n");
-		System.err.println("Affected GUI: "+aum.toString().split("@")[0]+"\n");
-		System.err.println("Error type: "+e.toString()+"\nInitial Method: "+e.getStackTrace()[0].toString().split("\\(")[0]+"\n");
-		e.printStackTrace();
-		System.err.println("\n ---- End of Debug Info ---- \n");
+		WMLL.i.printStackTrace(e);
 
 	}
 
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		i.clear();
-		i.add(new auj(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
+		i.add(new auk(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
 	}
 
-	public void a(auj b) {
+	public void a(auk b) {
 		switch (b.g) {
 		case 0:
 			f.a((avu)null);

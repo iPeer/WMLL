@@ -1,14 +1,14 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsGeneral extends avu {
+public class WMLLOptionsGeneral extends avv {
 
 	private WMLL wmll;
-	private avu parent;
+	private avv parent;
 	private boolean isBinding;
-	private auj bindingButton, autohideForce;
+	private auk bindingButton, autohideForce;
 
-	public WMLLOptionsGeneral(WMLL wmll, avu aum) {
+	public WMLLOptionsGeneral(WMLL wmll, avv aum) {
 		this.wmll = wmll;
 		this.parent = aum;
 	}
@@ -17,19 +17,19 @@ public class WMLLOptionsGeneral extends avu {
 	public void A_() {
 		i.clear();
 		if (wmll.debugClassPresent)
-			i.add(new auj(9001, g - 20, 0, 20, 20, "R"));
+			i.add(new auk(9001, g - 20, 0, 20, 20, "R"));
 		String enabledString = "Enabled on "+wmll.getWorldName()+": "+(WMLL.Enabled ? "Yes" : "No");
-		i.add(new auj(0, g / 2 - 150, h / 4, 300, 20, enabledString));
-		i.add(bindingButton = new auj(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
-		i.add(new auj(2, g / 2 - 190, h - 25, 380, 20, "Done"));
-		i.add(new auj(3, g / 2 - 50, h / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
-		i.add(new auj(4, g / 2 - 150, h / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
-		i.add(autohideForce = new auj(6, g / 2 - 150, h / 4 + 50, 300, 20, "Always obey autohide setting: "+(wmll.forceAutohideObey ? "ON" : "OFF")));
-		i.add(new auj(5, g / 2 - 150, h / 4 + 75, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
+		i.add(new auk(0, g / 2 - 150, h / 4, 300, 20, enabledString));
+		i.add(bindingButton = new auk(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
+		i.add(new auk(2, g / 2 - 190, h - 25, 380, 20, "Done"));
+		i.add(new auk(3, g / 2 - 50, h / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
+		i.add(new auk(4, g / 2 - 150, h / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
+		i.add(autohideForce = new auk(6, g / 2 - 150, h / 4 + 50, 300, 20, "Always obey autohide setting: "+(wmll.forceAutohideObey ? "ON" : "OFF")));
+		i.add(new auk(5, g / 2 - 150, h / 4 + 75, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
 		autohideForce.h = wmll.useML;
 	}
 
-	protected void a(auj b) {
+	protected void a(auk b) {
 		switch (b.g) {
 		case 9001:
 			f.a(new WMLLOptionsGeneral(this.wmll, this.parent));

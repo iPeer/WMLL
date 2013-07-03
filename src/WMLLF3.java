@@ -6,13 +6,13 @@ import net.minecraft.client.Minecraft;
 
 public class WMLLF3 {
 	
-	protected atm mc;
+	protected atn mc;
 	protected WMLL wmll;
 	boolean showSeed;
 	
 	private String MINECRAFT_VERSION = "";
 
-	public WMLLF3(atm h, WMLL wmll) {
+	public WMLLF3(atn h, WMLL wmll) {
 		this.mc = h;
 		this.wmll = wmll;
 		MINECRAFT_VERSION = WMLL.getMinecraftVersion();
@@ -60,11 +60,11 @@ public class WMLLF3 {
 		wmll.drawStringUsingPixels("WMLL "+WMLL.wmllVersion(), 2, 72, 0xffffff);
 		
 		// Coordinates
-		ob player = wmll.thePlayer();
+		oc player = wmll.thePlayer();
 		double x = player.t;
 		double y = player.u;
 		double z = player.v;
-		double f = lo.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
+		double f = lp.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
 		String roundingFormat = "#0";
 		DecimalFormat d = new DecimalFormat(roundingFormat);
 		String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+wmll.getPlayerDirection(Integer.parseInt(d.format(f)))+")";

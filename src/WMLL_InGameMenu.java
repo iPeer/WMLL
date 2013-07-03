@@ -8,14 +8,14 @@ public class WMLL_InGameMenu extends avo {
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		super.A_();
-		i.add(new auj(9000, g / 2 - 100, h / 4 + 144 + -16, "WMLL Options..."));
+		i.add(new auk(9000, g / 2 - 100, h / 4 + 144 + -16, "WMLL Options..."));
 		if (WMLL.i.debugClassPresent)
-			i.add(new auj(9001, g - 52, h - 22, 50, 20, "Reload"));
+			i.add(new auk(9001, g - 52, h - 22, 50, 20, "Reload"));
 		
 	}
 	
 	@Override
-    protected void a(auj awg1)
+    protected void a(auk awg1)
     {
 		switch (awg1.g) {
 		case 9000:

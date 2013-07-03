@@ -9,53 +9,53 @@ import java.util.Iterator;
 import java.util.Random;
 import org.lwjgl.opengl.GL11;
 
-public class auz extends ava
+public class ava extends avb
 {
 
-    private static final bjb b = new bjb("textures/misc/vignette.png");
-    private static final bjb c = new bjb("textures/gui/widgets.png");
-    private static final bjb d = new bjb("textures/misc/pumpkinblur.png");
-    private static final bgi e = new bgi();
+    private static final bjd b = new bjd("textures/misc/vignette.png");
+    private static final bjd c = new bjd("textures/gui/widgets.png");
+    private static final bjd d = new bjd("textures/misc/pumpkinblur.png");
+    private static final bgl e = new bgl();
     private final Random f = new Random();
-    private final atm g;
-    private final auk h;
+    private final atn g;
+    private final aul h;
     private int i;
     private String j;
     private int o;
     private boolean p;
-    public float ipeer_a_rename; // You're killing me, Mojang.
+    public float ipeer_a_rename;
     private int q;
-    private xy r;
+    private xz r;
 
-    public auz(atm atm1)
+    public ava(atn atn1)
     {
         j = "";
         ipeer_a_rename = 1.0F;
-        g = atm1;
-        h = new auk(atm1);
+        g = atn1;
+        h = new aul(atn1);
     }
 
     public void a(float f1, boolean flag, int k, int l)
     {
-        avv avv1 = new avv(g.t, g.c, g.d);
-        int i1 = avv1.a();
-        int j1 = avv1.b();
-        auy auy1 = g.k;
+        avw avw1 = new avw(g.t, g.c, g.d);
+        int i1 = avw1.a();
+        int j1 = avw1.b();
+        auz auz1 = g.k;
         g.o.c();
         GL11.glEnable(3042);
-        if(atm.s())
+        if(atn.s())
         {
             a(g.g.d(f1), i1, j1);
         } else
         {
             GL11.glBlendFunc(770, 771);
         }
-        xy xy1 = g.g.bn.f(3);
-        if(g.t.aa == 0 && xy1 != null && xy1.d == aqr.bf.cF)
+        xz xz1 = g.g.bn.f(3);
+        if(g.t.aa == 0 && xz1 != null && xz1.d == aqs.bf.cF)
         {
             b(i1, j1);
         }
-        if(!g.g.a(ne.k))
+        if(!g.g.a(nf.k))
         {
             float f2 = g.g.bO + (g.g.bN - g.g.bO) * f1;
             if(f2 > 0.0F)
@@ -67,10 +67,10 @@ public class auz extends ava
         {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             g.J().a(c);
-            tx tx1 = g.g.bn;
+            ty ty1 = g.g.bn;
             n = -90F;
             b(i1 / 2 - 91, j1 - 22, 0, 0, 182, 22);
-            b((i1 / 2 - 91 - 1) + tx1.c * 20, j1 - 22 - 1, 0, 22, 24, 22);
+            b((i1 / 2 - 91 - 1) + ty1.c * 20, j1 - 22 - 1, 0, 22, 24, 22);
             g.J().a(m);
             GL11.glEnable(3042);
             GL11.glBlendFunc(775, 769);
@@ -86,7 +86,7 @@ public class auz extends ava
             GL11.glDisable(3042);
             g.B.a("actionBar");
             GL11.glEnable(32826);
-            atk.c();
+            atl.c();
             for(int i2 = 0; i2 < 9; i2++)
             {
                 int k2 = (i1 / 2 - 90) + i2 * 20 + 2;
@@ -94,7 +94,7 @@ public class auz extends ava
                 a(i2, k2, j3, f1);
             }
 
-            atk.a();
+            atl.a();
             GL11.glDisable(32826);
             g.B.b();
         }
@@ -121,7 +121,7 @@ public class auz extends ava
         if(g.g.t())
         {
             g.B.a("jumpBar");
-            g.J().a(ava.m);
+            g.J().a(avb.m);
             float f4 = g.g.bJ();
             char c1 = '\266';
             int k4 = (int)(f4 * (float)(c1 + 1));
@@ -136,7 +136,7 @@ public class auz extends ava
         if(g.b.f())
         {
             g.B.a("expBar");
-            g.J().a(ava.m);
+            g.J().a(avb.m);
             int i3 = g.g.bC();
             if(i3 > 0)
             {
@@ -156,14 +156,14 @@ public class auz extends ava
                 boolean flag1 = false;
                 int i5 = flag1 ? 0xffffff : 0x80ff20;
                 String s2 = (new StringBuilder()).append("").append(g.g.bH).toString();
-                int i7 = (i1 - auy1.a(s2)) / 2;
+                int i7 = (i1 - auz1.a(s2)) / 2;
                 int k7 = j1 - 31 - 4;
                 boolean flag2 = false;
-                auy1.b(s2, i7 + 1, k7, 0);
-                auy1.b(s2, i7 - 1, k7, 0);
-                auy1.b(s2, i7, k7 + 1, 0);
-                auy1.b(s2, i7, k7 - 1, 0);
-                auy1.b(s2, i7, k7, i5);
+                auz1.b(s2, i7 + 1, k7, 0);
+                auz1.b(s2, i7 - 1, k7, 0);
+                auz1.b(s2, i7, k7 + 1, 0);
+                auz1.b(s2, i7, k7 - 1, 0);
+                auz1.b(s2, i7, k7, i5);
                 g.B.b();
             }
         }
@@ -173,7 +173,7 @@ public class auz extends ava
             if(q > 0 && r != null)
             {
                 String s = r.s();
-                int k3 = (i1 - auy1.a(s)) / 2;
+                int k3 = (i1 - auz1.a(s)) / 2;
                 int j5 = j1 - 59;
                 if(!g.b.b())
                 {
@@ -189,7 +189,7 @@ public class auz extends ava
                     GL11.glPushMatrix();
                     GL11.glEnable(3042);
                     GL11.glBlendFunc(770, 771);
-                    auy1.a(s, k3, j5, 0xffffff + (k6 << 24));
+                    auz1.a(s, k3, j5, 0xffffff + (k6 << 24));
                     GL11.glDisable(3042);
                     GL11.glPopMatrix();
                 }
@@ -202,57 +202,57 @@ public class auz extends ava
             String s1 = "";
             if(g.e.I() >= 0x1d6b4L)
             {
-                s1 = bjo.a("demo.demoExpired");
+                s1 = bjq.a("demo.demoExpired");
             } else
             {
-                s1 = String.format(bjo.a("demo.remainingTime"), new Object[] {
-                    lw.a((int)(0x1d6b4L - g.e.I()))
+                s1 = String.format(bjq.a("demo.remainingTime"), new Object[] {
+                    lx.a((int)(0x1d6b4L - g.e.I()))
                 });
             }
-            int i4 = auy1.a(s1);
-            auy1.a(s1, i1 - i4 - 10, 5, 0xffffff);
+            int i4 = auz1.a(s1);
+            auz1.a(s1, i1 - i4 - 10, 5, 0xffffff);
             g.B.b();
         }
-		if (!WMLL.i.useML)
+        if (!WMLL.i.useML)
         	WMLL.i.updategui(g, f1, this);
         if(g.t.ab)
         {
             g.B.a("debug");
             GL11.glPushMatrix();
-            auy1.a((new StringBuilder()).append("Minecraft 1.6 (").append(g.D).append(")").toString(), 2, 2, 0xffffff);
-            auy1.a(g.l(), 2, 12, 0xffffff);
-            auy1.a(g.m(), 2, 22, 0xffffff);
-            auy1.a(g.o(), 2, 32, 0xffffff);
-            auy1.a(g.n(), 2, 42, 0xffffff);
+            auz1.a((new StringBuilder()).append("Minecraft 1.6.1 (").append(g.D).append(")").toString(), 2, 2, 0xffffff);
+            auz1.a(g.l(), 2, 12, 0xffffff);
+            auz1.a(g.m(), 2, 22, 0xffffff);
+            auz1.a(g.o(), 2, 32, 0xffffff);
+            auz1.a(g.n(), 2, 42, 0xffffff);
             long l3 = Runtime.getRuntime().maxMemory();
             long l5 = Runtime.getRuntime().totalMemory();
             long l7 = Runtime.getRuntime().freeMemory();
             long l8 = l5 - l7;
             String s3 = (new StringBuilder()).append("Used memory: ").append((l8 * 100L) / l3).append("% (").append(l8 / 1024L / 1024L).append("MB) of ").append(l3 / 1024L / 1024L).append("MB").toString();
             int i9 = 0xe0e0e0;
-            b(auy1, s3, i1 - auy1.a(s3) - 2, 2, 0xe0e0e0);
+            b(auz1, s3, i1 - auz1.a(s3) - 2, 2, 0xe0e0e0);
             s3 = (new StringBuilder()).append("Allocated memory: ").append((l5 * 100L) / l3).append("% (").append(l5 / 1024L / 1024L).append("MB)").toString();
-            b(auy1, s3, i1 - auy1.a(s3) - 2, 12, 0xe0e0e0);
-            int k9 = lo.c(g.g.u);
-            int i10 = lo.c(g.g.v);
-            int k10 = lo.c(g.g.w);
-            b(auy1, String.format("x: %.5f (%d) // c: %d (%d)", new Object[] {
+            b(auz1, s3, i1 - auz1.a(s3) - 2, 12, 0xe0e0e0);
+            int k9 = lp.c(g.g.u);
+            int i10 = lp.c(g.g.v);
+            int k10 = lp.c(g.g.w);
+            b(auz1, String.format("x: %.5f (%d) // c: %d (%d)", new Object[] {
                 Double.valueOf(g.g.u), Integer.valueOf(k9), Integer.valueOf(k9 >> 4), Integer.valueOf(k9 & 0xf)
             }), 2, 64, 0xe0e0e0);
-            b(auy1, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {
+            b(auz1, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {
                 Double.valueOf(g.g.E.b), Double.valueOf(g.g.v)
             }), 2, 72, 0xe0e0e0);
-            b(auy1, String.format("z: %.5f (%d) // c: %d (%d)", new Object[] {
+            b(auz1, String.format("z: %.5f (%d) // c: %d (%d)", new Object[] {
                 Double.valueOf(g.g.w), Integer.valueOf(k10), Integer.valueOf(k10 >> 4), Integer.valueOf(k10 & 0xf)
             }), 2, 80, 0xe0e0e0);
-            int l10 = lo.c((double)((g.g.A * 4F) / 360F) + 0.5D) & 3;
-            b(auy1, (new StringBuilder()).append("f: ").append(l10).append(" (").append(WMLL.i.getPlayerDirection(l10)).append(") / ").append(lo.g(g.g.A)).toString(), 2, 88, 0xe0e0e0);
+            int l10 = lp.c((double)((g.g.A * 4F) / 360F) + 0.5D) & 3;
+            b(auz1, (new StringBuilder()).append("f: ").append(l10).append(" (").append(WMLL.i.getPlayerDirection(l10)).append(") / ").append(lp.g(g.g.A)).toString(), 2, 88, 0xe0e0e0);
             if(g.e != null && g.e.f(k9, i10, k10))
             {
-                adl adl1 = g.e.d(k9, k10);
-                b(auy1, (new StringBuilder()).append("lc: ").append(adl1.h() + 15).append(" b: ").append(adl1.a(k9 & 0xf, k10 & 0xf, g.e.u()).y).append(" bl: ").append(adl1.a(acb.b, k9 & 0xf, i10, k10 & 0xf)).append(" sl: ").append(adl1.a(acb.a, k9 & 0xf, i10, k10 & 0xf)).append(" rl: ").append(adl1.c(k9 & 0xf, i10, k10 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
+                adm adm1 = g.e.d(k9, k10);
+                b(auz1, (new StringBuilder()).append("lc: ").append(adm1.h() + 15).append(" b: ").append(adm1.a(k9 & 0xf, k10 & 0xf, g.e.u()).y).append(" bl: ").append(adm1.a(acc.b, k9 & 0xf, i10, k10 & 0xf)).append(" sl: ").append(adm1.a(acc.a, k9 & 0xf, i10, k10 & 0xf)).append(" rl: ").append(adm1.c(k9 & 0xf, i10, k10 & 0xf, 0)).toString(), 2, 96, 0xe0e0e0);
             }
-            b(auy1, String.format("ws: %.3f, fs: %.3f, g: %b, fl: %d", new Object[] {
+            b(auz1, String.format("ws: %.3f, fs: %.3f, g: %b, fl: %d", new Object[] {
                 Float.valueOf(g.g.bG.b()), Float.valueOf(g.g.bG.a()), Boolean.valueOf(g.g.F), Integer.valueOf(g.e.f(k9, k10))
             }), 2, 104, 0xe0e0e0);
             GL11.glPopMatrix();
@@ -278,16 +278,16 @@ public class auz extends ava
                 {
                     k5 = Color.HSBtoRGB(f5 / 50F, 0.7F, 0.6F) & 0xffffff;
                 }
-                auy1.b(j, -auy1.a(j) / 2, -4, k5 + (j4 << 24 & 0xff000000));
+                auz1.b(j, -auz1.a(j) / 2, -4, k5 + (j4 << 24 & 0xff000000));
                 GL11.glDisable(3042);
                 GL11.glPopMatrix();
             }
             g.B.b();
         }
-        asw asw1 = g.e.X().a(1);
-        if(asw1 != null)
+        asx asx1 = g.e.X().a(1);
+        if(asx1 != null)
         {
-            a(asw1, j1, i1, auy1);
+            a(asx1, j1, i1, auz1);
         }
         GL11.glEnable(3042);
         GL11.glBlendFunc(770, 771);
@@ -298,13 +298,13 @@ public class auz extends ava
         h.a(i);
         g.B.b();
         GL11.glPopMatrix();
-        asw1 = g.e.X().a(0);
-        if(g.t.T.e && (!g.A() || g.g.a.c.size() > 1 || asw1 != null))
+        asx1 = g.e.X().a(0);
+        if(g.t.T.e && (!g.A() || g.g.a.c.size() > 1 || asx1 != null))
         {
             g.B.a("playerList");
-            bck bck1 = g.g.a;
-            java.util.List list = bck1.c;
-            int l6 = bck1.d;
+            bcn bcn1 = g.g.a;
+            java.util.List list = bcn1.c;
+            int l6 = bcn1.d;
             int j7 = l6;
             int i8 = 1;
             for(; j7 > 20; j7 = ((l6 + i8) - 1) / i8)
@@ -331,42 +331,42 @@ public class auz extends ava
                 {
                     continue;
                 }
-                bcv bcv1 = (bcv)list.get(j9);
-                asx asx1 = g.e.X().i(bcv1.a);
-                String s4 = asx.a(asx1, bcv1.a);
-                auy1.a(s4, l9, j10, 0xffffff);
-                if(asw1 != null)
+                bcy bcy1 = (bcy)list.get(j9);
+                asy asy1 = g.e.X().i(bcy1.a);
+                String s4 = asy.a(asy1, bcy1.a);
+                auz1.a(s4, l9, j10, 0xffffff);
+                if(asx1 != null)
                 {
-                    int i11 = l9 + auy1.a(s4) + 5;
+                    int i11 = l9 + auz1.a(s4) + 5;
                     int k11 = (l9 + j8) - 12 - 5;
                     if(k11 - i11 > 5)
                     {
-                        asy asy1 = asw1.a().a(bcv1.a, asw1);
-                        String s5 = (new StringBuilder()).append(a.o).append("").append(asy1.c()).toString();
-                        auy1.a(s5, k11 - auy1.a(s5), j10, 0xffffff);
+                        asz asz1 = asx1.a().a(bcy1.a, asx1);
+                        String s5 = (new StringBuilder()).append(a.o).append("").append(asz1.c()).toString();
+                        auz1.a(s5, k11 - auz1.a(s5), j10, 0xffffff);
                     }
                 }
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                 g.J().a(m);
                 int j11 = 0;
                 byte byte1 = 0;
-                if(bcv1.b < 0)
+                if(bcy1.b < 0)
                 {
                     byte1 = 5;
                 } else
-                if(bcv1.b < 150)
+                if(bcy1.b < 150)
                 {
                     byte1 = 0;
                 } else
-                if(bcv1.b < 300)
+                if(bcy1.b < 300)
                 {
                     byte1 = 1;
                 } else
-                if(bcv1.b < 600)
+                if(bcy1.b < 600)
                 {
                     byte1 = 2;
                 } else
-                if(bcv1.b < 1000)
+                if(bcy1.b < 1000)
                 {
                     byte1 = 3;
                 } else
@@ -384,24 +384,24 @@ public class auz extends ava
         GL11.glEnable(3008);
     }
 
-    private void a(asw asw1, int k, int l, auy auy1)
+    private void a(asx asx1, int k, int l, auz auz1)
     {
-        atb atb1 = asw1.a();
-        Collection collection = atb1.i(asw1);
+        atc atc1 = asx1.a();
+        Collection collection = atc1.i(asx1);
         if(collection.size() > 15)
         {
             return;
         }
-        int i1 = auy1.a(asw1.d());
+        int i1 = auz1.a(asx1.d());
         for(Iterator iterator = collection.iterator(); iterator.hasNext();)
         {
-            asy asy1 = (asy)iterator.next();
-            asx asx1 = atb1.i(asy1.e());
-            String s = (new StringBuilder()).append(asx.a(asx1, asy1.e())).append(": ").append(a.m).append(asy1.c()).toString();
-            i1 = Math.max(i1, auy1.a(s));
+            asz asz1 = (asz)iterator.next();
+            asy asy1 = atc1.i(asz1.e());
+            String s = (new StringBuilder()).append(asy.a(asy1, asz1.e())).append(": ").append(a.m).append(asz1.c()).toString();
+            i1 = Math.max(i1, auz1.a(s));
         }
 
-        int j1 = collection.size() * auy1.a;
+        int j1 = collection.size() * auz1.a;
         int k1 = k / 2 + j1 / 3;
         byte byte0 = 3;
         int l1 = l - i1 - byte0;
@@ -413,23 +413,23 @@ public class auz extends ava
             {
                 break;
             }
-            asy asy2 = (asy)iterator1.next();
+            asz asz2 = (asz)iterator1.next();
             i2++;
-            asx asx2 = atb1.i(asy2.e());
-            String s1 = asx.a(asx2, asy2.e());
-            String s2 = (new StringBuilder()).append(a.m).append("").append(asy2.c()).toString();
+            asy asy2 = atc1.i(asz2.e());
+            String s1 = asy.a(asy2, asz2.e());
+            String s2 = (new StringBuilder()).append(a.m).append("").append(asz2.c()).toString();
             int j2 = l1;
-            int k2 = k1 - i2 * auy1.a;
+            int k2 = k1 - i2 * auz1.a;
             int l2 = (l - byte0) + 2;
-            a(j2 - 2, k2, l2, k2 + auy1.a, 0x50000000);
-            auy1.b(s1, j2, k2, 0x20ffffff);
-            auy1.b(s2, l2 - auy1.a(s2), k2, 0x20ffffff);
+            a(j2 - 2, k2, l2, k2 + auz1.a, 0x50000000);
+            auz1.b(s1, j2, k2, 0x20ffffff);
+            auz1.b(s2, l2 - auz1.a(s2), k2, 0x20ffffff);
             if(i2 == collection.size())
             {
-                String s3 = asw1.d();
-                a(j2 - 2, k2 - auy1.a - 1, l2, k2 - 1, 0x60000000);
+                String s3 = asx1.d();
+                a(j2 - 2, k2 - auz1.a - 1, l2, k2 - 1, 0x60000000);
                 a(j2 - 2, k2 - 1, l2, k2, 0x50000000);
-                auy1.b(s3, (j2 + i1 / 2) - auy1.a(s3) / 2, k2 - auy1.a, 0x20ffffff);
+                auz1.b(s3, (j2 + i1 / 2) - auz1.a(s3) / 2, k2 - auz1.a, 0x20ffffff);
             }
         } while(true);
     }
@@ -441,28 +441,28 @@ public class auz extends ava
         {
             flag = false;
         }
-        int i1 = lo.f(g.g.aJ());
-        int j1 = lo.f(g.g.ax);
+        int i1 = lp.f(g.g.aJ());
+        int j1 = lp.f(g.g.ax);
         f.setSeed(i * 0x4c627);
         boolean flag1 = false;
-        ur ur1 = g.g.bD();
-        int k1 = ur1.a();
-        int l1 = ur1.b();
-        oo oo1 = g.g.a(tl.a);
+        us us1 = g.g.bD();
+        int k1 = us1.a();
+        int l1 = us1.b();
+        op op1 = g.g.a(tm.a);
         int i2 = k / 2 - 91;
         int j2 = k / 2 + 91;
         int k2 = l - 39;
-        float f1 = (float)oo1.e();
+        float f1 = (float)op1.e();
         float f2 = g.g.bj();
-        int l2 = lo.f((f1 + f2) / 2.0F / 10F);
+        int l2 = lp.f((f1 + f2) / 2.0F / 10F);
         int i3 = Math.max(10 - (l2 - 2), 3);
         int j3 = k2 - (l2 - 1) * i3 - 10;
         float f3 = f2;
         int k3 = g.g.aM();
         int l3 = -1;
-        if(g.g.a(ne.l))
+        if(g.g.a(nf.l))
         {
-            l3 = i % lo.f(f1 + 5F);
+            l3 = i % lp.f(f1 + 5F);
         }
         g.B.a("armor");
         for(int i4 = 0; i4 < 10; i4++)
@@ -487,14 +487,14 @@ public class auz extends ava
         }
 
         g.B.c("health");
-        for(int j4 = lo.f((f1 + f2) / 2.0F) - 1; j4 >= 0; j4--)
+        for(int j4 = lp.f((f1 + f2) / 2.0F) - 1; j4 >= 0; j4--)
         {
             int l4 = 16;
-            if(g.g.a(ne.u))
+            if(g.g.a(nf.u))
             {
                 l4 += 36;
             } else
-            if(g.g.a(ne.v))
+            if(g.g.a(nf.v))
             {
                 l4 += 72;
             }
@@ -503,7 +503,7 @@ public class auz extends ava
             {
                 k5 = 1;
             }
-            int k6 = lo.f((float)(j4 + 1) / 10F) - 1;
+            int k6 = lp.f((float)(j4 + 1) / 10F) - 1;
             int j7 = i2 + (j4 % 10) * 8;
             int i8 = k2 - k6 * i3;
             if(i1 <= 4)
@@ -553,8 +553,8 @@ public class auz extends ava
             }
         }
 
-        nj nj1 = g.g.o;
-        if(nj1 == null)
+        nk nk1 = g.g.o;
+        if(nk1 == null)
         {
             g.B.c("food");
             for(int i5 = 0; i5 < 10; i5++)
@@ -562,7 +562,7 @@ public class auz extends ava
                 int l5 = k2;
                 int l6 = 16;
                 byte byte0 = 0;
-                if(g.g.a(ne.s))
+                if(g.g.a(nf.s))
                 {
                     l6 += 36;
                     byte0 = 13;
@@ -599,12 +599,12 @@ public class auz extends ava
             }
 
         } else
-        if(nj1 instanceof ob)
+        if(nk1 instanceof oc)
         {
             g.B.c("mountHealth");
-            ob ob1 = (ob)nj1;
-            int i6 = (int)Math.ceil(ob1.aJ());
-            float f4 = ob1.aP();
+            oc oc1 = (oc)nk1;
+            int i6 = (int)Math.ceil(oc1.aJ());
+            float f4 = oc1.aP();
             int k7 = (int)(f4 + 0.5F) / 2;
             if(k7 > 30)
             {
@@ -640,11 +640,11 @@ public class auz extends ava
 
         }
         g.B.c("air");
-        if(g.g.a(aju.h))
+        if(g.g.a(ajv.h))
         {
             int j5 = g.g.aj();
-            int j6 = lo.f(((double)(j5 - 2) * 10D) / 300D);
-            int i7 = lo.f(((double)j5 * 10D) / 300D) - j6;
+            int j6 = lp.f(((double)(j5 - 2) * 10D) / 300D);
+            int i7 = lp.f(((double)j5 * 10D) / 300D) - j6;
             for(int l7 = 0; l7 < j6 + i7; l7++)
             {
                 if(l7 < j6)
@@ -662,17 +662,17 @@ public class auz extends ava
 
     private void d()
     {
-        if(bel.c == null || bel.b <= 0)
+        if(beo.c == null || beo.b <= 0)
         {
             return;
         }
-        bel.b--;
-        auy auy1 = g.k;
-        avv avv1 = new avv(g.t, g.c, g.d);
-        int k = avv1.a();
+        beo.b--;
+        auz auz1 = g.k;
+        avw avw1 = new avw(g.t, g.c, g.d);
+        int k = avw1.a();
         char c1 = '\266';
         int l = k / 2 - c1 / 2;
-        int i1 = (int)(bel.a * (float)(c1 + 1));
+        int i1 = (int)(beo.a * (float)(c1 + 1));
         byte byte0 = 12;
         b(l, byte0, 0, 74, c1, 5);
         b(l, byte0, 0, 74, c1, 5);
@@ -680,8 +680,8 @@ public class auz extends ava
         {
             b(l, byte0, 0, 79, i1, 5);
         }
-        String s = bel.c;
-        auy1.a(s, k / 2 - auy1.a(s) / 2, byte0 - 10, 0xffffff);
+        String s = beo.c;
+        auz1.a(s, k / 2 - auz1.a(s) / 2, byte0 - 10, 0xffffff);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         g.J().a(m);
     }
@@ -694,13 +694,13 @@ public class auz extends ava
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(3008);
         g.J().a(d);
-        bfc bfc1 = bfc.a;
-        bfc1.b();
-        bfc1.a(0.0D, l, -90D, 0.0D, 1.0D);
-        bfc1.a(k, l, -90D, 1.0D, 1.0D);
-        bfc1.a(k, 0.0D, -90D, 1.0D, 0.0D);
-        bfc1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        bfc1.a();
+        bff bff1 = bff.a;
+        bff1.b();
+        bff1.a(0.0D, l, -90D, 0.0D, 1.0D);
+        bff1.a(k, l, -90D, 1.0D, 1.0D);
+        bff1.a(k, 0.0D, -90D, 1.0D, 0.0D);
+        bff1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        bff1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -724,13 +724,13 @@ public class auz extends ava
         GL11.glBlendFunc(0, 769);
         GL11.glColor4f(ipeer_a_rename, ipeer_a_rename, ipeer_a_rename, 1.0F);
         g.J().a(b);
-        bfc bfc1 = bfc.a;
-        bfc1.b();
-        bfc1.a(0.0D, l, -90D, 0.0D, 1.0D);
-        bfc1.a(k, l, -90D, 1.0D, 1.0D);
-        bfc1.a(k, 0.0D, -90D, 1.0D, 0.0D);
-        bfc1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
-        bfc1.a();
+        bff bff1 = bff.a;
+        bff1.b();
+        bff1.a(0.0D, l, -90D, 0.0D, 1.0D);
+        bff1.a(k, l, -90D, 1.0D, 1.0D);
+        bff1.a(k, 0.0D, -90D, 1.0D, 0.0D);
+        bff1.a(0.0D, 0.0D, -90D, 0.0D, 0.0D);
+        bff1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -750,19 +750,19 @@ public class auz extends ava
         GL11.glDepthMask(false);
         GL11.glBlendFunc(770, 771);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
-        mo mo1 = aqr.bj.m(1);
-        g.J().a(bhw.b);
-        float f2 = mo1.c();
-        float f3 = mo1.e();
-        float f4 = mo1.d();
-        float f5 = mo1.f();
-        bfc bfc1 = bfc.a;
-        bfc1.b();
-        bfc1.a(0.0D, l, -90D, f2, f5);
-        bfc1.a(k, l, -90D, f4, f5);
-        bfc1.a(k, 0.0D, -90D, f4, f3);
-        bfc1.a(0.0D, 0.0D, -90D, f2, f3);
-        bfc1.a();
+        mp mp1 = aqs.bj.m(1);
+        g.J().a(bhz.b);
+        float f2 = mp1.c();
+        float f3 = mp1.e();
+        float f4 = mp1.d();
+        float f5 = mp1.f();
+        bff bff1 = bff.a;
+        bff1.b();
+        bff1.a(0.0D, l, -90D, f2, f5);
+        bff1.a(k, l, -90D, f4, f5);
+        bff1.a(k, 0.0D, -90D, f4, f3);
+        bff1.a(0.0D, 0.0D, -90D, f2, f3);
+        bff1.a();
         GL11.glDepthMask(true);
         GL11.glEnable(2929);
         GL11.glEnable(3008);
@@ -771,12 +771,12 @@ public class auz extends ava
 
     private void a(int k, int l, int i1, float f1)
     {
-        xy xy1 = g.g.bn.a[k];
-        if(xy1 == null)
+        xz xz1 = g.g.bn.a[k];
+        if(xz1 == null)
         {
             return;
         }
-        float f2 = (float)xy1.c - f1;
+        float f2 = (float)xz1.c - f1;
         if(f2 > 0.0F)
         {
             GL11.glPushMatrix();
@@ -785,12 +785,12 @@ public class auz extends ava
             GL11.glScalef(1.0F / f3, (f3 + 1.0F) / 2.0F, 1.0F);
             GL11.glTranslatef(-(l + 8), -(i1 + 12), 0.0F);
         }
-        e.b(g.k, g.J(), xy1, l, i1);
+        e.b(g.k, g.J(), xz1, l, i1);
         if(f2 > 0.0F)
         {
             GL11.glPopMatrix();
         }
-        e.c(g.k, g.J(), xy1, l, i1);
+        e.c(g.k, g.J(), xz1, l, i1);
     }
 
     public void a()
@@ -802,12 +802,12 @@ public class auz extends ava
         i++;
         if(g.g != null)
         {
-            xy xy1 = g.g.bn.h();
-            if(xy1 == null)
+            xz xz1 = g.g.bn.h();
+            if(xz1 == null)
             {
                 q = 0;
             } else
-            if(r == null || xy1.d != r.d || !xy.a(xy1, r) || !xy1.g() && xy1.k() != r.k())
+            if(r == null || xz1.d != r.d || !xz.a(xz1, r) || !xz1.g() && xz1.k() != r.k())
             {
                 q = 40;
             } else
@@ -815,7 +815,7 @@ public class auz extends ava
             {
                 q--;
             }
-            r = xy1;
+            r = xz1;
         }
     }
 
@@ -831,7 +831,7 @@ public class auz extends ava
         p = flag;
     }
 
-    public auk b()
+    public aul b()
     {
         return h;
     }

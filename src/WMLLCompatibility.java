@@ -10,7 +10,7 @@ import net.minecraftforge.common.ForgeHooks;
 import org.lwjgl.opengl.GL11;
 
 
-public class WMLLCompatibility extends ava {
+public class WMLLCompatibility extends avv {
 	
 	private int i;
 
