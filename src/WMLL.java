@@ -33,10 +33,10 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 816"; //816
+		return "Test 817"; //817
 	}
 	public static final String versionName() {
-		return "TWO of 100 people reported that bug";
+		return "FORGE onwards!";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.6.1";
@@ -398,7 +398,7 @@ public class WMLL {
 				int blockID = getBlockID(getPlayerCoordinates()[0], getPlayerCoordinates()[1] - 1, getPlayerCoordinates()[2]);
 				drawDebug(Integer.toString(blockID), (getWindowSize().a() - (getFontRenderer().a(Integer.toString(blockID)) + 1)), 4, 0xffffff);
 				try {
-					drawDebug("GUI: "+mc.s.toString(), (getWindowSize().a() - (getFontRenderer().a("GUI: "+mc.s.toString()) + 1)), 5, 0xffffff);
+					drawDebug("GUI: "+mc.m.toString(), (getWindowSize().a() - (getFontRenderer().a("GUI: "+mc.m.toString()) + 1)), 5, 0xffffff);
 				}
 				catch (NullPointerException e) {
 					drawDebug("GUI: null", (getWindowSize().a() - (getFontRenderer().a("GUI: null") + 1)), 5, 0xffffff);
@@ -989,12 +989,12 @@ public class WMLL {
 		return calendar.getTime().toString().split(" ")[3];
 	}
 
-	private ast getGUI() {
-		return mc.s;
+	private avv getGUI() {
+		return mc.m;
 	}
 	
 	private String getGUIClassName() {
-		return (mc.s != null ? mc.s.toString().split("@")[0] : "null");
+		return (getGUI() != null ? getGUI().toString().split("@")[0] : "null");
 	}
 	
 	private bcu getWorld() {

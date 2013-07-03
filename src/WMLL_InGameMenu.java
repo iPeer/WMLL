@@ -1,5 +1,5 @@
 
-public class WMLL_InGameMenu extends avo {
+public class WMLL_InGameMenu extends avp {
 	
 	public WMLL_InGameMenu() {
 		super();
