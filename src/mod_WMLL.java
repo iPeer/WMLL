@@ -27,7 +27,7 @@ public class mod_WMLL extends BaseMod {
 		WMLL.i.useML = true;
 	}
 	
-	public boolean onTickInGame(float f, atn mc) {
+	public boolean onTickInGame(float f, ats mc) {
 		WMLL.i.updategui(mc, f);	
 		return true;
 	}

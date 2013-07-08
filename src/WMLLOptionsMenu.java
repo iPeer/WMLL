@@ -6,7 +6,7 @@ import net.minecraftforge.common.ForgeVersion;
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsMenu extends avv {
+public class WMLLOptionsMenu extends awb {
 
 	private WMLL wmll;
 	private avv parent;
@@ -37,21 +37,21 @@ public class WMLLOptionsMenu extends avv {
 		i.clear();
 		try {
 			if (wmll.isEnabled()) {
-				i.add(new auk(0, g / 2 - 200, h - 95, "General Settings"));
-				i.add(new auk(1, g / 2 + 2, h - 95, "Output Settings"));
-				i.add(new auk(2, g / 2 - 200, h - 70, "Miscellaneous Settings"));
-				i.add(new auk(3, g / 2 + 2, h - 70, "Compatibility Settings"));
-				auk updateButton;
-				i.add(updateButton = new auk(-1, g / 2 - 100, h / 4 + 23, "View forum thread"));
+				i.add(new auq(0, g / 2 - 200, h - 95, "General Settings"));
+				i.add(new auq(1, g / 2 + 2, h - 95, "Output Settings"));
+				i.add(new auq(2, g / 2 - 200, h - 70, "Miscellaneous Settings"));
+				i.add(new auq(3, g / 2 + 2, h - 70, "Compatibility Settings"));
+				auq updateButton;
+				i.add(updateButton = new auq(-1, g / 2 - 100, h / 4 + 23, "View forum thread"));
 				updateButton.j = wmll.updateInfo.length > 0 && Desktop.isDesktopSupported() && (this.desktop = Desktop.getDesktop()).isSupported(Desktop.Action.BROWSE);
 			}
 			else {
-				i.add(new auk(999, g / 2 - 50, h - 110, 100, 20, "Enable it!"));
+				i.add(new auq(999, g / 2 - 50, h - 110, 100, 20, "Enable it!"));
 			}
-			i.add(new auk(4, g / 2 - 190, h - 30, 380, 20, (wmll.isEnabled() ? "Done" : "Cancel")));
+			i.add(new auq(4, g / 2 - 190, h - 30, 380, 20, (wmll.isEnabled() ? "Done" : "Cancel")));
 			if (wmll.debugClassPresent) {
-				i.add(new auk(9000, g - 40, 0, 20, 20, (WMLL.debugActive ? "\247l" : "")+"D"));
-				i.add(new auk(9001, g - 20, 0, 20, 20, "R"));
+				i.add(new auq(9000, g - 40, 0, 20, 20, (WMLL.debugActive ? "\247l" : "")+"D"));
+				i.add(new auq(9001, g - 20, 0, 20, 20, "R"));
 			}
 		}
 		catch (Exception e) {
@@ -59,7 +59,7 @@ public class WMLLOptionsMenu extends avv {
 		}
 	}
 
-	protected void a(auk b) {
+	protected void a(auq b) {
 		switch (b.g) {
 		case 0:
 			f.a(new WMLLOptionsGeneral(this.wmll, this));

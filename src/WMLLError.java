@@ -1,9 +1,9 @@
 
-public class WMLLError extends avv {
+public class WMLLError extends awb {
 
 	private Throwable e;
 
-	public WMLLError(avv aum, Throwable e) {
+	public WMLLError(awb aum, Throwable e) {
 		this.e = e;
 
 		WMLL.i.printStackTrace(e);
@@ -13,10 +13,10 @@ public class WMLLError extends avv {
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		i.clear();
-		i.add(new auk(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
+		i.add(new auq(0, g / 2 - 190, h - 30, 380, 20, "Okay"));
 	}
 
-	public void a(auk b) {
+	public void a(auq b) {
 		switch (b.g) {
 		case 0:
 			f.a((avu)null);

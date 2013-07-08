@@ -5,25 +5,25 @@ import java.util.regex.Pattern;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public class WMLLRenderer extends avv {
+public class WMLLRenderer extends avh {
 
-	public static bjd tex = new bjd("ipeer/wmll/imagesheet.png");
+	public static bjl tex = new bjl("ipeer/wmll/imagesheet.png");
 	public String updateVersion = "0";
 	public String updateMCVersion = "1.0";
 	private int StringY = 30, notifyTick = 200, StringY1 = 50, notifyTick1 = 800;
-	public atn mc;
+	public ats mc;
 	private WMLL wmll;
 	public boolean notifyUpdate;
 	public boolean firstRun;
 
-	public WMLLRenderer(atn mc2, WMLL w) {
+	public WMLLRenderer(ats mc2, WMLL w) {
 		this.mc = mc2;
 		this.wmll = w;
 	}
 
 	public void tick() {
 		if (notifyUpdate) {
-			if (mc.s == null)
+			if (mc.m == null)
 				notifyTick--;
 			if (notifyTick < 10)
 				StringY--;
@@ -35,7 +35,7 @@ public class WMLLRenderer extends avv {
 		}
 		if (firstRun) {
 			String a = "";
-			if (mc.s == null)
+			if (mc.m == null)
 				notifyTick1--;
 			if (notifyTick1 >= 500)
 				a = "To cycle WMLL's outputs, press \247c"+Keyboard.getKeyName(WMLL.F4Key)+"\247e.";

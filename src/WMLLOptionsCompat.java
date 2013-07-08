@@ -1,20 +1,20 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsCompat extends avv {
+public class WMLLOptionsCompat extends awb {
 
 	private WMLL wmll;
-	private avv parent;
-	private auk rei, zans, alien;
+	private awb parent;
+	private auq rei, zans, alien;
 	private int page = 1;
 
-	public WMLLOptionsCompat(WMLL wmll, avv aum) {
+	public WMLLOptionsCompat(WMLL wmll, awb aum) {
 		this(wmll, aum, 1);
 	}
 
-	public WMLLOptionsCompat(WMLL wmll, avv aum, int page) {
+	public WMLLOptionsCompat(WMLL wmll, awb parent2, int page) {
 		this.wmll = wmll;
-		this.parent = aum;
+		this.parent = parent2;
 		this.page = page;
 	}
 
@@ -22,13 +22,13 @@ public class WMLLOptionsCompat extends avv {
 	public void A_() {
 		i.clear();
 		if (wmll.debugClassPresent)
-			i.add(new auk(9001, g - 20, 0, 20, 20, "R"));
-		i.add(new auk(0, g / 2 - 190, h - 30, (this.page == 1 ? 295 : 380), 20, "Done"));
+			i.add(new auq(9001, g - 20, 0, 20, 20, "R"));
+		i.add(new auq(0, g / 2 - 190, h - 30, (this.page == 1 ? 295 : 380), 20, "Done"));
 		if (this.page == 1) {
-			i.add(new auk(5, g / 2 + 105, h - 30, 85, 20, "Mod Statuses"));
-			i.add(rei = new auk(1, g / 2 - 145, h / 4 + 45, 140, 20, "Rei's Minimap: "+(wmll.ReiEnabled && !wmll.ReiUseMl ? "ON" : "OFF")));
-			i.add(zans = new auk(2, g / 2 + 2, h / 4 + 45, 140, 20, "Zan's Minimap: "+(wmll.ZansEnabled && wmll.ZansMinimap ? "ON" : "OFF")));
-			i.add(alien = new auk(3, g / 2 - 70, h / 4 + 70, 140, 20, "Alien Motion Detector: "+(wmll.AlienEnabled && wmll.AlienRadar ? "ON" : "OFF")));
+			i.add(new auq(5, g / 2 + 105, h - 30, 85, 20, "Mod Statuses"));
+			i.add(rei = new auq(1, g / 2 - 145, h / 4 + 45, 140, 20, "Rei's Minimap: "+(wmll.ReiEnabled && !wmll.ReiUseMl ? "ON" : "OFF")));
+			i.add(zans = new auq(2, g / 2 + 2, h / 4 + 45, 140, 20, "Zan's Minimap: "+(wmll.ZansEnabled && wmll.ZansMinimap ? "ON" : "OFF")));
+			i.add(alien = new auq(3, g / 2 - 70, h / 4 + 70, 140, 20, "Alien Motion Detector: "+(wmll.AlienEnabled && wmll.AlienRadar ? "ON" : "OFF")));
 			rei.h = wmll.Rei && !wmll.ReiUseMl;
 			zans.h = wmll.ZansMinimap;
 			alien.h = wmll.AlienRadar;
@@ -40,7 +40,7 @@ public class WMLLOptionsCompat extends avv {
 			f.a(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? null : parent);
 	}
 
-	protected void a(auk b) {
+	protected void a(auq b) {
 		switch (b.g) {
 		case 9001:
 			f.a(new WMLLOptionsCompat(this.wmll, this.parent, this.page));
@@ -90,12 +90,12 @@ public class WMLLOptionsCompat extends avv {
 			a(o, "Minimaps", h / 2, h / 4 + 32, 0xbbbbbb);
 		}
 		else {
-			a(o, "This menu allows you to see what mods are loaded, and if they're not", h / 2, h / 4 - 40, 0xffffff);
-			a(o, "gives information on what went wrong when WMLL tried to load them.", h / 2, h / 4 - 28, 0xffffff);
-			a(o, "Rei's Minimap: "+(wmll.reiError.equals("") ? "\247aOK" : "\247c"+(wmll.reiError.contains(":") ? wmll.reiError.split(":")[0] : wmll.reiError)), h / 2, h / 4, 0xffffff);
-			a(o, "Zan's Minimap: "+(wmll.zanError.equals("") ? "\247aOK" : "\247c"+(wmll.zanError.contains(":") ? wmll.zanError.split(":")[0] : wmll.zanError)), h / 2, h / 4 + 12, 0xffffff);
-			a(o, "Alien MT: "+(wmll.alienError.equals("") ? "\247aOK" : "\247c"+(wmll.alienError.contains(":") ? wmll.alienError.split(":")[0] : wmll.alienError)), h / 2, h / 4 + 24, 0xffffff);
-			a(o, "Forge: "+(wmll.forgeError.equals("") || wmll.useML ? "\247aOK" : "\247c"+(wmll.forgeError.contains(":") ? wmll.forgeError.split(":")[0] : wmll.forgeError)), h / 2, h / 4 + 36, 0xffffff);
+			a(o, "This menu allows you to see what mods are loaded, and if they're not", g / 2, h / 4 - 40, 0xffffff);
+			a(o, "gives information on what went wrong when WMLL tried to load them.", g / 2, h / 4 - 28, 0xffffff);
+			a(o, "Rei's Minimap: "+(wmll.reiError.equals("") ? "\247aOK" : "\247c"+(wmll.reiError.contains(":") ? wmll.reiError.split(":")[0] : wmll.reiError)), g / 2, h / 4, 0xffffff);
+			a(o, "Zan's Minimap: "+(wmll.zanError.equals("") ? "\247aOK" : "\247c"+(wmll.zanError.contains(":") ? wmll.zanError.split(":")[0] : wmll.zanError)), g / 2, h / 4 + 12, 0xffffff);
+			a(o, "Alien MT: "+(wmll.alienError.equals("") ? "\247aOK" : "\247c"+(wmll.alienError.contains(":") ? wmll.alienError.split(":")[0] : wmll.alienError)), g / 2, h / 4 + 24, 0xffffff);
+			a(o, "Forge: "+(wmll.forgeError.equals("") || wmll.useML ? "\247aOK" : "\247c"+(wmll.forgeError.contains(":") ? wmll.forgeError.split(":")[0] : wmll.forgeError)), g / 2, h / 4 + 36, 0xffffff);
 		}
 		super.a(i, j, f);
 	}
