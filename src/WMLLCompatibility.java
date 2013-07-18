@@ -1,10 +1,8 @@
 
 /* 
- * 12w40a/b notice:
- * 		This class is FULL of errors in the snapshot release and there is nothing I can do about it until the referenced mods are updated.
+ * THIS CLASS IS DEPRECATED AND WILL NOT COMPILE. IGNORE ANY ERRORS WITH THIS FILE AS THEIR ORIGIN.
  */
 
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.ForgeHooks;
 
 import org.lwjgl.opengl.GL11;

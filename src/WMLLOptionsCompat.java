@@ -87,7 +87,7 @@ public class WMLLOptionsCompat extends awb {
 			a(o, "If a mod you have installed is greyed out, click \247oMod Statuses\247r", g / 2, h / 4 - 4, 0xffffff);
 			a(o, "to see what went wrong.", h / 2, h / 4 + 8, 0xffffff);
 			
-			a(o, "Minimaps", h / 2, h / 4 + 32, 0xbbbbbb);
+			a(o, "Minimaps", g / 2, h / 4 + 32, 0xbbbbbb);
 		}
 		else {
 			a(o, "This menu allows you to see what mods are loaded, and if they're not", g / 2, h / 4 - 40, 0xffffff);

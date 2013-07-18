@@ -1,6 +1,4 @@
-import net.minecraft.client.Minecraft;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-
 
 public class mod_WMLL extends BaseMod {
 	
@@ -27,10 +25,16 @@ public class mod_WMLL extends BaseMod {
 		WMLL.i.useML = true;
 	}
 	
+	@Override
 	public boolean onTickInGame(float f, ats mc) {
 		WMLL.i.updategui(mc, f);	
 		return true;
 	}
+	
+//	public boolean onTickInGame(float f, Minecraft mc) {
+//		WMLL.i.updategui(mc, f);	
+//		return true;
+//	}
 
 
 	

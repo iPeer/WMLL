@@ -1,8 +1,6 @@
 
 import java.text.DecimalFormat;
 
-import net.minecraft.client.Minecraft;
-
 
 public class WMLLF3 {
 	

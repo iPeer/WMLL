@@ -17,13 +17,10 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.main.Main;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.ForgeVersion;
 
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
 
 import reifnsk.minimap.ReiMinimap;
 
@@ -33,10 +30,10 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 818"; //817
+		return "Test 820"; //820
 	}
 	public static final String versionName() {
-		return "!";
+		return "aaand we're back";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.6.2";
@@ -164,7 +161,7 @@ public class WMLL {
 				shitBricks(2, e);
 			}
 		}
-		if (getClass().getClassLoader().getResource("MotionTracker.class") != null) {
+/*		if (getClass().getClassLoader().getResource("MotionTracker.class") != null) {
 			try {
 				AlienRadar = true;
 				alienRadar = new MotionTracker();
@@ -178,7 +175,7 @@ public class WMLL {
 				shitBricks(3, e);
 				AlienRadar = false;
 			}
-		}
+		}*/
 		if (getClass().getClassLoader().getResource("com/thevoxelbox/voxelmap/VoxelMap.class") != null) {
 			try {
 				ZansMinimap = true;
@@ -328,7 +325,7 @@ public class WMLL {
 			wmllRenderer.firstRun = true;
 		}
 		if (!ranInit) {
-			debug("Performing world-load init");
+			debug("[WMLL] Performing world-load init");
 			this.mc = h;
 			realInit = true;
 			try {
@@ -339,26 +336,27 @@ public class WMLL {
 			}
 			wmllF3 = new WMLLF3(h, this);
 			ranInit = true;
-			this.fontRenderer = h.l;
+			this.fontRenderer = (useML ? ModLoader.getMinecraftInstance().l : h.l);
 			outputOptionsFile = new File(getGamePath(), "WMLLOutput.properties");
 			loadOptions();
 			this.autoSeed = Boolean.parseBoolean(options.getProperty("autoAquireSeed", "true"));
 			if (debugClassPresent)
 				entityPlayer().a("Test");
 			//(new Thread(wmllUpdateCheck)).start();
-			debug("Options file set to: "+outputOptionsFile.getAbsolutePath());
-			debug("World-load init complete.");
+			debug("[WMLL] Options file set to: "+outputOptionsFile.getAbsolutePath());
+			debug("[WMLL] World-load init complete.");
 		}
-		if (useML && getWorld() == null)
+		if (useML && getWorld() == null) {
 			return;
-/*		if (!useML && h != null) {
+		}
+		if (!useML && h != null) {
 			if (Rei && !ReiUseMl && ReiEnabled)
 				ReiMinimap.instance.onTickInGame(renderPartialTicks, h);
-			if (AlienRadar && AlienEnabled && alienRadar != null && getWorld() != null)
-				((MotionTracker)alienRadar).onTickInGame(h);
+			//if (AlienRadar && AlienEnabled && alienRadar != null && getWorld() != null)
+			//	((MotionTracker)alienRadar).onTickInGame(h);
 			if (ZansMinimap && ZansEnabled && zansMinimap != null && getWorld() != null)
 				((VoxelMap)zansMinimap).onTickInGame(h);
-		}*/
+		}
 		if (mcDebugOpen() || wmllF3Output) {
 			if (mcDebugOpen() && wmllOverrideF3)
 				toggleF3Override();
@@ -387,7 +385,7 @@ public class WMLL {
 			catch (NoClassDefFoundError n1) { }
 			catch (NoSuchFieldError n2) { }*/
 			Enabled = isEnabled();
-			if (WMLLDebugActive()) {
+			if (WMLLDebugActive() || (debugClassPresent && useML)) {
 				int x = getPlayerCoordinates()[0];
 				int z = getPlayerCoordinates()[2];
 				String worldName = getWorldName()+" ("+isMultiplayer()+")";
@@ -398,7 +396,7 @@ public class WMLL {
 				int blockID = getBlockID(getPlayerCoordinates()[0], getPlayerCoordinates()[1] - 1, getPlayerCoordinates()[2]);
 				drawDebug(Integer.toString(blockID), (getWindowSize().a() - (getFontRenderer().a(Integer.toString(blockID)) + 1)), 4, 0xffffff);
 				try {
-					drawDebug("GUI: "+mc.m.toString(), (getWindowSize().a() - (getFontRenderer().a("GUI: "+mc.m.toString()) + 1)), 5, 0xffffff);
+					drawDebug("GUI: "+getGUI().toString(), (getWindowSize().a() - (getFontRenderer().a("GUI: "+getGUI().toString()) + 1)), 5, 0xffffff);
 				}
 				catch (NullPointerException e) {
 					drawDebug("GUI: null", (getWindowSize().a() - (getFontRenderer().a("GUI: null") + 1)), 5, 0xffffff);
@@ -430,6 +428,9 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 16, 0xffffff);
 				a = (getGUI() != null ? getGUI().toString() : "null");
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 17, 0xffffff);
+				a = "Enabled: "+isEnabled();
+				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 18, 0xffffff);
+				drawDebug("Test", 1, 1, 0xffffff);
 			}
 			else if (!WMLLDebugActive() && debugClassPresent && shouldShow()) {
 				String a = "WMLL "+wmllVersion()+" (DEBUG MODE)";
@@ -765,9 +766,9 @@ public class WMLL {
 		m = sunLight.matcher(s);
 		s = m.replaceAll(Integer.toString(getSunLight(x, y, z)));
 		m = entities.matcher(s);
-		s = m.replaceAll(mc.n().split(" ")[1].split("/")[0]);
+		s = m.replaceAll(mc.m().split(" ")[1].split("/")[0]);
 		m = entities2.matcher(s);
-		s = m.replaceAll(mc.n().split(" ")[1].replaceAll("\\.", ""));
+		s = m.replaceAll(mc.m().split(" ")[1].replaceAll("\\.", ""));
 		Pattern debug = Pattern.compile("%debug:([\\p{Alnum}\\p{Punct}&&[^\\\\ ]]+)%", Pattern.CASE_INSENSITIVE);
 		m = debug.matcher(s);
 		while (m.find()) {
@@ -989,8 +990,8 @@ public class WMLL {
 		return calendar.getTime().toString().split(" ")[3];
 	}
 
-	private avf getGUI() {
-		return mc.m;
+	private awb getGUI() {
+		return mc.n;
 	}
 	
 	private String getGUIClassName() {
@@ -1699,8 +1700,8 @@ public class WMLL {
 		if (WMLL.i.forgeDetected)
 			System.err.println("[!] Forge is installed.");
 		System.err.println("\nCP: "+System.getProperty("java.class.path")+"\n");
-		if (aum != null)
-			System.err.println("Affected GUI: "+aum.toString().split("@")[0]+"\n");
+		if (getGUI() != null)
+			System.err.println("Affected GUI: "+getGUI().toString().split("@")[0]+"\n");
 		System.err.println("Error type: "+e.toString()+"\nInitial Method: "+e.getStackTrace()[0].toString().split("\\(")[0]+"\n");
 		e.printStackTrace();
 		System.err.println("\n ---- End of Debug Info ---- \n");
