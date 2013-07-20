@@ -80,8 +80,8 @@ public class WMLLOptionsOutput extends awb {
 		auq paramButton;
 		i.add(paramButton = new auq(-1, wmll.getWindowSize().a() - 108, 19, 100, 14, "Parameter help"));
 		paramButton.h = Desktop.isDesktopSupported() && (this.desktop = Desktop.getDesktop()).isSupported(Desktop.Action.BROWSE);
-		if (wmll.debugClassPresent)
-			i.add(new auq(9001, g - 20, 0, 20, 20, "R"));
+		if (wmll.debugClassPresent || WMLL.WMLLDebugActive())
+			i.add(new auq(9001, g - 60, 0, 60, 20, "Reload GUI"));
 	}
 
 	protected void a(auq b) {
@@ -189,7 +189,7 @@ public class WMLLOptionsOutput extends awb {
 		int r = checkColour(colours[0]);
 		int g1 = checkColour(colours[1]);
 		int b = checkColour(colours[2]);
-		a(o, "Colour preview", h / 2, h / 4 + 85, new Color(r, g1, b).getRGB());
+		a(o, "Colour preview", g / 2, h / 4 + 85, new Color(r, g1, b).getRGB());
 		a(o, "Seed", g / 2 - ((wmll.getWindowSize().a() - wmll.getFontRenderer().a("Seed") - 20) / 2), h / 4 + 92, 0xffffff);
 		for (avc a : editboxes)
 			a.f();

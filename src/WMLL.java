@@ -30,10 +30,10 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 820"; //820
+		return "Test 821"; //820
 	}
 	public static final String versionName() {
-		return "aaand we're back";
+		return "";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.6.2";
@@ -61,6 +61,7 @@ public class WMLL {
 	public boolean autoSeed = true;
 	//public Minecraft mc;
 	public ats mc;
+	public boolean showDebug = false;
 
 	public boolean wmllOverrideF3;
 	public int F3Type;
@@ -126,7 +127,7 @@ public class WMLL {
 		
 		Rei = ReiUseMl = RadarBro = false;
 		this.debugClassPresent = (getClass().getClassLoader().getResource("ipeer_wmll_debug") != null);
-		//debugActive = this.debugClassPresent;
+		debugActive = this.debugClassPresent;
 		settingsFile = new File("./mods/WMLL");
 		if (!settingsFile.exists())
 			settingsFile.mkdirs();
@@ -385,7 +386,7 @@ public class WMLL {
 			catch (NoClassDefFoundError n1) { }
 			catch (NoSuchFieldError n2) { }*/
 			Enabled = isEnabled();
-			if (WMLLDebugActive() || (debugClassPresent && useML)) {
+			if ((WMLLDebugActive() && showDebug) || (debugClassPresent && useML)) {
 				int x = getPlayerCoordinates()[0];
 				int z = getPlayerCoordinates()[2];
 				String worldName = getWorldName()+" ("+isMultiplayer()+")";
@@ -430,23 +431,25 @@ public class WMLL {
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 17, 0xffffff);
 				a = "Enabled: "+isEnabled();
 				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 18, 0xffffff);
-				drawDebug("Test", 1, 1, 0xffffff);
 			}
-			else if (!WMLLDebugActive() && debugClassPresent && shouldShow()) {
+			else if (WMLLDebugActive() && debugClassPresent && shouldShow() && !showDebug) {
 				String a = "WMLL "+wmllVersion()+" (DEBUG MODE)";
-				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 0, 0xffffff);
+				int yPos = 0;
+				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), yPos++, 0xffffff);
 				if (forgeDetected) {
 					a = "Forge: "+ForgeVersion.getVersion();
-					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 1, 0xffffff);
+					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), yPos++, 0xffffff);
 				}
 				if (Rei) {
 					a = "Rei's Minimap: "+ReiMinimap.MOD_VERSION;
-					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 2, 0xffffff);
+					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), yPos++, 0xffffff);
 				}
 				if (ZansMinimap) {
 					a = "VoxelMap: "+((VoxelMap)zansMinimap).zmodver; 
-					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), 3, 0xffffff);
+					drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), yPos++, 0xffffff);
 				}
+				a = "Press "+Keyboard.getKeyName(F4Key)+" to toggle more debug goodness."; 
+				drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), yPos++, 0xffffff);
 
 			}
 			WMLLCheckKeys();
@@ -1435,6 +1438,9 @@ public class WMLL {
 			else
 				if (getGUI() == null) {
 					//&& !(mc.s instanceof acr/*GuiChat*/) && !(mc.s instanceof ars/*Sign Editing*/) && !(mc.s instanceof hw/*Book Editing*/)) {
+					if (WMLLDebugActive()) {
+						showDebug = !showDebug;
+					}
 					if (useImages || classicOutput) {
 						if (Keyboard.isKeyDown(42)) {
 							WMLLI--;

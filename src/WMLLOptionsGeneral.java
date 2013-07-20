@@ -16,8 +16,8 @@ public class WMLLOptionsGeneral extends awb {
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		i.clear();
-		if (wmll.debugClassPresent)
-			i.add(new auq(9001, g - 20, 0, 20, 20, "R"));
+		if (wmll.debugClassPresent || WMLL.WMLLDebugActive())
+			i.add(new auq(9001, g - 60, 0, 60, 20, "Reload GUI"));
 		String enabledString = "Enabled on "+wmll.getWorldName()+": "+(WMLL.Enabled ? "Yes" : "No");
 		i.add(new auq(0, g / 2 - 150, h / 4, 300, 20, enabledString));
 		i.add(bindingButton = new auq(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));

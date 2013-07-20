@@ -21,8 +21,8 @@ public class WMLLOptionsCompat extends awb {
 	@SuppressWarnings("unchecked")
 	public void A_() {
 		i.clear();
-		if (wmll.debugClassPresent)
-			i.add(new auq(9001, g - 20, 0, 20, 20, "R"));
+		if (wmll.debugClassPresent || WMLL.WMLLDebugActive())
+			i.add(new auq(9001, g - 60, 0, 60, 20, "Reload GUI"));
 		i.add(new auq(0, g / 2 - 190, h - 30, (this.page == 1 ? 295 : 380), 20, "Done"));
 		if (this.page == 1) {
 			i.add(new auq(5, g / 2 + 105, h - 30, 85, 20, "Mod Statuses"));

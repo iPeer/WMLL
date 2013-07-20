@@ -12,6 +12,7 @@ public class WMLLOptionsMenu extends awb {
 	private avv parent;
 	private static final String threadURL = "http://www.minecraftforum.net/topic/170739-";
 	private Desktop desktop;
+	private auq reloadButton = null;
 
 	public WMLLOptionsMenu() {	}
 
@@ -43,16 +44,18 @@ public class WMLLOptionsMenu extends awb {
 				i.add(new auq(3, g / 2 + 2, h - 70, "Compatibility Settings"));
 				auq updateButton;
 				i.add(updateButton = new auq(-1, g / 2 - 100, h / 4 + 23, "View forum thread"));
-				updateButton.j = wmll.updateInfo.length > 0 && Desktop.isDesktopSupported() && (this.desktop = Desktop.getDesktop()).isSupported(Desktop.Action.BROWSE);
+				updateButton.h = wmll.updateInfo.length > 0 && Desktop.isDesktopSupported() && (this.desktop = Desktop.getDesktop()).isSupported(Desktop.Action.BROWSE);
 			}
 			else {
 				i.add(new auq(999, g / 2 - 50, h - 110, 100, 20, "Enable it!"));
 			}
 			i.add(new auq(4, g / 2 - 190, h - 30, 380, 20, (wmll.isEnabled() ? "Done" : "Cancel")));
-			if (wmll.debugClassPresent) {
-				i.add(new auq(9000, g - 40, 0, 20, 20, (WMLL.debugActive ? "\247l" : "")+"D"));
-				i.add(new auq(9001, g - 20, 0, 20, 20, "R"));
-			}
+			//if (wmll.debugClassPresent) {
+			i.add(new auq(9000, g - 70, 0, 70, 20, "Debug: "+(WMLL.WMLLDebugActive() ? "ON" : "OFF")));
+			//auq reloadButton;
+			i.add(reloadButton = new auq(9001, g - 60, 20, 60, 20, "Reload GUI"));
+			reloadButton.i = WMLL.debugActive;
+			//}
 		}
 		catch (Exception e) {
 			f.a(new WMLLError(this, e));
@@ -95,7 +98,8 @@ public class WMLLOptionsMenu extends awb {
 		case 9000:
 			boolean a = !WMLL.debugActive;
 			WMLL.debugActive = a;
-			b.f = (WMLL.debugActive ? "\247l" : "")+"D";
+			b.f = "Debug: "+(a ? "ON" : "OFF");
+			reloadButton.i = a;
 			return;
 		case 999:
 			WMLL.options.put("World-"+wmll.getWorldName(), "true");
