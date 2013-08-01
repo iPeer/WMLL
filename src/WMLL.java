@@ -30,10 +30,10 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Stable 57"; //821
+		return "Test 822"; //821
 	}
 	public static final String versionName() {
-		return "";
+		return "The Moon is pretty!";
 	}
 	public static final String getMinecraftVersion() {
 		return "1.6.2";
@@ -81,13 +81,13 @@ public class WMLL {
 	private WMLLRenderer wmllRenderer;
 	private WMLLF3 wmllF3;
 	public boolean Rei, ReiUseMl, RadarBro, AlienRadar, ZansMinimap, ReiEnabled, AlienEnabled, ZansEnabled, forgeDetected, forgeEnabled, useForge;
-	private Object alienRadar;
 	private Object zansMinimap;
 	public boolean satBar;
 	private boolean ranInit = false;
 	public boolean firstRun = true;
-	private final String[] sleepstrings = {"1337 posts!", "iPeer <3 Boston", "/r/WMLL!", "Now on Reddit!", "What's My Arrow Level?", "Almost makes you wish for a nuclear winter!", "1 byte of posts!", "Kuurth for 1000!", "Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
+	private final String[] sleepstrings = {"A Gibbous moon is 3 quarters!", "1337 posts!", "iPeer <3 Boston", "/r/WMLL!", "Now on Reddit!", "What's My Arrow Level?", "Almost makes you wish for a nuclear winter!", "1 byte of posts!", "Kuurth for 1000!", "Paralympics!", "Olympics!", "London 2012!", "Would you kindly?", "Goodnight, PLAYERNAME!", "This is my bed. There are many like it, but this one is mine.", "If it fits, I sleeps!", "*fade to blackness*", "*water drip*", "Goodnight, Hero!", "ZzzzzZZz", "That'sssssssss a very nice bed you have there...", "That bed looks comfy!", "*snoring*", "...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*", "*screech*"};
 	private final String[] easters = {"204", "54", "273", "164", "14", "214", "124", "44"};
+	private final String[] moonPhases = {"Full", "Waning Gibbous", "Last Quarter", "Waning Crescent", "New", "Waxing Crescent", "First Quarter", "Waxing Gibbous"};
 	private boolean sleepingStringSet = false;
 	private String lightString = "Light level: 9001";
 	private long lastF4Press = 0;
@@ -658,6 +658,7 @@ public class WMLL {
 	}
 
 	public String generateLightString(String s) { // [Roxy] Now Case insensitive
+		//TODO: Don't actually need to do anything here, this is just so I can find this part easily.
 		int x = getPlayerCoordinates()[0];
 		int y = getPlayerCoordinates()[1];
 		int z = getPlayerCoordinates()[2];
@@ -693,6 +694,7 @@ public class WMLL {
 		Pattern localTime12h = Pattern.compile("%12hlocaltime%", Pattern.CASE_INSENSITIVE);
 		Pattern entities = Pattern.compile("%entities%", Pattern.CASE_INSENSITIVE);
 		Pattern entities2 = Pattern.compile("%fullentities%", Pattern.CASE_INSENSITIVE);
+		Pattern moonPhase = Pattern.compile("%moon(phase)?%", Pattern.CASE_INSENSITIVE);
 		String lightLevel = (a < 8 && colourLowLight ? "\247c" : "")+Integer.toString(a)+"\247r";
 		a = getSavedBlockLight(x, y, z);
 		String blockLight = (a < 8 && colourLowLight ? "\247c" : "")+Integer.toString(a)+"\247r";
@@ -772,6 +774,8 @@ public class WMLL {
 		s = m.replaceAll(mc.m().split(" ")[1].split("/")[0]);
 		m = entities2.matcher(s);
 		s = m.replaceAll(mc.m().split(" ")[1].replaceAll("\\.", ""));
+		m = moonPhase.matcher(s);
+		s = m.replaceAll(moonPhases[getMoonPhase()]+(WMLLDebugActive() ? ", "+getMoonPhase() : ""));
 		Pattern debug = Pattern.compile("%debug:([\\p{Alnum}\\p{Punct}&&[^\\\\ ]]+)%", Pattern.CASE_INSENSITIVE);
 		m = debug.matcher(s);
 		while (m.find()) {
@@ -1008,6 +1012,10 @@ public class WMLL {
 		catch (NullPointerException n) {
 			return null;
 		}
+	}
+	
+	private int getMoonPhase() {
+		return getWorld().w();
 	}
 
 	public bkw sspServer() {
