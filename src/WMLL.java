@@ -30,7 +30,7 @@ import com.thevoxelbox.voxelmap.VoxelMap;
 public class WMLL {
 
 	public static final String wmllVersion() {
-		return "Test 822"; //821
+		return "Test 823"; //823
 	}
 	public static final String versionName() {
 		return "The Moon is pretty!";
@@ -874,7 +874,7 @@ public class WMLL {
 	}
 
 	public int getItemId(yd item) {
-		return item.c;
+		return item.d;
 	}
 
 	public String getInternalItemName(yd item) {
@@ -894,7 +894,7 @@ public class WMLL {
 
 	public int getHeldItemID() {
 		try {
-			return getHeldItem().c;
+			return getItemId(getHeldItem());
 		}
 		catch (NullPointerException e) { return -1; }
 	}
