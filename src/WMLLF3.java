@@ -4,13 +4,13 @@ import java.text.DecimalFormat;
 
 public class WMLLF3 {
 	
-	protected ats mc;
+	protected atv mc;
 	protected WMLL wmll;
 	boolean showSeed;
 	
 	private String MINECRAFT_VERSION = "";
 
-	public WMLLF3(ats h, WMLL wmll) {
+	public WMLLF3(atv h, WMLL wmll) {
 		this.mc = h;
 		this.wmll = wmll;
 		MINECRAFT_VERSION = WMLL.getMinecraftVersion();
@@ -58,11 +58,11 @@ public class WMLLF3 {
 		wmll.drawStringUsingPixels("WMLL "+WMLL.wmllVersion(), 2, 72, 0xffffff);
 		
 		// Coordinates
-		oe player = wmll.thePlayer();
+		bdi player = wmll.thePlayer();
 		double x = player.t;
 		double y = player.u;
 		double z = player.v;
-		double f = lr.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
+		double f = ls.c((double)((player.z * 4F) / 360F) + 0.5D) & 3;
 		String roundingFormat = "#0";
 		DecimalFormat d = new DecimalFormat(roundingFormat);
 		String coords = "("+d.format(x)+", "+d.format(y)+", "+d.format(z)+", "+wmll.getPlayerDirection(Integer.parseInt(d.format(f)))+")";

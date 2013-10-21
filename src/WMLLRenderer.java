@@ -5,18 +5,18 @@ import java.util.regex.Pattern;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public class WMLLRenderer extends avh {
+public class WMLLRenderer extends avk {
 
-	public static bjl tex = new bjl("ipeer/wmll/imagesheet.png");
+	public static bjo tex = new bjo("ipeer/wmll/imagesheet.png");
 	public String updateVersion = "0";
 	public String updateMCVersion = "1.0";
 	private int StringY = 30, notifyTick = 200, StringY1 = 50, notifyTick1 = 800;
-	public ats mc;
+	public atv mc;
 	private WMLL wmll;
 	public boolean notifyUpdate;
 	public boolean firstRun;
 
-	public WMLLRenderer(ats mc2, WMLL w) {
+	public WMLLRenderer(atv mc2, WMLL w) {
 		this.mc = mc2;
 		this.wmll = w;
 	}

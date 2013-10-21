@@ -1,14 +1,14 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsGeneral extends awb {
+public class WMLLOptionsGeneral extends awe {
 
 	private WMLL wmll;
-	private awb parent;
+	private awe parent;
 	private boolean isBinding;
-	private auq bindingButton, autohideForce;
+	private aut bindingButton, autohideForce;
 
-	public WMLLOptionsGeneral(WMLL wmll, awb parent2) {
+	public WMLLOptionsGeneral(WMLL wmll, awe parent2) {
 		this.wmll = wmll;
 		this.parent = parent2;
 	}
@@ -17,19 +17,19 @@ public class WMLLOptionsGeneral extends awb {
 	public void A_() {
 		i.clear();
 		if (wmll.debugClassPresent || WMLL.WMLLDebugActive())
-			i.add(new auq(9001, g - 60, 0, 60, 20, "Reload GUI"));
+			i.add(new aut(9001, g - 60, 0, 60, 20, "Reload GUI"));
 		String enabledString = "Enabled on "+wmll.getWorldName()+": "+(WMLL.Enabled ? "Yes" : "No");
-		i.add(new auq(0, g / 2 - 150, h / 4, 300, 20, enabledString));
-		i.add(bindingButton = new auq(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
-		i.add(new auq(2, g / 2 - 190, h - 25, 380, 20, "Done"));
-		i.add(new auq(3, g / 2 - 50, h / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
-		i.add(new auq(4, g / 2 - 150, h / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
-		i.add(autohideForce = new auq(6, g / 2 - 150, h / 4 + 50, 300, 20, "Always obey autohide setting: "+(wmll.forceAutohideObey ? "ON" : "OFF")));
-		i.add(new auq(5, g / 2 - 150, h / 4 + 75, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
+		i.add(new aut(0, g / 2 - 150, h / 4, 300, 20, enabledString));
+		i.add(bindingButton = new aut(1, g / 2 - 150, h / 4 - 25, 98, 20, "Cycle Key: "+Keyboard.getKeyName(WMLL.F4Key)));
+		i.add(new aut(2, g / 2 - 190, h - 25, 380, 20, "Done"));
+		i.add(new aut(3, g / 2 - 50, h / 4 - 25, 200, 20, "Auto detect SP world seeds: "+(wmll.autoSeed ? "ON" : "OFF")));
+		i.add(new aut(4, g / 2 - 150, h / 4 + 25, 300, 20, "Autohide when a GUI is open: "+(wmll.showUnderGUIs ? "OFF" : "ON")));
+		i.add(autohideForce = new aut(6, g / 2 - 150, h / 4 + 50, 300, 20, "Always obey autohide setting: "+(wmll.forceAutohideObey ? "ON" : "OFF")));
+		i.add(new aut(5, g / 2 - 150, h / 4 + 75, 300, 20, "Show world name/server IP on main menu: "+(!wmll.showWorldName ? "OFF" : "ON")));
 		autohideForce.h = wmll.useML;
 	}
 
-	protected void a(auq b) {
+	protected void a(aut b) {
 		switch (b.g) {
 		case 9001:
 			f.a(new WMLLOptionsGeneral(this.wmll, this.parent));
@@ -48,7 +48,7 @@ public class WMLLOptionsGeneral extends awb {
 			if (parent != null)
 				f.a(parent);
 			else
-				f.a((awb)null);
+				f.a((awe)null);
 			return;
 		case 3:
 			boolean c = wmll.autoSeed;

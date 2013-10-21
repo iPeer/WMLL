@@ -20,13 +20,14 @@ public class mod_WMLL extends BaseMod {
 		e.getModMetadata().description = "Enables the player to tell the light level of the block they're stood on (and more!)";
 	}
 	
+	@Override
 	public void modsLoaded() {
 		ModLoader.setInGameHook(this, true, false);
 		WMLL.i.useML = true;
 	}
 	
 	@Override
-	public boolean onTickInGame(float f, ats mc) {
+	public boolean onTickInGame(float f, atv mc) {
 		WMLL.i.updategui(mc, f);	
 		return true;
 	}

@@ -1,18 +1,18 @@
 import org.lwjgl.input.Keyboard;
 
 
-public class WMLLOptionsCompat extends awb {
+public class WMLLOptionsCompat extends awe {
 
 	private WMLL wmll;
-	private awb parent;
-	private auq rei, zans, alien;
+	private awe parent;
+	private aut rei, zans, alien;
 	private int page = 1;
 
-	public WMLLOptionsCompat(WMLL wmll, awb aum) {
+	public WMLLOptionsCompat(WMLL wmll, awe aum) {
 		this(wmll, aum, 1);
 	}
 
-	public WMLLOptionsCompat(WMLL wmll, awb parent2, int page) {
+	public WMLLOptionsCompat(WMLL wmll, awe parent2, int page) {
 		this.wmll = wmll;
 		this.parent = parent2;
 		this.page = page;
@@ -22,13 +22,13 @@ public class WMLLOptionsCompat extends awb {
 	public void A_() {
 		i.clear();
 		if (wmll.debugClassPresent || WMLL.WMLLDebugActive())
-			i.add(new auq(9001, g - 60, 0, 60, 20, "Reload GUI"));
-		i.add(new auq(0, g / 2 - 190, h - 30, (this.page == 1 ? 295 : 380), 20, "Done"));
+			i.add(new aut(9001, g - 60, 0, 60, 20, "Reload GUI"));
+		i.add(new aut(0, g / 2 - 190, h - 30, (this.page == 1 ? 295 : 380), 20, "Done"));
 		if (this.page == 1) {
-			i.add(new auq(5, g / 2 + 105, h - 30, 85, 20, "Mod Statuses"));
-			i.add(rei = new auq(1, g / 2 - 145, h / 4 + 45, 140, 20, "Rei's Minimap: "+(wmll.ReiEnabled && !wmll.ReiUseMl ? "ON" : "OFF")));
-			i.add(zans = new auq(2, g / 2 + 2, h / 4 + 45, 140, 20, "Zan's Minimap: "+(wmll.ZansEnabled && wmll.ZansMinimap ? "ON" : "OFF")));
-			i.add(alien = new auq(3, g / 2 - 70, h / 4 + 70, 140, 20, "Alien Motion Detector: "+(wmll.AlienEnabled && wmll.AlienRadar ? "ON" : "OFF")));
+			i.add(new aut(5, g / 2 + 105, h - 30, 85, 20, "Mod Statuses"));
+			i.add(rei = new aut(1, g / 2 - 145, h / 4 + 45, 140, 20, "Rei's Minimap: "+(wmll.ReiEnabled && !wmll.ReiUseMl ? "ON" : "OFF")));
+			i.add(zans = new aut(2, g / 2 + 2, h / 4 + 45, 140, 20, "Zan's Minimap: "+(wmll.ZansEnabled && wmll.ZansMinimap ? "ON" : "OFF")));
+			i.add(alien = new aut(3, g / 2 - 70, h / 4 + 70, 140, 20, "Alien Motion Detector: "+(wmll.AlienEnabled && wmll.AlienRadar ? "ON" : "OFF")));
 			rei.h = wmll.Rei && !wmll.ReiUseMl;
 			zans.h = wmll.ZansMinimap;
 			alien.h = wmll.AlienRadar;
@@ -40,7 +40,7 @@ public class WMLLOptionsCompat extends awb {
 			f.a(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? null : parent);
 	}
 
-	protected void a(auq b) {
+	protected void a(aut b) {
 		switch (b.g) {
 		case 9001:
 			f.a(new WMLLOptionsCompat(this.wmll, this.parent, this.page));
