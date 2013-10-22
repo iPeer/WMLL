@@ -24,11 +24,12 @@ import org.lwjgl.input.Keyboard;
 import reifnsk.minimap.ReiMinimap;
 
 import com.thevoxelbox.voxelmap.VoxelMap;
+import net.minecraftforge.common.MinecraftForge;
 
 public class WMLL {
     
     public static final String wmllVersion() {
-	return "Test 825";
+	return "Test 826";
     }
     
     public static final String versionName() {
@@ -359,16 +360,16 @@ public class WMLL {
 	    return;
 	}
 	// TODO: Rei's wasn't updated to 1.6.4 and PlanetMinecraft was down when trying to update this stuff.
-	//		if (!useML && h != null) {
-	//			if (Rei && !ReiUseMl && ReiEnabled)
-	//				ReiMinimap.instance.onTickInGame(renderPartialTicks, h);
-	//			// if (AlienRadar && AlienEnabled && alienRadar != null &&
-	//			// getWorld() != null)
-	//			// ((MotionTracker)alienRadar).onTickInGame(h);
-	//			if (ZansMinimap && ZansEnabled && zansMinimap != null
-	//					&& getWorld() != null)
-	//				((VoxelMap) zansMinimap).onTickInGame(h);
-	//		}
+	if (!useML && h != null) {
+	    // if (Rei && !ReiUseMl && ReiEnabled)
+	    // ReiMinimap.instance.onTickInGame(renderPartialTicks, h);
+	    // if (AlienRadar && AlienEnabled && alienRadar != null &&
+	    // getWorld() != null)
+	    // ((MotionTracker)alienRadar).onTickInGame(h);
+	    if (ZansMinimap && ZansEnabled && zansMinimap != null
+		    && getWorld() != null)
+		((VoxelMap) zansMinimap).onTickInGame(h);
+	}
 	if (mcDebugOpen() || wmllF3Output) {
 	    if (mcDebugOpen() && wmllOverrideF3)
 		toggleF3Override();
