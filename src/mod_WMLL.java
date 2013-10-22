@@ -28,7 +28,7 @@ public class mod_WMLL extends BaseMod {
 	
 	@Override
 	public boolean onTickInGame(float f, atv mc) {
-		WMLL.i.updategui(mc, f);	
+		WMLL.i.onTickInGame();	
 		return true;
 	}
 	

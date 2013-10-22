@@ -214,7 +214,7 @@ public class avj extends avk
             g.C.b();
         }
 	if (!WMLL.i.useML)
-		WMLL.i.updategui(g, f1, this);
+		WMLL.i.updategui(g, this);
         if(g.u.ab)
         {
             g.C.a("debug");

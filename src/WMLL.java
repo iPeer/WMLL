@@ -29,7 +29,7 @@ import net.minecraftforge.common.MinecraftForge;
 public class WMLL {
     
     public static final String wmllVersion() {
-	return "Test 826";
+	return "Test 827";
     }
     
     public static final String versionName() {
@@ -40,8 +40,7 @@ public class WMLL {
 	return "1.6.4";
     }
     
-    public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7,
-	    9, 20, 31, 32, 39, 40, 44, 50, 130);
+    public static final List<Integer> blockBlackList = Arrays.asList(0, 8, 7, 9, 20, 31, 32, 39, 40, 44, 50, 130);
     public static final Map<Integer, String> dimensionNames = new HashMap<Integer, String>();
     public static final Map<String, String> fieldNames = new HashMap<String, String>();
     public static final WMLLUpdateCheck wmllUpdateCheck = new WMLLUpdateCheck();
@@ -84,7 +83,7 @@ public class WMLL {
     private WMLLF3 wmllF3;
     public boolean Rei, ReiUseMl, RadarBro, AlienRadar, ZansMinimap,
 	    ReiEnabled, AlienEnabled, ZansEnabled, forgeDetected, forgeEnabled,
-	    useForge;
+	    useForge, useBL;
     private Object zansMinimap;
     public boolean satBar;
     private boolean ranInit = false;
@@ -102,8 +101,7 @@ public class WMLL {
 	"That bed looks comfy!", "*snoring*",
 	"...aaaaaannnnddd asleepness!", "Muuuuuuurrrrh", "*clank*",
 	"*screech*" };
-    private final String[] easters = { "204", "54", "273", "164", "14", "214",
-	"124", "44" };
+    private final String[] easters = { "204", "54", "273", "164", "14", "214", "124", "44" };
     private final String[] moonPhases = { "Full", "Waning Gibbous",
 	"Last Quarter", "Waning Crescent", "New", "Waxing Crescent",
 	"First Quarter", "Waxing Gibbous" };
@@ -116,8 +114,8 @@ public class WMLL {
     public boolean worldSeedSet = false;
     public boolean warnedAboutConflicts = false;
     public String reiError = "Not found", zanError = "Not found",
-	    alienError = "Not found", forgeError = "Not found";
-    
+	    alienError = "Not found", forgeError = "Not found", bLoader = "Not found";
+    public String bLoaderVersion = "";
     public String[] updateInfo = {};
     
     // protected WMLLCompatibility wmllCompatibility;
@@ -125,7 +123,6 @@ public class WMLL {
     
     public boolean realInit = false;
     public boolean useML = false;
-    private float renderPartialTicks = 0.0f;
     private boolean renderArmourDisplay = false;
     public boolean forceAutohideObey = false;
     
@@ -164,11 +161,12 @@ public class WMLL {
 	 * );
 	 */
 	// loadOptions();
-	if (getClass().getClassLoader().getResource(
-		"net/minecraftforge/common/ForgeHooks.class") != null
-		|| useML) {
-	    useForge = forgeDetected = true;
+	if (getClass().getClassLoader().getResource("net/minecraftforge/common/ForgeHooks.class") != null) {
+	    useForge = forgeDetected = useML = true;
 	    forgeError = "";
+	}
+	if (getClass().getClassLoader().getResource("net/acomputerdog/BlazeLoader/main/BlazeLoader.class") != null) {
+	   bLoader = "";
 	}
 	if (getClass().getClassLoader().getResource("mod_ReiMinimap.class") != null) {
 	    try {
@@ -227,6 +225,8 @@ public class WMLL {
 	    debug("[WMLL] WMLL is running in Rei's Minimap Compatibility mode");
 	if (forgeDetected)
 	    debug("[WMLL] WMLL is running in Forge Compatibility mode");
+	if (useBL)
+	    debug("[WMLL] WMLL is running in BlazeLoader Compatibility mode");
 	if (RadarBro)
 	    debug("[WMLL] WMLL is running in RadarBro Compatibility mode");
 	if (satBar)
@@ -251,22 +251,25 @@ public class WMLL {
 	debug("[WMLL] WMLL " + wmllVersion() + " initialized.");
     }
     
-    public void updategui(atv h) throws WMLLException {
-	updategui(h, h.r);
+//    public void updategui(atv h) throws WMLLException {
+//	updategui(h, h.r);
+//    }
+//    
+//    public void updategui(atv h, avj w) throws WMLLException {
+//	throw new WMLLException(
+//		"Deprecated Initialisation Method! Use updategui(mc, float, guiingame) instead.");
+//    }
+//    
+//    public void updategui(atv mc2, float f) {
+//	updategui(mc2, f, mc2.r);
+//    }
+    
+    public void onTickInGame() {
+	updategui(atv.w(), atv.w().r);
     }
     
-    public void updategui(atv h, avj w) throws WMLLException {
-	throw new WMLLException(
-		"Deprecated Initialisation Method! Use updategui(mc, float, guiingame) instead.");
-    }
-    
-    public void updategui(atv mc2, float f) {
-	updategui(mc2, f, mc2.r);
-    }
-    
-    // public void updategui(Minecraft h, float renderPartialTicks, aww w) {
-    public void updategui(atv h, float renderPartialTicks, avj avg) {
-	this.renderPartialTicks = renderPartialTicks;
+    public void updategui(atv h,/* float renderPartialTicks, */avj avg) {
+	//this.renderPartialTicks = renderPartialTicks;
 	if (getWorld() != null && !wmllUpdateCheck.running && autoUpdateCheck) {
 	    wmllUpdateCheck.start();
 	} else if (getWorld() == null && wmllUpdateCheck.running) {
@@ -332,6 +335,8 @@ public class WMLL {
 	    firstRun = false;
 	    wmllRenderer.firstRun = true;
 	}
+	if (useML && getWorld(h) == null || getWorld(h) == null)
+	    return;
 	if (!ranInit) {
 	    debug("[WMLL] Performing world-load init");
 	    this.mc = h;
@@ -347,17 +352,12 @@ public class WMLL {
 	    this.fontRenderer = (useML ? ModLoader.getMinecraftInstance().l: h.l);
 	    outputOptionsFile = new File(getGamePath(), "WMLLOutput.properties");
 	    loadOptions();
-	    this.autoSeed = Boolean.parseBoolean(options.getProperty(
-		    "autoAquireSeed", "true"));
+	    this.autoSeed = Boolean.parseBoolean(options.getProperty("autoAquireSeed", "true"));
 	    if (debugClassPresent)
 		entityPlayer().a("Test");
 	    // (new Thread(wmllUpdateCheck)).start();
-	    debug("[WMLL] Options file set to: "
-		    + outputOptionsFile.getAbsolutePath());
+	    debug("[WMLL] Options file set to: "+outputOptionsFile.getAbsolutePath());
 	    debug("[WMLL] World-load init complete.");
-	}
-	if (useML && getWorld() == null) {
-	    return;
 	}
 	// TODO: Rei's wasn't updated to 1.6.4 and PlanetMinecraft was down when trying to update this stuff.
 	if (!useML && h != null) {
@@ -526,6 +526,11 @@ public class WMLL {
 			    a,
 			    (getWindowSize().a() - (getFontRenderer().a(a) + 1)),
 			    yPos++, 0xffffff);
+		}
+		if (useBL) {
+		    // TODO
+		    a = "BlazeLoader: "+net.acomputerdog.BlazeLoader.main.Version.getStringVersion();
+		    drawDebug(a, (getWindowSize().a() - (getFontRenderer().a(a) + 1)), yPos++, 0xffffff);
 		}
 		a = "Press " + Keyboard.getKeyName(F4Key)
 			+ " to toggle more debug goodness.";
@@ -1208,8 +1213,12 @@ public class WMLL {
     }
     
     private bdd getWorld() {
+	return getWorld(mc);
+    }
+    
+    private bdd getWorld(atv atv1) {
 	try {
-	    return mc.f;
+	    return atv1.f;
 	}
 	catch (NullPointerException n) {
 	    return null;
@@ -2012,7 +2021,7 @@ public class WMLL {
     }
     
     public boolean shouldShow() {
-	if (showUnderGUIs && (!useML || useML && forceAutohideObey))
+	if (showUnderGUIs && (!useML || useML && forceAutohideObey) || !guiHidden())
 	    return true;
 	else
 	    return (useML && (getGUI() == null || getGUIClassName().contains("net.minecraft.client.gui.GuiSleepMP")));
@@ -2035,6 +2044,10 @@ public class WMLL {
     
     public File getGamePath() {
 	return mc.x;
+    }
+    
+    public boolean guiHidden() {
+	return mc.u.Z;
     }
     
 }
